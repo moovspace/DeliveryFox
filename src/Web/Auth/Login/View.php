@@ -112,7 +112,7 @@ class View extends Component
 		return '
 		<div class="box-top">
 			<img src="/src/Web/Auth/logo.png" alt="logo" class="logo">
-			<a href="/login" class="button-signin">' . $arr->btn . '</a>
+			<a href="/login" class="button-signin" title="' . $arr->btn . '">' . $arr->btn . '</a>
 		</div>
 		<div class="box-100">
 
@@ -137,9 +137,9 @@ class View extends Component
 				</form>
 
 				<div class="box-small">
-					<div class="register-link"> ' . $arr->need . ' <a href="/register">' . $arr->register . '</a> </div>
+					<div class="register-link"> ' . $arr->need . ' <a href="/register" title="' . $arr->register . '">' . $arr->register . '</a> </div>
 
-					<div class="pass-link"> <a href="/password">' . $arr->forgot . '</a> </div>
+					<div class="pass-link"> <a href="/password" title="' . $arr->forgot . '">' . $arr->forgot . '</a> </div>
 				</div>
 			</div>
 
