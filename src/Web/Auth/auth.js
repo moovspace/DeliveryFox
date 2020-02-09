@@ -49,6 +49,13 @@ function IsPass(it){
 	}
 }
 
+function Lang(it){
+	console.log("Change lang ", it);
+	let lang = it.dataset.lang;
+	let loc = window.location.pathname + '?lang='+ lang;
+	window.location = loc;
+}
+
 function ShowError(err)
 {
 	let el = document.getElementById("error-form").innerHTML = err;

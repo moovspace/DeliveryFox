@@ -147,6 +147,10 @@ class View extends Component
 				<img src="/src/Web/Auth/image.png" class="image">
 			</div>
 
+			<div id="lang">
+				<a data-lang="pl" class="lang" onclick="Lang(this);"> PL </a>
+				<a data-lang="en" class="lang" onclick="Lang(this);"> EN </a>
+			</div>
 		</div>
 		';
 	}

@@ -4,49 +4,81 @@
 a, .button, button {
 	cursor: pointer;
 }
-.box-top{	
+.box-top{
 	overflow: hidden;
 	border-bottom: 1px solid #eee;
 }
 .box-100{
 	float: left;
 	width: 100%;
-	overflow: hidden;	
+	overflow: hidden;
 }
-.box-50{	
+.box-50{
 	float: left;
 	width: 50%;
 	height: 100%;
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
 	overflow: hidden;
 }
-.bg{	
+.bg{
 	background: #fff
 }
 .image{
-	width: 100%;	
+	width: 100%;
 	height: 100%;
 	background-size: cover;
     background-repeat: no-repeat;
-	background-position: 50% 50%;	
+	background-position: 50% 50%;
 }
 .logo{
-	float: left; 
+	float: left;
 	height: 70px;
 	margin: 10px 20px;
 }
+#lang{
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	width: 35px;
+	height: 35px;
+	margin: 30px 10px 0px 0px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#lang:hover{
+	height: auto;
+}
+#lang a{
+	font-size: 13px;
+	font-weight: 900;
+	line-height: 20px;
+	float: left;
+	height: 30px;
+	width: 30px;
+	padding: 5px;
+	margin: 2px;
+	text-align: center;
+	color: #fff;
+	background: #21bf73;
+	border-radius: 50px;
+	transition: all .5s
+}
+#lang a:hover{
+	background: #ffb121;
+}
+
 .button-signin{
-	float: right;	
+	float: right;
 	background: #21bf73;
 	color: #fff;
 	font-size: 20px;
 	font-weight: 900;
 	margin: 20px;
 	padding: 13px 25px;
-	border: 1px solid #21bf73;	
+	border: 1px solid #21bf73;
 	border-radius: 50px;
-	transition: all .6s;	
+	transition: all .6s;
 }
 .button-signin:hover{
 	background: #fff;
@@ -68,7 +100,7 @@ form{
 input[type=text]:focus, input[type=password]:focus {
 	outline:none;
 	border: 2px solid #21bf73;
-	
+
 }
 .btn-login{
 	margin-top: 20px;
@@ -78,9 +110,9 @@ input[type=text]:focus, input[type=password]:focus {
 	background: #21bf73;
 	border: 1px solid #21bf73;
 	border-radius: 50px;
-	padding: 10px 50px;	
+	padding: 10px 50px;
 }
-.btn-login:hover{	
+.btn-login:hover{
 	background: #21bf99;
 	cursor: pointer;
 }
@@ -89,12 +121,12 @@ input[type=text]:focus, input[type=password]:focus {
 	width: 100%;
 	margin-top: 20px;
 	width: 100%;
-	height: 70px;	
+	height: 70px;
 	position: relative
 }
 .box-input .placeholder{
 	font-size: 14px;
-	position: absolute; top: 15px; left: 10px; background: #fff; padding: 3px 15px; border-radius: 50px;	
+	position: absolute; top: 15px; left: 10px; background: #fff; padding: 3px 15px; border-radius: 50px;
 	transition: top .5s, color .5s
 }
 .box-input .placeholder-up{
@@ -135,11 +167,11 @@ input[type=text]:focus, input[type=password]:focus {
 #error-form{
 	float: left; width: 100%; text-align: center
 }
-.red{	
+.red{
 	color: #f74453; font-weight: 700;
 	margin-bottom: 10px;
 }
-.green{	
+.green{
 	color: #21bf73; font-weight: 700;
 	margin-bottom: 10px;
 }

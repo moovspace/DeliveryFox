@@ -69,13 +69,19 @@ class View extends Component
 			<h1 class="h1"> ' . $arr->title . ' </h1>
 			<div id="error-form">' . $arr->error . '</div>
 		</div>
+
+		<div id="lang">
+			<a data-lang="pl" class="lang" onclick="Lang(this);"> PL </a>
+			<a data-lang="en" class="lang" onclick="Lang(this);"> EN </a>
+		</div>
 		';
 	}
 
 	static function Head()
 	{
 		return [
-			'<link rel="stylesheet" href="/src/Web/Auth/auth.css">'
+			'<link rel="stylesheet" href="/src/Web/Auth/auth.css">',
+			'<script defer src="/src/Web/Auth/auth.js"></script>'
 		];
 	}
 }
