@@ -6,10 +6,11 @@ try
 {
 	$r = new Router();
 
-	$r->Set("/", "Web/Home/Homepage", "Index");
-	$r->Set("/logout", "Web/Logout/Logout", "Index");
+	// Namespace path
+	$r->Set("/", "MyApp/Web/Home/Homepage", "Index");
+	$r->Set("/logout", "MyApp/Web/Logout/Logout", "Index");
 
-	// Include Auth Component routes
+	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");
 
 	// $r->ErrorPage();

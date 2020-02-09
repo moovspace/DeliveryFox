@@ -1,4 +1,6 @@
 <?php
+namespace MyApp\Web\Auth\Register;
+
 use MyApp\Web\Html\Html;
 use MyApp\Web\Auth\Register\View;
 

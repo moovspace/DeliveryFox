@@ -3,7 +3,7 @@
     "description": "New app",
     "type": "project",
     "require": {
-        "moovspace/phpapix": "^4.0"
+        "moovspace/phpapix": "^7.0"
     },
     "minimum-stability": "stable",
     "autoload": {

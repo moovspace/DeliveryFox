@@ -1,4 +1,6 @@
 <?php
+namespace MyApp\Web\Auth\Pass;
+
 use MyApp\Web\Html\Html;
 use MyApp\Web\Auth\Pass\View;
 

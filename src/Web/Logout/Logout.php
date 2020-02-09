@@ -1,4 +1,6 @@
 <?php
+namespace MyApp\Web\Logout;
+
 class Logout
 {
 	function Index($r)

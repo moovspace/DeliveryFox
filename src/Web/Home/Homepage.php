@@ -1,4 +1,6 @@
 <?php
+namespace MyApp\Web\Home;
+
 use MyApp\Web\Html\Html;
 use MyApp\Web\Home\View;
 use MyApp\Component\Auth\ViewLogin;

@@ -1,4 +1,6 @@
 <?php
+namespace MyApp\Web\Auth\Confirm;
+
 use MyApp\Web\Html\Html;
 use MyApp\Web\Auth\Confirm\View;
 
