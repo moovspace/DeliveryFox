@@ -1,0 +1,14 @@
+{
+    "name": "moovspace/new-app",
+    "description": "New app",
+    "type": "project",
+    "require": {
+        "moovspace/phpapix": "^4.0"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src/"
+        }
+    }
+}

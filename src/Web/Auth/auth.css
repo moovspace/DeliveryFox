@@ -1,0 +1,152 @@
+*{
+	box-sizing: border-box;
+}
+a, .button, button {
+	cursor: pointer;
+}
+.box-top{	
+	overflow: hidden;
+	border-bottom: 1px solid #eee;
+}
+.box-100{
+	float: left;
+	width: 100%;
+	overflow: hidden;	
+}
+.box-50{	
+	float: left;
+	width: 50%;
+	height: 100%;
+	margin: 0px; 
+	padding: 0px;
+	overflow: hidden;
+}
+.bg{	
+	background: #fff
+}
+.image{
+	width: 100%;	
+	height: 100%;
+	background-size: cover;
+    background-repeat: no-repeat;
+	background-position: 50% 50%;	
+}
+.logo{
+	float: left; 
+	height: 70px;
+	margin: 10px 20px;
+}
+.button-signin{
+	float: right;	
+	background: #21bf73;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 900;
+	margin: 20px;
+	padding: 13px 25px;
+	border: 1px solid #21bf73;	
+	border-radius: 50px;
+	transition: all .6s;	
+}
+.button-signin:hover{
+	background: #fff;
+	color: #21bf73;
+}
+.h1{
+	margin: 70px 0px; color: #222; width: 100%; text-align: center
+}
+form{
+	margin: 10px auto;
+	max-width: 70%;
+	text-align: center
+}
+.input{
+	font-size: 17px; font-weight: 500;
+	float: left; width: 100%; height: 55px; padding: 20px; border-radius: 6px; border: 1px solid #eee;
+	transition: all .4s; box-sizing: border-box;
+}
+input[type=text]:focus, input[type=password]:focus {
+	outline:none;
+	border: 2px solid #21bf73;
+	
+}
+.btn-login{
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #fff;
+	background: #21bf73;
+	border: 1px solid #21bf73;
+	border-radius: 50px;
+	padding: 10px 50px;	
+}
+.btn-login:hover{	
+	background: #21bf99;
+	cursor: pointer;
+}
+.box-input{
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+	width: 100%;
+	height: 70px;	
+	position: relative
+}
+.box-input .placeholder{
+	font-size: 14px;
+	position: absolute; top: 15px; left: 10px; background: #fff; padding: 3px 15px; border-radius: 50px;	
+	transition: top .5s, color .5s
+}
+.box-input .placeholder-up{
+	position: absolute; top: -13px; left: 10px; background: #fff; padding: 3px 15px; border-radius: 50px;
+	border: 1px solid #21bf73; color: #21bf73;
+}
+.box-input .icon{
+	position: absolute; top: 20px; right: 20px; color: #21bf73
+}
+.error-border-color {
+	color: #f74453 !important;
+	border: 2px solid #f74453 !important
+}
+.error-color {
+	color: #f74453 !important;
+	margin-bottom: 10px;
+}
+.box-small{
+	margin-top: 20px;
+	margin-left: 10%;
+	float: left; width: 80%; overflow: hidden; padding: 15px;
+	text-align: center; border-top: 1px solid #eee;
+}
+.box-small div{
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+.box-small .register-link{
+	font-size: 20px
+}
+.box-small a{
+	color: #21bf73; font-weight: 700; margin-bottom: 10px; padding: 5px; transition: all .5s
+}
+.box-small a:hover{
+	color: #8043e2;
+}
+
+#error-form{
+	float: left; width: 100%; text-align: center
+}
+.red{	
+	color: #f74453; font-weight: 700;
+	margin-bottom: 10px;
+}
+.green{	
+	color: #21bf73; font-weight: 700;
+	margin-bottom: 10px;
+}
+
+@media all and (max-width: 1024px){
+	.box-50{
+		width: 100%;
+		height: auto;
+	}
+}
