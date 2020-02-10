@@ -5,6 +5,9 @@ use \Exception;
 use PhpApix\Mysql\Db;
 use MyApp\App\Component;
 use MyApp\App\Translate\Trans;
+// Html
+use MyApp\Web\Auth\Html\TopMenu;
+use MyApp\Web\Auth\Html\ChangeLang;
 
 class View extends Component
 {
@@ -56,23 +59,18 @@ class View extends Component
 		$arr->title = $t->Get('ACTIVATION_TITLE');
 		$arr->error = $err;
 
+		echo TopMenu::Show($arr);
+
 		echo self::Html($arr);
+
+		echo ChangeLang::Show($arr);
 	}
 
 	static function Html($arr){
 		return '
-		<div class="box-top">
-			<img src="/src/Web/Auth/logo.png" alt="logo" class="logo">
-			<a href="/login" class="button-signin">' . $arr->btn . '</a>
-		</div>
 		<div class="box-100">
 			<h1 class="h1"> ' . $arr->title . ' </h1>
 			<div id="error-form">' . $arr->error . '</div>
-		</div>
-
-		<div id="lang">
-			<a data-lang="pl" class="lang" onclick="Lang(this);"> PL </a>
-			<a data-lang="en" class="lang" onclick="Lang(this);"> EN </a>
 		</div>
 		';
 	}

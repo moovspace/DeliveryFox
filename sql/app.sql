@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 09 Lut 2020, 13:06
+-- Czas generowania: 09 Lut 2020, 21:39
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -444,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `ukey1` (`email`),
   UNIQUE KEY `ukey` (`username`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tabela Truncate przed wstawieniem `user`
@@ -456,7 +456,7 @@ TRUNCATE TABLE `user`;
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `pass`, `mobile`, `role`, `time`, `ip`, `code`, `active`) VALUES
-(58, 'a71442d6-4b31-11ea-8817-0016d48a4846', 'usero@drive.xx', '8ca8d666a30e2f981b119c9d77fdff9e', '', 'user', '2020-02-09 11:45:21', '127.0.0.1', '', 1);
+(58, 'a71442d6-4b31-11ea-8817-0016d48a4846', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'user', '2020-02-09 11:45:21', '127.0.0.1', '', 1);
 
 -- --------------------------------------------------------
 

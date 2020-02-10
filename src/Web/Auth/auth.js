@@ -71,6 +71,8 @@ window.onload = function () {
 	PlaceholderUpOnload(it);
 	IsEmail(it);
 
+	// elem.addEventListener("click", showTagName, true);
+
 	// Get('https://jsonplaceholder.typicode.com/users').then((data) => {
 	// 	console.log(data) // JSON data parsed by `response.json()` call
 	// })

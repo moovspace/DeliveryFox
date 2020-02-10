@@ -8,6 +8,9 @@ use MyApp\App\Email\Email;
 use MyApp\App\Email\SendEmail;
 use MyApp\App\Email\EmailTheme;
 use MyApp\App\Translate\Trans;
+// Html
+use MyApp\Web\Auth\Html\TopMenu;
+use MyApp\Web\Auth\Html\ChangeLang;
 
 class View extends Component
 {
@@ -109,15 +112,15 @@ class View extends Component
 			$arr->post_email = $_POST['email'];
 		}
 
+		echo TopMenu::Show($arr);
+
 		echo self::Html($arr);
+
+		echo ChangeLang::Show($arr);
 	}
 
 	static function Html($arr){
 		return '
-		<div class="box-top">
-			<img src="/src/Web/Auth/logo.png" alt="logo" class="logo">
-			<a href="/login" class="button-signin" title="' . $arr->btn . '">' . $arr->btn . '</a>
-		</div>
 		<div class="box-100">
 
 			<div class="box-50">
@@ -145,11 +148,6 @@ class View extends Component
 
 			<div class="box-50 bg">
 				<img src="/src/Web/Auth/image.png" class="image">
-			</div>
-
-			<div id="lang">
-				<a data-lang="pl" class="lang" onclick="Lang(this);"> PL </a>
-				<a data-lang="en" class="lang" onclick="Lang(this);"> EN </a>
 			</div>
 		</div>
 		';
