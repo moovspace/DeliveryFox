@@ -11,7 +11,7 @@ use MyApp\Web\Auth\Html\ChangeLang;
 
 class View extends Component
 {
-    static function Data(){
+    static function Data($arr = null){
         try
 		{
 			if(!empty($_GET['code']))
@@ -66,7 +66,7 @@ class View extends Component
 		echo ChangeLang::Show($arr);
 	}
 
-	static function Html($arr){
+	static function Html($arr = null, $html = ""){
 		return '
 		<div class="box-100">
 			<h1 class="h1"> ' . $arr->title . ' </h1>

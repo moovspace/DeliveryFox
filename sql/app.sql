@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 09 Lut 2020, 21:39
+-- Czas generowania: 10 Lut 2020, 22:08
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -468,6 +468,8 @@ DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE IF NOT EXISTS `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rf_user` int(11) NOT NULL,
+  `firstname` varchar(100) NOT NULL DEFAULT '',
+  `lastname` varchar(100) NOT NULL DEFAULT '',
   `country` varchar(100) NOT NULL DEFAULT '',
   `city` varchar(100) NOT NULL DEFAULT '',
   `zip` varchar(10) NOT NULL DEFAULT '',
@@ -480,13 +482,20 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   `orders` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UserKey` (`rf_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `user_info`
 --
 
-TRUNCATE TABLE `user_info`;COMMIT;
+TRUNCATE TABLE `user_info`;
+--
+-- Zrzut danych tabeli `user_info`
+--
+
+INSERT INTO `user_info` (`id`, `rf_user`, `firstname`, `lastname`, `country`, `city`, `zip`, `address`, `mobile`, `mail`, `lat`, `lng`, `about`, `orders`) VALUES
+(1, 58, '', '', '', '', '', '', '', '', '0.000000', '0.000000', '', 0);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

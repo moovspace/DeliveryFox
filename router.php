@@ -13,6 +13,10 @@ try
 	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");
 
+	// Admin Panel
+	$r->Set("/panel", "MyApp\Web\AdminPanel\Profil", "Index");
+	$r->Set("/panel/profil", "MyApp\Web\AdminPanel\Profil", "Index");
+
 	// $r->ErrorPage();
 	ErrorPage::Error404();
 }

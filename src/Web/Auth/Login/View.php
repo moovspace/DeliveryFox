@@ -26,7 +26,7 @@ class View extends Component
 		}
 	}
 
-    static function Data(){
+    static function Data($arr = null){
         try
 		{
 			if(!empty($_POST)){
@@ -45,7 +45,7 @@ class View extends Component
 				$p2 = md5($_POST['pass']);
 
 				$db = Db::getInstance(); // Singleton
-				$r = $db->Pdo->prepare("SELECT id,role,active FROM user WHERE email = :s1 AND pass = :s2");
+				$r = $db->Pdo->prepare("SELECT id,role,active FROM user WHERE email = :s1 AND pass = :s2 AND active = 1");
 				$r->execute([':s1' => $p1, ':s2' => $p2]);
 				$user = $r->fetchAll();
 
@@ -115,7 +115,7 @@ class View extends Component
 		echo ChangeLang::Show($arr);
 	}
 
-	static function Html($arr){
+	static function Html($arr = null, $html = ""){
 		return '
 		<div class="box-100">
 

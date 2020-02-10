@@ -53,7 +53,7 @@ class View extends Component
 		return (string) $theme;
 	}
 
-    static function Data(){
+    static function Data($arr = null){
         try
 		{
 			if(!empty($_POST))
@@ -146,7 +146,7 @@ class View extends Component
 		echo ChangeLang::Show($arr);
 	}
 
-	static function Html($arr){
+	static function Html($arr = null, $html = ""){
 		return '
 		<div class="box-100">
 
