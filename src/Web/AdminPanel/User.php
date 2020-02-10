@@ -85,6 +85,11 @@ class User
 		return $this;
 	}
 
+	/**
+	 * Get user data
+	 *
+	 * @return array
+	 */
 	function GetUser()
 	{
 		$id = $this->Id;
@@ -105,6 +110,11 @@ class User
 		return $this->User;
 	}
 
+	/**
+	 * Get user info data
+	 *
+	 * @return array
+	 */
 	function GetUserInfo()
 	{
 		$id = $this->Id;
@@ -123,11 +133,23 @@ class User
 		return $this->UserInfo;
 	}
 
+	/**
+	 * Update user data
+	 *
+	 * @return integer
+	 */
 	function SaveUser()
 	{
 		return $this->UpdateUserDb($this->User);
 	}
 
+	/**
+	 * Update user table
+	 *
+	 * @param array $arr Array with data [paran => value]
+	 * @param string $table Table name
+	 * @return integer
+	 */
 	final protected function UpdateUserDb($arr, $table = 'user')
 	{
 		$sql = 'UPDATE '.$table.' SET ';
@@ -150,6 +172,11 @@ class User
 		return $ok;
 	}
 
+	/**
+	 * Update user_info data
+	 *
+	 * @return integer
+	 */
 	function SaveUserInfo()
 	{
 		return $this->UpdateUserInfoDb($this->UserInfo);
@@ -158,9 +185,9 @@ class User
 	/**
 	 * Update database
 	 *
-	 * @param array $arr
-	 * @param string $table
-	 * @return void
+	 * @param array $arr Array with data [paran => value]
+	 * @param string $table Table name
+	 * @return integer
 	 */
 	final protected function UpdateUserInfoDb($arr, $table = 'user_info')
 	{
