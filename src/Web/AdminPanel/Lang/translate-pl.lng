@@ -1,8 +1,8 @@
 {
 "UPDATED": "Profil zaktualizowany.",
-"ERR_NOTHING": "profil jest aktualny.",
-"ERR_IMAGE": "Tylko zdjęcia z rozszeżeniem .jpeg, .jpg.",
-"ERR_USERNAME": "Uzytkownik o takiej nazwie już istnieje.",
+"ERR_NOTHING": "Profil jest aktualny.",
+"ERR_IMAGE": "Tylko zdjęcia z rozszerzeniem .jpeg, .jpg.",
+"ERR_USERNAME": "Użytkownik o takiej nazwie już istnieje.",
 "ERR_UPDATE": "Nie można zaktualizować.",
 "PR_SETTINGS": "Profil użytkownika",
 "PR_ACCOUNT": "Ustawienia konta",
