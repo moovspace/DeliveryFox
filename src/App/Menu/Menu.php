@@ -80,16 +80,16 @@ class Menu
 		}
 		$html = '
 			<div class="menu-box">
-				<a href="'.$this->MenuUrl.'" class="title '.$open_title.'" title="' . $this->MenuTitle . '">' . $this->MenuIcon . '' . $this->MenuName . '</a>
+				<a href="'.$this->MenuUrl.'" class="title '.$open_title.'" title="' . $this->MenuTitle . '">' . $this->MenuIcon . ' <hide> ' . $this->MenuName . ' </hide> </a>
 			<div class="submenu '.$open.'">
 		';
 
 		foreach ($this->Links as $key => $link) {
 			if($this->CurrentRoute() == $link['url']){
 				$link['icon'] = $link['icon_open'];
-				$html .= '<a href="'.$link['url'].'" class="submenu-link submenu-link-active" title="'.$link['title'].'">'.$link['icon'].''.$link['name'].'</a>';
+				$html .= '<a href="'.$link['url'].'" class="submenu-link submenu-link-active" title="'.$link['title'].'">'.$link['icon'].' <hide> '.$link['name'].' </hide> </a>';
 			}else{
-				$html .= '<a href="'.$link['url'].'" class="submenu-link" title="'.$link['title'].'" >'.$link['icon'].''.$link['name'].'</a>';
+				$html .= '<a href="'.$link['url'].'" class="submenu-link" title="'.$link['title'].'" >'.$link['icon'].' <hide>'.$link['name'].' </hide> </a>';
 			}
 		}
 

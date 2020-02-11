@@ -215,4 +215,12 @@ select::-ms-expand {
 		min-width: 100% !important;
 		max-width: 100% !important;
 	}
+	#box-left{
+		float: left;
+		margin-left: 0px;
+		width: 90px;
+	}
+	hide{
+		display: none;
+	}
 }
