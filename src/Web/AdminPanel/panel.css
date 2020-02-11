@@ -36,6 +36,14 @@ a{
 	padding: 10px;
 	border: 0px solid #eee;
 }
+.box-bottom{
+	padding: 50px;
+	overflow: hidden;
+	border-bottom: 0px solid #eee;
+	text-align: center;
+	box-shadow: 0px 3px 5px rgba(0,0,0,0.03) inset;
+	font-size: 13px;
+}
 h1, h2, h3, h4{
 	color: #222;
 	margin: 1%;

@@ -7,6 +7,7 @@ use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
 use MyApp\App\Menu\Menu;
 use MyApp\Web\AdminPanel\TopMenu;
+use MyApp\Web\AdminPanel\Footer;
 use MyApp\App\Translate\Trans;
 
 class ProfilView extends Component
@@ -170,7 +171,7 @@ class ProfilView extends Component
 		// Import component
 		$menu['top'] = TopMenu::Show($arr);
 		$menu['left'] = LeftMenu::Show();
-		$menu['footer'] = '';
+		$menu['footer'] = Footer::Show($arr);;
 
 		// Retuen html
 		return self::Html($arr, $menu);
