@@ -6,7 +6,7 @@ use MyApp\App\Component;
 
 class View extends Component
 {
-    static function Data(){
+    static function Data($arr = null){
         try
 		{
             // Mysql from static method with singleton (Db class)

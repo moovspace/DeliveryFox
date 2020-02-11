@@ -14,6 +14,20 @@ class User
 	protected $Id = 0;
 
 	/**
+	 * User privileges
+	 *
+	 * @var string
+	 */
+	protected $Role = 'user';
+
+	/**
+	 * Is account activeated
+	 *
+	 * @var integer
+	 */
+	protected $Active = 0;
+
+	/**
 	 * User login data
 	 *
 	 * @var array
@@ -42,6 +56,8 @@ class User
 		if(!empty($_SESSION['user']['id']))
 		{
 			$this->Id = (int) $_SESSION['user']['id'];
+			$this->Role = (string) $_SESSION['user']['role'];
+			$this->Active = (int) $_SESSION['user']['active'];
 
 			if($this->Id <= 0)
 			{
@@ -69,6 +85,7 @@ class User
 	function SetUser($name, $value)
 	{
 		$this->User[$name] = $value;
+		$this->UserSave[$name] = $value;
 		return $this;
 	}
 
@@ -82,6 +99,8 @@ class User
 	function SetUserInfo($name, $value)
 	{
 		$this->UserInfo[$name] = $value;
+		// Data update
+		$this->UserInfoSave[$name] = $value;
 		return $this;
 	}
 
@@ -140,7 +159,7 @@ class User
 	 */
 	function SaveUser()
 	{
-		return $this->UpdateUserDb($this->User);
+		return $this->UpdateUserDb($this->UserSave);
 	}
 
 	/**
@@ -179,7 +198,7 @@ class User
 	 */
 	function SaveUserInfo()
 	{
-		return $this->UpdateUserInfoDb($this->UserInfo);
+		return $this->UpdateUserInfoDb($this->UserInfoSave);
 	}
 
 	/**
@@ -193,13 +212,15 @@ class User
 	{
 		try
 		{
-			$insert = 'INSERT INTO '.$table.'(rf_user,firstname) VALUES('.$this->Id.',"") ';
+			$uid = (int) $this->Id;
+			$insert = 'INSERT INTO '.$table.'(rf_user,firstname) VALUES('.$uid.',"") ';
 			$db = Db::getInstance();
 			$r = $db->Pdo->query($insert);
 		}
 		catch(Exception $e)
 		{
 			// echo $e->getMessage();
+			// Dummy error: duplicate key
 		}
 
 		$sql = 'UPDATE '.$table.' SET ';

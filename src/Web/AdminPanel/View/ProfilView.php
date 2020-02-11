@@ -14,13 +14,13 @@ class ProfilView extends Component
 		{
 			$user = new User();
 			// User table
-			$user->SetUser('role', 'user');
-			// $user->SaveUser();
+			$user->SetUser('role', 'admin');
+			$user->SaveUser();
 
 			// User_info table
-			$user->SetUserInfo('firstname', '');
-			$user->SetUserInfo('lastname', '');
-			// $user->SaveUserInfo();
+			$user->SetUserInfo('firstname', 'Maxiu');
+			$user->SetUserInfo('lastname', 'Maxioski');
+			$user->SaveUserInfo();
 		}
 		catch(Exception $e)
 		{
