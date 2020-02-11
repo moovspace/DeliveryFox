@@ -4,6 +4,11 @@ namespace MyApp\Web\AdminPanel;
 use \Exception;
 use PhpApix\Mysql\Db;
 
+/**
+ * Logged user class
+ *
+ * @throw Exception Error code number: 666
+ */
 class User
 {
 	/**
@@ -28,18 +33,113 @@ class User
 	protected $Active = 0;
 
 	/**
+	 * Username
+	 *
+	 * @var string
+	 */
+	protected $Username = '';
+
+	/**
+	 * User email
+	 *
+	 * @var string
+	 */
+	protected $Email = '';
+
+	/**
+	 * User mobile
+	 *
+	 * @var string
+	 */
+	protected $Mobile = '';
+
+	/**
+	 * User tmp data
+	 *
+	 * @var array
+	 */
+	protected $UserSave = null;
+
+	/**
+	 * User info tmp data
+	 *
+	 * @var array
+	 */
+	protected $UserInfoSave = null;
+
+	/**
 	 * User login data
 	 *
 	 * @var array
 	 */
-	protected $User = null;
+	public $User = null;
 
 	/**
 	 * User info data
 	 *
 	 * @var array
 	 */
-	protected $UserInfo = null;
+	public $UserInfo = null;
+
+	/**
+	 * Logged user session id
+	 *
+	 * @return integer
+	 */
+	public function Id()
+	{
+		return $this->Id;
+	}
+
+	/**
+	 * Logged user session role
+	 *
+	 * @return integer
+	 */
+	public function Role()
+	{
+		return $this->Role;
+	}
+
+	/**
+	 * Logged user session active
+	 *
+	 * @return integer
+	 */
+	public function Active()
+	{
+		return $this->Active;
+	}
+
+	/**
+	 * Logged user session username
+	 *
+	 * @return string
+	 */
+	public function Username()
+	{
+		return $this->Username;
+	}
+
+	/**
+	 * Logged user session email
+	 *
+	 * @return string
+	 */
+	public function Email()
+	{
+		return $this->Email;
+	}
+
+	/**
+	 * Logged user session mobile
+	 *
+	 * @return string
+	 */
+	public function Mobile()
+	{
+		return $this->Mobile;
+	}
 
 	/**
 	 * Get user id from session
@@ -55,24 +155,23 @@ class User
 
 		if(!empty($_SESSION['user']['id']))
 		{
-			if($this->Id <= 0)
+			if($_SESSION['user']['id'] <= 0)
 			{
-				throw new Exception("Invalid user id!", 1);
+				throw new Exception("Invalid session user id!", 666);
 			}
 			else
 			{
 				$this->Id = (int) $_SESSION['user']['id'];
 				$this->Role = (string) $_SESSION['user']['role'];
 				$this->Active = (int) $_SESSION['user']['active'];
-
-				// Get user data
-				// $this->GetUser();
-				// $this->GetUserInfo();
+				$this->Username = (string) $_SESSION['user']['username'];
+				$this->Mobile = (string) $_SESSION['user']['mobile'];
+				$this->Email = (string) $_SESSION['user']['email'];
 			}
 		}
 		else
 		{
-			throw new Exception("Session user id does not exists!", 2);
+			throw new Exception("Invalid session user id!", 666);
 		}
 	}
 
@@ -112,12 +211,11 @@ class User
 	 */
 	function GetUser()
 	{
-		$id = $this->Id;
 		$this->User = null;
 
 		$db = Db::getInstance();
 		$r = $db->Pdo->prepare("SELECT * FROM user WHERE id = :id");
-		$r->execute([':id' => $id]);
+		$r->execute([':id' => $this->Id]);
 		$rows = $r->fetchAll();
 
 		if(!empty($rows))
@@ -137,12 +235,11 @@ class User
 	 */
 	function GetUserInfo()
 	{
-		$id = $this->Id;
 		$this->UserInfo = null;
 
 		$db = Db::getInstance();
 		$r = $db->Pdo->prepare("SELECT * FROM user_info WHERE rf_user = :id");
-		$r->execute([':id' => $id]);
+		$r->execute([':id' => $this->Id]);
 		$rows = $r->fetchAll();
 
 		if(!empty($rows))
@@ -244,3 +341,20 @@ class User
 		return $ok;
 	}
 }
+
+/*
+	$user = new User();
+
+	// Get user data
+	$u = $this->GetUser(); // user table: username, email, mobile, ...
+	$ui = $this->GetUserInfo(); // user_info table: firstname, lastname, country, address, city, ...
+
+	// User table update
+	$user->SetUser('role', 'admin');
+	$user->SaveUser();
+
+	// User_info table update
+	$user->SetUserInfo('firstname', 'Maxiu');
+	$user->SetUserInfo('lastname', 'Maxioski');
+	$user->SaveUserInfo();
+*/

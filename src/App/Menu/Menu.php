@@ -99,13 +99,13 @@ class Menu
 	}
 
 	function Style1(){
-		echo '
+		return '
 		<style>
 			.menu-box{float: left; width: 100%; padding: 9px; overflow: hidden; position: relative}
 			.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
 			.menu-box i{margin-right: 15px; margin-left: 15px;}
 			.menu-box .title{float: left; width: 100%; padding: 9px; background: #fff; color: #222}
-			.menu-box .title-open{border-left: 0px solid #f9fcfb}
+			.menu-box .title-open{border-left: 0px solid #f9fcfb; font-weight: 900}
 			.menu-box .submenu{display: none; float: left; width: 100%; overflow: hidden}
 			.menu-box .submenu-open{display: inherit !important}
 			.menu-box .submenu-link{float: left; width: 100%; padding: 9px; background: #f9f9f9; color: #263f44}
@@ -115,7 +115,7 @@ class Menu
 	}
 
 	function Style2(){
-		echo '
+		return '
 		<style>
 			.menu-box{float: left; width: 100%; overflow: hidden; position: relative}
 			.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
@@ -131,7 +131,7 @@ class Menu
 	}
 
 	function Style3(){
-		echo '
+		return  '
 		<style>
 			.menu-box{float: left; width: 100%; overflow: hidden; position: relative}
 			.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
@@ -147,7 +147,7 @@ class Menu
 	}
 
 	function Style4(){
-		echo '
+		return '
 		<style>
 			.menu-box{float: left; width: 100%; overflow: hidden; position: relative}
 			.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
@@ -163,7 +163,7 @@ class Menu
 	}
 
 	function Style5(){
-		echo '
+		return '
 		<style>
 			.menu-box{float: left; width: 100%; overflow: hidden; position: relative}
 			.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}

@@ -1,0 +1,218 @@
+a{
+	color: #222;
+}
+::placeholder {
+	color: #000;
+}
+.box-top{
+	overflow: hidden;
+	border-bottom: 0px solid #eee;
+}
+.logo{
+	float: left;
+	height: 45px;
+	margin: 10px 20px;
+}
+#box{
+	display: flex;
+	float: left;
+	width: 96%;
+	margin-left: 2%;
+	padding: 10px;
+	border: 0px solid #eee;
+}
+#box-left{
+	float: left;
+	width: 360px;
+	height: auto;
+	padding: 10px;
+	border: 0px solid #eee;
+}
+
+#box-right{
+	float: left;
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	border: 0px solid #eee;
+}
+h1, h2, h3, h4{
+	color: #222;
+	margin: 1%;
+	margin-top: 0px;
+}
+error{
+	margin: 1%;
+}
+.red{
+	font-weight: 400;
+	float: left;
+	width: 98%;
+	margin: 1%;
+	color: #f22;
+	padding: 10px 15px;
+	background: rgba(255, 44, 44, .05);
+	border: 1px solid #f22
+}
+.green{
+	font-weight: 400;
+	color: #21b973;
+	float: left;
+	width: 98%;
+	margin: 1%;
+	color: #21b973;
+	padding: 10px 15px;
+	background: rgba(25, 123, 90, .05);
+	border: 1px solid #21b973;
+}
+small{
+	color: #21b973
+}
+#exit{
+	float: right;
+	margin: 25px 20px 0px 10px;
+	cursor: pointer
+}
+#exit:hover{
+	color: #f22
+}
+.avatar{
+	float: right;
+	margin: 10px;
+	padding: 3px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 1px solid #21b973;
+}
+.avatar img{
+	width: 100%;
+	height: 100%;;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.hello{
+	float: right;
+	margin: 25px 10px;
+	font-weight: 500
+}
+
+/* Menu left */
+.menu-box{float: left; width: 100%; padding: 9px; overflow: hidden; position: relative}
+.menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
+.menu-box i{margin-right: 15px; margin-left: 15px;}
+.menu-box .title{float: left; width: 100%; padding: 9px; background: #fff; color: #222}
+.menu-box .title-open{border-left: 0px solid #f9fcfb; font-weight: 900}
+.menu-box .submenu{display: none; float: left; width: 100%; overflow: hidden}
+.menu-box .submenu-open{display: inherit !important}
+.menu-box .submenu-link{float: left; width: 100%; padding: 9px; background: #f9f9f9; color: #263f44}
+.menu-box .submenu-link-active{color: #263f44; font-weight: 900}
+
+/* Panel right form */
+.box-wrap{
+	padding: 10px;
+	border: 0px solid #eee;
+	border-radius: 6px;
+	overflow: hidden;
+	box-sizing: border-box
+}
+.box-wrap *{
+	box-sizing: border-box;
+	outline: none;
+}
+.box-wrap h1, .box-wrap h2, .box-wrap h3, .box-wrap h4{
+	float: left; width: 100%; margin: 1%;
+}
+.box-wrap line{
+	float: left; width: 100%; min-height: 10px; overflow: hidden;
+}
+.box-wrap label{
+	float: left; width: 98%; margin: 1%;
+}
+.box-wrap input, .box-wrap textarea, .box-wrap select{
+	font-size: 16px;
+	float: left;
+	width: 98%;
+	min-width: 98%;
+	max-width: 98%;
+	padding: 15px;
+	margin: 1%;
+	border: 1px solid #e0e6e9;
+	transition: all .5s;
+	vertical-align:top;
+}
+.box-wrap input[type=file]{
+	padding: 11px;
+}
+.box-wrap select{
+	padding: 13px;
+}
+.box-wrap input:focus, .box-wrap textarea:focus{
+	border: 1px solid #21b973
+}
+.box-wrap textarea{
+	min-height: 150px;
+}
+.box-wrap .btn{
+	font-weight: 900;
+	width: auto;
+	min-width: auto;
+	max-width: auto;
+	padding: 10px 25px;
+	background: #fff;
+	color: #21b973;
+	border: 1px solid #21b973;
+	cursor: pointer;
+	transition: all .5s;
+	box-sizing: border-box;
+}
+.box-wrap .btn:hover{
+	background: #21b973;
+	color: #fff;
+	box-sizing: border-box;
+}
+.box-wrap .float-right{
+	float: right
+}
+.box-wrap .float-left{
+	float: left
+}
+.box-wrap .w-100{
+	float: left; width: 98%; margin: 1%;
+	min-width: 98%;
+	max-width: 98%;
+}
+.box-wrap .w-50{
+	float: left; width: 48%; margin: 1%;
+	min-width: 48%;
+	max-width: 48%;
+}
+.box-wrap .w-33{
+	float: left; width: 31.333%; margin: 1%;
+	min-width: 31.333%;
+	max-width: 31.333%;
+}
+.box-wrap .w-25{
+	float: left; width: 23%; margin: 1%;
+	min-width: 23%;
+	max-width: 23%;
+}
+
+/* Select arrow */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+select::-ms-expand {
+    display: none;
+}
+
+@media all and (max-width: 1024px){
+	.box-wrap .w-50, .box-wrap .w-33, .box-wrap .w-25{
+		width: 100% !important;
+		min-width: 100% !important;
+		max-width: 100% !important;
+	}
+}

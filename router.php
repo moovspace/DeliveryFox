@@ -14,6 +14,7 @@ try
 	$r->Include("Web/Auth/routes");
 
 	// Admin Panel
+	// $r->Redirect('/panel', '/panel/profil');
 	$r->Set("/panel", "MyApp\Web\AdminPanel\Profil", "Index");
 	$r->Set("/panel/profil", "MyApp\Web\AdminPanel\Profil", "Index");
 
@@ -28,6 +29,8 @@ catch(Exception $e)
 
 <?php
 /*
+// Redirect uri (on top)
+$r->Redirect('/panel', '/panel/profil');
 
 // Only GET
 $r->Set('/route1', function($p) {
