@@ -170,6 +170,7 @@ class ProfilView extends Component
 		// Import component
 		$menu['top'] = TopMenu::Show($arr);
 		$menu['left'] = LeftMenu::Show();
+		$menu['footer'] = '';
 
 		// Retuen html
 		return self::Html($arr, $menu);
@@ -276,6 +277,7 @@ class ProfilView extends Component
 				</div>
 			</div>
 		</div>
+		'.$html['footer'].'
 		';
 	}
 
