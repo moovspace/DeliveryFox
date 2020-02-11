@@ -55,18 +55,19 @@ class User
 
 		if(!empty($_SESSION['user']['id']))
 		{
-			$this->Id = (int) $_SESSION['user']['id'];
-			$this->Role = (string) $_SESSION['user']['role'];
-			$this->Active = (int) $_SESSION['user']['active'];
-
 			if($this->Id <= 0)
 			{
 				throw new Exception("Invalid user id!", 1);
 			}
 			else
 			{
-				$this->GetUser();
-				$this->GetUserInfo();
+				$this->Id = (int) $_SESSION['user']['id'];
+				$this->Role = (string) $_SESSION['user']['role'];
+				$this->Active = (int) $_SESSION['user']['active'];
+
+				// Get user data
+				// $this->GetUser();
+				// $this->GetUserInfo();
 			}
 		}
 		else

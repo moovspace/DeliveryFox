@@ -77,6 +77,12 @@ class Trans
 		return strtolower($lang);
 	}
 
+	/**
+	 * Get KEY_ID_NAME transpaltion
+	 *
+	 * @param string $id Unique json array key name
+	 * @return void
+	 */
 	function Get($id)
 	{
 		if(array_key_exists($id, $this->Json))
