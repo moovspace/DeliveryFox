@@ -30,9 +30,6 @@ class ProfilView extends Component
 	{
 		if(!empty($_POST['account']))
 		{
-			// print_r($_POST);
-			// print_r($_FILES);
-
 			if(!empty($_FILES['file']['tmp_name']))
 			{
 				// Upload avatar
@@ -69,8 +66,6 @@ class ProfilView extends Component
 
 		if(!empty($_POST['aboutinfo']))
 		{
-			// print_r($_POST);
-
 			try
 			{
 				foreach($_POST as $k => $v)
@@ -96,8 +91,6 @@ class ProfilView extends Component
 
 		if(!empty($_POST['delivery']))
 		{
-			// print_r($_POST);
-
 			try
 			{
 				foreach($_POST as $k => $v)
@@ -153,14 +146,21 @@ class ProfilView extends Component
 		// Get user data
 		$arr['user'] = $user->GetUser();
 		$arr['user_info'] = $user->GetUserInfo();
+		$arr['error'] = '';
 
-		$arr['error'] = '<span class="green">Profil has been updated.</span>';
-		if($user->ErrorUpdate == -3){
-			$arr['error'] = '<span class="red">Error image file (Only .jpeg, .jpg files).</span>';
-		}else if($user->ErrorUpdate == -2){
-			$arr['error'] = '<span class="red">This username is aledy taken.</span>';
-		}else if($user->ErrorUpdate < 0){
-			$arr['error'] = '<span class="red">Can not update profil.</span>';
+		if(!empty($_POST))
+		{
+			if($user->ErrorUpdate == 0){
+				$arr['error'] = '<span class="green">Nothing to update.</span>';
+			}else if($user->ErrorUpdate == 1){
+				$arr['error'] = '<span class="green">Profil has been updated.</span>';
+			}else if($user->ErrorUpdate == -3){
+				$arr['error'] = '<span class="red">Error image file (Only .jpeg, .jpg files).</span>';
+			}else if($user->ErrorUpdate == -2){
+				$arr['error'] = '<span class="red">This username is aledy taken.</span>';
+			}else if($user->ErrorUpdate < 0){
+				$arr['error'] = '<span class="red">Can not update profil.</span>';
+			}
 		}
 
 		// Import component
