@@ -73,7 +73,7 @@ class EditAttributesView extends Component
 		}
 	}
 
-	static function AddAttribute()
+	static function AddAttributeVariant()
 	{
 		if(!empty($_POST['add']))
 		{
@@ -82,7 +82,7 @@ class EditAttributesView extends Component
 				$name = $_POST['attr'];
 				$eid = (int) $_GET['edit'];
 
-				if(!empty($name))
+				if(!empty($name) && self::AttributeExists($eid) > 0)
 				{
 					$db = Db::getInstance();
 					$r = $db->Pdo->prepare("INSERT INTO attr_name(rf_attr,name) VALUES(:attr, :name)");
@@ -111,7 +111,7 @@ class EditAttributesView extends Component
 				$name = $_POST['attr'];
 				$eid = (int) $_GET['edit'];
 
-				if(!empty($name))
+				if(!empty($name) && self::AttributeExists($eid) > 0)
 				{
 					$db = Db::getInstance();
 					$r = $db->Pdo->prepare("UPDATE attr SET name = :name WHERE id = :attr");
@@ -149,6 +149,24 @@ class EditAttributesView extends Component
 			return [];
 		}
 	}
+
+	static function AttributeExists($id)
+	{
+		try
+		{
+			$id = (int)$id;
+
+			$db = Db::getInstance();
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM attr WHERE id = $id");
+			$r->execute();
+			return $r->fetchAll()[0]['cnt'];
+		}
+		catch(Exception $e)
+		{
+			return 0;
+		}
+	}
+
 	static function CheckAttributesChilds($id)
 	{
 		try
@@ -166,7 +184,7 @@ class EditAttributesView extends Component
 		}
 	}
 
-	static function DelAttribute()
+	static function DelAttributeVariant()
 	{
 		if(!empty($_GET['delete']))
 		{
@@ -205,12 +223,12 @@ class EditAttributesView extends Component
 			}
 
 			// Add variant
-			$user->ErrorUpdate = self::AddAttribute();
+			$user->ErrorUpdate = self::AddAttributeVariant();
 
 			// Delete variant
 			if(!empty($_GET['delete']))
 			{
-				$user->ErrorUpdate = self::DelAttribute();
+				$user->ErrorUpdate = self::DelAttributeVariant();
 			}
 
 			// Change attribute
