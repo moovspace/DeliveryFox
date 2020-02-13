@@ -96,40 +96,6 @@ class AttrListEdit
 			$t .= self::Pagine($page, $maxrows, $perpage);
 		}
 		return $t;
-
-		// $x = '
-		// <ul class="header">
-		// 	<li>
-		// 		<div>Id</div><div>Name</div><div>Actions</div>
-		// 	</li>
-		// </ul>
-
-		// <ul>
-		// 	<li>
-		// 		<div>1</div>
-		// 		<div>Rozmiar</div>
-		// 		<div>
-		// 			<a class="btn-small-li"> <i class="fas fa-edit"></i> </a>
-		// 			<a class="btn-small-li"> <i class="fas fa-trash"></i> </a>
-		// 		</div>
-		// 	</li>
-		// 	<li>
-		// 		<div>2</div>
-		// 		<div>Sos</div>
-		// 		<div>
-		// 			<a class="btn-small-li"> <i class="fas fa-edit"></i> </a>
-		// 			<a class="btn-small-li"> <i class="fas fa-trash"></i> </a>
-		// 		</div>
-		// 	</li>
-
-		// </ul>
-
-		// <div class="pages">
-		// 	<a href="?page=1"> <i class="fas fa-chevron-left"></i> </a>
-		// 	<a href="?page=2"> 2 / 50 </a>
-		// 	<a href="?page=3"> <i class="fas fa-chevron-right"></i> </a>
-		// </div>
-		// ';
 	}
 }
 

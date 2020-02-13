@@ -16,7 +16,7 @@ class ProfilView extends Component
 
 	static function Menu()
 	{
-		$menu = new Menu('/panel', 'Profil', 'User profil', '<i class="fas fa-home"></i>', '<i class="fas fa-home"></i>');
+		$menu = new Menu('/panel', 'Profil', 'Profil', '<i class="fas fa-home"></i>', '<i class="fas fa-home"></i>');
 		// $menu->AddLink('/panel/profil', 'Profil', 'User profile');
 		return $menu;
 	}

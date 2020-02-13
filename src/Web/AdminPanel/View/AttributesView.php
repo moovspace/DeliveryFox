@@ -18,7 +18,10 @@ class AttributesView extends Component
 
 	static function Menu()
 	{
-		$menu = new Menu('/panel/attributes', 'Attributes', 'Product attributes', '<i class="fas fa-cog"></i>', '<i class="fas fa-cog"></i>');
+		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
+		$t_attr = $t->Get('A_LIST');
+		$t_title = $t->Get('A_TITLE');
+		$menu = new Menu('/panel/attributes', $t_attr, $t_title, '<i class="fas fa-cog"></i>', '<i class="fas fa-cog"></i>');
 		// $menu->AddLink('/panel/profil', 'Profil', 'User profile');
 		return $menu;
 	}
