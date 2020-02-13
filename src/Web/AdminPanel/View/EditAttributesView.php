@@ -142,7 +142,7 @@ class EditAttributesView extends Component
 			{
 				return $rows[0]['name'];
 			}
-			return 0;
+			return 'Error attribute id';
 		}
 		catch(Exception $e)
 		{
