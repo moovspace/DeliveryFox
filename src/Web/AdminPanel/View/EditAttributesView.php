@@ -174,7 +174,7 @@ class EditAttributesView extends Component
 			$id = (int) $id;
 
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product_attr WHERE rf_attr = $id");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product WHERE rf_attr = $id");
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -318,7 +318,7 @@ class EditAttributesView extends Component
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('A_VARIANT').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="">
-							<input type="text" name="attr" placeholder="e.g. Big or Small">
+							<input type="text" name="attr" placeholder="e.g. Hot or Medium">
 							<input type="submit" name="add" value="'.$arr['trans']->Get('A_VARIANT_ADD').'" class="btn float-right">
 						</form>
 					</div>
@@ -326,7 +326,7 @@ class EditAttributesView extends Component
 					<div id="box-fixed-edit" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('A_ATTRIBUTE_EDIT').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="">
-							<input type="text" name="attr" placeholder="e.g. Size or Sauce">
+							<input type="text" name="attr" placeholder="e.g. Sauce">
 							<input type="submit" name="change" value="'.$arr['trans']->Get('A_ATTRIBUTE_CHANGE').'" class="btn float-right">
 						</form>
 					</div>

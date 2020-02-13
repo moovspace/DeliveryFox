@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 10 Lut 2020, 22:08
+-- Czas generowania: 13 Lut 2020, 20:56
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `addon` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `limit` int(11) NOT NULL DEFAULT 5,
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `attr` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `attr`
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `attr_name` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `attrKey` (`rf_attr`,`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `attr_name`
@@ -96,11 +97,14 @@ TRUNCATE TABLE `attr_name`;
 --
 
 INSERT INTO `attr_name` (`id`, `rf_attr`, `name`) VALUES
-(3, 1, 'Duży'),
+(6, 0, 'None'),
+(14, 1, 'Duży'),
 (1, 1, 'Mały'),
 (2, 1, 'Średni'),
-(5, 2, 'Ostry'),
-(4, 2, 'Łagodny');
+(15, 1, 'Wielki'),
+(18, 2, 'Czosnkowy'),
+(17, 2, 'Pikantny'),
+(16, 2, 'Łagodny');
 
 -- --------------------------------------------------------
 
@@ -111,7 +115,6 @@ INSERT INTO `attr_name` (`id`, `rf_attr`, `name`) VALUES
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent` int(11) NOT NULL DEFAULT 0,
   `name` varchar(100) NOT NULL,
   `slug` varchar(50) NOT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT 1,
@@ -129,9 +132,9 @@ TRUNCATE TABLE `category`;
 -- Zrzut danych tabeli `category`
 --
 
-INSERT INTO `category` (`id`, `parent`, `name`, `slug`, `visible`) VALUES
-(1, 0, 'Pizza', 'pizza', 1),
-(2, 0, 'Kebab', 'kebab', 1);
+INSERT INTO `category` (`id`, `name`, `slug`, `visible`) VALUES
+(1, 'Pizza', 'pizza', 1),
+(2, 'Kebab', 'kebab', 0);
 
 -- --------------------------------------------------------
 
@@ -221,26 +224,6 @@ INSERT INTO `email_theme` (`id`, `name`, `html`, `params`) VALUES
 (1, 'activation', '<h1>Hello!</h1><p>Activate your new account:</p><a target=\"__blank\" href=\"{URL}\" style=\"color: #09f\"> Activate now! </a><h4>Regards</h4>', '{URL}'),
 (2, 'reset-password', '<h1>Hello!</h1><p>Hello, it is new password: {PASSWORD} </p><h4>Regards</h4>', '{PASSWORD}');
 
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `featured`
---
-
-DROP TABLE IF EXISTS `featured`;
-CREATE TABLE IF NOT EXISTS `featured` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product` int(11) NOT NULL,
-  `featured_product` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniKey` (`product`,`featured_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Tabela Truncate przed wstawieniem `featured`
---
-
-TRUNCATE TABLE `featured`;
 -- --------------------------------------------------------
 
 --
@@ -341,7 +324,8 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent` int(11) NOT NULL DEFAULT 0,
-  `variant` varchar(100) NOT NULL DEFAULT '',
+  `size` varchar(50) NOT NULL,
+  `rf_attr` int(11) NOT NULL DEFAULT 0,
   `category` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `long_desc` text NOT NULL,
@@ -356,9 +340,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `rating_count` int(11) NOT NULL DEFAULT 0,
   `rating_average` decimal(3,2) NOT NULL DEFAULT 5.00,
   `rf_user` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `variantKey` (`parent`,`variant`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `product`
@@ -369,36 +352,30 @@ TRUNCATE TABLE `product`;
 -- Zrzut danych tabeli `product`
 --
 
-INSERT INTO `product` (`id`, `parent`, `variant`, `category`, `name`, `long_desc`, `short_desc`, `price`, `price_sale`, `on_sale`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`, `rf_user`) VALUES
-(1, 0, '', 1, 'Pizza', 'Pizza hawajska na grubym cieście.', 'Pizza hawajska.', '35.66', '0.00', 0, '2020-01-31 19:13:22', 1, 'instock', 100, 0, '5.00', 0);
+INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `long_desc`, `short_desc`, `price`, `price_sale`, `on_sale`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`, `rf_user`) VALUES
+(2, 0, 'Mała 30 cm', 2, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '', '16.00', '0.00', 0, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00', 0),
+(3, 2, 'Duża 45 cm', 2, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '', '26.00', '0.00', 0, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `product_attr`
+-- Struktura tabeli dla tabeli `product_featured`
 --
 
-DROP TABLE IF EXISTS `product_attr`;
-CREATE TABLE IF NOT EXISTS `product_attr` (
+DROP TABLE IF EXISTS `product_featured`;
+CREATE TABLE IF NOT EXISTS `product_featured` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rf_product` int(11) NOT NULL,
-  `rf_attr` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `product` int(11) NOT NULL,
+  `featured_product` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniKey` (`product`,`featured_product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Tabela Truncate przed wstawieniem `product_attr`
+-- Tabela Truncate przed wstawieniem `product_featured`
 --
 
-TRUNCATE TABLE `product_attr`;
---
--- Zrzut danych tabeli `product_attr`
---
-
-INSERT INTO `product_attr` (`id`, `rf_product`, `rf_attr`) VALUES
-(1, 1, 1),
-(2, 1, 2);
-
+TRUNCATE TABLE `product_featured`;
 -- --------------------------------------------------------
 
 --
@@ -444,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `ukey1` (`email`),
   UNIQUE KEY `ukey` (`username`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tabela Truncate przed wstawieniem `user`
@@ -456,7 +433,8 @@ TRUNCATE TABLE `user`;
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `pass`, `mobile`, `role`, `time`, `ip`, `code`, `active`) VALUES
-(58, 'a71442d6-4b31-11ea-8817-0016d48a4846', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'user', '2020-02-09 11:45:21', '127.0.0.1', '', 1);
+(58, 'Marcys', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '+48 321 321 321', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1),
+(63, 'Max', 'root@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1);
 
 -- --------------------------------------------------------
 
@@ -482,7 +460,7 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   `orders` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UserKey` (`rf_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `user_info`
@@ -494,7 +472,7 @@ TRUNCATE TABLE `user_info`;
 --
 
 INSERT INTO `user_info` (`id`, `rf_user`, `firstname`, `lastname`, `country`, `city`, `zip`, `address`, `mobile`, `mail`, `lat`, `lng`, `about`, `orders`) VALUES
-(1, 58, '', '', '', '', '', '', '', '', '0.000000', '0.000000', '', 0);
+(1, 58, 'Max', 'Maxioski', 'Polska', 'Przasnysz', '06-300', 'Moczymordowska 199/23', '+48 111 222 333', 'emai@email.xx', '50.000000', '20.000000', 'To ja Maxiu!', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

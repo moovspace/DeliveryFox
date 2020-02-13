@@ -10,23 +10,23 @@ use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
 use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
-use MyApp\Web\AdminPanel\AttrList;
+use MyApp\Web\AdminPanel\CategoriesList;
 
-class AttributesView extends Component
+class CategoriesView extends Component
 {
 	static public $ErrorUpdate = 0;
 
 	static function Menu()
 	{
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
-		$t_attr = $t->Get('A_LIST');
-		$t_title = $t->Get('A_TITLE');
-		$menu = new Menu('/panel/attributes', $t_attr, $t_title, '<i class="fas fa-cog"></i>', '<i class="fas fa-cog"></i>');
+		$t_name = $t->Get('C_CAT');
+		$t_title = $t->Get('C_CAT_TITLE');
+		$menu = new Menu('/panel/categories', $t_name, $t_title, '<i class="fas fa-lemon"></i>', '<i class="fas fa-lemon"></i>');
 		// $menu->AddLink('/panel/profil', 'Profil', 'User profile');
 		return $menu;
 	}
 
-	static function GetAttributes()
+	static function GetCategories()
 	{
 		if(empty($_GET['page']) || $_GET['page'] < 1){
 			$_GET['page'] = 1;
@@ -46,7 +46,7 @@ class AttributesView extends Component
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM attr ORDER BY id DESC LIMIT :offset,:perpage");
+			$r = $db->Pdo->prepare("SELECT * FROM category ORDER BY id DESC LIMIT :offset,:perpage");
 			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
 			return $r->fetchAll();
 		}
@@ -61,7 +61,7 @@ class AttributesView extends Component
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM attr");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM category");
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -211,16 +211,19 @@ class AttributesView extends Component
 		$menu['footer'] = Footer::Show($arr);
 
 		// Draw list
-		$aid = $t->Get('A_L_ID');
-		$aname = $t->Get('A_L_NAME');
-		$aaction = $t->Get('A_L_ACTION');
-		$title = [$aid, $aname, $aaction];
-		// $title = ['Id','Name', 'Actions'];
-		$rows =  self::GetAttributes();
+		$aid = $t->Get('C_ID');
+		$a1 = $t->Get('C_SUBCAT');
+		$a2 = $t->Get('C_NAME');
+		$a3 = $t->Get('C_SLUG');
+		$a4 = $t->Get('C_VISIBLE');
+		$a5 = $t->Get('C_ACTION');
+
+		$title = [$aid, $a2, $a3, $a4, $a5];
+		$rows =  self::GetCategories();
 		$maxrows =  self::GetAttributesMaxRows();
 		// print_r($maxrows);
 		// print_r($rows);
-		$menu['list'] = AttrList::Get($title, $rows, (int) $_GET['page'], $maxrows);
+		$menu['list'] = CategoriesList::Get($title, $rows, (int) $_GET['page'], $maxrows);
 
 		// Retuen html
 		return self::Html($arr, $menu);
@@ -233,7 +236,7 @@ class AttributesView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('A_TITLE').'  </h1>
+				<h1> '.$arr['trans']->Get('C_TITLE').'  </h1>
 				<error id="error">
 					' . $arr['error'] . '
 				</error>
@@ -242,12 +245,12 @@ class AttributesView extends Component
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('A_ATTRIBUTE').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="/panel/attributes">
-							<input type="text" name="attr" placeholder="e.g. Sauce">
+							<input type="text" name="attr" placeholder="e.g. Size or Sauce">
 							<input type="submit" name="add" value="'.$arr['trans']->Get('A_ATTRIBUTE_ADD').'" class="btn float-right">
 						</form>
 					</div>
 
-					<h3> '.$arr['trans']->Get('A_LIST').'  <a id="btn-add-attribute" onclick="OpenAddAttributes(this)"> '.$arr['trans']->Get('A_ATTRIBUTE').' <i class="fas fa-plus"></i> </a> </h3>
+					<h3> '.$arr['trans']->Get('C_SUB_TITLE').'  <a id="btn-add-attribute" onclick="OpenAddAttributes(this)"> '.$arr['trans']->Get('A_ATTRIBUTE').' <i class="fas fa-plus"></i> </a> </h3>
 
 					'.$html['list'].'
 

@@ -46,5 +46,15 @@
 "A_V_NAME": "Wariant",
 "A_ERR_VARIANT_DELETE": "Wcześniej usuń produkty z tym wariantem.",
 "A_ERR_OK": "Atrybut został zaktualizowany.",
-"NO_RECORDS": "Nie znaleziono rekordów."
+"NO_RECORDS": "Nie znaleziono rekordów.",
+"C_CAT": "Kategorie",
+"C_CAT_TITLE": "Kategorie produktów",
+"C_TITLE": "Kategorie produktów",
+"C_SUB_TITLE": "Kategorie",
+"C_ID": "Id",
+"C_SUBCAT": "Rodzic",
+"C_NAME": "Nazwa",
+"C_SLUG": "Slug",
+"C_VISIBLE": "Widoczna",
+"C_ACTION": "Akcja"
 }

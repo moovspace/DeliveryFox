@@ -46,5 +46,15 @@
 "A_V_NAME": "Variant",
 "A_ERR_VARIANT_DELETE": "Delete products with this variant first.",
 "A_ERR_OK": "Attribute has been updated.",
-"NO_RECORDS": "No records found."
+"NO_RECORDS": "No records found.",
+"C_CAT": "Category",
+"C_CAT_TITLE": "Product categories",
+"C_TITLE": "Product categories",
+"C_SUB_TITLE": "Categories",
+"C_ID": "Id",
+"C_SUBCAT": "Parent",
+"C_NAME": "Name",
+"C_SLUG": "Slug",
+"C_VISIBLE": "Visible",
+"C_ACTION": "Actions"
 }
