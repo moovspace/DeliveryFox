@@ -136,7 +136,13 @@ class EditAttributesView extends Component
 			$db = Db::getInstance();
 			$r = $db->Pdo->prepare("SELECT name FROM attr WHERE id = $eid");
 			$r->execute();
-			return $r->fetchAll()[0]['name'];
+			$rows = $r->fetchAll();
+
+			if(!empty($rows))
+			{
+				return $rows[0]['name'];
+			}
+			return 0;
 		}
 		catch(Exception $e)
 		{
