@@ -24,10 +24,10 @@ class CategoriesList
 			foreach ($d as $k => $v) {
 				$id = $v['id'];
 
-				$visible = '<span> <i class="fas fa-eye"></i> </span>';
+				$visible = '<span> <a href="?visible='.$id.'" title="Change visibility"> <i class="fas fa-eye"></i> </a> </span>';
 				if($v['visible'] == 0)
 				{
-					$visible = '<span> <i class="fas fa-eye-slash"></i> </span>';
+					$visible = '<span> <a href="?visible='.$id.'" title="Change visibility"> <i class="fas fa-eye-slash"></i> </a> </span>';
 				}
 
 				$t .= '<li>';
@@ -37,7 +37,7 @@ class CategoriesList
 				$t .= '<div> ' . $visible . ' </div>';
 				$t .= '
 				<div>
-					<a href="?edit='.$id.'" class="btn-small-li click-edit" data-id="'.$id.'"> <i class="fas fa-edit"></i> </a>
+					<a class="btn-small-li click-edit" data-id="'.$id.'" onclick="OpenEditCategory(this)"> <i class="fas fa-edit"></i> </a>
 					<a href="?delete='.$id.'" class="btn-small-li click-del" data-id="'.$id.'"> <i class="fas fa-trash"></i> </a>
 				</div>
 				</li>

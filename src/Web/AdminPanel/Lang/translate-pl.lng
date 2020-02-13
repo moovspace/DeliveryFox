@@ -56,5 +56,8 @@
 "C_NAME": "Nazwa",
 "C_SLUG": "Slug",
 "C_VISIBLE": "Widoczna",
-"C_ACTION": "Akcja"
+"C_ACTION": "Akcja",
+"C_ADD_CAT": "Kategoria",
+"C_ADD": "Dodaj",
+"C_CHANGE": "Aktualizuj"
 }
