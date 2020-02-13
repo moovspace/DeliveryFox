@@ -24,10 +24,10 @@ class CategoriesList
 			foreach ($d as $k => $v) {
 				$id = $v['id'];
 
-				$visible = '<span> <a href="?visible='.$id.'" title="Change visibility"> <i class="fas fa-eye"></i> </a> </span>';
+				$visible = '<span> <i class="fas fa-eye"></i> </span>';
 				if($v['visible'] == 0)
 				{
-					$visible = '<span> <a href="?visible='.$id.'" title="Change visibility"> <i class="fas fa-eye-slash"></i> </a> </span>';
+					$visible = '<span> <i class="fas fa-eye-slash"></i> </span>';
 				}
 
 				$t .= '<li>';
