@@ -21,6 +21,8 @@ class Html
 					self::Favicon();
 					self::Cache();
 				?>
+				<!-- Animate.css -->
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
 				<!-- fonts -->
 				<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700,800,900" rel="stylesheet">
@@ -58,7 +60,7 @@ class Html
 
 	static function Head($arr){
 		$o = '';
-		if(is_array($arr)){			
+		if(is_array($arr)){
 			foreach($arr as $v){
 				$o .= $v;
 			}

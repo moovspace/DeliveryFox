@@ -13,17 +13,17 @@ html,body{
 
 a{
 	cursor: pointer;
-	color: #007bff;
+	color: #21b973;
 	font-weight: 400;
 	text-decoration: none;
 }
 
 a:hover{
-	color: #a2ff00;
+	color: #47c78b;
 	text-decoration: none;
 }
 
-a:not([href]){
+/* a:not([href]){
 	color: #007bff;
 	text-decoration: none;
 }
@@ -31,7 +31,7 @@ a:not([href]){
 a:hover:not([href]){
 	color: #fff;
 	text-decoration: none;
-}
+} */
 
 h1, h2 {
 	font-weight: 900;

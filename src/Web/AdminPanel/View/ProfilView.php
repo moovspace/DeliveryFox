@@ -3,12 +3,12 @@ namespace MyApp\Web\AdminPanel\View;
 
 use Exception;
 use MyApp\App\Component;
+use MyApp\App\Menu\Menu;
+use MyApp\App\Translate\Trans;
 use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
-use MyApp\App\Menu\Menu;
 use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
-use MyApp\App\Translate\Trans;
 
 class ProfilView extends Component
 {

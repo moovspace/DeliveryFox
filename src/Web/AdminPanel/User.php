@@ -98,7 +98,7 @@ class User
 	 */
 	public function Role()
 	{
-		return $this->Role;
+		return (string) $this->Role;
 	}
 
 	/**
