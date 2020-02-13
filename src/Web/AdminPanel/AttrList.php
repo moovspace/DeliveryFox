@@ -66,13 +66,17 @@ class AttrList
 		if($prev < 1){ $prev = 1; }
 		if($next > $maxpage){ $next = $maxpage; }
 
-		return '
-		<div class="pages">
-			<a href="?page='.$prev.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-left"></i> </a>
-			<a href="?page='.$page.'&perpage='.$perpage.$q.'"> '.$page.' / '.$maxpage.' </a>
-			<a href="?page='.$next.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-right"></i> </a>
-		</div>
-		';
+		if($maxpage != 1)
+		{
+			return '
+			<div class="pages">
+				<a href="?page='.$prev.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-left"></i> </a>
+				<a href="?page='.$page.'&perpage='.$perpage.$q.'"> '.$page.' / '.$maxpage.' </a>
+				<a href="?page='.$next.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-right"></i> </a>
+			</div>
+			';
+		}
+		return '';
 	}
 
 	/**

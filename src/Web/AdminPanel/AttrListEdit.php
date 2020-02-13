@@ -69,13 +69,17 @@ class AttrListEdit
 		// Atrubut id
 		$eid = (int)$_GET['edit'];
 
-		return '
-		<div class="pages">
-			<a href="?edit='.$eid.'&page='.$prev.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-left"></i> </a>
-			<a href="?edit='.$eid.'&page='.$page.'&perpage='.$perpage.$q.'"> '.$page.' / '.$maxpage.' </a>
-			<a href="?edit='.$eid.'&page='.$next.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-right"></i> </a>
-		</div>
-		';
+		if($maxpage != 1)
+		{
+			return '
+			<div class="pages">
+				<a href="?edit='.$eid.'&page='.$prev.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-left"></i> </a>
+				<a href="?edit='.$eid.'&page='.$page.'&perpage='.$perpage.$q.'"> '.$page.' / '.$maxpage.' </a>
+				<a href="?edit='.$eid.'&page='.$next.'&perpage='.$perpage.$q.'"> <i class="fas fa-chevron-right"></i> </a>
+			</div>
+			';
+		}
+		return '';
 	}
 
 	/**
