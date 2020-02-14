@@ -62,5 +62,6 @@
 "C_ADD": "Add",
 "C_CHANGE": "Update",
 "C_ERR_DELETE": "Delete products with this category",
-"C_UPDATED": "Category has been updated."
+"C_UPDATED": "Category has been updated.",
+"C_ERR_EMPTY": "Enter all fields."
 }

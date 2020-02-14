@@ -23,7 +23,7 @@
 "LB_COUNTRY": "Kraj",
 "SAVE": "ZAPISZ",
 "EG": "np.",
-"A_ERR_NOTHING": "Atrybut już istnieje lub jest niepoprawny.",
+"A_ERR_NOTHING": "Zaktualizowane!",
 "A_UPDATED": "Zaktualizowano atrybuty.",
 "A_ERR_DELETE": "Musisz wcześniej usunąć elementy atrybutu.",
 "A_ERR_DUPLICATE": "Atrybut o takiej nazwie już istnieje.",
@@ -62,5 +62,6 @@
 "C_ADD": "Utwórz kategorię",
 "C_CHANGE": "Aktualizuj kategorię",
 "C_ERR_DELETE": "Wcześniej usuń produkty z tej kategorii",
-"C_UPDATED": "Zaktualizowano kategorię."
+"C_UPDATED": "Zaktualizowano kategorie.",
+"C_ERR_EMPTY": "Uzupełnij wszystki pola formularza."
 }

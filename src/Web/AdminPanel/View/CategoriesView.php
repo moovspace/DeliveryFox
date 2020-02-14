@@ -88,7 +88,7 @@ class CategoriesView extends Component
 					$r->execute([':name' => $name, 'slug' => $slug, 'visible' => $visible]);
 					return $db->Pdo->lastInsertId();
 				}
-				return 0;
+				return -4;
 			}
 			catch(Exception $e)
 			{
@@ -187,16 +187,19 @@ class CategoriesView extends Component
 				throw new Exception("Error user privileges", 666);
 			}
 
-			$user->ErrorUpdate = self::AddCategory();
+			if(!empty($_GET['delete']))
+			{
+				$user->ErrorUpdate = self::Del();
+			}
 
 			if(!empty($_POST['update']))
 			{
 				$user->ErrorUpdate = self::UpdateCategory();
 			}
 
-			if(!empty($_GET['delete']))
+			if(!empty($_POST['add']))
 			{
-				$user->ErrorUpdate = self::Del();
+				$user->ErrorUpdate = self::AddCategory();
 			}
 		}
 		catch(Exception $e)
@@ -225,16 +228,16 @@ class CategoriesView extends Component
 		$arr['error'] = '';
 		$arr['trans'] = $t;
 
-		if(!empty($_POST) || !empty($_GET))
+		if(!empty($_POST['update']) || !empty($_POST) || !empty($_GET['delete']))
 		{
-			$user->ErrorUpdate;
-
 			if($user->ErrorUpdate == 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('A_ERR_NOTHING').' </span>';
 			}else if($user->ErrorUpdate == 1){
 				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
 			}else if($user->ErrorUpdate > 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
+			}else if($user->ErrorUpdate == -4){
+				$arr['error'] = '<span class="red"> '.$t->Get('C_ERR_EMPTY').' </span>';
 			}else if($user->ErrorUpdate == -3){
 				$arr['error'] = '<span class="red"> '.$t->Get('C_ERR_DELETE').' </span>';
 			}else if($user->ErrorUpdate == -2){
@@ -283,7 +286,7 @@ class CategoriesView extends Component
 
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
-						<form method="POST" action="">
+						<form method="POST" action="/panel/categories">
 							<label>Name</label>
 							<input type="text" name="name" placeholder="e.g. Pizza">
 							<label>Slug</label>
@@ -299,7 +302,7 @@ class CategoriesView extends Component
 
 					<div id="box-fixed-edit" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT1').' <i class="fas fa-times close"></i> </h3>
-						<form method="POST" action="">
+						<form method="POST" action="/panel/categories">
 							<label>Name</label>
 							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
 							<label>Slug</label>
