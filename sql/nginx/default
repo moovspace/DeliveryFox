@@ -2,13 +2,13 @@
 server {
     listen 80;
     listen [::]:80;
-    
+
     # Document dir
     root /home/usero/Www/html/drive.xx;
-    
+
     # Run first
     index index.php index.html;
-    
+
     # Domain, host
     server_name drive.xx www.drive.xx;
 
@@ -20,7 +20,7 @@ server {
     location / {
         # Get file or folder or error
         # try_files $uri $uri/ =404;
-        
+
         # Get file or folder or redirect uri to url param in index.php
         try_files $uri $uri/ /index.php?url=$uri&$args;
     }
@@ -30,10 +30,92 @@ server {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
     }
+}
 
-    location /sql {
-        # allow 127.0.0.1/16;
-        deny all;
+### ROUTER.XX
+server {
+    listen 80;
+    listen [::]:80;
+
+    # Document dir
+    root /home/usero/Www/html/router.xx;
+
+    # Run first
+    index index.php index.html;
+
+    # Domain, host
+    server_name router.xx www.router.xx;
+
+    location / {
+        # Get file or folder or error
+        # try_files $uri $uri/ =404;
+
+        # Get file or folder or redirect uri to url param in index.php
+        try_files $uri $uri/ /index.php?url=$uri&$args;
+    }
+
+    location ~ \.php$ {
+        # Php-fpm
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+    }
+}
+
+### LUNCH.XX
+server {
+    listen 80;
+    listen [::]:80;
+
+    # Document dir
+    root /home/usero/Www/html/lunch.xx;
+
+    # Run first
+    index index.php index.html;
+
+    # Domain, host
+    server_name lunch.xx www.lunch.xx;
+
+    location / {
+        # Get file or folder or error
+        # try_files $uri $uri/ =404;
+
+        # Get file or folder or redirect uri to url param in index.php
+        try_files $uri $uri/ /index.php?url=$uri&$args;
+    }
+
+    location ~ \.php$ {
+        # Php-fpm
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+    }
+}
+
+### PHPAPIX.XX
+server {
+    listen 80;
+    listen [::]:80;
+
+    # Document dir
+    root /home/usero/Www/html/phpapix.xx;
+
+    # Run first
+    index index.php index.html;
+
+    # Domain, host
+    server_name phpapix.xx www.phpapix.xx;
+
+    location / {
+        # Get file or folder or error
+        # try_files $uri $uri/ =404;
+
+        # Get file or folder or redirect uri to url param in index.php
+        try_files $uri $uri/ /index.php?url=$uri&$args;
+    }
+
+    location ~ \.php$ {
+        # Php-fpm
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
     }
 }
 
@@ -41,25 +123,20 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    
+
     # Document dir
     root /home/usero/Www/html/phpmyadmin.xx;
-    
+
     # Run first
     index index.php index.html;
-    
+
     # Domain, host
     server_name phpmyadmin.xx www.phpmyadmin.xx;
-
-    location = /favicon.ico {
-        # root /favicon;
-        rewrite . /favicon/favicon.ico;
-    }
 
     location / {
         # Get file or folder or error
         # try_files $uri $uri/ =404;
-        
+
         # Get file or folder or redirect uri to url param in index.php
         try_files $uri $uri/ /index.php?url=$uri&$args;
     }

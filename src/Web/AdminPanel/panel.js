@@ -32,12 +32,41 @@ function OpenEditCategory(it){
 	let slug = document.getElementById('edit-cat-slug')
 	let visible = document.getElementById('edit-cat-visible')
 
-	// Fetch here
+	console.log("Category id " , catid.value);
 
-	// Set name
-	name.value = '';
-	// Set slug
-	slug.value = '';
-	// Set select option
-	visible.value = 0;
+	// Fetch here
+	let url = 'http://drive.xx/src/Web/AdminPanel/Api/get-category.php?category=' + catid.value;
+
+	ApiGet(url).then((data) => {
+		console.log(data.name);
+		name.value = data.name;
+		slug.value = data.slug;
+		visible.value = data.visible;
+	});
+}
+
+// GET request
+async function ApiGet(url = 'http://jsonplaceholder.typicode.com/users'){
+	let response = await fetch(url)
+	.catch((error) => {
+		console.error('Error get:', error);
+	});
+	console.log(response);
+	return await response.json();
+}
+
+// POST request
+async function ApiPost(url = 'https://jsonplaceholder.typicode.com/posts/1', form_id = "form"){
+	// Get form data, files
+	const formData = new FormData(document.getElementById(form_id));
+	// Send data
+	let response = await fetch(url, {
+		method: 'POST',
+		body: formData
+	})
+	.catch((error) => {
+		console.error('Error post formData:', error);
+	});
+
+	return await response.json();
 }

@@ -22,7 +22,7 @@ class CategoriesView extends Component
 		$t_name = $t->Get('C_CAT');
 		$t_title = $t->Get('C_CAT_TITLE');
 		$menu = new Menu('/panel/categories', $t_name, $t_title, '<i class="fas fa-lemon"></i>', '<i class="fas fa-lemon"></i>');
-		// $menu->AddLink('/panel/profil', 'Profil', 'User profile');
+		// $menu->AddLink('/panel/categories', 'Profil', 'User profile');
 		return $menu;
 	}
 
@@ -56,7 +56,7 @@ class CategoriesView extends Component
 		}
 	}
 
-	static function GetAttributesMaxRows()
+	static function GetMaxRows()
 	{
 		try
 		{
@@ -71,20 +71,21 @@ class CategoriesView extends Component
 		}
 	}
 
-	static function AddAttribute()
+	static function AddCategory()
 	{
 		if(!empty($_POST['add']))
 		{
 			try
 			{
-				$name = $_POST['attr'];
+				$name = $_POST['name'];
+				$slug = $_POST['slug'];
+				$visible = (int) $_POST['visible'];
 
-				if(!empty($name))
+				if(!empty($name) && !empty($slug))
 				{
 					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("INSERT INTO attr(name) VALUES(:name)");
-					$r->execute([':name' => $name]);
-					unset($_POST['attr']);
+					$r = $db->Pdo->prepare("INSERT INTO category(name,slug,visible) VALUES(:name,:slug,:visible)");
+					$r->execute([':name' => $name, 'slug' => $slug, 'visible' => $visible]);
 					return $db->Pdo->lastInsertId();
 				}
 				return 0;
@@ -99,14 +100,46 @@ class CategoriesView extends Component
 		}
 	}
 
-	static function CheckAttributesChilds($id)
+	static function UpdateCategory()
+	{
+		if(!empty($_POST['update']))
+		{
+			try
+			{
+				$id = $_POST['catid'];
+				$name = $_POST['name'];
+				$slug = $_POST['slug'];
+				$visible = (int) $_POST['visible'];
+
+				if(!empty($name) && !empty($slug) && $id > 0)
+				{
+					$db = Db::getInstance();
+					$r = $db->Pdo->prepare("UPDATE category SET name = :name, slug = :slug, visible = :visible WHERE id = :id");
+					$r->execute([':name' => $name, 'slug' => $slug, 'visible' => $visible, ':id' => $id]);
+					return $db->Pdo->lastInsertId();
+				}
+				return 0;
+			}
+			catch(Exception $e)
+			{
+				echo $e->getMessage();
+
+				if ($e->errorInfo[1] == 1062) {
+					return -2; // record exist
+				}
+				return -1; // error
+			}
+		}
+	}
+
+	static function CheckChilds($id)
 	{
 		try
 		{
 			$id = (int) $id;
 
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM attr_name WHERE rf_attr = $id");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product WHERE rf_attr = $id");
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -116,7 +149,7 @@ class CategoriesView extends Component
 		}
 	}
 
-	static function DelAttribute()
+	static function Del()
 	{
 		if(!empty($_GET['delete']))
 		{
@@ -124,14 +157,14 @@ class CategoriesView extends Component
 			{
 				$id = (int) $_GET['delete'];
 
-				if(self::CheckAttributesChilds($id) == 0)
+				if(self::CheckChilds($id) == 0)
 				{
 					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("DELETE FROM attr WHERE id = $id");
+					$r = $db->Pdo->prepare("DELETE FROM category WHERE id = $id");
 					$r->execute();
 					return $r->rowCount();
 				}else{
-					// Delete attr_name childs first
+					// Delete product childs childs first
 					return -3;
 				}
 			}
@@ -154,10 +187,16 @@ class CategoriesView extends Component
 				throw new Exception("Error user privileges", 666);
 			}
 
-			$user->ErrorUpdate = self::AddAttribute();
+			$user->ErrorUpdate = self::AddCategory();
 
-			if(!empty($_GET['delete'])){
-				$user->ErrorUpdate = self::DelAttribute();
+			if(!empty($_POST['update']))
+			{
+				$user->ErrorUpdate = self::UpdateCategory();
+			}
+
+			if(!empty($_GET['delete']))
+			{
+				$user->ErrorUpdate = self::Del();
 			}
 		}
 		catch(Exception $e)
@@ -186,18 +225,18 @@ class CategoriesView extends Component
 		$arr['error'] = '';
 		$arr['trans'] = $t;
 
-		if(!empty($_POST) || !empty($_GET['delete']))
+		if(!empty($_POST) || !empty($_GET))
 		{
 			$user->ErrorUpdate;
 
 			if($user->ErrorUpdate == 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('A_ERR_NOTHING').' </span>';
 			}else if($user->ErrorUpdate == 1){
-				$arr['error'] = '<span class="green"> '.$t->Get('A_UPDATED').' </span>';
+				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
 			}else if($user->ErrorUpdate > 0){
-				$arr['error'] = '<span class="green"> '.$t->Get('A_UPDATED').' </span>';
+				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
 			}else if($user->ErrorUpdate == -3){
-				$arr['error'] = '<span class="red"> '.$t->Get('A_ERR_DELETE').' </span>';
+				$arr['error'] = '<span class="red"> '.$t->Get('C_ERR_DELETE').' </span>';
 			}else if($user->ErrorUpdate == -2){
 				$arr['error'] = '<span class="red"> '.$t->Get('A_ERR_DUPLICATE').' </span>';
 			}else if($user->ErrorUpdate < 0){
@@ -220,7 +259,7 @@ class CategoriesView extends Component
 
 		$title = [$aid, $a2, $a3, $a4, $a5];
 		$rows =  self::GetCategories();
-		$maxrows =  self::GetAttributesMaxRows();
+		$maxrows =  self::GetMaxRows();
 		// print_r($maxrows);
 		// print_r($rows);
 		$menu['list'] = CategoriesList::Get($title, $rows, (int) $_GET['page'], $maxrows);
@@ -244,7 +283,7 @@ class CategoriesView extends Component
 
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
-						<form method="POST" action="/panel/attributes">
+						<form method="POST" action="">
 							<label>Name</label>
 							<input type="text" name="name" placeholder="e.g. Pizza">
 							<label>Slug</label>
@@ -259,7 +298,7 @@ class CategoriesView extends Component
 					</div>
 
 					<div id="box-fixed-edit" class="animated fadeIn">
-						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
+						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT1').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="">
 							<label>Name</label>
 							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
@@ -271,7 +310,7 @@ class CategoriesView extends Component
 								<option value="0">No</option>
 							</select>
 							<input type="hidden" name="catid" value="0" id="catid">
-							<input type="submit" name="change" value="'.$arr['trans']->Get('C_CHANGE').'" class="btn float-right">
+							<input type="submit" name="update" value="'.$arr['trans']->Get('C_CHANGE').'" class="btn float-right">
 						</form>
 					</div>
 

@@ -27,7 +27,7 @@
 "A_UPDATED": "Attribute has been updated.",
 "A_ERR_DELETE": "Delete attribute childs first.",
 "A_ERR_DUPLICATE": "Record with this name exists.",
-"A_ERR_UPDATE": "Can not update attributes.",
+"A_ERR_UPDATE": "Can not update record.",
 "A_TITLE": "Product attributes",
 "A_LIST": "Attributes",
 "A_ATTRIBUTE": "Attribute",
@@ -58,6 +58,9 @@
 "C_VISIBLE": "Visible",
 "C_ACTION": "Actions",
 "C_ADD_CAT": "Category",
+"C_ADD_CAT1": "Edit category",
 "C_ADD": "Add",
-"C_CHANGE": "Update"
+"C_CHANGE": "Update",
+"C_ERR_DELETE": "Delete products with this category",
+"C_UPDATED": "Category has been updated."
 }

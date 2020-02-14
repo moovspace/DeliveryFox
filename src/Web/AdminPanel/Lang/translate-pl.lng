@@ -27,7 +27,7 @@
 "A_UPDATED": "Zaktualizowano atrybuty.",
 "A_ERR_DELETE": "Musisz wcześniej usunąć elementy atrybutu.",
 "A_ERR_DUPLICATE": "Atrybut o takiej nazwie już istnieje.",
-"A_ERR_UPDATE": "Nie można zaktualizować atrybutu.",
+"A_ERR_UPDATE": "Nie można zaktualizować rekordu.",
 "A_TITLE": "Atrybuty produktów",
 "A_LIST": "Atrybuty",
 "A_ATTRIBUTE": "Atrybut",
@@ -58,6 +58,9 @@
 "C_VISIBLE": "Widoczna",
 "C_ACTION": "Akcja",
 "C_ADD_CAT": "Kategoria",
-"C_ADD": "Dodaj",
-"C_CHANGE": "Aktualizuj"
+"C_ADD_CAT1": "Edytuj kategorię",
+"C_ADD": "Utwórz kategorię",
+"C_CHANGE": "Aktualizuj kategorię",
+"C_ERR_DELETE": "Wcześniej usuń produkty z tej kategorii",
+"C_UPDATED": "Zaktualizowano kategorię."
 }
