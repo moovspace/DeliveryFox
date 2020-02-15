@@ -45,12 +45,12 @@ a{
 	font-size: 13px;
 }
 h1, h2, h3, h4{
-	color: #222;
+	color: #273849;
 	margin: 1%;
 	margin-top: 0px;
 }
-error{
-	margin: 1%;
+error span{
+	padding-left: 1%;
 }
 .red{
 	font-weight: 400;
@@ -109,12 +109,15 @@ small{
 .menu-box{float: left; width: 100%; padding: 9px; overflow: hidden; position: relative}
 .menu-box *{box-sizing: border-box; text-decoration: none; outline: none}
 .menu-box i{margin-right: 15px; margin-left: 15px;}
+.menu-box a{transition: all .5s}
+.menu-box a:hover{color: #21b973}
 .menu-box .title{float: left; width: 100%; padding: 9px; background: #fff; color: #222}
 .menu-box .title-open{border-left: 0px solid #f9fcfb; font-weight: 900}
+.menu-box .title-open hide{font-weight: 900}
 .menu-box .submenu{display: none; float: left; width: 100%; overflow: hidden}
 .menu-box .submenu-open{display: inherit !important}
-.menu-box .submenu-link{float: left; width: 100%; padding: 9px; background: #f9f9f9; color: #263f44}
-.menu-box .submenu-link-active{color: #263f44; font-weight: 900}
+.menu-box .submenu-link{float: left; width: 100%; padding: 9px; background: #f9f9f9; color: #222}
+.menu-box .submenu-link-active{color: #21b973; font-size: 15.5px; font-weight: 400}
 
 /* Panel right form */
 .box-wrap{
@@ -307,6 +310,16 @@ ul li div{
 	font-weight: 500;
 	color: #222;
 }
+ul li div:first-child{
+	width: auto;
+	min-width: 50px;
+	justify-content: left;
+}
+ul li div:nth-child(2){
+	width: auto;
+	min-width: 100px;
+	justify-content: left;
+}
 ul li div:last-child{
 	width: auto;
 	min-width: 100px;
@@ -320,8 +333,8 @@ ul li .btn-small-li{
 	padding: 5px;
 	margin-right: 5px;
 	background: #eee;
-	width: 30px;
-	height: 30px;
+	min-width: 30px;
+	min-height: 30px;
 	text-align: center;
 	border-radius: 6px;
 }
@@ -373,6 +386,22 @@ ul.header li div{
 .color-green{
 	color: #21b973
 }
-
-@media all and (max-width: 1024px){
+highlight{
+	color: #21b973; font-weight: 900; margin-left: 5px; margin-right: 5px;
 }
+/* Add product */
+#product-image{
+	float: left; width: 200px; height: 200px;
+	padding: 10px; border: 2px dashed #eee;
+	object-fit: cover;
+}
+.ml{
+	float: left;
+	margin-left: 10px;
+}
+@media all and (max-width: 1024px){
+	#box-fixed .w-50, #box-fixed-edit .w-50{
+		margin: 0%;
+	}
+}
+

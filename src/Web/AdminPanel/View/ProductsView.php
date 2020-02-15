@@ -10,23 +10,23 @@ use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
 use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
-use MyApp\Web\AdminPanel\CategoriesList;
+use MyApp\Web\AdminPanel\ProductsList;
 
-class CategoriesView extends Component
+class ProductsView extends Component
 {
 	static public $ErrorUpdate = 0;
 
 	static function Menu()
 	{
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
-		$t_name = $t->Get('C_CAT');
-		$t_title = $t->Get('C_CAT_TITLE');
-		$menu = new Menu('/panel/categories', $t_name, $t_title, '<i class="fas fa-lemon"></i>', '<i class="fas fa-lemon"></i>');
-		// $menu->AddLink('/panel/categories', 'Categories', 'product categories');
+		$t_name = $t->Get('P_CAT');
+		$t_title = $t->Get('P_CAT_TITLE');
+		$menu = new Menu('/panel/products', $t_name, $t_title, '<i class="fas fa-shopping-bag"></i>', '<i class="fas fa-shopping-bag"></i>');
+		$menu->AddLink('/panel/product/add', 'Add product', 'Add new product', '<i class="fas fa-plus"></i>', '<i class="fas fa-plus"></i>');
 		return $menu;
 	}
 
-	static function GetCategories()
+	static function GetProducts()
 	{
 		if(empty($_GET['page']) || $_GET['page'] < 1){
 			$_GET['page'] = 1;
@@ -46,7 +46,7 @@ class CategoriesView extends Component
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM category ORDER BY id DESC LIMIT :offset,:perpage");
+			$r = $db->Pdo->prepare("SELECT * FROM product ORDER BY id DESC LIMIT :offset,:perpage");
 			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
 			return $r->fetchAll();
 		}
@@ -61,87 +61,7 @@ class CategoriesView extends Component
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM category");
-			$r->execute();
-			return $r->fetchAll()[0]['cnt'];
-		}
-		catch(Exception $e)
-		{
-			return 1;
-		}
-	}
-
-	static function AddCategory()
-	{
-		if(!empty($_POST['add']))
-		{
-			try
-			{
-				$name = $_POST['name'];
-				$slug = $_POST['slug'];
-				$visible = (int) $_POST['visible'];
-				$onaddon = (int) $_POST['on_addon'];
-
-				if(!empty($name) && !empty($slug))
-				{
-					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("INSERT INTO category(name,slug,visible,on_addon) VALUES(:name,:slug,:visible,:addon)");
-					$r->execute([':name' => $name, 'slug' => $slug, 'visible' => $visible, ':addon' => $onaddon]);
-					return $db->Pdo->lastInsertId();
-				}
-				return -4;
-			}
-			catch(Exception $e)
-			{
-				if ($e->errorInfo[1] == 1062) {
-					return -2; // record exist
-				}
-				return -1; // error
-			}
-		}
-	}
-
-	static function UpdateCategory()
-	{
-		if(!empty($_POST['update']))
-		{
-			try
-			{
-				$id = $_POST['catid'];
-				$name = $_POST['name'];
-				$slug = $_POST['slug'];
-				$visible = (int) $_POST['visible'];
-				$onaddon = (int) $_POST['on_addon'];
-
-				if(!empty($name) && !empty($slug) && $id > 0)
-				{
-					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("UPDATE category SET name = :name, slug = :slug, visible = :visible, on_addon = :addon WHERE id = :id");
-					$r->execute([':name' => $name, 'slug' => $slug, 'visible' => $visible, ':addon' => $onaddon, ':id' => $id]);
-					return $db->Pdo->lastInsertId();
-				}
-				return 0;
-			}
-			catch(Exception $e)
-			{
-				echo $e->getMessage();
-
-				if ($e->errorInfo[1] == 1062) {
-					return -2; // record exist
-				}
-				return -1; // error
-			}
-		}
-	}
-
-	static function CheckChilds($id)
-	{
-		try
-		{
-			$id = (int) $id;
-
-			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product WHERE rf_attr = $id");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product");
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -159,14 +79,13 @@ class CategoriesView extends Component
 			{
 				$id = (int) $_GET['delete'];
 
-				if(self::CheckChilds($id) == 0)
+				if($id > 0)
 				{
 					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("DELETE FROM category WHERE id = $id");
+					$r = $db->Pdo->prepare("DELETE FROM product WHERE id = $id");
 					$r->execute();
 					return $r->rowCount();
 				}else{
-					// Delete product childs childs first
 					return -3;
 				}
 			}
@@ -192,16 +111,6 @@ class CategoriesView extends Component
 			if(!empty($_GET['delete']))
 			{
 				$user->ErrorUpdate = self::Del();
-			}
-
-			if(!empty($_POST['update']))
-			{
-				$user->ErrorUpdate = self::UpdateCategory();
-			}
-
-			if(!empty($_POST['add']))
-			{
-				$user->ErrorUpdate = self::AddCategory();
 			}
 		}
 		catch(Exception $e)
@@ -230,7 +139,7 @@ class CategoriesView extends Component
 		$arr['error'] = '';
 		$arr['trans'] = $t;
 
-		if(!empty($_POST['update']) || !empty($_POST) || !empty($_GET['delete']))
+		if(!empty($_POST) || !empty($_GET['delete']))
 		{
 			if($user->ErrorUpdate == 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('A_ERR_NOTHING').' </span>';
@@ -255,19 +164,21 @@ class CategoriesView extends Component
 		$menu['footer'] = Footer::Show($arr);
 
 		// Draw list
-		$aid = $t->Get('C_ID');
-		$a1 = $t->Get('C_SUBCAT');
-		$a2 = $t->Get('C_NAME');
-		$a3 = $t->Get('C_SLUG');
-		$a4 = $t->Get('C_VISIBLE');
-		$a5 = $t->Get('C_ACTION');
+		$aid = $t->Get('PP_ID');
+		$vid = $t->Get('PP_ID_VARIANT');
+		$a1 = $t->Get('PP_NAME');
+		$a2 = $t->Get('PP_PRICE');
+		$a3 = $t->Get('PP_PRICE_SALE');
+		$a4 = $t->Get('PP_SIZE');
+		$a5 = $t->Get('PP_ACTION');
 
-		$title = [$aid, $a2, $a3, $a4, $a5];
-		$rows =  self::GetCategories();
+		$title = [$aid, $vid, $a1, $a4, $a2.' / '.$a3, $a5];
+
+		$rows =  self::GetProducts();
 		$maxrows =  self::GetMaxRows();
 		// print_r($maxrows);
 		// print_r($rows);
-		$menu['list'] = CategoriesList::Get($title, $rows, (int) $_GET['page'], $maxrows);
+		$menu['list'] = ProductsList::Get($title, $rows, (int) $_GET['page'], $maxrows);
 
 		// Retuen html
 		return self::Html($arr, $menu);
@@ -280,7 +191,7 @@ class CategoriesView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('C_TITLE').'  </h1>
+				<h1> '.$arr['trans']->Get('P_TITLE').'  </h1>
 				<error id="error">
 					' . $arr['error'] . '
 				</error>
@@ -293,23 +204,11 @@ class CategoriesView extends Component
 							<input type="text" name="name" placeholder="e.g. Pizza">
 							<label>Slug</label>
 							<input type="text" name="slug" placeholder="e.g. pizza">
-
-							<div class="w-50">
-								<label>Visible</label>
-								<select name="visible">
-									<option value="1">Yes</option>
-									<option value="0">No</option>
-								</select>
-							</div>
-
-							<div class="w-50">
-								<label>Addon</label>
-								<select name="on_addon">
-									<option value="0">No</option>
-									<option value="1">Yes</option>
-								</select>
-							</div>
-
+							<label>Visible</label>
+							<select name="visible">
+								<option value="1">Yes</option>
+								<option value="0">No</option>
+							</select>
 							<input type="submit" name="add" value="'.$arr['trans']->Get('C_ADD').'" class="btn float-right">
 						</form>
 					</div>
@@ -321,26 +220,17 @@ class CategoriesView extends Component
 							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
 							<label>Slug</label>
 							<input type="text" name="slug" placeholder="e.g. pizza" id="edit-cat-slug">
-							<div class="w-50">
-								<label>Visible</label>
-								<select name="visible" id="edit-cat-visible">
-									<option value="1">Yes</option>
-									<option value="0">No</option>
-								</select>
-							</div>
-							<div class="w-50">
-								<label>Addon</label>
-								<select name="on_addon" id="edit-cat-addon">
-									<option value="0">No</option>
-									<option value="1">Yes</option>
-								</select>
-							</div>
+							<label>Visible</label>
+							<select name="visible" id="edit-cat-visible">
+								<option value="1">Yes</option>
+								<option value="0">No</option>
+							</select>
 							<input type="hidden" name="catid" value="0" id="catid">
 							<input type="submit" name="update" value="'.$arr['trans']->Get('C_CHANGE').'" class="btn float-right">
 						</form>
 					</div>
 
-					<h3> '.$arr['trans']->Get('C_SUB_TITLE').'  <a id="btn-add-attribute" onclick="OpenAddAttributes(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-plus"></i> </a> </h3>
+					<h3> '.$arr['trans']->Get('P_SUB_TITLE').'  <a href="/panel/product/add" id="btn-add-attribute"> '.$arr['trans']->Get('P_ADD_CAT').' <i class="fas fa-plus"></i> </a> </h3>
 
 					'.$html['list'].'
 

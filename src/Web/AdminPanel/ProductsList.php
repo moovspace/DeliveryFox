@@ -2,7 +2,7 @@
 namespace MyApp\Web\AdminPanel;
 use MyApp\App\Translate\Trans;
 
-class CategoriesList
+class ProductsList
 {
 	static function Title(array $title){
 		$t = '<ul class="header"><li>';
@@ -34,25 +34,34 @@ class CategoriesList
 			foreach ($d as $k => $v) {
 				$id = $v['id'];
 
-				$visible = '<span title="Visible"> <i class="fas fa-eye"></i> </span>';
-				if($v['visible'] == 0)
+				$parent = '<span title="Product variant"> Id-'.$v['parent'].' </span>';
+				if($v['parent'] == 0)
 				{
-					$visible = '<span title="Hidden"> <i class="fas fa-eye-slash"></i> </span>';
+					$parent = '<span title="Main product"> <i class="fas fa-boxes"></i> </span>';
 				}
-				$addon = '';
-				if($v['on_addon'] == 1)
+
+				// Add variant
+				$add = '';
+				if($v['parent'] == 0)
 				{
-					$addon = '<span class="ml" title="Addons"> <i class="fas fa-boxes"></i> </span>';
+					// $add = '<a href="/panel/product/add?id='.$id.'" class="btn-small-li click-variant" data-id="'.$id.'" title="Add variant"> <i class="fas fa-plus-square"></i> </a>';
 				}
 
 				$t .= '<li>';
 				$t .= '<div> ' . $v['id'] . ' </div>';
+				$t .= '<div> ' . $parent . ' </div>';
 				$t .= '<div> ' . $v['name'] . ' </div>';
-				$t .= '<div> ' . $v['slug'] . ' </div>';
-				$t .= '<div> ' . $visible . ' ' . $addon . ' </div>';
+				$t .= '<div> ' . $v['size'] . ' </div>';
+				if($v['on_sale'] == 0){
+					$t .= '<div> <highlight>' . $v['price'] . ' </highlight> / ' . $v['price_sale'] . ' </div>';
+				}else{
+					$t .= '<div> ' . $v['price'] . ' / <highlight>' . $v['price_sale'] . '</highlight> </div>';
+				}
+				// $t .= '<div> ' . $v['price_sale'] . ' </div>';
 				$t .= '
 				<div>
-					<a class="btn-small-li click-edit" data-id="'.$id.'" onclick="OpenEditCategory(this)"> <i class="fas fa-edit"></i> </a>
+					'.$add.'
+					<a href="/panel/product/edit?id='.$id.'" class="btn-small-li click-edit" data-id="'.$id.'"> <i class="fas fa-edit"></i> </a>
 					<a href="?page='.$page.'&perpage='.$perpage.'&delete='.$id.'" class="btn-small-li click-del" data-id="'.$id.'"> <i class="fas fa-trash"></i> </a>
 				</div>
 				</li>

@@ -7,6 +7,16 @@ function logoError(it){
 	// console.log(it);
 	it.src = '/media/img/logo.png';
 }
+function imgErrorProduct(it){
+	// console.log(it);
+	it.src = '/media/img/food.png';
+}
+function SetProductImage(it){
+	let f = it.files[0];
+	console.log(f);
+	let el = document.getElementById('product-image');
+	el.src = URL.createObjectURL(f);
+}
 function Close(it){
 	it.parentNode.style.display = "none";
 }
@@ -31,6 +41,7 @@ function OpenEditCategory(it){
 	let name = document.getElementById('edit-cat-name')
 	let slug = document.getElementById('edit-cat-slug')
 	let visible = document.getElementById('edit-cat-visible')
+	let onaddon = document.getElementById('edit-cat-addon')
 
 	console.log("Category id " , catid.value);
 
@@ -38,10 +49,13 @@ function OpenEditCategory(it){
 	let url = 'http://drive.xx/src/Web/AdminPanel/Api/get-category.php?category=' + catid.value;
 
 	ApiGet(url).then((data) => {
-		console.log(data.name);
+
+		console.log(data);
+
 		name.value = data.name;
 		slug.value = data.slug;
 		visible.value = data.visible;
+		onaddon.value = data.on_addon;
 	});
 }
 

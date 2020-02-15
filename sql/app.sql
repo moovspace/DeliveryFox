@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 13 Lut 2020, 20:56
+-- Czas generowania: 15 Lut 2020, 11:12
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -24,27 +24,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `app` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `app`;
 
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `addon`
---
-
-DROP TABLE IF EXISTS `addon`;
-CREATE TABLE IF NOT EXISTS `addon` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `limit` int(11) NOT NULL DEFAULT 5,
-  `visible` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Tabela Truncate przed wstawieniem `addon`
---
-
-TRUNCATE TABLE `addon`;
 -- --------------------------------------------------------
 
 --
@@ -118,10 +97,11 @@ CREATE TABLE IF NOT EXISTS `category` (
   `name` varchar(100) NOT NULL,
   `slug` varchar(50) NOT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT 1,
+  `on_addon` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `category`
@@ -132,9 +112,10 @@ TRUNCATE TABLE `category`;
 -- Zrzut danych tabeli `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `slug`, `visible`) VALUES
-(1, 'Pizza', 'pizza', 1),
-(2, 'Kebab', 'kebab', 0);
+INSERT INTO `category` (`id`, `name`, `slug`, `visible`, `on_addon`) VALUES
+(1, 'Pizza', 'pizza', 1, 0),
+(5, 'Kebab', 'kebab', 1, 0),
+(6, 'Dodatki', 'addons', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -328,18 +309,18 @@ CREATE TABLE IF NOT EXISTS `product` (
   `rf_attr` int(11) NOT NULL DEFAULT 0,
   `category` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `long_desc` text NOT NULL,
-  `short_desc` varchar(250) NOT NULL,
+  `about` text NOT NULL,
   `price` decimal(15,2) NOT NULL DEFAULT 0.00,
   `price_sale` decimal(15,2) NOT NULL DEFAULT 0.00,
   `on_sale` tinyint(1) NOT NULL DEFAULT 0,
+  `addon_category` int(11) NOT NULL DEFAULT 0,
+  `addon_quatity` int(11) NOT NULL DEFAULT 5,
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   `stock_status` enum('instock','outofstock','leftinstock','backdored') NOT NULL DEFAULT 'instock',
   `stock_quantity` int(11) NOT NULL DEFAULT 0,
   `rating_count` int(11) NOT NULL DEFAULT 0,
   `rating_average` decimal(3,2) NOT NULL DEFAULT 5.00,
-  `rf_user` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
@@ -352,9 +333,9 @@ TRUNCATE TABLE `product`;
 -- Zrzut danych tabeli `product`
 --
 
-INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `long_desc`, `short_desc`, `price`, `price_sale`, `on_sale`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`, `rf_user`) VALUES
-(2, 0, 'Mała 30 cm', 2, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '', '16.00', '0.00', 0, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00', 0),
-(3, 2, 'Duża 45 cm', 2, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '', '26.00', '0.00', 0, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00', 0);
+INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `about`, `price`, `price_sale`, `on_sale`, `addon_category`, `addon_quatity`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`) VALUES
+(2, 0, 'Mała 30 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
+(3, 2, 'Duża 45 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '26.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00');
 
 -- --------------------------------------------------------
 

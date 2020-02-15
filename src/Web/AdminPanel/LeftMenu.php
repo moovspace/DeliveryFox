@@ -5,6 +5,7 @@ use MyApp\Web\AdminPanel\User;
 use MyApp\Web\AdminPanel\View\ProfilView;
 use MyApp\Web\AdminPanel\View\AttributesView;
 use MyApp\Web\AdminPanel\View\CategoriesView;
+use MyApp\Web\AdminPanel\View\ProductsView;
 
 class LeftMenu
 {
@@ -20,6 +21,7 @@ class LeftMenu
 		{
 			$menu .= AttributesView::Menu()->GetMenu();
 			$menu .= CategoriesView::Menu()->GetMenu();
+			$menu .= ProductsView::Menu()->GetMenu();
 		}
 
 		if($user->Role() == 'worker')
