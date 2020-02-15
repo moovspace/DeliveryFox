@@ -92,6 +92,7 @@
 "EP_ATTR_CHOSE": "Choose",
 "EP_VISIBLE": "Product vivibility",
 "EP_VISIBLE_ON": "Visible",
+"EP_INSTOCK_ON": "Available for sale",
 "EP_YES": "Yes",
 "EP_NO": "No",
 "EP_ON": "On",
@@ -106,5 +107,9 @@
 "PP_PRICE": "Price",
 "PP_PRICE_SALE": "Sale",
 "PP_SIZE": "Size",
-"PP_ACTION": "Actions"
+"PP_ACTION": "Actions",
+"PP_STATUS": "Status",
+"EP_TYPE": "Product type",
+"EP_TYPE_VARIANT": "Product / Variant",
+"EP_TYPE_MAIN": "Main product"
 }

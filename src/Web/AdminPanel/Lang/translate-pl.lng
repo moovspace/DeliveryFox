@@ -92,6 +92,7 @@
 "EP_ATTR_CHOSE": "Wybierz",
 "EP_VISIBLE": "Dostępność produktu",
 "EP_VISIBLE_ON": "Widoczny",
+"EP_INSTOCK_ON": "Dostępny w sprzedaży",
 "EP_YES": "Tak",
 "EP_NO": "Nie",
 "EP_ON": "Włącz",
@@ -106,5 +107,9 @@
 "PP_PRICE": "Cena",
 "PP_PRICE_SALE": "Promocja",
 "PP_SIZE": "Rozmiar",
-"PP_ACTION": "Akcja"
+"PP_ACTION": "Akcja",
+"PP_STATUS": "Status",
+"EP_TYPE": "Typ produktu",
+"EP_TYPE_VARIANT": "Produkt / Wariant",
+"EP_TYPE_MAIN": "Product główny"
 }

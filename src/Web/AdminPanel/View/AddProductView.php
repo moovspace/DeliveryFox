@@ -147,6 +147,8 @@ class AddProductView extends Component
 		if(empty($_POST['visible'])) { $_POST['visible'] = 0; }
 		if(empty($_POST['addon_category'])) { $_POST['addon_category'] = 0; }
 		if(empty($_POST['addon_quantity'])) { $_POST['addon_quantity'] = 5; }
+		if(empty($_POST['parent'])) { $_POST['parent'] = 0; }
+		if(empty($_POST['stock_status'])) { $_POST['stock_status'] = 'instock'; }
 		// Image
 		$img = '/image.png';
 		if(!empty(self::ImageHash()))
@@ -176,6 +178,18 @@ class AddProductView extends Component
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_AVATAR').' </label>
 							<input type="file" name="file" accept="image/jpeg" onchange="SetProductImage(this)">
+						</div>
+
+						<line></line>
+
+						<h3> '.$arr['trans']->Get('EP_TYPE').' </h3>
+
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('EP_TYPE_VARIANT').' </label>
+							<select name="category" data-val="'.$_POST['parent'].'">
+								<option value="0"> '.$arr['trans']->Get('EP_TYPE_MAIN').' </option>
+								<option value="1">Pizza hawajska Mała 35cm</option>
+							</select>
 						</div>
 
 						<line></line>
@@ -242,6 +256,14 @@ class AddProductView extends Component
 							<select name="visible" data-val="'.$_POST['visible'].'">
 								<option value="1"> '.$arr['trans']->Get('EP_YES').' </option>
 								<option value="0"> '.$arr['trans']->Get('EP_NO').' </option>
+							</select>
+						</div>
+
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('EP_INSTOCK_ON').' </label>
+							<select name="visible" data-val="'.$_POST['stock_status'].'">
+								<option value="instock"> '.$arr['trans']->Get('EP_YES').' </option>
+								<option value="outofstock"> '.$arr['trans']->Get('EP_NO').' </option>
 							</select>
 						</div>
 

@@ -171,8 +171,9 @@ class ProductsView extends Component
 		$a3 = $t->Get('PP_PRICE_SALE');
 		$a4 = $t->Get('PP_SIZE');
 		$a5 = $t->Get('PP_ACTION');
+		$status = $t->Get('PP_STATUS');
 
-		$title = [$aid, $vid, $a1, $a4, $a2.' / '.$a3, $a5];
+		$title = [$aid, $vid, $a1, $a4, $a2.' / '.$a3, $status, $a5];
 
 		$rows =  self::GetProducts();
 		$maxrows =  self::GetMaxRows();

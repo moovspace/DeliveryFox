@@ -328,6 +328,9 @@ ul li div:last-child{
 ul li:hover{
 	border-color: #21b973;
 }
+ul li div span{
+	margin-right: 10px;
+}
 ul li .btn-small-li{
 	float: right;
 	padding: 5px;

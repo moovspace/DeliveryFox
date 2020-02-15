@@ -47,17 +47,29 @@ class ProductsList
 					// $add = '<a href="/panel/product/add?id='.$id.'" class="btn-small-li click-variant" data-id="'.$id.'" title="Add variant"> <i class="fas fa-plus-square"></i> </a>';
 				}
 
+				$status = '<span title="Instock"> <i class="fas fa-eye"></i> </span>';
+				if($v['visible'] == 0)
+				{
+					$status = '<span title="In stock"> <i class="fas fa-eye-slash"></i> </span>';
+				}
+				$stock = '<span title="Instock"> <i class="fas fa-check-circle"></i> </span>';
+				if($v['stock_status'] == "outofstock")
+				{
+					$stock = '<span title="Out of stock"> <i class="fas fa-times-circle"></i> </span>';
+				}
+
 				$t .= '<li>';
 				$t .= '<div> ' . $v['id'] . ' </div>';
 				$t .= '<div> ' . $parent . ' </div>';
 				$t .= '<div> ' . $v['name'] . ' </div>';
 				$t .= '<div> ' . $v['size'] . ' </div>';
-				if($v['on_sale'] == 0){
+				if($v['on_sale'] == 0)
+				{
 					$t .= '<div> <highlight>' . $v['price'] . ' </highlight> / ' . $v['price_sale'] . ' </div>';
 				}else{
 					$t .= '<div> ' . $v['price'] . ' / <highlight>' . $v['price_sale'] . '</highlight> </div>';
 				}
-				// $t .= '<div> ' . $v['price_sale'] . ' </div>';
+				$t .= '<div> ' . $status . $stock . ' </div>';
 				$t .= '
 				<div>
 					'.$add.'
