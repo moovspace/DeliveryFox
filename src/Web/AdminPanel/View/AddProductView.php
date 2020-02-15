@@ -3,7 +3,7 @@ namespace MyApp\Web\AdminPanel\View;
 
 use Exception;
 use MyApp\App\Component;
-use MyApp\App\Menu\Menu;
+use PhpApix\Mysql\Db;
 use MyApp\App\Translate\Trans;
 use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
@@ -29,19 +29,127 @@ class AddProductView extends Component
 		return in_array($mime, $allowed);
 	}
 
+	static function GetParentProducts()
+	{
+		try{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM product WHERE parent = 0");
+			$r->execute();
+			return $r->fetchAll();
+
+		}catch(Exception $e){
+			return [];
+		}
+	}
+
+	static function GetAddonCategories()
+	{
+		try{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM category WHERE on_addon = 1");
+			$r->execute();
+			return $r->fetchAll();
+
+		}catch(Exception $e){
+			return [];
+		}
+	}
+
+	static function GetCategories()
+	{
+		try{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM category WHERE on_addon = 0");
+			$r->execute();
+			return $r->fetchAll();
+
+		}catch(Exception $e){
+			return [];
+		}
+	}
+
+	static function GetAttributes()
+	{
+		try{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM attr");
+			$r->execute();
+			return $r->fetchAll();
+
+		}catch(Exception $e){
+			return [];
+		}
+	}
+
+	/**
+	 * Update user table
+	 *
+	 * @param array $arr Array with data [paran => value]
+	 * @param string $table Table name
+	 * @return integer
+	 */
+	static function UpdateProductDb($arr, $table = 'product')
+	{
+		$sql = 'UPDATE '.$table.' SET ';
+		$param = [];
+		$o = '';
+		foreach ($arr as $k => $v)
+		{
+			// key = :key
+			$o .= $k.' = :'.$k .',';
+			// Params array [':id' => $v]
+			$param[':'.$k] = $v;
+		}
+		$sql .= rtrim($o, ',');
+		$sql .= ' WHERE id = '.(int)$this->Id;
+
+		$db = Db::getInstance();
+		$r = $db->Pdo->prepare($sql);
+		$r->execute($param);
+		$ok = $r->rowCount();
+		return $ok;
+	}
+
+	static function InsertProductDb($arr, $table = 'product')
+	{
+		unset($arr['product']); // Submit button name
+		$param = [];
+		$o = '';
+		$o1 = '';
+		foreach ($arr as $k => $v)
+		{
+			// key = :key
+			$o .= $k.',';
+			$o1 .= ':'.$k .',';
+			// Params array [':id' => $v]
+			$param[':'.$k] = $v;
+		}
+		$o = rtrim($o, ',');
+		$o1 = rtrim($o1, ',');
+
+		$sql = 'INSERT INTO '.$table.'('.$o.') VALUES('.$o1.')';
+
+		$db = Db::getInstance();
+		$r = $db->Pdo->prepare($sql);
+		$r->execute($param);
+		$ok = $db->Pdo->lastInsertId();
+		return $ok;
+	}
+
 	static function Update()
 	{
 		if(!empty($_POST['product']))
 		{
+			// Random image name, rename to product id
+			$img = self::ImageHash();
+			$img = 'media/tmp/' . $img. '.jpg';
+
 			if(!empty($_FILES['file']['tmp_name']))
 			{
-				// Random image name, copy to product id
-				$img = self::ImageHash();
-
 				// Upload avatar
 				if(self::isImage())
 				{
-					echo move_uploaded_file($_FILES['file']['tmp_name'], 'media/tmp/' . $img. '.jpg');
+					move_uploaded_file($_FILES['file']['tmp_name'], $img);
 				}
 				else
 				{
@@ -51,18 +159,32 @@ class AddProductView extends Component
 
 			try
 			{
-				foreach($_POST as $k => $v)
-				{
+				// Add product
+				$pid = self::InsertProductDb($_POST);
 
+				if($pid > 0)
+				{
+					// Move image to product id.jpg
+					if(file_exists($img))
+					{
+						$dest = 'media/product/'.$pid.'.jpg';
+						rename($img, $dest);
+						chmod($dest,0777);
+					}
+
+					// header('Location: /panel/products');
+					return $pid;
 				}
 
 				// Error
-				return 1;
+				return 0;
 			}
 			catch(Exception $e)
 			{
+				echo $e->getMessage();
+
 				if ($e->errorInfo[1] == 1062) {
-					return -2; // username exist
+					return -2;
 				}
 				return -1;
 			}
@@ -113,10 +235,14 @@ class AddProductView extends Component
 
 		if(!empty($_POST))
 		{
+			echo $user->ErrorUpdate;
+
 			if($user->ErrorUpdate == 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('ERR_NOTHING').' </span>';
-			}else if($user->ErrorUpdate == 1){
+			}else if($user->ErrorUpdate > 0){
 				$arr['error'] = '<span class="green"> '.$t->Get('UPDATED').' </span>';
+				unset($_POST);
+				unset($_SESSION['imagehash']);
 			}else if($user->ErrorUpdate == -3){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_IMAGE').' </span>';
 			}else if($user->ErrorUpdate == -2){
@@ -143,6 +269,7 @@ class AddProductView extends Component
 		if(empty($_POST['price_sale'])) { $_POST['price_sale'] = '0.00'; }
 		if(empty($_POST['category'])) { $_POST['category'] = 0; }
 		if(empty($_POST['rf_attr'])) { $_POST['rf_attr'] = 0; }
+		if(empty($_POST['about'])) { $_POST['about'] = ''; }
 		if(empty($_POST['on_sale'])) { $_POST['on_sale'] = 0; }
 		if(empty($_POST['visible'])) { $_POST['visible'] = 0; }
 		if(empty($_POST['addon_category'])) { $_POST['addon_category'] = 0; }
@@ -150,10 +277,38 @@ class AddProductView extends Component
 		if(empty($_POST['parent'])) { $_POST['parent'] = 0; }
 		if(empty($_POST['stock_status'])) { $_POST['stock_status'] = 'instock'; }
 		// Image
-		$img = '/image.png';
+		$img = '/media/img/food.png';
 		if(!empty(self::ImageHash()))
 		{
 			$img = '/media/tmp/'.self::ImageHash().'.jpg';
+		}
+
+		$pr = self::GetParentProducts();
+		$parent_products = '';
+		foreach ($pr as $key => $v)
+		{
+			$parent_products .= '<option value="'.$v['id'].'"> '.$v['name'].' ('.$v['size'].') </option>';
+		}
+
+		$ad = self::GetAddonCategories();
+		$product_addons = '';
+		foreach ($ad as $key => $v)
+		{
+			$product_addons .= '<option value="'.$v['id'].'"> '.$v['name'].' </option>';
+		}
+
+		$at = self::GetAttributes();
+		$product_attr = '';
+		foreach ($at as $key => $v)
+		{
+			$product_attr .= '<option value="'.$v['id'].'"> '.$v['name'].' </option>';
+		}
+
+		$ca = self::GetCategories();
+		$category = '';
+		foreach ($ca as $key => $v)
+		{
+			$category .= '<option value="'.$v['id'].'"> '.$v['name'].' </option>';
 		}
 
 		return '
@@ -188,7 +343,9 @@ class AddProductView extends Component
 							<label> '.$arr['trans']->Get('EP_TYPE_VARIANT').' </label>
 							<select name="category" data-val="'.$_POST['parent'].'">
 								<option value="0"> '.$arr['trans']->Get('EP_TYPE_MAIN').' </option>
-								<option value="1">Pizza hawajska Mała 35cm</option>
+								<optgroup label="Variant for (select parent product)">
+									'.$parent_products.'
+								</optgroup>
 							</select>
 						</div>
 
@@ -209,8 +366,8 @@ class AddProductView extends Component
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('EP_CATEGORY').' </label>
 							<select name="category" data-val="'.$_POST['category'].'">
-								<option value="1">Kebab</option>
-								<option value="0">Pizza</option>
+								<option value="0"> '.$arr['trans']->Get('EP_ATTR_CHOSE').' </option>
+								'.$category.'
 							</select>
 						</div>
 
@@ -218,9 +375,13 @@ class AddProductView extends Component
 							<label> '.$arr['trans']->Get('EP_ATTR').' </label>
 							<select name="rf_attr" data-val="'.$_POST['rf_attr'].'">
 								<option value="0"> '.$arr['trans']->Get('EP_ATTR_CHOSE').' </option>
-								<option value="1">Sos</option>
-								<option value="2">Napoje 330ml</option>
+								'.$product_attr.'
 							</select>
+						</div>
+
+						<div class="w-50">
+							<label>'.$arr['trans']->Get('EP_ABOUT').' </label>
+							<textarea name="about" placeholder="'.$arr['trans']->Get('EP_ABOUT_PL').'">' . $_POST['about'] . '</textarea>
 						</div>
 
 						<line></line>
@@ -261,7 +422,7 @@ class AddProductView extends Component
 
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('EP_INSTOCK_ON').' </label>
-							<select name="visible" data-val="'.$_POST['stock_status'].'">
+							<select name="stock_status" data-val="'.$_POST['stock_status'].'">
 								<option value="instock"> '.$arr['trans']->Get('EP_YES').' </option>
 								<option value="outofstock"> '.$arr['trans']->Get('EP_NO').' </option>
 							</select>
@@ -275,8 +436,7 @@ class AddProductView extends Component
 							<label> '.$arr['trans']->Get('EP_CATEGORY').' </label>
 							<select name="addon_category" data-val="'.$_POST['addon_category'].'">
 								<option value="0"> '.$arr['trans']->Get('EP_ATTR_CHOSE').' </option>
-								<option value="1">Dodatki pizza</option>
-								<option value="2">Dodatki kebab</option>
+								'.$product_addons.'
 							</select>
 						</div>
 

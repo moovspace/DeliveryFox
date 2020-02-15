@@ -23,6 +23,7 @@ class ProductsView extends Component
 		$t_title = $t->Get('P_CAT_TITLE');
 		$menu = new Menu('/panel/products', $t_name, $t_title, '<i class="fas fa-shopping-bag"></i>', '<i class="fas fa-shopping-bag"></i>');
 		$menu->AddLink('/panel/product/add', 'Add product', 'Add new product', '<i class="fas fa-plus"></i>', '<i class="fas fa-plus"></i>');
+		$menu->AddLink('/panel/product/edit', 'Edit product', 'Edit product', '<i class="fas fa-edit"></i>', '<i class="fas fa-edit"></i>');
 		return $menu;
 	}
 
@@ -84,7 +85,17 @@ class ProductsView extends Component
 					$db = Db::getInstance();
 					$r = $db->Pdo->prepare("DELETE FROM product WHERE id = $id");
 					$r->execute();
-					return $r->rowCount();
+					$ok = $r->rowCount();
+
+					if($ok > 0)
+					{
+						$img = 'media/product/'.$id.'.jpg';
+						if(file_exists($img)){
+							unlink($img);
+						}
+					}
+
+					return $ok;
 				}else{
 					return -3;
 				}

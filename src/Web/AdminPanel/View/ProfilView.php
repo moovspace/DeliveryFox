@@ -205,7 +205,7 @@ class ProfilView extends Component
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_AVATAR').' </label>
-							<input type="file" name="file" placeholder="'.$arr['trans']->Get('EG').' Avatar">
+							<input type="file" name="file" accept="image/jpeg" placeholder="'.$arr['trans']->Get('EG').' Avatar">
 						</div>
 						<line></line>
 						<input type="submit" name="account" value="'.$arr['trans']->Get('SAVE').'" class="btn float-right">

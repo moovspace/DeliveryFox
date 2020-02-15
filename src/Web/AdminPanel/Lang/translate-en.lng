@@ -110,6 +110,8 @@
 "PP_ACTION": "Actions",
 "PP_STATUS": "Status",
 "EP_TYPE": "Product type",
-"EP_TYPE_VARIANT": "Product / Variant",
-"EP_TYPE_MAIN": "Main product"
+"EP_TYPE_VARIANT": "Choose variant",
+"EP_TYPE_MAIN": "Main product",
+"EP_ABOUT": "Description",
+"EP_ABOUT_PL": "e.g. Pizza hawajska na grubym cieście."
 }

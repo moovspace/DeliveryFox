@@ -47,15 +47,15 @@ class ProductsList
 					// $add = '<a href="/panel/product/add?id='.$id.'" class="btn-small-li click-variant" data-id="'.$id.'" title="Add variant"> <i class="fas fa-plus-square"></i> </a>';
 				}
 
-				$status = '<span title="Instock"> <i class="fas fa-eye"></i> </span>';
+				$status = '<span title="Visible" class="color-green"> <i class="fas fa-eye"></i> </span>';
 				if($v['visible'] == 0)
 				{
-					$status = '<span title="In stock"> <i class="fas fa-eye-slash"></i> </span>';
+					$status = '<span title="Hidden" class="color-red"> <i class="fas fa-eye-slash"></i> </span>';
 				}
-				$stock = '<span title="Instock"> <i class="fas fa-check-circle"></i> </span>';
+				$stock = '<span title="Instock" class="color-green"> <i class="fas fa-check-circle"></i> </span>';
 				if($v['stock_status'] == "outofstock")
 				{
-					$stock = '<span title="Out of stock"> <i class="fas fa-times-circle"></i> </span>';
+					$stock = '<span title="Out of stock" class="color-red"> <i class="fas fa-times-circle"></i> </span>';
 				}
 
 				$t .= '<li>';

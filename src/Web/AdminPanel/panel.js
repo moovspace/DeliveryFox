@@ -7,15 +7,15 @@ function logoError(it){
 	// console.log(it);
 	it.src = '/media/img/logo.png';
 }
-function imgErrorProduct(it){
-	// console.log(it);
-	it.src = '/media/img/food.png';
-}
 function SetProductImage(it){
 	let f = it.files[0];
 	console.log(f);
 	let el = document.getElementById('product-image');
 	el.src = URL.createObjectURL(f);
+}
+function imgErrorProduct(it){
+	// console.log(it);
+	it.src = '/media/img/food.png';
 }
 function Close(it){
 	it.parentNode.style.display = "none";

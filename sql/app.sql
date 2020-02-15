@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 15 Lut 2020, 11:12
+-- Czas generowania: 15 Lut 2020, 17:06
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -48,7 +48,7 @@ TRUNCATE TABLE `attr`;
 --
 
 INSERT INTO `attr` (`id`, `name`) VALUES
-(1, 'Rozmiar'),
+(1, 'Napoje'),
 (2, 'Sos');
 
 -- --------------------------------------------------------
@@ -77,10 +77,10 @@ TRUNCATE TABLE `attr_name`;
 
 INSERT INTO `attr_name` (`id`, `rf_attr`, `name`) VALUES
 (6, 0, 'None'),
-(14, 1, 'Duży'),
-(1, 1, 'Mały'),
-(2, 1, 'Średni'),
-(15, 1, 'Wielki'),
+(14, 1, 'Coca Cola'),
+(15, 1, 'Oranżada'),
+(1, 1, 'Pepsi'),
+(2, 1, 'Sprite'),
 (18, 2, 'Czosnkowy'),
 (17, 2, 'Pikantny'),
 (16, 2, 'Łagodny');
@@ -321,7 +321,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `stock_quantity` int(11) NOT NULL DEFAULT 0,
   `rating_count` int(11) NOT NULL DEFAULT 0,
   `rating_average` decimal(3,2) NOT NULL DEFAULT 5.00,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pKey` (`parent`,`size`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
@@ -335,7 +336,7 @@ TRUNCATE TABLE `product`;
 
 INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `about`, `price`, `price_sale`, `on_sale`, `addon_category`, `addon_quatity`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`) VALUES
 (2, 0, 'Mała 30 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
-(3, 2, 'Duża 45 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '26.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00');
+(3, 2, 'Duża 45 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '26.00', '21.00', 1, 0, 5, '2020-02-13 19:01:16', 0, 'outofstock', 0, 0, '5.00');
 
 -- --------------------------------------------------------
 
