@@ -9,24 +9,38 @@ use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
 use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
+use MyApp\Web\Currency;
 
-class AddProductView extends Component
+class EditProductView extends Component
 {
 	static public $ErrorUpdate = 0;
-
-	static function ImageHash()
-	{
-		if(empty($_SESSION['imagehash'])){
-			$_SESSION['imagehash'] = md5(microtime());
-		}
-		return $_SESSION['imagehash'];
-	}
 
 	static function isImage()
 	{
 		$mime = $_FILES['file']['type'];
 		$allowed = array("image/jpeg");
 		return in_array($mime, $allowed);
+	}
+
+	static function GetProductWithId($id = 0)
+	{
+		try
+		{
+			$id = (int) $id;
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM product WHERE id = $id");
+			$r->execute();
+			$row = $r->fetchAll();
+
+			if(!empty($row))
+			{
+				return $row[0];
+			}
+			return [];
+
+		}catch(Exception $e){
+			return [];
+		}
 	}
 
 	static function GetParentProducts()
@@ -81,39 +95,49 @@ class AddProductView extends Component
 		}
 	}
 
-	static function InsertProductDb($arr, $table = 'product')
+	/**
+	 * Update user table
+	 *
+	 * @param array $arr Array with data [paran => value]
+	 * @param string $table Table name
+	 * @return integer
+	 */
+	static function UpdateProductDb($arr, $table = 'product')
 	{
-		unset($arr['product']); // Submit button name
+		unset($arr['product']);
+		unset($arr['id']);
+		$sql = 'UPDATE '.$table.' SET ';
 		$param = [];
 		$o = '';
-		$o1 = '';
 		foreach ($arr as $k => $v)
 		{
-			if(!empty($v))
-			{
-				// echo "EMPTY-" .$v.'--|';
-				$o .= $k.',';
-				$o1 .= ':'.$k .',';
+			if(!empty($v) || $v == "0"){
+				// key = :key
+				$o .= $k.' = :'.$k .',';
+				// Params array [':id' => $v]
 				$param[':'.$k] = $v;
+			}else{
+				return -1;
 			}
 		}
-		$o = rtrim($o, ',');
-		$o1 = rtrim($o1, ',');
-		$sql = 'INSERT INTO '.$table.'('.$o.') VALUES('.$o1.')';
+		$sql .= rtrim($o, ',');
+		$sql .= ' WHERE id = '.(int)$_GET['id'];
+
 		$db = Db::getInstance();
 		$r = $db->Pdo->prepare($sql);
 		$r->execute($param);
-		$ok = $db->Pdo->lastInsertId();
+		$ok = $r->rowCount();
+
 		return $ok;
 	}
 
 	static function Update()
 	{
+		// Update product
 		if(!empty($_POST['product']))
 		{
-			// Random image name, rename to product id
-			$img = self::ImageHash();
-			$img = 'media/tmp/' . $img. '.jpg';
+			$id = (int) $_GET['id'];
+			$img = 'media/product/' . $id. '.jpg';
 
 			if(!empty($_FILES['file']['tmp_name']))
 			{
@@ -130,33 +154,12 @@ class AddProductView extends Component
 
 			try
 			{
-				// Add product
-				$pid = self::InsertProductDb($_POST);
-
-				if($pid > 0)
-				{
-					// Move image to product id.jpg
-					if(file_exists($img))
-					{
-						$dest = 'media/product/'.$pid.'.jpg';
-						rename($img, $dest);
-						chmod($dest,0777);
-					}
-
-					// header('Location: /panel/products');
-					return $pid;
-				}
-
-				// Error
-				return 0;
+				// Update product
+				return self::UpdateProductDb($_POST);
 			}
 			catch(Exception $e)
 			{
 				// echo $e->getMessage();
-
-				if ($e->errorInfo[1] == 1062) {
-					return -2;
-				}
 				return -1;
 			}
 
@@ -207,11 +210,9 @@ class AddProductView extends Component
 		if(!empty($_POST))
 		{
 			if($user->ErrorUpdate == 0){
-				$arr['error'] = '<span class="green"> '.$t->Get('ERR_NOTHING').' </span>';
+				$arr['error'] = '<span class="green"> '.$t->Get('A_ERR_NOTHING').' </span>';
 			}else if($user->ErrorUpdate > 0){
-				$arr['error'] = '<span class="green"> '.$t->Get('PR_UPDATED').' </span>';
-				unset($_POST);
-				unset($_SESSION['imagehash']);
+				$arr['error'] = '<span class="green"> '.$t->Get('EP_UPDATED').' </span>';
 			}else if($user->ErrorUpdate == -3){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_IMAGE').' </span>';
 			}else if($user->ErrorUpdate == -2){
@@ -248,10 +249,25 @@ class AddProductView extends Component
 
 		// Image
 		$img = '/media/img/food.png';
-		if(!empty(self::ImageHash()))
+		if($_GET['id'] > 0)
 		{
-			$img = '/media/tmp/'.self::ImageHash().'.jpg';
+			$pid = $_GET['id'];
+			$foto = 'media/product/'.$pid.'.jpg';
+			if(file_exists($foto))
+			{
+				$img = '/'.$foto;
+			}
 		}
+
+		// Get product from db
+		$product = self::GetProductWithId($_GET['id']);
+		if(empty($product))
+		{
+			header('Location: /panel/products');
+		}
+		// Update POST
+		$_POST = array_merge($_POST, $product);
+
 
 		$pr = self::GetParentProducts();
 		$parent_products = '';
@@ -321,7 +337,8 @@ class AddProductView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('EP_ADD_PRODUCT').' </h1>
+				<h1> '.$arr['trans']->Get('EP_EDIT_PRODUCT').' </h1>
+				<h3>'.$_POST['name'].' - '.$_POST['size'].' - '.$_POST['price'].' '.Currency::MAIN.'</h3>
 
 				<error id="error">
 					' . $arr['error'] . '
@@ -333,7 +350,7 @@ class AddProductView extends Component
 						<h3> '.$arr['trans']->Get('EP_FOTO').' </h3>
 
 						<div class="w-50">
-							<img id="product-image" src="'.$img.'" onerror="imgErrorProduct(this)">
+							<img id="product-image" src="'.$img.'?rand='.md5(microtime()).'" onerror="imgErrorProduct(this)">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_AVATAR').' </label>
@@ -452,7 +469,7 @@ class AddProductView extends Component
 
 						<line></line>
 
-						<input type="submit" name="product" value="'.$arr['trans']->Get('EP_CREATE').'" class="btn float-right">
+						<input type="submit" name="product" value="'.$arr['trans']->Get('EP_UPDATE').'" class="btn float-right">
 					</form>
 				</div>
 

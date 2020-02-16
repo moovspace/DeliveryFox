@@ -19,11 +19,20 @@ class ProductsView extends Component
 	static function Menu()
 	{
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
+
 		$t_name = $t->Get('P_CAT');
 		$t_title = $t->Get('P_CAT_TITLE');
+		$t_add = $t->Get('P_ADD');
+		$t_add_title = $t->Get('P_ADD_TITLE');
+		$t_edit = $t->Get('P_EDIT');
+		$t_edit_title = $t->Get('P_EDIT_TITLE');
 		$menu = new Menu('/panel/products', $t_name, $t_title, '<i class="fas fa-shopping-bag"></i>', '<i class="fas fa-shopping-bag"></i>');
-		$menu->AddLink('/panel/product/add', 'Add product', 'Add new product', '<i class="fas fa-plus"></i>', '<i class="fas fa-plus"></i>');
-		$menu->AddLink('/panel/product/edit', 'Edit product', 'Edit product', '<i class="fas fa-edit"></i>', '<i class="fas fa-edit"></i>');
+		$menu->AddLink('/panel/product/add', $t_add, $t_add_title, '<i class="fas fa-plus"></i>', '<i class="fas fa-plus"></i>');
+
+		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/product/edit')
+		{
+			$menu->AddLink('/panel/product/edit', $t_edit, $t_edit_title, '<i class="fas fa-edit"></i>', '<i class="fas fa-edit"></i>');
+		}
 		return $menu;
 	}
 

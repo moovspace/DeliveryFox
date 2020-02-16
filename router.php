@@ -21,7 +21,7 @@ try
 	$r->Set("/panel/categories", "MyApp\Web\AdminPanel\Categories", "Index");
 	$r->Set("/panel/products", "MyApp\Web\AdminPanel\Products", "Index");
 	$r->Set("/panel/product/add", "MyApp\Web\AdminPanel\AddProduct", "Index");
-	$r->Set("/panel/product/edit", "MyApp\Web\AdminPanel\AddProduct", "Index");
+	$r->Set("/panel/product/edit", "MyApp\Web\AdminPanel\EditProduct", "Index");
 
 	// $r->ErrorPage();
 	ErrorPage::Error404();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 15 Lut 2020, 17:06
+-- Czas generowania: 16 Lut 2020, 13:00
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `price_sale` decimal(15,2) NOT NULL DEFAULT 0.00,
   `on_sale` tinyint(1) NOT NULL DEFAULT 0,
   `addon_category` int(11) NOT NULL DEFAULT 0,
-  `addon_quatity` int(11) NOT NULL DEFAULT 5,
+  `addon_quantity` int(11) NOT NULL DEFAULT 5,
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   `stock_status` enum('instock','outofstock','leftinstock','backdored') NOT NULL DEFAULT 'instock',
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `rating_average` decimal(3,2) NOT NULL DEFAULT 5.00,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pKey` (`parent`,`size`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `product`
@@ -334,9 +334,10 @@ TRUNCATE TABLE `product`;
 -- Zrzut danych tabeli `product`
 --
 
-INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `about`, `price`, `price_sale`, `on_sale`, `addon_category`, `addon_quatity`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`) VALUES
+INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `about`, `price`, `price_sale`, `on_sale`, `addon_category`, `addon_quantity`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`) VALUES
 (2, 0, 'Mała 30 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
-(3, 2, 'Duża 45 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '26.00', '21.00', 1, 0, 5, '2020-02-13 19:01:16', 0, 'outofstock', 0, 0, '5.00');
+(17, 2, 'Średnia 25cm', 0, 0, 'Pizza hawajska', 'Wspaniała pizza hawajska na cienkim cieście.', '19.00', '0.00', 0, 0, 5, '2020-02-15 21:25:54', 1, 'instock', 0, 0, '5.00'),
+(26, 2, 'Wielka 60cm', 2, 1, 'Pizza hawajska', 'Wielka pizza hawajska.', '41.51', '40.01', 1, 6, 2, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00');
 
 -- --------------------------------------------------------
 
