@@ -8,24 +8,24 @@ use MyApp\App\Orders\CartDb;
 try
 {
 	// Cart test
-	$c = new Cart();
-	$c->Clear();
-	$hash = $c->AddProduct(1, 1, 13.50);
-	$c->ProductPlus($hash);
-	$c->AddAddon($hash, 16, 2, 2.54);
-	$c->AddonPlus($hash, 16, 1);
-	$c->AddonMinus($hash, 16, 1);
+	// $c = new Cart();
+	// $c->Clear();
+	// $hash = $c->AddProduct(1, 1, 13.50);
+	// $c->ProductPlus($hash);
+	// $c->AddAddon($hash, 16, 2, 2.54);
+	// $c->AddonPlus($hash, 16, 1);
+	// $c->AddonMinus($hash, 16, 1);
 
-	$hash = $c->AddProduct(2, 1, 15.50);
-	$c->AddAddon($hash, 17, 2, 3.00);
-	$c->AddAddon($hash, 7, 1, 2.00);
+	// $hash = $c->AddProduct(2, 1, 15.50);
+	// $c->AddAddon($hash, 17, 2, 3.00);
+	// $c->AddAddon($hash, 7, 1, 2.00);
 
-	// $c->Show();
-	// echo $c->Checkout();
+	// // $c->Show();
+	// // echo $c->Checkout();
 
-	$cdb = new CartDb();
-	$price = $cdb->Checkout();
-	echo $orderid = $cdb->CreateOrder($price, 'Złota 13/9');
+	// $cdb = new CartDb();
+	// $price = $cdb->Checkout();
+	// echo $orderid = $cdb->CreateOrder($price, 'Złota 13/9');
 
 	$r = new Router();
 
