@@ -62,7 +62,7 @@ class CartDb
 		if($orderid > 0)
 		{
 			$this->AddProducts($orderid);
-			$this->AddAddons($orderid);
+			// $this->AddAddons($orderid);
 		}
 		else
 		{
@@ -102,7 +102,9 @@ class CartDb
 				{
 					$r = $db->Pdo->prepare("INSERT INTO order_product(rf_orders, product, price, quantity, sale) VALUES(:rf, :product, :price, :quantity, :sale)");
 					$r->execute([':rf' => $oid, ':product' => $v['id'], ':price' => $v['price'], ':quantity' => $v['quantity'], ':sale' => $v['sale']]);
-					$this->ProductsIds[] = $db->Pdo->lastInsertId();
+					$this->ProductsIds[] = $pid = $db->Pdo->lastInsertId();
+					// Add product addons
+					$this->AddAddons($oid, $pid, $k);
 				}
 			}
 			catch(Exception $e)
@@ -116,24 +118,28 @@ class CartDb
 		}
 	}
 
-	protected function AddAddons($oid = 0)
+	protected function AddAddons($oid = 0, $pid = 0, $hash = 'XXX')
 	{
 		$this->AddonsIds = null;
 
-		if($oid > 0)
+		if($oid > 0 && $pid > 0)
 		{
 			try
 			{
 				$db = Db::GetInstance();
 
-				foreach($this->Addons as $k => $pr)
+				echo "<pre>";
+				print_r($this->Addons);
+				print_r($hash);
+
+				foreach($this->Addons[$hash] as $k => $v)
 				{
-					foreach($pr as $k => $v)
-					{
-						$r = $db->Pdo->prepare("INSERT INTO order_product_addon(rf_order_product, product, price, quantity, sale) VALUES(:rf, :product, :price, :quantity, :sale)");
-						$r->execute([':rf' => $oid, ':product' => $v['id'], ':price' => $v['price'], ':quantity' => $v['quantity'], ':sale' => $v['sale']]);
-						$this->AddonsIds[] = $db->Pdo->lastInsertId();
-					}
+					print_r($v);
+
+					$r = $db->Pdo->prepare("INSERT INTO order_product_addon(rf_orders, rf_order_product, product, price, quantity, sale) VALUES(:rf1, :rf2, :product, :price, :quantity, :sale)");
+					$r->execute([':rf1' => $oid, ':rf2' => $pid, ':product' => $v['id'], ':price' => $v['price'], ':quantity' => $v['quantity'], ':sale' => $v['sale']]);
+					$this->AddonsIds[] = $db->Pdo->lastInsertId();
+
 				}
 			}
 			catch(Exception $e)
@@ -158,7 +164,7 @@ class CartDb
 		foreach ($this->Products as $k => $p)
 		{
 			$cost += $p['price'] * (int) $p['quantity'];
-			$cost += $this->AddonsCost($p['id'], $p['quantity']);
+			$cost += $this->AddonsCost($k, $p['quantity']);
 		}
 		return $cost;
 	}

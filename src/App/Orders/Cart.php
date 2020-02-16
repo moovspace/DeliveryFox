@@ -53,30 +53,30 @@ class Cart
 		}
 	}
 
-	function AddAddon($product_id, $addon_id, $quantity, $price = 0, $sale = 0)
+	function AddAddon($product_hash, $addon_id, $quantity, $price = 0, $sale = 0)
 	{
 		// Add product to array
-		$this->Addons[$product_id][$addon_id] = ['id' => (int) $addon_id, 'quantity' => (int) $quantity, 'price' => $price, 'sale' => $sale];
+		$this->Addons[$product_hash][$addon_id] = ['id' => (int) $addon_id, 'quantity' => (int) $quantity, 'price' => $price, 'sale' => $sale];
 		$this->Save();
 	}
 
-	function AddonPlus($product_id, $addon_id, $quantity = 1)
+	function AddonPlus($product_hash, $addon_id, $quantity = 1)
 	{
-		if(!empty($this->Addons[$product_id][$addon_id]))
+		if(!empty($this->Addons[$product_hash][$addon_id]))
 		{
-			$quantity = $this->Addons[$product_id][$addon_id]['quantity'] + $quantity;
-			$this->Addons[$product_id][$addon_id]['quantity'] = (int) $quantity;
+			$quantity = $this->Addons[$product_hash][$addon_id]['quantity'] + $quantity;
+			$this->Addons[$product_hash][$addon_id]['quantity'] = (int) $quantity;
 			$this->Save();
 		}
 	}
 
-	function AddonMinus($product_id, $addon_id, $quantity = 1)
+	function AddonMinus($product_hash, $addon_id, $quantity = 1)
 	{
-		if(!empty($this->Addons[$product_id][$addon_id]))
+		if(!empty($this->Addons[$product_hash][$addon_id]))
 		{
-			$quantity = $this->Addons[$product_id][$addon_id]['quantity'] - $quantity;
+			$quantity = $this->Addons[$product_hash][$addon_id]['quantity'] - $quantity;
 			if($quantity < 1){ $quantity = 1; }
-			$this->Addons[$product_id][$addon_id]['quantity'] = (int) $quantity;
+			$this->Addons[$product_hash][$addon_id]['quantity'] = (int) $quantity;
 			$this->Save();
 		}
 	}
@@ -124,10 +124,10 @@ class Cart
 		return $cost;
 	}
 
-	function AddonsCost($product_id, $product_quantity = 1)
+	function AddonsCost($product_hash, $product_quantity = 1)
 	{
 		$cost = 0;
-		foreach ($this->Addons[$product_id] as $k => $p)
+		foreach ($this->Addons[$product_hash] as $k => $p)
 		{
 			$cost += ($p['price'] * (int) $p['quantity']) * (int) $product_quantity;
 		}
