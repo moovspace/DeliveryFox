@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 16 Lut 2020, 13:00
+-- Czas generowania: 16 Lut 2020, 19:37
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.11-1~deb10u1
 
@@ -270,6 +270,99 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
 --
 
 TRUNCATE TABLE `newsletter`;
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` bigint(22) NOT NULL AUTO_INCREMENT,
+  `price` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `status` enum('pending','failed','completed','refunded','canceled','onhold','processing','delivery') NOT NULL DEFAULT 'pending',
+  `address` varchar(250) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `coupon` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tabela Truncate przed wstawieniem `orders`
+--
+
+TRUNCATE TABLE `orders`;
+--
+-- Zrzut danych tabeli `orders`
+--
+
+INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`) VALUES
+(1, '399.00', 'pending', 'Złota 13', '2020-02-16 15:24:07', ''),
+(9, '37.16', 'pending', 'Złota 13/9', '2020-02-16 18:34:56', ''),
+(10, '37.16', 'pending', 'Złota 13/9', '2020-02-16 18:35:57', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_product`
+--
+
+DROP TABLE IF EXISTS `order_product`;
+CREATE TABLE IF NOT EXISTS `order_product` (
+  `id` bigint(22) NOT NULL AUTO_INCREMENT,
+  `rf_orders` bigint(22) NOT NULL,
+  `product` int(11) NOT NULL,
+  `price` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `sale` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tabela Truncate przed wstawieniem `order_product`
+--
+
+TRUNCATE TABLE `order_product`;
+--
+-- Zrzut danych tabeli `order_product`
+--
+
+INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, `sale`) VALUES
+(1, 1, 2, '20.00', 2, 0),
+(8, 9, 1, '13.50', 2, 0),
+(9, 10, 1, '13.50', 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `order_product_addon`
+--
+
+DROP TABLE IF EXISTS `order_product_addon`;
+CREATE TABLE IF NOT EXISTS `order_product_addon` (
+  `id` bigint(22) NOT NULL AUTO_INCREMENT,
+  `rf_order_product` bigint(22) NOT NULL,
+  `product` int(11) NOT NULL,
+  `price` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `sale` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tabela Truncate przed wstawieniem `order_product_addon`
+--
+
+TRUNCATE TABLE `order_product_addon`;
+--
+-- Zrzut danych tabeli `order_product_addon`
+--
+
+INSERT INTO `order_product_addon` (`id`, `rf_order_product`, `product`, `price`, `quantity`, `sale`) VALUES
+(1, 1, 17, '3.50', 1, 0),
+(3, 9, 16, '2.54', 2, 0),
+(4, 10, 16, '2.54', 2, 0);
+
 -- --------------------------------------------------------
 
 --

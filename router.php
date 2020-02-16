@@ -2,8 +2,26 @@
 use PhpApix\Router\Router;
 use MyApp\Web\Error\ErrorPage;
 
+use MyApp\App\Orders\Cart;
+use MyApp\App\Orders\CartDb;
+
 try
 {
+	// // Cart test
+	// $c = new Cart();
+	// $c->Clear();
+	// $hash = $c->AddProduct(1, 1, 13.50);
+	// $c->ProductPlus($hash);
+	// $c->AddAddon(1, 16, 2, 2.54);
+	// $c->AddonPlus(1, 16, 1);
+	// $c->AddonMinus(1, 16, 1);
+	// // $c->Show();
+	// // echo $c->Checkout();
+
+	// $cdb = new CartDb();
+	// $price = $cdb->Checkout();
+	// echo $orderid = $cdb->CreateOrder($price, 'Złota 13/9');
+
 	$r = new Router();
 
 	// Namespace path
