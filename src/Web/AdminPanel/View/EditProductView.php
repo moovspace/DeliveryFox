@@ -73,7 +73,7 @@ class EditProductView extends Component
 	{
 		try{
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM category WHERE on_addon = 0");
+			$r = $db->Pdo->prepare("SELECT * FROM category");
 			$r->execute();
 			return $r->fetchAll();
 
