@@ -128,14 +128,8 @@ class CartDb
 			{
 				$db = Db::GetInstance();
 
-				echo "<pre>";
-				print_r($this->Addons);
-				print_r($hash);
-
 				foreach($this->Addons[$hash] as $k => $v)
 				{
-					print_r($v);
-
 					$r = $db->Pdo->prepare("INSERT INTO order_product_addon(rf_orders, rf_order_product, product, price, quantity, sale) VALUES(:rf1, :rf2, :product, :price, :quantity, :sale)");
 					$r->execute([':rf1' => $oid, ':rf2' => $pid, ':product' => $v['id'], ':price' => $v['price'], ':quantity' => $v['quantity'], ':sale' => $v['sale']]);
 					$this->AddonsIds[] = $db->Pdo->lastInsertId();
