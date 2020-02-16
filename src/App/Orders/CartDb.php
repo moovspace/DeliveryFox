@@ -118,11 +118,11 @@ class CartDb
 		}
 	}
 
-	protected function AddAddons($oid = 0, $pid = 0, $hash = 'XXX')
+	protected function AddAddons($oid = 0, $pid = 0, $hash)
 	{
 		$this->AddonsIds = null;
 
-		if($oid > 0 && $pid > 0)
+		if($oid > 0 && $pid > 0 && !empty($hash))
 		{
 			try
 			{
