@@ -1,6 +1,7 @@
 <?php
 namespace MyApp\App\DbCart;
 
+use MyApp\App\Translate\Trans;
 use PhpApix\Mysql\Db;
 
 class DbCart
@@ -132,6 +133,8 @@ class DbCart
 
 	function Html()
 	{
+		$t = new Trans('/src/App/DbCart/Lang', 'pl');
+
 		$cart_cost = 0;
 
 		$h = '<div class="cart">';
@@ -154,15 +157,15 @@ class DbCart
 				<div class="product">
 
 					<div class="title">
-						<img src="/media/product/'.$p['id'].'.jpg" onerror="imgError(this)">
+						<img src="/media/product/'.$p['id'].'.jpg" onerror="ErrorProductImage(this)">
 						<div class="name"> '.$pr['name'].' '.$pr['size'].' </div>
 					</div>
 
 					<div class="row row-big">
 						<div class="buttons">
-							<a class="minus"> <i class="fas fa-minus"></i> </a>
+							<a class="minus" onclick="minusProduct('.$k.')"> <i class="fas fa-minus"></i> </a>
 							<a class="quantity"> '.$p['quantity'].' </a>
-							<a class="plus"> <i class="fas fa-plus"></i> </a>
+							<a class="plus" onclick="plusProduct('.$k.')"> <i class="fas fa-plus"></i> </a>
 						</div>
 						<div class="price">
 							<span> '.$price.' </span>
@@ -174,7 +177,7 @@ class DbCart
 					if(!empty($this->Addons[$k]))
 					{
 						$h .= '
-						<div class="addon-title"> Addons:</div>
+						<div class="addon-title"> '.$t->Get('ADDONS').' </div>
 						<div class="addons">
 						';
 
@@ -194,9 +197,9 @@ class DbCart
 								$h .= '
 								<div class="row">
 									<div class="buttons">
-										<a class="minus"> <i class="fas fa-minus"></i> </a>
+										<a class="minus" onclick="minusAddon('.$k.', '.$v['id'].')"> <i class="fas fa-minus"></i> </a>
 										<a class="quantity"> '.$v['quantity'].' </a>
-										<a class="plus"> <i class="fas fa-plus"></i> </a>
+										<a class="plus" onclick="plusAddon('.$k.', '.$v['id'].')"> <i class="fas fa-plus"></i> </a>
 									</div>
 									<div class="name"> '.$pr['name'].' '.$pr['size'].' </div>
 									<div class="price">
@@ -226,10 +229,11 @@ class DbCart
 		{
 			$delivery_cost = $this->DeliveryCost;
 		}
+
 		return $h .= '
 			<div class="checkout">
-				<div class="delivery"> <span>Koszt dostawy</span> <span class="cost"> '.number_format((float)$delivery_cost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
-				<div class="delivery"> <span>Razem</span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
+				<div class="delivery"> <span> '.$t->Get('DELIVERY_COST').' </span> <span class="cost"> '.number_format((float)$delivery_cost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
+				<div class="delivery"> <span> '.$t->Get('COST').' </span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
 			</div>
 		</div>
 		'; // cart

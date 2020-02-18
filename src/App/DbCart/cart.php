@@ -15,7 +15,7 @@ $c = new DbCart('PLN');
 $c->DeliveryCost(5.66);
 $c->DeliveryMinOrderCost(200);
 
-// $c->Clear();
+$c->Clear();
 
 // ?add_product_id=17&add_product_quantity=1
 if(!empty($_GET['add_product_id']) && !empty($_GET['add_product_quantity']) && empty($_GET['addons']))
