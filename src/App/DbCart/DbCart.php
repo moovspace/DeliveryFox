@@ -221,9 +221,14 @@ class DbCart
 			}
 		}
 
+		$delivery_cost = 0;
+		if($cart_cost < $this->DeliveryMinOrderCost)
+		{
+			$delivery_cost = $this->DeliveryCost;
+		}
 		return $h .= '
 			<div class="checkout">
-				<div class="delivery"> <span>Koszt dostawy</span> <span class="cost"> '.number_format((float)$this->DeliveryCost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
+				<div class="delivery"> <span>Koszt dostawy</span> <span class="cost"> '.number_format((float)$delivery_cost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
 				<div class="delivery"> <span>Razem</span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
 			</div>
 		</div>
