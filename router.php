@@ -2,20 +2,19 @@
 use PhpApix\Router\Router;
 use MyApp\Web\Error\ErrorPage;
 
-use MyApp\App\Orders\DbCart;
+use MyApp\Web\Page\TopMenu\TopMenuFixed;
+
+$arr = [];
+$arr[0] = ['name' => 'menu', 'title' => 'Menu', 'href' => '/menu'] ;
+$arr[1] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
+$arr[2] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
+
+$m = new TopMenuFixed($arr);
+echo $m->Show($arr);
+echo '<style>'.$m->Css() .'</style>';
 
 try
 {
-	$c = new DbCart('PLN');
-	$hash = $c->AddProduct(2,1);
-	$c->AddAddon($hash,26,2);
-	$hash = $c->AddProduct(2,1);
-
-	// $c->Show();
-	echo "Cost: " . $c->Checkout();
-	echo $c->Html();
-
-
 	$r = new Router();
 
 	// Namespace path
@@ -26,14 +25,7 @@ try
 	$r->Include("Web/Auth/routes");
 
 	// Admin Panel
-	// $r->Redirect('/panel', '/panel/profil');
-	$r->Set("/panel", "MyApp\Web\AdminPanel\Profil", "Index");
-	$r->Set("/panel/profil", "MyApp\Web\AdminPanel\Profil", "Index");
-	$r->Set("/panel/attributes", "MyApp\Web\AdminPanel\Attributes", "Index");
-	$r->Set("/panel/categories", "MyApp\Web\AdminPanel\Categories", "Index");
-	$r->Set("/panel/products", "MyApp\Web\AdminPanel\Products", "Index");
-	$r->Set("/panel/product/add", "MyApp\Web\AdminPanel\AddProduct", "Index");
-	$r->Set("/panel/product/edit", "MyApp\Web\AdminPanel\EditProduct", "Index");
+	$r->Include("Web/AdminPanel/routes");
 
 	// $r->ErrorPage();
 	ErrorPage::Error404();

@@ -91,7 +91,7 @@ class DbCart
 		}
 
 		// Delivery cost
-		if($cost < $this->DeliveryMinOrderCost)
+		if($cost < $this->DeliveryMinOrderCost && $cost > 0)
 		{
 			$cost += $this->DeliveryCost;
 		}
@@ -163,14 +163,14 @@ class DbCart
 
 					<div class="row row-big">
 						<div class="buttons">
-							<a class="minus" onclick="minusProduct('.$k.')"> <i class="fas fa-minus"></i> </a>
+							<a class="minus" onclick="minusProduct(\''.$k.'\')"> <i class="fas fa-minus"></i> </a>
 							<a class="quantity"> '.$p['quantity'].' </a>
-							<a class="plus" onclick="plusProduct('.$k.')"> <i class="fas fa-plus"></i> </a>
+							<a class="plus" onclick="plusProduct(\''.$k.'\')"> <i class="fas fa-plus"></i> </a>
 						</div>
 						<div class="price">
 							<span> '.$price.' </span>
 							<curr> '.$this->Currency.' </curr>
-							<a class="delete" onclick="deleteProduct('.$k.')"> <i class="far fa-times-circle"></i> </a>
+							<a class="delete" onclick="deleteProduct(\''.$k.'\')"> <i class="far fa-times-circle"></i> </a>
 						</div>
 					</div>';
 
@@ -188,7 +188,8 @@ class DbCart
 							if(!empty($pr))
 							{
 								$price = $pr['price'];
-								if($pr['price_sale'] < $price && $pr['on_sale'] > 0){
+								if($pr['price_sale'] < $price && $pr['on_sale'] > 0)
+								{
 									$price = $pr['price_sale'];
 								}
 
@@ -197,15 +198,15 @@ class DbCart
 								$h .= '
 								<div class="row">
 									<div class="buttons">
-										<a class="minus" onclick="minusAddon('.$k.', '.$v['id'].')"> <i class="fas fa-minus"></i> </a>
+										<a class="minus" onclick="minusAddon(\''.$k.'\', \''.$v['id'].'\')"> <i class="fas fa-minus"></i> </a>
 										<a class="quantity"> '.$v['quantity'].' </a>
-										<a class="plus" onclick="plusAddon('.$k.', '.$v['id'].')"> <i class="fas fa-plus"></i> </a>
+										<a class="plus" onclick="plusAddon(\''.$k.'\', \''.$v['id'].'\')"> <i class="fas fa-plus"></i> </a>
 									</div>
 									<div class="name"> '.$pr['name'].' '.$pr['size'].' </div>
 									<div class="price">
 										<span> '.$price.' </span>
 										<curr> '.$this->Currency.' </curr>
-										<a class="delete" onclick="deleteAddon('.$k.', '.$v['id'].')"> <i class="far fa-times-circle"></i> </a>
+										<a class="delete" onclick="deleteAddon(\''.$k.'\', \''.$v['id'].'\')"> <i class="far fa-times-circle"></i> </a>
 									</div>
 								</div>
 								';

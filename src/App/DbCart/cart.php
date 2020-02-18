@@ -8,14 +8,18 @@ use MyApp\Web\Currency;
 
 // Load PLN
 $curr = Currency::MAIN;
-
 // Create cart
-$c = new DbCart('PLN');
+$c = new DbCart($curr);
 // Add delivery limits
 $c->DeliveryCost(5.66);
+// Min order
 $c->DeliveryMinOrderCost(200);
 
-$c->Clear();
+// ?clear=1
+if(!empty($_GET['clear']))
+{
+	$c->Clear();
+}
 
 // ?add_product_id=17&add_product_quantity=1
 if(!empty($_GET['add_product_id']) && !empty($_GET['add_product_quantity']) && empty($_GET['addons']))
@@ -93,8 +97,10 @@ echo $c->Html();
 ?>
 
 <style>
-.cart, .cart *{
+*:not(i){
 	font-family: 'Quicksand', sans-serif;
+}
+.cart, .cart *{
 	padding: 0px;
 	margin: 0px;
 	box-sizing: border-box;
@@ -155,8 +161,11 @@ echo $c->Html();
 	padding: 0px;
 }
 .cart .product .sum{
-	float: left; width: 100%; text-align: right; font-weight: 600;
+	float: left; width: 100%; text-align: right;
 	padding: 10px 5px; border-top: 1px dashed #eee;
+}
+.cart .product .sum *{
+font-weight: 900
 }
 .cart .product .row{
 	display: flex;
@@ -180,7 +189,7 @@ echo $c->Html();
 	color: #f20; cursor: pointer
 }
 .cart .product .row .buttons a{
-	padding: 5px; cursor: pointer; overflow: hidden
+	color: #222; padding: 5px; cursor: pointer; overflow: hidden;
 }
 .cart .product .row .buttons .plus:hover{
 	color: #21b973
@@ -195,7 +204,7 @@ echo $c->Html();
 
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700,800,900" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-
+<script src="/src/App/DbCart/cart.js"></script>
 
 <!--
 <div class="cart">
