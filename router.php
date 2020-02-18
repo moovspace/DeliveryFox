@@ -2,8 +2,20 @@
 use PhpApix\Router\Router;
 use MyApp\Web\Error\ErrorPage;
 
+use MyApp\App\Orders\DbCart;
+
 try
 {
+	$c = new DbCart('PLN');
+	$hash = $c->AddProduct(2,1);
+	$c->AddAddon($hash,26,2);
+	$hash = $c->AddProduct(2,1);
+
+	// $c->Show();
+	echo "Cost: " . $c->Checkout();
+	echo $c->Html();
+
+
 	$r = new Router();
 
 	// Namespace path
@@ -31,6 +43,7 @@ catch(Exception $e)
 	echo json_encode(["errorMsg" => $e->getMessage(), "errorCode" => $e->getCode()]);
 }
 ?>
+
 
 <?php
 /*

@@ -45,8 +45,11 @@ function OpenEditCategory(it){
 
 	console.log("Category id " , catid.value);
 
+	let host = window.location.hostname;
+	console.log("Host: ", host);
+
 	// Fetch here
-	let url = 'http://drive.xx/src/Web/AdminPanel/Api/get-category.php?category=' + catid.value;
+	let url = 'http://' + host + '/src/Web/AdminPanel/Api/get-category.php?category=' + catid.value;
 
 	ApiGet(url).then((data) => {
 

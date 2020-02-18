@@ -106,6 +106,7 @@
 "EP_CREATE": "Utwórz",
 "EP_UPDATE": "Zapisz",
 "EP_ADDONS": "Dodatki",
+"EP_ADDON": "Dodatki",
 "EP_QUANTITY": "Maksymalna ilość dodatku",
 "EP_QUANTITY_PL": "0",
 "PP_ID": "Id",

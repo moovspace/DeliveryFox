@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 16 Lut 2020, 20:25
+-- Czas generowania: 18 Lut 2020, 12:44
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
--- Wersja PHP: 7.3.11-1~deb10u1
+-- Wersja PHP: 7.3.14-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,8 +38,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `address` varchar(250) NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `coupon` varchar(50) NOT NULL DEFAULT '',
+  `delivery_cost` decimal(10,2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `orders`
@@ -50,8 +51,10 @@ TRUNCATE TABLE `orders`;
 -- Zrzut danych tabeli `orders`
 --
 
-INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`) VALUES
-(24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '');
+INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`, `delivery_cost`) VALUES
+(24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '', '0.00'),
+(26, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:31:36', '', '0.00'),
+(27, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:38:23', '', '5.66');
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product`
@@ -81,7 +84,11 @@ TRUNCATE TABLE `order_product`;
 
 INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, `sale`) VALUES
 (32, 24, 1, '13.50', 2, 0),
-(33, 24, 2, '15.50', 1, 0);
+(33, 24, 2, '15.50', 1, 0),
+(34, 26, 17, '19.00', 1, 0),
+(35, 26, 2, '16.00', 1, 0),
+(36, 27, 17, '19.00', 1, 0),
+(37, 27, 2, '16.00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -99,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `order_product_addon` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product_addon`
@@ -113,7 +120,13 @@ TRUNCATE TABLE `order_product_addon`;
 INSERT INTO `order_product_addon` (`id`, `rf_orders`, `rf_order_product`, `product`, `price`, `quantity`, `sale`) VALUES
 (23, 24, 32, 16, '2.54', 2, 0),
 (24, 24, 33, 17, '3.00', 2, 0),
-(25, 24, 33, 7, '2.00', 1, 0);
+(25, 24, 33, 7, '2.00', 1, 0),
+(26, 26, 34, 2, '16.00', 2, 0),
+(27, 26, 34, 17, '19.00', 1, 0),
+(28, 26, 35, 26, '40.01', 2, 1),
+(29, 27, 36, 2, '16.00', 2, 0),
+(30, 27, 36, 17, '19.00', 1, 0),
+(31, 27, 37, 26, '40.01', 2, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

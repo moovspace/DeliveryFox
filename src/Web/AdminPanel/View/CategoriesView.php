@@ -289,13 +289,13 @@ class CategoriesView extends Component
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="/panel/categories">
-							<label>Name</label>
+							<label> '.$arr['trans']->Get('A_L_NAME').' </label>
 							<input type="text" name="name" placeholder="e.g. Pizza">
-							<label>Slug</label>
+							<label> '.$arr['trans']->Get('C_SLUG').' </label>
 							<input type="text" name="slug" placeholder="e.g. pizza">
 
 							<div class="w-50">
-								<label>Visible</label>
+								<label> '.$arr['trans']->Get('P_VISIBLE').' </label>
 								<select name="visible">
 									<option value="1">Yes</option>
 									<option value="0">No</option>
@@ -303,7 +303,7 @@ class CategoriesView extends Component
 							</div>
 
 							<div class="w-50">
-								<label>Addon</label>
+								<label> '.$arr['trans']->Get('EP_ADDON').' </label>
 								<select name="on_addon">
 									<option value="0">No</option>
 									<option value="1">Yes</option>
@@ -317,19 +317,19 @@ class CategoriesView extends Component
 					<div id="box-fixed-edit" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT1').' <i class="fas fa-times close"></i> </h3>
 						<form method="POST" action="/panel/categories">
-							<label>Name</label>
+							<label> '.$arr['trans']->Get('A_L_NAME').' </label>
 							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
-							<label>Slug</label>
+							<label> '.$arr['trans']->Get('C_SLUG').' </label>
 							<input type="text" name="slug" placeholder="e.g. pizza" id="edit-cat-slug">
 							<div class="w-50">
-								<label>Visible</label>
+								<label> '.$arr['trans']->Get('P_VISIBLE').' </label>
 								<select name="visible" id="edit-cat-visible">
 									<option value="1">Yes</option>
 									<option value="0">No</option>
 								</select>
 							</div>
 							<div class="w-50">
-								<label>Addon</label>
+								<label> '.$arr['trans']->Get('EP_ADDON').' </label>
 								<select name="on_addon" id="edit-cat-addon">
 									<option value="0">No</option>
 									<option value="1">Yes</option>
