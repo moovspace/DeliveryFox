@@ -22,7 +22,7 @@
 	background: #fff;
 }
 .products .list .product .sale{
-	position: absolute; top: 20px; right: 0px; z-index: 8;
+	position: absolute; top: 25px; right: 25px; z-index: 8;
 	padding: 5px 30px;
 	background: #ffe600; border-radius: 6px;
 	color: #222; font-weight: 700
@@ -33,7 +33,7 @@
 .products .list .product .img{
 	overflow: hidden; position: relative;
 	padding: 5px;
-	border: 1px solid #222; border-radius: 1%;
+	border: 0px solid #222; border-radius: 1%;
 }
 .products .list .product img{
 	float: left; width: 100%; min-height: 330px;
@@ -52,7 +52,7 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	font-size: 2vw; font-weight: 900
+	font-size: 1.8vw; font-weight: 900
 }
 .products .list .product .price{
 	box-sizing: border-box;
@@ -79,7 +79,7 @@
 	float: right; display: none; transition: all .5s
 }
 .products .list .product .add-to-cart:hover{
-	border: 1px solid #ffe600;
+	border-color: #ffe600;
 	background: #ffe600;
 	color: #222;
 	cursor: pointer;
@@ -142,5 +142,84 @@
 	}
 	.products .list .product .add-to-cart{
 		font-size: 3vw;
+	}
+}
+
+#add-product-fixed{
+	position: fixed; z-index: 10;
+	top: 5vh; left: 15vw;
+	width: 70vw;
+	height: 90vh;
+	padding: 20px;
+	border-radius: 6px;
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+	background: #fff;
+	overflow-y: scroll
+}
+#add-product-fixed .top{
+	display: flex;
+}
+#add-product-fixed .top img{
+	float: left; min-width: 200px; height: 200px;
+	border-radius: 6px;
+	border: 1px solid #222; padding: 5px;
+	object-fit: cover
+}
+#add-product-fixed .top .about{
+	float: left; width: 100%;
+}
+#add-product-fixed .top .about .name{
+	font-size: 30px; font-weight: 900;
+	padding: 0px 20px;
+}
+#add-product-fixed .top .about .desc{
+	font-size: 15px; font-weight: 400;
+	padding: 0px 20px;
+}
+#add-product-fixed .top .right{
+	float: left; min-width: 200px;
+}
+#add-product-fixed .top .right .price{
+	float: right; margin: 2%;
+	font-weight: 900; font-size: 31px;
+}
+#add-product-fixed .top .right .add-to-cart-now{
+	float: right; width: auto; margin: 2%;
+	padding: 15px 35px;
+	border: 1px solid #222; border-radius: 50px;
+	transition: all .5s
+}
+#add-product-fixed .top .right .add-to-cart-now:hover{
+	background: #ffe600; color: #222; cursor: pointer;
+	border-color: #ffe600
+}
+
+#add-product-fixed .size{
+	float: left; width: 100%;
+	display: flex; padding: 10px;
+}
+#add-product-fixed .size .size-btn{
+	width: 98%; margin: 1%;
+	padding: 15px 25px;
+	border: 1px solid #222;
+	border-radius: 50px;
+}
+
+#add-product-fixed .addons{
+	float: left; width: 100%;
+	padding: 10px;
+}
+#add-product-fixed .addons .addon-btn{
+	float: left; width: 23%; margin: 1%;
+	padding: 10px;
+}
+
+@media all and (max-width: 1024px){
+	#add-product-fixed .top, #add-product-fixed .size{
+		display: flex;
+		flex-direction: column
+	}
+	#add-product-fixed .addons .addon-btn{
+		width: 98%;
 	}
 }
