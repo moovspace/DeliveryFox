@@ -91,6 +91,7 @@ class ProductBox
 				</div>
 
 				<div id="add-product-fixed">
+					<div class="close" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
 					<div class="top">
 						<img src="/media/img/food-1.jpg">
 						<div class="about">
@@ -112,18 +113,24 @@ class ProductBox
 							<option>Sos łagodny</option>
 						</select>
 					</div>
-					<h3>Addons</h3>
-					<div class="addons">
-						<div class="addon-btn"> Ananas <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Ser kozi <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Szynka <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Ananas <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Ser kozi <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Szynka <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Ananas <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Ser kozi <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-						<div class="addon-btn"> Szynka <i class="fas fa-minus"></i> <span class="quantity">1</span> <i class="fas fa-plus"></i> </div>
-					</div>
+					<div class="addon-title">Addons</div>
+					<div class="addons">';
+
+					foreach(['','','','','','','','',''] as $v)
+					{
+						$h .= '<div class="addon-btn">
+							<div class="title">
+								<name>Ananas</name> <price>2.50</price> <curr>PLN<curr>
+							</div>
+							<div class="buttons">
+								<span class="minus"> <i class="fas fa-minus"></i> </span>
+								<span class="quantity">1</span>
+								<span class="plus"> <i class="fas fa-plus"></i> </span>
+							</div>
+						</div>';
+					}
+
+					$h .= '</div>
 				</div>
 			</div>
 		';

@@ -58,7 +58,7 @@
 	box-sizing: border-box;
 	float: left; width: 48%;
 	padding: 10px 0px; margin: 1%; margin-top: 0px;
-	font-size: 1.5vw; font-weight: 600
+	font-size: 1.5vw; font-weight: 400
 }
 .products .list .product .price curr{
 	vertical-align: super;
@@ -67,7 +67,7 @@
 .products .list .product .add-to-cart{
 	box-sizing: border-box;
 	float: right; width: 48%;
-	padding: 15px 20px; margin: 1%;
+	padding: 10px 20px; margin: 1%;
 	font-size: 1.3vw;
 	border: 1px solid #222; border-radius: 50px;
 	transition: all .6s
@@ -147,8 +147,8 @@
 
 #add-product-fixed{
 	position: fixed; z-index: 10;
-	top: 5vh; left: 15vw;
-	width: 70vw;
+	top: 5vh; left: 10vw;
+	width: 80vw;
 	height: 90vh;
 	padding: 20px;
 	border-radius: 6px;
@@ -156,13 +156,22 @@
 	background: #fff;
 	overflow-y: scroll
 }
+#add-product-fixed .close{
+	position: absolute;
+	top: 10px; right: 10px;
+	padding: 5px;
+}
+#add-product-fixed .close:hover{
+	color: #f20; cursor: pointer;
+}
 #add-product-fixed .top{
 	display: flex;
+	margin-top: 20px;
 }
 #add-product-fixed .top img{
 	float: left; min-width: 200px; height: 200px;
+	margin-bottom: 10px;
 	border-radius: 6px;
-	border: 1px solid #222; padding: 5px;
 	object-fit: cover
 }
 #add-product-fixed .top .about{
@@ -185,7 +194,7 @@
 }
 #add-product-fixed .top .right .add-to-cart-now{
 	float: right; width: auto; margin: 2%;
-	padding: 15px 35px;
+	padding: 10px 35px;
 	border: 1px solid #222; border-radius: 50px;
 	transition: all .5s
 }
@@ -200,19 +209,54 @@
 }
 #add-product-fixed .size .size-btn{
 	width: 98%; margin: 1%;
-	padding: 15px 25px;
+	padding: 10px 20px;
 	border: 1px solid #222;
 	border-radius: 50px;
 }
-
+#add-product-fixed .addon-title{
+	float: left; width: 100%;
+	padding: 5px 20px;
+}
 #add-product-fixed .addons{
 	float: left; width: 100%;
 	padding: 10px;
 }
 #add-product-fixed .addons .addon-btn{
-	float: left; width: 23%; margin: 1%;
+	float: left; width: 31.333%; margin: 1%;
 	padding: 10px;
+	background: #eee; border-radius: 6px
 }
+#add-product-fixed .addons .addon-btn .title{
+	float: left; width: 98%; margin: 1%; padding: 5px 15px;
+	background: #fff; border-radius: 6px;
+	font-size: 14px;
+}
+#add-product-fixed .addons .addon-btn .buttons{
+	float: left; width: 98%; margin: 1% 1% 0px 1%;
+}
+#add-product-fixed .addons .addon-btn .buttons span{
+	float: left; margin-right: 10px;  padding: 5px;
+	min-width: 25px; min-height: 25px;
+	text-align: center;
+	background: #fff; border-radius: 6px;
+	font-size: 14px;
+}
+#add-product-fixed .addons .addon-btn .buttons .minus{
+	background: #000; color: #fff; cursor: pointer;
+	transition: all .6s
+}
+#add-product-fixed .addons .addon-btn .buttons .plus{
+	background: #000; color: #fff; cursor: pointer;
+	transition: all .6s
+}
+#add-product-fixed .addons .addon-btn .buttons .minus:hover{
+	background: #ffe600;
+}
+#add-product-fixed .addons .addon-btn .buttons .plus:hover{
+	background: #ffe600;
+}
+
+
 
 @media all and (max-width: 1024px){
 	#add-product-fixed .top, #add-product-fixed .size{
@@ -221,5 +265,8 @@
 	}
 	#add-product-fixed .addons .addon-btn{
 		width: 98%;
+	}
+	#add-product-fixed .top .right .price{
+		float: left;
 	}
 }
