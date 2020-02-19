@@ -91,7 +91,7 @@ class ProductBox
 				</div>
 
 				<div id="add-product-fixed">
-					<div class="close" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
+					<div class="close-it" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
 					<div class="top">
 						<img src="/media/img/food-1.jpg">
 						<div class="about">
@@ -106,7 +106,7 @@ class ProductBox
 						</div>
 					</div>
 					<div class="size">
-						<div class="size-btn"> Size 15cm </div>
+						<div class="size-btn size-btn-active"> Size 15cm </div>
 						<div class="size-btn"> Size 25cm </div>
 						<div class="size-btn"> Size 35cm </div>
 						<select class="size-btn">
