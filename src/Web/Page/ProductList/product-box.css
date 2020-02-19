@@ -84,7 +84,8 @@
 	float: left; text-align: left
 }
 .products .list .product .add-to-cart i{
-	float: right; display: none; transition: all .5s
+	float: right; display: none; transition: all .5s;
+	padding: 2px;
 }
 .products .list .product .add-to-cart:hover{
 	border-color: #ffe600;

@@ -4,7 +4,7 @@
 .category-menu .link{float: left; width: 100%; padding: 5px 5px 5px 40px; font-weight: 600; color: #222;}
 .category-menu .link:hover{color: #21b973}
 
-@media all and (max-width: 640px){
+@media all and (max-width: 1024px){
 	.category-menu{float: left;  width: 50px;}
 	.category-menu:hover{ width: 100%; }
 }
