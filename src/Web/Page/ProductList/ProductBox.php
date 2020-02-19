@@ -38,7 +38,7 @@ class ProductBox
 						</div>
 						<div class="name">Krewetki meksykańskie</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 					<div class="product">
 						<div class="sale"> <i class="fas fa-grin-stars"></i> Sale! </div>
@@ -47,7 +47,7 @@ class ProductBox
 						</div>
 						<div class="name">Tortilla vege</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 					<div class="product">
 						<div class="sale"> <i class="fas fa-grin-stars"></i> Sale! </div>
@@ -56,7 +56,7 @@ class ProductBox
 						</div>
 						<div class="name">Spaghetti mushrom</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 
 					<div class="product">
@@ -65,7 +65,7 @@ class ProductBox
 						</div>
 						<div class="name">Quasadilla</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 					<div class="product">
 						<div class="img">
@@ -73,7 +73,7 @@ class ProductBox
 						</div>
 						<div class="name">Kuleczki panierowane</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 					<div class="product">
 						<div class="img">
@@ -81,7 +81,7 @@ class ProductBox
 						</div>
 						<div class="name">Szaszłyki z kaczki</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>ORDER</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 
 				</div>

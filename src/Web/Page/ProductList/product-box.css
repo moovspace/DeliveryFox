@@ -26,7 +26,8 @@
 }
 .products .list .product:hover{
 	border: 2px solid #ffe600;
-	box-shadow: 0px 0px 5px #ffe60094
+	box-shadow: 0px 0px 5px #ffe60094;
+	background: #ffe6001f
 }
 .products .list .product .sale{
 	position: absolute; top: 25px; right: 25px; z-index: 8;
@@ -59,7 +60,7 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	font-size: 1.8vw; font-weight: 900
+	font-size: 1.8vw; font-weight: 400
 }
 .products .list .product .price{
 	box-sizing: border-box;
@@ -75,8 +76,8 @@
 	box-sizing: border-box;
 	float: right; width: 48%;
 	padding: 10px 20px; margin: 1%;
-	font-size: 1.3vw;
-	border: 1px solid #222; border-radius: 50px;
+	font-size: 1.3vw; font-weight: 900;
+	border: 2px solid #222; border-radius: 50px;
 	transition: all .6s
 }
 .products .list .product .add-to-cart span{
