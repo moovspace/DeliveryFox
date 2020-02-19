@@ -2,20 +2,17 @@
 namespace MyApp\Web\Home;
 
 use PhpApix\Mysql\Db;
-use MyApp\App\Component;
+use MyApp\Web\Page\Main\Content;
+use MyApp\Web\Page\TopMenu\TopMenuFixed;
+use MyApp\Web\Page\Menu\CategoryMenu;
+use MyApp\Web\Page\ProductList\ProductBox;
 
-class View extends Component
+class View
 {
     static function Data($arr = null){
         try
 		{
-            // Mysql from static method with singleton (Db class)
-            $db = Db::getInstance();
-            $stm = $db->Pdo->query("SELECT * FROM user");
-            $rows = $stm->fetchAll();
-            // $db->Pdo->lastInsertId();
-            // PDO::lastInsertId();
-            return $rows;
+			$db = Db::GetInstance();
 		}
 		catch(Exception $e)
 		{
@@ -23,18 +20,26 @@ class View extends Component
         }
     }
 
-    static function Show($text = 'Hello World')
+    static function Show()
     {
-        // Get data
-        $d = self::Data();
-        print_r($d);
-        ?>
+		$arr[0] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
+		$arr[1] = ['name' => 'menu', 'title' => 'Menu', 'href' => '/menu'] ;
+		$arr[2] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
 
-        <div class="box">
-			<h1> <?php echo $text; ?> </h1>
-        </div>
+		// Html
+		$h = '';
+		$h .= TopMenuFixed::Show($arr);
+		$h .= CategoryMenu::Show();
+		$h .= ProductBox::Show();
 
-        <?php
+		// Content div
+		echo Content::Show([$h]);
+
+		// Style, js
+		echo Content::Head();
+		echo TopMenuFixed::Head();
+		echo CategoryMenu::Head();
+		echo ProductBox::Head();
 	}
 }
 ?>

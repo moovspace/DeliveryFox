@@ -1,0 +1,13 @@
+.fixed-menu{background: rgba(255,255,255,.95); position: fixed; top: 0px; left: 0px; z-index: 9; width: 100%; padding: 5px; color: #222; display: inline-flex; align-items: center;}
+.fixed-menu > div{padding: 10px;}
+.fixed-menu .left{float: left; flex-grow: 1}
+.fixed-menu .left img{float: left; height: 40px;}
+.fixed-menu .middle{float: left; flex-grow: 10; display: flex; align-items: center; justify-content: flex-end; text-align: right}
+.fixed-menu .middle a{float: right; width: auto; padding: 5px; color: #222; font-weight: 900 !important}
+.fixed-menu .middle a:hover{color: #21b973}
+.fixed-menu .middle .fixed-link-active span{float: left; overflow: hidden; padding: 10px 15px; border-top: 0px solid #21b973; color: #21b973}
+.fixed-menu .right{float: right; flex-grow: 1; text-align: right}
+.fixed-menu .right a{float: right; padding: 5px; margin-right: 30px; color: #222; font-weight: 600}
+.fixed-menu .right a:hover{color: #21b973}
+.fixed-menu .cart-btn{position: relative;}
+.fixed-menu .cart-btn .product-quantity{position: absolute; top: -10px; right: -15px; font-size: 13px; min-width: 25px; min-height: 25px; background: #f8d614b6; color: #222; padding: 5px; align-items: center; text-align: center; border-radius: 6px;}

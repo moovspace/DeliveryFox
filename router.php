@@ -2,17 +2,6 @@
 use PhpApix\Router\Router;
 use MyApp\Web\Error\ErrorPage;
 
-use MyApp\Web\Page\TopMenu\TopMenuFixed;
-
-$arr = [];
-$arr[0] = ['name' => 'menu', 'title' => 'Menu', 'href' => '/menu'] ;
-$arr[1] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
-$arr[2] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
-
-$m = new TopMenuFixed($arr);
-echo $m->Show($arr);
-echo '<style>'.$m->Css() .'</style>';
-
 try
 {
 	$r = new Router();

@@ -1,0 +1,146 @@
+.products{
+	float: left; width: 100%; background: #f9f9f9
+}
+.products .h1{
+	float: left; width: 98%;
+	padding: 10px 20px; margin: 1%;
+	font-weight: 900; font-size: 19px;
+	background: #fff;
+}
+
+.products .list{
+	float: left; width: 98%;
+	padding: 10px; margin: 1%;
+	font-weight: 400; font-size: 14px;
+	background: #fff
+}
+
+.products .list .product{
+	position: relative;
+	float: left; width: 31.333%;
+	padding: 10px; margin: 1%; margin-bottom: 10px;
+	background: #fff;
+}
+.products .list .product .sale{
+	position: absolute; top: 20px; right: 0px; z-index: 8;
+	padding: 5px 30px;
+	background: #ffe600; border-radius: 6px;
+	color: #222; font-weight: 700
+}
+.products .list .product .sale-off{
+	display: none
+}
+.products .list .product .img{
+	overflow: hidden; position: relative;
+	padding: 5px;
+	border: 1px solid #222; border-radius: 1%;
+}
+.products .list .product img{
+	float: left; width: 100%; min-height: 330px;
+	border-radius: 1%;
+	overflow: hidden; object-fit: cover;
+	transition: all .6s
+}
+.products .list .product img:hover{
+	transform: scale(1.2) rotate(5deg);
+	/* transform: rotate(15deg); */
+}
+.products .list .product .name{
+	display: flex;
+	float: left; width: 98%; height: 100px;
+	padding: 10px; margin: 1%;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 2vw; font-weight: 900
+}
+.products .list .product .price{
+	box-sizing: border-box;
+	float: left; width: 48%;
+	padding: 10px 0px; margin: 1%; margin-top: 0px;
+	font-size: 1.5vw; font-weight: 600
+}
+.products .list .product .price curr{
+	vertical-align: super;
+	font-size: 1.2vw; font-weight: 400;
+}
+.products .list .product .add-to-cart{
+	box-sizing: border-box;
+	float: right; width: 48%;
+	padding: 15px 20px; margin: 1%;
+	font-size: 1.3vw;
+	border: 1px solid #222; border-radius: 50px;
+	transition: all .6s
+}
+.products .list .product .add-to-cart span{
+	float: left; text-align: left
+}
+.products .list .product .add-to-cart i{
+	float: right; display: none; transition: all .5s
+}
+.products .list .product .add-to-cart:hover{
+	border: 1px solid #ffe600;
+	background: #ffe600;
+	color: #222;
+	cursor: pointer;
+	transition: all .4s
+}
+.products .list .product .add-to-cart:hover i{
+	float: right; display: inherit
+}
+.products .product-pagine{
+	float: left; width: 98%; margin: 20px 1%;
+	display: flex; justify-content: center; align-items: center;
+	background: #fff
+}
+.products .product-pagine a{
+	padding: 10px; margin: 15px;
+	border-radius: 25px; border: 1px solid #222;
+	min-height: 40px; min-width: 42px;
+	text-align: center;
+	transition: all .5s
+}
+.products .product-pagine a:hover{
+	background: #ffe600; color: #fff; border-color: #ffe600
+}
+.products .product-pagine #product-curr-page{
+	padding: 10px 30px; background: #000; color: #fff; border-radius: 25px;
+}
+
+@media all and (max-width: 1024px)
+{
+	.products .list .product{
+		float: left; width: 48%;
+	}
+	.products .list .product .name{
+		height: 70px;
+		font-size: 2.7vw;
+	}
+	.products .list .product .price{
+		width: 98%;
+		font-size: 2.5vw; text-align: center
+	}
+	.products .list .product .add-to-cart{
+		width: 98%;
+		font-size: 2vw;
+	}
+}
+@media all and (max-width: 640px)
+{
+	.products .list .product{
+		float: left; width: 98%;
+	}
+	.products .list .product .name{
+		height: 70px;
+		font-size: 4vw;
+	}
+	.products .list .product .price{
+		font-size: 4vw;
+	}
+	.products .list .product .price curr{
+		font-size: 3vw;
+	}
+	.products .list .product .add-to-cart{
+		font-size: 3vw;
+	}
+}
