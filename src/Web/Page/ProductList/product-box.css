@@ -20,6 +20,13 @@
 	float: left; width: 31.333%;
 	padding: 10px; margin: 1%; margin-bottom: 10px;
 	background: #fff;
+	border: 2px solid #fff;
+	border-radius: 6px;
+	transition: all .6s
+}
+.products .list .product:hover{
+	border: 2px solid #ffe600;
+	box-shadow: 0px 0px 5px #ffe60094
 }
 .products .list .product .sale{
 	position: absolute; top: 25px; right: 25px; z-index: 8;
@@ -36,7 +43,7 @@
 	border: 0px solid #222; border-radius: 1%;
 }
 .products .list .product img{
-	float: left; width: 100%; min-height: 330px;
+	float: left; width: 100%; min-height: 300px;
 	border-radius: 1%;
 	overflow: hidden; object-fit: cover;
 	transition: all .6s
