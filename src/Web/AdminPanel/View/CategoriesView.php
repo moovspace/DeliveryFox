@@ -320,7 +320,7 @@ class CategoriesView extends Component
 							<label> '.$arr['trans']->Get('A_L_NAME').' </label>
 							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
 							<label> '.$arr['trans']->Get('C_SLUG').' </label>
-							<input type="text" name="slug" placeholder="e.g. pizza" id="edit-cat-slug">
+							<input type="text" name="slug" placeholder="e.g. pizza or pizza-big" id="edit-cat-slug">
 							<div class="w-50">
 								<label> '.$arr['trans']->Get('P_VISIBLE').' </label>
 								<select name="visible" id="edit-cat-visible">

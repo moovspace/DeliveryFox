@@ -10,6 +10,10 @@ try
 	$r->Set("/", "MyApp/Web/Home/Homepage", "Index");
 	$r->Set("/logout", "MyApp/Web/Logout/Logout", "Index");
 
+	// Products category
+	$r->Set("/category", "MyApp/Web/Home/Homepage", "Index");
+	$r->Set("/category/{slug}", "MyApp/Web/Home/Homepage", "Index");
+
 	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");
 

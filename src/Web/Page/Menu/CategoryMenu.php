@@ -27,7 +27,7 @@ class CategoryMenu
 	{
 		$h = '<div class="category-menu"> <div class="title"> <i class="fas fa-bars"></i> Menu </div>';
 		foreach (self::Data() as $k => $v) {
-			$h .= '<a class="link" href="?category='.$v['slug'].'">'.ucfirst($v['name']).'</a>';
+			$h .= '<a class="link" href="/category/'.$v['slug'].'">'.ucfirst($v['name']).'</a>';
 		}
 		return $h .'</div>';
 	}

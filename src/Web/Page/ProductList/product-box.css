@@ -27,7 +27,7 @@
 .products .list .product:hover{
 	border: 2px solid #ffe600;
 	box-shadow: 0px 0px 5px #ffe60094;
-	background: #ffe6001f
+	background: #ffe60017
 }
 .products .list .product .sale{
 	position: absolute; top: 25px; right: 25px; z-index: 8;
@@ -44,7 +44,8 @@
 	border: 0px solid #222; border-radius: 1%;
 }
 .products .list .product img{
-	float: left; width: 100%; min-height: 300px;
+	float: left; width: 100%;
+	min-height: 300px; max-height: 300px;
 	border-radius: 1%;
 	overflow: hidden; object-fit: cover;
 	transition: all .6s
@@ -154,8 +155,30 @@
 	}
 }
 
-#add-product-fixed{
+#black-hole{
 	position: fixed; z-index: 10;
+	top: 0px; left: 0px;
+	width: 100%; height: 100%;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.719);
+}
+#black-hole .close-it{
+	position: relative;
+	float: left; width: 100%; z-index: 12;
+	text-align: right; padding: 20px;
+	color: #fff;
+}
+#black-hole .close-it i{
+	padding: 10px;
+	min-width: 35px; min-height: 35px; text-align: center;
+	background: #ffe600; color: #000;
+	border-radius: 50px;
+}
+#black-hole .close-it i:hover{
+ 	background: #000; color: #f20; cursor: pointer;
+}
+#add-product-fixed{
+	position: fixed; z-index: 11;
 	top: 5vh; left: 10vw;
 	width: 80vw;
 	height: 90vh;
@@ -164,14 +187,6 @@
 	box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
 	background: #fff;
 	overflow-y: scroll
-}
-#add-product-fixed .close-it{
-	float: left; width: 100%;
-	text-align: right; padding: 10px;
-	border-bottom: 1px solid #eee
-}
-#add-product-fixed .close-it:hover{
-	color: #f20; cursor: pointer;
 }
 #add-product-fixed .top{
 	display: flex;
@@ -223,8 +238,11 @@
 	border: 1px solid #222;
 	border-radius: 50px;
 }
+#add-product-fixed .size .size-btn:hover{
+	font-weight: 900; cursor: pointer;
+}
 #add-product-fixed .size .size-btn-active{
-	background: #ffe600; border: 1px solid #ffe600; color: #fff; font-weight: 900
+	background: #ffe600; border: 1px solid #ffe600; color: #222; font-weight: 900
 }
 #add-product-fixed .addon-title{
 	float: left; width: 100%;
