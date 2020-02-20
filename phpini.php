@@ -29,6 +29,11 @@ session_start();
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
 
+if(empty($_SESSION['lang']))
+{
+	$_SESSION['lang'] = 'pl';
+}
+
 // More php setings
 // .user.ini
 ?>

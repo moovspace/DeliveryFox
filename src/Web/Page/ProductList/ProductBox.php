@@ -1,6 +1,9 @@
 <?php
 namespace MyApp\Web\Page\ProductList;
+
+use Exception;
 use MyApp\Web\Page\Perpage;
+use PhpApix\Mysql\Db;
 
 class ProductBox
 {
@@ -8,7 +11,7 @@ class ProductBox
 	{
 		// Url params
 		$p = self::GetParams();
-		// Category
+		// Category slug
 		$cat = '';
 		if(!empty($p[1]))
 		{
@@ -33,13 +36,48 @@ class ProductBox
 		if($back < 1) { $back = 1; }
 		$next = $page + 1;
 
+		$q = ''; // Search words
+		if(!empty($_GET['q']))
+		{
+			$q = $_GET['q'];
+		}
+
+		$products = self::GetProducts($cat, $page, $perpage, $q);
+
 		$h = '
 			<div class="products">
 				<div class="h1">Products > All</div>
 
-				<div class="list">
+				<div class="list">';
+				foreach ($products as $k => $v)
+				{
+					$sale_off = '';
+					if($v['on_sale'] == 0)
+					{
+						$sale_off = 'sale-off';
+					}
 
-					<div class="product">
+					$price = $v['price'];
+					if($v['on_sale'] > 0)
+					{
+						if($v['price_sale'] < $v['price'])
+						{
+							$price = $v['price_sale'];
+						}
+					}
+
+					$h .= '<div class="product">
+						<div class="sale '.$sale_off.'"> <i class="fas fa-grin-stars"></i> Sale! </div>
+						<div class="img">
+							<img src="/media/product/'.$v['id'].'.jpg" onerror="ErrorProductImage(this)">
+						</div>
+						<div class="name">'.$v['name'].'</div>
+						<div class="price"><span>'.number_format((float) $price, 2).'</span> <curr>PLN</curr></div>
+						<div class="add-to-cart" onclick="ShowAddToCart(\''.$v['id'].'\')"> <span>ZAMÓW</span> <i class="fas fa-chevron-right"></i> </div>
+					</div>';
+				}
+
+				$h1 = '<div class="product">
 						<div class="sale sale-off"> <i class="fas fa-grin-stars"></i> Sale! </div>
 						<div class="img">
 							<img src="/media/img/food-0.jpg">
@@ -90,9 +128,9 @@ class ProductBox
 						<div class="name">Szaszłyki z kaczki</div>
 						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
 						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
+					</div>';
 
-				</div>
+				$h .= '</div>
 
 				<!-- Pagination -->
 				<div class="product-pagine">
@@ -100,46 +138,50 @@ class ProductBox
 				</div>
 
 				<!-- Add to cart popup -->
-				<div id="black-hole" onclick="thisPP.style.display = \'none\';">
+				<div id="black-hole" data-lang="'.$_SESSION['lang'].'">
 					<div class="close-it" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
 					<div id="add-product-fixed">
 						<div class="top">
-							<img src="/media/img/food-1.jpg">
+							<img src="/media/img/food.png" id="pr-img">
 							<div class="about">
-								<div class="name"> Pizza hawajska z warzywami</div>
-								<p class="desc">
-								As a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. And a search for will uncover many web sites still in their infancy.
+								<div class="name" id="pr-name"> <!-- Pizza hawajska z warzywami --> </div>
+								<p class="desc" id="pr-desc">
+								<!-- As a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. And a search for will uncover many web sites still in their infancy. -->
 								</p>
 							</div>
 							<div class="right">
-								<div class="price"> 159.98 <curr>PLN</curr> </div>
-								<div class="add-to-cart-now"> Add to cart </div>
+								<div class="price"> <span id="pr-price">0.00</span> <curr>PLN</curr> </div>
+								<div class="add-to-cart-now" id="pr-id" data-id="0" data-attr="0" data-addons"{}"> ADD TO CART </div>
+								<div class="size" id="pr-attr">
+									<select class="size-btn" id="pr-attr-id">
+										<option>Sos łagodny</option>
+									</select>
+								</div>
 							</div>
 						</div>
-						<div class="size">
-							<div class="size-btn size-btn-active"> Size 15cm </div>
-							<div class="size-btn"> Size 25cm </div>
-							<div class="size-btn"> Size 35cm </div>
-							<select class="size-btn">
-								<option>Sos łagodny</option>
-							</select>
+						<div class="size" id="pr-size">
+							<!--
+								<div class="size-btn size-btn-active"> Size 15cm </div>
+								<div class="size-btn"> Size 25cm </div>
+								<div class="size-btn"> Size 35cm </div>
+							-->
 						</div>
-						<div class="addon-title">Addons</div>
-						<div class="addons">';
+						<div class="addon-title" id="hide-addon-title">Addons</div>
+						<div class="addons" id="pr-addons">';
 
-						foreach(['','','','','','','','',''] as $v)
-						{
-							$h .= '<div class="addon-btn">
-								<div class="title">
-									<name>Ananas</name> <price>2.50</price> <curr>PLN<curr>
-								</div>
-								<div class="buttons">
-									<span class="minus"> <i class="fas fa-minus"></i> </span>
-									<span class="quantity">1</span>
-									<span class="plus"> <i class="fas fa-plus"></i> </span>
-								</div>
-							</div>';
-						}
+						// foreach(['','','','','','','','',''] as $v)
+						// {
+						// 	$h .= '<div class="addon-btn" data-id="0">
+						// 		<div class="title">
+						// 			<name>Ananas</name> <price>2.50</price> <curr>PLN<curr>
+						// 		</div>
+						// 		<div class="buttons">
+						// 			<span class="minus" onclick="MinusAddon(this)"> <i class="fas fa-minus"></i> </span>
+						// 			<span class="quantity">0</span>
+						// 			<span class="plus" onclick="PlusAddon(this)"> <i class="fas fa-plus"></i> </span>
+						// 		</div>
+						// 	</div>';
+						// }
 
 						$h .= '</div>
 					</div>
@@ -162,5 +204,64 @@ class ProductBox
 	{
 		$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 		return explode('/', rtrim(ltrim($url, '/'), '/'));
+	}
+
+	static function GetProducts($slug = '', int $page = 1, int $perpage = 6, $q = '')
+	{
+		try
+		{
+			if($page < 1 ){ $page = 1; }
+			$offset = (int) (($page - 1) * $perpage);
+
+				// Get products
+			$db = Db::GetInstance();
+
+			if(!empty($q))
+			{
+				$q = str_replace(' ', '|', $q);
+				$sql = "SELECT * FROM product WHERE CONCAT_WS('',name,about) REGEXP :q AND parent = 0 ORDER BY id DESC LIMIT $offset, $perpage";
+				$r = $db->Pdo->prepare($sql);
+				$r->execute([':q' => $q]);
+			}
+			else
+			{
+				// Category id
+				$cid = (int) self::GetCategoryId($slug);
+				$sql = "SELECT * FROM product WHERE category = $cid AND parent = 0 AND visible = 1 ORDER BY id DESC LIMIT $offset, $perpage";
+				if($cid == 0)
+				{
+					$sql = "SELECT * FROM product WHERE category != $cid AND parent = 0 AND visible = 1 ORDER BY id DESC LIMIT $offset, $perpage";
+				}
+
+				$r = $db->Pdo->prepare($sql);
+				$r->execute();
+			}
+
+			return $r->fetchAll();
+		}
+		catch(Exception $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+
+	static function GetCategoryId($slug = '')
+	{
+		try
+		{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT id FROM category WHERE slug = ::slug");
+			$r->execute([':slug' => $slug]);
+			$o = $r->fetchAll();
+			if(!empty($o)){
+				return $o['id'];
+			}else{
+				return 0;
+			}
+		}
+		catch(Exception $e)
+		{
+
+		}
 	}
 }
