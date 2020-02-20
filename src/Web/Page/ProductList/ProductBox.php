@@ -1,5 +1,6 @@
 <?php
 namespace MyApp\Web\Page\ProductList;
+use MyApp\Web\Page\Perpage;
 
 class ProductBox
 {
@@ -19,12 +20,14 @@ class ProductBox
 		{
 			$page = (int) $_GET['page'];
 		}
-		$perpage = 6;
+		// Perpage
+		$perpage = Perpage::MAIN;
 		if(!empty($_GET['perpage']))
 		{
 			$perpage = (int) $_GET['perpage'];
 		}
-		if($perpage < 1) { $perpage = 6; }
+		if($perpage < 1) { $perpage = (int) Perpage::MAIN; }
+		// Pages
 		if($page < 1) { $page = 1; }
 		$back = $page - 1;
 		if($back < 1) { $back = 1; }
@@ -51,7 +54,7 @@ class ProductBox
 							<img src="/media/img/food-1.jpg">
 						</div>
 						<div class="name">Tortilla vege</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
+						<div class="price"><span>109.15</span> <curr>PLN</curr></div>
 						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>
 					<div class="product">
@@ -97,7 +100,7 @@ class ProductBox
 				</div>
 
 				<!-- Add to cart popup -->
-				<div id="black-hole">
+				<div id="black-hole" onclick="thisPP.style.display = \'none\';">
 					<div class="close-it" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
 					<div id="add-product-fixed">
 						<div class="top">

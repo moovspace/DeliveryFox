@@ -7,7 +7,9 @@ class TopMenu
 	{
 		return '
 		<div class="box-top">
-			<img src="/media/img/logo.png" alt="logo" class="logo" onerror="logoError(this)">
+			<a href="/" title="Homepage">
+				<img src="/media/img/logo.png" alt="logo" class="logo" onerror="logoError(this)">
+			</a>
 			<a href="/logout"> <i class="fas fa-door-open" id="exit" title="Logout"></i> </a>
 			<div class="avatar">
 				<img src="/media/avatar/' . $arr['user']['id'] . '.jpg" alt="User image" onerror="imgError(this)">

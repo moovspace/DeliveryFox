@@ -118,8 +118,8 @@ class DbCartSave
 							}
 						}
 
-						$r = $db->Pdo->prepare("INSERT INTO order_product(rf_orders, product, price, quantity, sale) VALUES(:rf, :product, :price, :quantity, :sale)");
-						$r->execute([':rf' => $oid, ':product' => $v['id'], ':price' => $pr['price'], ':quantity' => $v['quantity'], ':sale' => $pr['on_sale']]);
+						$r = $db->Pdo->prepare("INSERT INTO order_product(rf_orders, product, price, quantity, sale,attr) VALUES(:rf, :product, :price, :quantity, :sale, :attr)");
+						$r->execute([':rf' => $oid, ':product' => $v['id'], ':price' => $pr['price'], ':quantity' => $v['quantity'], ':sale' => $pr['on_sale'], ':attr' => $v['attr']]);
 						$this->ProductsIds[] = $pid = $db->Pdo->lastInsertId();
 						// Add product addons
 						$this->AddAddons($oid, $pid, $k);

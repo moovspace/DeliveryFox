@@ -75,7 +75,7 @@ class View extends Component
 
 				// Mysql from static method with singleton (Db class)
 				$db = Db::getInstance();
-				$r = $db->Pdo->prepare("INSERT INTO user(username,code,email,pass,ip) VALUES(UUID(),'$code',:s1,'$p2',:s3)");
+				$r = $db->Pdo->prepare("INSERT INTO user(username,code,email,pass,ip,apikey) VALUES(UUID(),'$code',:s1,'$p2',:s3, UUID())");
 				$r->execute([':s1' => $p1, ':s3' => $p3]);
 				$id = $db->Pdo->lastInsertId();
 

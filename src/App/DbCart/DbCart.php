@@ -20,12 +20,14 @@ class DbCart
 		$this->Load(); // Load cart from session
 	}
 
-	function AddProduct(int $id = 0, int $quantity = 1)
+	function AddProduct(int $id = 0, int $quantity = 1, int $attr = 0)
 	{
 		$hash = $this->Hash();
 		if(!empty($hash) && $quantity > 0 && $id > 0)
 		{
-			$this->Products[$hash] = ['id' => $id, 'quantity' => $quantity];
+			if($attr < 0){ $attr = 0; }
+
+			$this->Products[$hash] = ['id' => $id, 'quantity' => $quantity, 'attr' => $attr];
 			$this->Save();
 		}
 		return $hash;

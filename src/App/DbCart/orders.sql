@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 18 Lut 2020, 12:44
+-- Czas generowania: 20 Lut 2020, 12:57
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `price` decimal(15,2) NOT NULL DEFAULT 0.00,
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
+  `attr` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 
@@ -82,13 +83,13 @@ TRUNCATE TABLE `order_product`;
 -- Zrzut danych tabeli `order_product`
 --
 
-INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, `sale`) VALUES
-(32, 24, 1, '13.50', 2, 0),
-(33, 24, 2, '15.50', 1, 0),
-(34, 26, 17, '19.00', 1, 0),
-(35, 26, 2, '16.00', 1, 0),
-(36, 27, 17, '19.00', 1, 0),
-(37, 27, 2, '16.00', 1, 0);
+INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, `sale`, `attr`) VALUES
+(32, 24, 1, '13.50', 2, 0, 0),
+(33, 24, 2, '15.50', 1, 0, 0),
+(34, 26, 17, '19.00', 1, 0, 0),
+(35, 26, 2, '16.00', 1, 0, 0),
+(36, 27, 17, '19.00', 1, 0, 0),
+(37, 27, 2, '16.00', 1, 0, 0);
 
 -- --------------------------------------------------------
 

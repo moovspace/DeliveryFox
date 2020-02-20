@@ -21,28 +21,27 @@ if(!empty($_GET['clear']))
 	$c->Clear();
 }
 
-// ?add_product_id=17&add_product_quantity=1
-if(!empty($_GET['add_product_id']) && !empty($_GET['add_product_quantity']) && empty($_GET['addons']))
-{
-	$c->AddProduct($_GET['add_product_id'], $_GET['add_product_quantity']);
-}
-
 // ?add_product_id=17&add_product_quantity=1&addons=[{"id":2,"quantity":2},{"id":17,"quantity":1}]
-if(!empty($_GET['add_product_id']) && !empty($_GET['add_product_quantity']) && !empty($_GET['addons']))
+// ?add_product_id=17&add_product_quantity=1&add_product_attr=0&addons=[{"id":2,"quantity":2},{"id":17,"quantity":1}]
+if(!empty($_GET['add_product_id']) && !empty($_GET['add_product_quantity']))
 {
-	$hash = $c->AddProduct($_GET['add_product_id'], $_GET['add_product_quantity']);
+	if(empty($_GET['add_product_attr'])) { $_GET['add_product_attr'] = 0; }
+	$hash = $c->AddProduct($_GET['add_product_id'], $_GET['add_product_quantity'], $_GET['add_product_attr']);
 
-	$addons = json_decode($_GET['addons'], true);
-
-	foreach ($addons as $k => $v)
+	if(!empty($_GET['addons']))
 	{
-		if($v['quantity'] <= 0)
+		$addons = json_decode($_GET['addons'], true);
+
+		foreach ($addons as $k => $v)
 		{
-			$v['quantity'] = 1;
-		}
-		if($v['id'] > 0)
-		{
-			$c->AddAddon($hash, $v['id'], $v['quantity']);
+			if($v['quantity'] <= 0)
+			{
+				$v['quantity'] = 1;
+			}
+			if($v['id'] > 0)
+			{
+				$c->AddAddon($hash, $v['id'], $v['quantity']);
+			}
 		}
 	}
 }
@@ -205,6 +204,10 @@ font-weight: 900
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700,800,900" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
 <script src="/src/App/DbCart/cart.js"></script>
+
+<?php
+exit;
+?>
 
 <!--
 <div class="cart">

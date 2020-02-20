@@ -14,7 +14,9 @@ class TopMenuFixed
 		$o = '
 		<div class="fixed-menu">
 			<div class="left">
-				<img src="/media/img/logo.png">
+				<a href="/" title="Homepage">
+					<img src="/media/img/logo.png">
+				</a>
 			</div>
 			<div class="middle">';
 

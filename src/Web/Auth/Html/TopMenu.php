@@ -7,7 +7,9 @@ class TopMenu
 	{
 		return '
 		<div class="box-top">
-			<img src="/src/Web/Auth/logo.png" alt="logo" class="logo">
+			<a href="/" title="Homepage">
+				<img src="/src/Web/Auth/logo.png" alt="logo" class="logo">
+			</a>
 			<a href="/login" class="button-signin" title="' . $arr->btn . '">' . $arr->btn . '</a>
 		</div>
 		';
