@@ -82,6 +82,7 @@ function SetProduct(pr)
 
 				// Default price
 				document.getElementById("pr-price").dataset.price = price;
+				document.getElementById("product-quantity-count").innerHTML = 1;
 
 				html = html + '<div class="size-btn size-btn-active" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
 
