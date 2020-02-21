@@ -36,6 +36,8 @@ class Html
 				<!-- Style -->
 				<link rel="stylesheet" href="/src/Web/Html/style.css">
 
+				<script src="/src/App/DbCart/cart.js"></script>
+
 				<!-- Script -->
 				<script src="/src/Web/Html/main.js"></script>
 

@@ -145,6 +145,7 @@ echo $c->Html();
 	margin: 5px;
 	border-radius: 4px;
 	overflow: hidden;
+	object-fit: cover
 }
 .cart .product .title .name{
 	float: left;
@@ -201,9 +202,11 @@ font-weight: 900
 }
 </style>
 
+<!--
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700,800,900" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
 <script src="/src/App/DbCart/cart.js"></script>
+-->
 
 <?php
 exit;

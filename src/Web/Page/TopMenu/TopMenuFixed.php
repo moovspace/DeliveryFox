@@ -31,7 +31,7 @@ class TopMenuFixed
 
 			$o .= '</div>
 			<div class="right">
-				<a href="/cart" class="cart-btn"> <div class="product-quantity">79</div> <i class="fas fa-shopping-cart"></i> </a>
+				<a class="cart-btn" id="cart-btn-show"> <div class="product-quantity" id="cart-product-quantity">0</div> <i class="fas fa-shopping-cart"></i> </a>
 			</div>
 		</div>
 		';

@@ -203,6 +203,17 @@ class ProductBox
 				</div>
 
 			</div>
+
+			<div id="shopping-cart" class="animated fadeIn">
+				<div id="cart-top">
+					<span> <i class="fas fa-shopping-cart"></i> Koszyk </span>
+					<div id="close-cart"> <i class="fas fa-times"></i> </div>
+					<a href="/checkout"> <div id="cart-checkout"> Zamów </div> </a>
+				</div>
+				<div id="cart-hover">
+					<div class="empty-cart">Dodaj produkty do koszyka.</div>
+				</div>
+			</div>
 		';
 		return $h;
 	}

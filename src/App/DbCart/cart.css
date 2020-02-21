@@ -53,6 +53,7 @@ Add links:
 	margin: 5px;
 	border-radius: 4px;
 	overflow: hidden;
+	object-fit: cover
 }
 .cart .product .title .name{
 	float: left;

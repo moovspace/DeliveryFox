@@ -1,8 +1,25 @@
+let cartbtn = document.getElementById("cart-btn-show");
+console.log("Event ", cartbtn);
+cartbtn.addEventListener("click", (e) => {
+	e.preventDefault();
+	document.getElementById("shopping-cart").style.display = 'inherit';
+}, false);
+
+let cartbtnhide = document.getElementById("close-cart");
+cartbtnhide.addEventListener("click", (e) => {
+	e.preventDefault();
+	document.getElementById("shopping-cart").style.display = 'none';
+}, false);
+
+
 function AddToCartProduct(it)
 {
-	let id = it.dataset.id;
+	let product_id = it.dataset.id;
+	let product_quantity = document.getElementById("product-quantity-count").innerHTML;
+
 	var addons = [];
 	let addonJson = '';
+
 	let attr = 0;
 	let el = document.getElementById("pr-attr-id");
 	if(el != null)
@@ -10,7 +27,7 @@ function AddToCartProduct(it)
 		attr = el.value;
 	}
 
-	console.log("Add to cart: ", id, attr);
+	console.log("Add to cart: ", product_id, attr);
 
 	let all = document.querySelectorAll(".addon-btn");
 
@@ -29,9 +46,30 @@ function AddToCartProduct(it)
 
 	// Send to cart
 	// ?add_product_id=17&add_product_quantity=1&add_product_attr=0&addons=[{"id":2,"quantity":2},{"id":17,"quantity":1}]
+	SendToCart(product_id, product_quantity, attr, addonJson);
 
-	// Close popup
+	// From cart.js
+	loadCartProductsQuantity();
+
+	document.getElementById("black-hole").style.display = 'none';
 }
+
+function SendToCart(id, qty, attr, addons)
+{
+	const url = 'http://' + document.location.host + '/src/App/DbCart/cart.php?add_product_id='+id+'&add_product_quantity='+qty+'&add_product_attr='+attr+'&addons=' + addons;
+
+	console.log("Url: ", url);
+
+	let promise = fetch(url).then((res) => {
+		return res.text();
+	});
+
+	promise.then((html) => {
+		console.log(html);
+		document.getElementById("cart-hover").innerHTML = html;
+	});
+}
+
 
 function ShowAddToCart(id)
 {
@@ -73,16 +111,11 @@ function SetProduct(pr)
 				document.getElementById("pr-name").innerHTML = p.name;
 				document.getElementById("pr-desc").innerHTML = p.about;
 				document.getElementById("pr-price").innerHTML = p.price;
-				document.getElementById("pr-price").dataset.price = p.price;
-
+				document.getElementById("pr-price").dataset.price = price;
 				// Load attr
 				LoadAttributes(p.rf_attr);
 				// Load addons
 				LoadAddons(p.addon_category);
-
-				// Default price
-				document.getElementById("pr-price").dataset.price = price;
-				document.getElementById("product-quantity-count").innerHTML = 1;
 
 				html = html + '<div class="size-btn size-btn-active" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
 
