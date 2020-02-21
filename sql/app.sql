@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 20 Lut 2020, 13:58
+-- Czas generowania: 21 Lut 2020, 09:06
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -440,9 +440,9 @@ TRUNCATE TABLE `product`;
 --
 
 INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `about`, `price`, `price_sale`, `on_sale`, `addon_category`, `addon_quantity`, `time`, `visible`, `stock_status`, `stock_quantity`, `rating_count`, `rating_average`) VALUES
-(2, 0, 'Mała 30 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.00', '0.00', 0, 0, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
-(17, 2, 'Średnia 25cm', 0, 0, 'Pizza hawajska', 'Wspaniała pizza hawajska na cienkim cieście.', '19.00', '0.00', 0, 0, 5, '2020-02-15 21:25:54', 1, 'instock', 0, 0, '5.00'),
-(26, 2, 'Wielka 60cm', 2, 1, 'Pizza hawajska', 'Wielka pizza hawajska.', '41.51', '40.01', 1, 6, 2, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00');
+(2, 0, 'Mała 20 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.32', '0.00', 0, 6, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
+(17, 2, 'Średnia 25cm', 0, 6, 'Pizza hawajska', 'Wspaniała pizza hawajska na cienkim cieście.', '19.15', '0.00', 0, 0, 5, '2020-02-15 21:25:54', 1, 'instock', 0, 0, '5.00'),
+(26, 2, 'Wielka 60cm', 2, 6, 'Pizza hawajska', 'Wielka pizza hawajska.', '41.51', '40.01', 1, 6, 2, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00');
 
 -- --------------------------------------------------------
 

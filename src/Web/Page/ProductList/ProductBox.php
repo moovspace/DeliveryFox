@@ -46,9 +46,14 @@ class ProductBox
 
 		$h = '
 			<div class="products">
-				<div class="h1">Products > All</div>
+				<!-- <div class="h1"> Products </div> -->
 
 				<div class="list">';
+
+				if(empty($products)){
+					$h .= '<notify>No products available</notify>';
+				}
+
 				foreach ($products as $k => $v)
 				{
 					$sale_off = '';
@@ -130,18 +135,21 @@ class ProductBox
 						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
 					</div>';
 
-				$h .= '</div>
+				$h .= '</div>';
 
-				<!-- Pagination -->
-				<div class="product-pagine">
-					<a href="/category/'.$cat.'?perpage='.$perpage.'&page='.$back.'"> <i class="fas fa-chevron-left"></i> </a> <span id="product-curr-page"> '.$page.' </span> <a href="/category/'.$cat.'?perpage='.$perpage.'&page='.$next.'"> <i class="fas fa-chevron-right"></i> </a>
-				</div>
+				if(!empty($products)){
 
-				<!-- Add to cart popup -->
-				<div id="black-hole" data-lang="'.$_SESSION['lang'].'">
-					<div class="close-it" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
-					<div id="add-product-fixed">
-						<div class="top">
+					$h .= '
+					<div class="product-pagine">
+						<a href="/category/'.$cat.'?perpage='.$perpage.'&page='.$back.'"> <i class="fas fa-chevron-left"></i> </a> <span id="product-curr-page"> '.$page.' </span> <a href="/category/'.$cat.'?perpage='.$perpage.'&page='.$next.'"> <i class="fas fa-chevron-right"></i> </a>
+					</div>';
+				}
+
+				$h .= '<!-- Add to cart popup -->
+					<div id="black-hole" data-lang="'.$_SESSION['lang'].'">
+						<div class="close-it" onclick="this.parentNode.style.display = \'none\';"> <i class="fas fa-times"></i> </div>
+						<div id="add-product-fixed">
+							<div class="top">
 							<img src="/media/img/food.png" id="pr-img">
 							<div class="about">
 								<div class="name" id="pr-name"> <!-- Pizza hawajska z warzywami --> </div>
@@ -150,24 +158,31 @@ class ProductBox
 								</p>
 							</div>
 							<div class="right">
-								<div class="price"> <span id="pr-price">0.00</span> <curr>PLN</curr> </div>
-								<div class="add-to-cart-now" id="pr-id" data-id="0" data-attr="0" data-addons"{}"> ADD TO CART </div>
+								<div class="price"> <span id="pr-price" data-price="0.00">0.00</span> <curr>PLN</curr> </div>
+								<div id="product-quantity">
+									<span class="plus" onclick="PlusProduct(this)"> <i class="fas fa-plus"></i> </span>
+									<span class="quantity" id="product-quantity-count">1</span>
+									<span class="minus" onclick="MinusProduct(this)"> <i class="fas fa-minus"></i> </span>
+								</div>
 								<div class="size" id="pr-attr">
+									<!--
 									<select class="size-btn" id="pr-attr-id">
 										<option>Sos łagodny</option>
 									</select>
+									-->
 								</div>
+								<div class="add-to-cart-now" id="pr-id" onclick="AddToCartProduct(this)" data-id="0"> <i class="fas fa-cart-plus"></i> <span>DO KOSZYKA</span> </div>
 							</div>
 						</div>
 						<div class="size" id="pr-size">
 							<!--
 								<div class="size-btn size-btn-active"> Size 15cm </div>
-								<div class="size-btn"> Size 25cm </div>
-								<div class="size-btn"> Size 35cm </div>
+								<div class="size-btn" onclick="SetProductSize(this)" data-price="0"> Size 25cm </div>
 							-->
 						</div>
-						<div class="addon-title" id="hide-addon-title">Addons</div>
-						<div class="addons" id="pr-addons">';
+						<div class="addon-title" id="hide-addon-title">Dodatki</div>
+						<div class="addons" id="pr-addons">
+						<notify> Produkt bez dodatków. </notify>';
 
 						// foreach(['','','','','','','','',''] as $v)
 						// {
@@ -232,7 +247,6 @@ class ProductBox
 				{
 					$sql = "SELECT * FROM product WHERE category != $cid AND parent = 0 AND visible = 1 ORDER BY id DESC LIMIT $offset, $perpage";
 				}
-
 				$r = $db->Pdo->prepare($sql);
 				$r->execute();
 			}
@@ -250,11 +264,11 @@ class ProductBox
 		try
 		{
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("SELECT id FROM category WHERE slug = ::slug");
+			$r = $db->Pdo->prepare("SELECT id FROM category WHERE slug = :slug");
 			$r->execute([':slug' => $slug]);
 			$o = $r->fetchAll();
 			if(!empty($o)){
-				return $o['id'];
+				return $o[0]['id'];
 			}else{
 				return 0;
 			}
