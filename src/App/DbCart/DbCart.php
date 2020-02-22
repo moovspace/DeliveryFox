@@ -377,10 +377,20 @@ class DbCart
 
 	function PlusAddon($hash, $aid = 0)
 	{
+		$max_addons = 100;
+		$addon = $this->GetProduct($aid);
+		if(!empty($addon['addon_quantity']))
+		{
+			$max_addons = (int) $addon['addon_quantity'];
+		}
+
 		if(!empty($this->Addons[$hash][$aid]['quantity']))
 		{
-			$this->Addons[$hash][$aid]['quantity']++;
-			$this->Save();
+			if($this->Addons[$hash][$aid]['quantity'] < $max_addons)
+			{
+				$this->Addons[$hash][$aid]['quantity']++;
+				$this->Save();
+			}
 		}
 	}
 

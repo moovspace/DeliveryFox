@@ -23,6 +23,56 @@ function deleteProduct(hash)
 	loadCartProductsQuantity();
 }
 
+function plusProduct(hash)
+{
+	let host = document.location.host;
+	let url = 'http://' + host + '/src/App/DbCart/cart.php?plus_product=' + hash;
+	console.log(hash, host, url);
+	CartUrl(url, 'cart-hover');
+
+	loadCartProductsQuantity();
+}
+
+function minusProduct(hash)
+{
+	let host = document.location.host;
+	let url = 'http://' + host + '/src/App/DbCart/cart.php?minus_product=' + hash;
+	console.log(hash, host, url);
+	CartUrl(url, 'cart-hover');
+
+	loadCartProductsQuantity();
+}
+
+function deleteAddon(hash, id)
+{
+	let host = document.location.host;
+	let url = 'http://' + host + '/src/App/DbCart/cart.php?delete_addon=' + hash + '&delete_addon_id=' + id;
+	console.log(hash, host, url);
+	CartUrl(url, 'cart-hover');
+
+	loadCartProductsQuantity();
+}
+
+function plusAddon(hash, id)
+{
+	let host = document.location.host;
+	let url = 'http://' + host + '/src/App/DbCart/cart.php?plus_addon=' + hash + '&plus_addon_id=' + id;
+	console.log(hash, host, url);
+	CartUrl(url, 'cart-hover');
+
+	loadCartProductsQuantity();
+}
+
+function minusAddon(hash, id)
+{
+	let host = document.location.host;
+	let url = 'http://' + host + '/src/App/DbCart/cart.php?minus_addon=' + hash + '&minus_addon_id=' + id;
+	console.log(hash, host, url);
+	CartUrl(url, 'cart-hover');
+
+	loadCartProductsQuantity();
+}
+
 function loadCartProducts()
 {
 	let host = document.location.host;
