@@ -5,6 +5,7 @@ use Exception;
 use MyApp\Web\Page\Perpage;
 use PhpApix\Mysql\Db;
 use MyApp\App\Translate\Trans;
+use MyApp\Web\Currency;
 
 class ProductBox
 {
@@ -67,7 +68,7 @@ class ProductBox
 					}
 
 					$price = $v['price'];
-					$promo = $price . ' PLN';
+					$promo = $price . Currency::MAIN;
 					if($v['on_sale'] > 0)
 					{
 						if($v['price_sale'] < $v['price'])
@@ -89,7 +90,7 @@ class ProductBox
 							<img src="/media/product/'.$v['id'].'.jpg" onerror="ErrorProductImage(this)">
 						</div>
 						<div class="name">'.$v['name'].'</div>
-						<div class="price" title="'.$promo.'"><span>'.number_format((float) $price, 2).'</span> <curr>PLN</curr></div>
+						<div class="price" title="'.$promo.'"><span>'.number_format((float) $price, 2).'</span> <curr>'.Currency::MAIN.'</curr></div>
 						' . $btn . '
 					</div>';
 				}
@@ -117,7 +118,7 @@ class ProductBox
 								</p>
 							</div>
 							<div class="right">
-								<div class="price"> <span id="pr-price" data-price="0.00">0.00</span> <curr>PLN</curr> </div>
+								<div class="price"> <span id="pr-price" data-price="0.00">0.00</span> <curr>'.Currency::MAIN.'</curr> </div>
 								<div id="product-quantity">
 									<span class="plus" onclick="PlusProduct(this)"> <i class="fas fa-plus"></i> </span>
 									<span class="quantity" id="product-quantity-count">1</span>
