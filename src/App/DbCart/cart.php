@@ -131,7 +131,9 @@ echo $c->Html();
 	float: left; width: 100%;
 	padding: 10px 10px 0px 10px;
 	margin-bottom: 10px;
-	border: 1px solid #eee;
+	border: 1px solid #fff;
+	border-radius: 6px;
+	box-shadow: 0px 2px 3px rgba(0,0,0,0.1)
 }
 .cart .product .title{
 	display: flex;
@@ -199,6 +201,25 @@ font-weight: 900
 }
 .cart .product .row-big{
 	font-size: 20px;
+}
+.cart .empty{
+	float: left; width: 98%; margin: 1%;
+	padding: 13px 25px;
+	background: #fff; color: #21b973; border: 1px solid #21b973; box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+	font-size: 15px; font-weight: 500;
+	border-radius: 6px;
+}
+.cart .delivery-min{
+	font-size: 15px; font-weight: 700
+}
+.cart .product .row .price .fa-times{
+	font-size: 13px; margin-right: 10px; color: #000;
+}
+.cart .product .title .name small{
+	background: #21b9730c; color: #21b922;
+	font-weight: 500; font-size: 13px;
+	padding: 2px 20px; margin-top: 5px;
+	border-radius: 66px; border: 1px solid #21b922;
 }
 </style>
 

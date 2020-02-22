@@ -27,8 +27,6 @@ function AddToCartProduct(it)
 		attr = el.value;
 	}
 
-	console.log("Add to cart: ", product_id, attr);
-
 	let all = document.querySelectorAll(".addon-btn");
 
 	all.forEach((a) => {
@@ -41,7 +39,7 @@ function AddToCartProduct(it)
 		}
 
 		addonJson = JSON.stringify(addons);
-		console.log("Addons add to cart: ", addonJson);
+		// console.log("Addons add to cart: ", addonJson);
 	});
 
 	// Send to cart
@@ -74,14 +72,18 @@ function SendToCart(id, qty, attr, addons)
 function ShowAddToCart(id)
 {
 	let el = document.getElementById("black-hole");
-
-	console.log("Cart product: ", id, el);
-
 	// Load product id
 	LoadProduct(id);
-
 	// Show all
 	el.style.display = 'inherit';
+
+	document.getElementById("product-quantity-count").innerHTML = '1';
+
+	let cart = document.getElementById("shopping-cart");
+	if(cart != null)
+	{
+		cart.style.display = 'none';
+	}
 }
 
 function SetProduct(pr)
@@ -89,17 +91,17 @@ function SetProduct(pr)
 	var html = '';
 
 	pr.forEach((p) => {
-
-		console.log("Set product: ", p);
-
 		if(p.error != 1)
 		{
+			let sale = '';
 			let price = p.price
 			if(p.on_sale > 0)
 			{
 				if(p.price_sale < p.price)
 				{
 					price = p.price_sale;
+					// title
+					sale = '<i class="fas fa-grin-stars" title="' + p.price_sale + ' / ' + p.price + '"></i>';
 				}
 			}
 
@@ -110,17 +112,17 @@ function SetProduct(pr)
 				document.getElementById("pr-img").src = '/media/product/' + p.id + '.jpg';
 				document.getElementById("pr-name").innerHTML = p.name;
 				document.getElementById("pr-desc").innerHTML = p.about;
-				document.getElementById("pr-price").innerHTML = p.price;
+				document.getElementById("pr-price").innerHTML = price;
 				document.getElementById("pr-price").dataset.price = price;
 				// Load attr
 				LoadAttributes(p.rf_attr);
 				// Load addons
 				LoadAddons(p.addon_category);
 
-				html = html + '<div class="size-btn size-btn-active" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
+				html = html + '<div class="size-btn size-btn-active" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + sale + ' ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
 
 			}else{
-				html = html + '<div class="size-btn" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
+				html = html + '<div class="size-btn" onclick="SetProductSize(this)" data-id="'+p.id+'" data-rf_attr="'+p.rf_attr+'" data-addon="'+p.addon_category+'" data-price="' + price + '"> ' + sale + ' ' + price + ' <curr> PLN </curr> ' + p.size + ' </div>';
 			}
 		}else{
 			// Add size variants
@@ -133,12 +135,9 @@ function SetProduct(pr)
 
 function SetProductAttr(pr)
 {
-	console.log("Attr: ", pr);
-
 	var html1 = '<select id="pr-attr-id">';
 	pr.forEach((p) => {
 		html1 = html1 + '<option value="'+p.id+'">'+p.name+'</option>';
-		console.log(p);
 	});
 	html1 = html1 + '</select>';
 
@@ -147,12 +146,9 @@ function SetProductAttr(pr)
 
 function SetProductAddons(pr)
 {
-	console.log("Addon: ", pr);
-
 	var html1 = '';
 
 	pr.forEach((p) => {
-
 		let price = p.price;
 		if(p.on_sale)
 		{
@@ -180,15 +176,11 @@ function LoadProduct(id)
 {
 	const url = 'http://' + document.location.host + '/src/Web/Page/ProductList/get-product.php?id=' + id;
 
-	console.log("Url: ", url);
-
 	let promise = fetch(url).then((res) => {
 		return res.json();
 	});
 
 	promise.then((json) => {
-		console.log(json);
-
 		SetProduct(json);
 	});
 }
@@ -203,8 +195,6 @@ function LoadAttributes(id)
 		});
 
 		promise.then((json) => {
-			console.log(json);
-
 			SetProductAttr(json);
 		});
 	}else{
@@ -222,8 +212,6 @@ function LoadAddons(id)
 		});
 
 		promise.then((json) => {
-			console.log("Addons load: ", json);
-
 			SetProductAddons(json);
 		});
 	}
@@ -280,6 +268,8 @@ function MinusAddon(it){
 
 function SetProductSize(it)
 {
+	document.getElementById("product-quantity-count").innerHTML = '1';
+
 	RemoveClass();
 	it.classList.add("size-btn-active");
 
@@ -288,7 +278,6 @@ function SetProductSize(it)
 	var addon_category = it.dataset.addon;
 	var price = parseFloat(it.dataset.price).toFixed(2);
 	document.getElementById("pr-price").dataset.price = price;
-	console.log("Set product: ", id, price, addon_category);
 	SetProductPrice(parseFloat(price).toFixed(2));
 	SetProductId(id);
 
@@ -304,7 +293,6 @@ function SetProductSize(it)
 function RemoveClass(){
 	let l =  document.querySelectorAll(".size-btn");
 	l.forEach((i) => {
-		console.log(i);
 		i.classList.remove("size-btn-active");
 	});
 }
@@ -312,7 +300,6 @@ function RemoveClass(){
 function MinusProduct(it){
 	let n = document.getElementById("product-quantity-count");
 	let q = parseInt(n.innerHTML);
-	console.log(q);
 	q--;
 	if(q <= 1){
 		q = 1;
@@ -325,7 +312,6 @@ function MinusProduct(it){
 function PlusProduct(it){
 	let n = document.getElementById("product-quantity-count");
 	let q = parseInt(n.innerHTML);
-	console.log(q);
 	q++;
 	if(q <= 1){
 		q = 1;

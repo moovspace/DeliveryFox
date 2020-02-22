@@ -1,5 +1,6 @@
 {
 "DELIVERY_COST": "Koszt dostawy",
 "COST": "Razem",
-"ADDONS": "Dodatki"
+"ADDONS": "Dodatki",
+"DELIVERY_MIN": "Bezpłatna dostawa od: "
 }

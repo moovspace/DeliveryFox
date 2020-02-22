@@ -59,9 +59,21 @@ class DbCart
 		return [];
 	}
 
-	function GetAddon($id)
+	function GetAttrName($id)
 	{
-		return $this->GetProduct($id);
+		if($id > 0)
+		{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT * FROM attr_name WHERE id = :id");
+			$r->execute([':id' => $id]);
+			$row = $r->fetchAll();
+
+			if(!empty($row))
+			{
+				return $row[0]['name'];
+			}
+		}
+		return '';
 	}
 
 	function Checkout()
@@ -143,10 +155,15 @@ class DbCart
 
 		foreach($this->Products as $k => $p)
 		{
+			$attr_name = $this->GetAttrName($p['attr']);
+			if(!empty($attr_name))
+			{
+				$attr_name = '<small>' . $attr_name . '</small>';
+			}
 
 			$pr = $this->GetProduct($p['id']);
 
-			if(!empty($pr))
+			if(!empty($pr) && $pr['stock_status'] == 'instock')
 			{
 				$price = $pr['price'];
 				if($pr['price_sale'] < $price && $pr['on_sale'] > 0){
@@ -160,7 +177,7 @@ class DbCart
 
 					<div class="title">
 						<img src="/media/product/'.$p['id'].'.jpg" onerror="ErrorProductImage(this)">
-						<div class="name"> '.$pr['name'].' '.$pr['size'].' </div>
+						<div class="name"> '.$pr['name'].' '.$pr['size'].' </br> ' . $attr_name . ' </div>
 					</div>
 
 					<div class="row row-big">
@@ -170,6 +187,7 @@ class DbCart
 							<a class="plus" onclick="plusProduct(\''.$k.'\')"> <i class="fas fa-plus"></i> </a>
 						</div>
 						<div class="price">
+							<i class="fas fa-times"></i>
 							<span> '.$price.' </span>
 							<curr> '.$this->Currency.' </curr>
 							<a class="delete" onclick="deleteProduct(\''.$k.'\')"> <i class="far fa-times-circle"></i> </a>
@@ -187,7 +205,7 @@ class DbCart
 						{
 							$pr = $this->GetProduct($v['id']);
 
-							if(!empty($pr))
+							if(!empty($pr) && $pr['stock_status'] == 'instock')
 							{
 								$price = $pr['price'];
 								if($pr['price_sale'] < $price && $pr['on_sale'] > 0)
@@ -206,6 +224,7 @@ class DbCart
 									</div>
 									<div class="name"> '.$pr['name'].' '.$pr['size'].' </div>
 									<div class="price">
+										<i class="fas fa-times"></i>
 										<span> '.$price.' </span>
 										<curr> '.$this->Currency.' </curr>
 										<a class="delete" onclick="deleteAddon(\''.$k.'\', \''.$v['id'].'\')"> <i class="far fa-times-circle"></i> </a>
@@ -233,13 +252,22 @@ class DbCart
 			$delivery_cost = $this->DeliveryCost;
 		}
 
-		return $h .= '
-			<div class="checkout">
-				<div class="delivery"> <span> '.$t->Get('DELIVERY_COST').' </span> <span class="cost"> '.number_format((float)$delivery_cost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
-				<div class="delivery"> <span> '.$t->Get('COST').' </span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
+		if(!empty($this->Products)){
+			$h .= '
+				<div class="checkout">
+					<div class="delivery"> <span> '.$t->Get('DELIVERY_COST').' </span> <span class="cost"> '.number_format((float)$delivery_cost,2).' </span> <curr> '.$this->Currency.' </curr> </div>
+					<div class="delivery"> <span> '.$t->Get('COST').' </span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
+				</div>
+				<p class="delivery-min"> * '.$t->Get('DELIVERY_MIN').' '.$this->DeliveryMinOrderCost.' <curr> '.$this->Currency.' </curr> </p>
 			</div>
-		</div>
-		'; // cart
+			'; // cart
+		}else{
+			$h .= '
+				<div class="empty">Dodaj produkty do koszyka!</div>
+			';
+		}
+
+		return $h;
 	}
 
 	function Address($address = '')

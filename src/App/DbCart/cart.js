@@ -39,5 +39,15 @@ function loadCartProductsQuantity()
 	CartUrl(url, 'cart-product-quantity');
 }
 
+function CloseCart(){
+	let btn = document.querySelectorAll(".add-to-cart");
+	btn.forEach((i) => {
+		i.addEventListener('click', (e) => {
+			document.getElementById("shopping-cart").style.display = 'none';
+		});
+	});
+}
+
 loadCartProducts();
 loadCartProductsQuantity();
+CloseCart();

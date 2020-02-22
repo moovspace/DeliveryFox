@@ -63,77 +63,32 @@ class ProductBox
 					}
 
 					$price = $v['price'];
+					$promo = $price . ' PLN';
 					if($v['on_sale'] > 0)
 					{
 						if($v['price_sale'] < $v['price'])
 						{
 							$price = $v['price_sale'];
+							// title
+							$promo = $v['price'] . ' / '. $v['price_sale'] . ' PLN';
 						}
 					}
 
+					$btn = '<div class="add-to-cart"> <span>WYPRZEDANE</span> </div>';
+					if($v['stock_status'] == 'instock')
+					{
+						$btn = '<div class="add-to-cart" onclick="ShowAddToCart(\''.$v['id'].'\')"> <span>ZAMÓW</span> <i class="fas fa-chevron-right"></i> </div>';
+					}
 					$h .= '<div class="product">
 						<div class="sale '.$sale_off.'"> <i class="fas fa-grin-stars"></i> Sale! </div>
 						<div class="img">
 							<img src="/media/product/'.$v['id'].'.jpg" onerror="ErrorProductImage(this)">
 						</div>
 						<div class="name">'.$v['name'].'</div>
-						<div class="price"><span>'.number_format((float) $price, 2).'</span> <curr>PLN</curr></div>
-						<div class="add-to-cart" onclick="ShowAddToCart(\''.$v['id'].'\')"> <span>ZAMÓW</span> <i class="fas fa-chevron-right"></i> </div>
+						<div class="price" title="'.$promo.'"><span>'.number_format((float) $price, 2).'</span> <curr>PLN</curr></div>
+						' . $btn . '
 					</div>';
 				}
-
-				$h1 = '<div class="product">
-						<div class="sale sale-off"> <i class="fas fa-grin-stars"></i> Sale! </div>
-						<div class="img">
-							<img src="/media/img/food-0.jpg">
-						</div>
-						<div class="name">Krewetki meksykańskie</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
-					<div class="product">
-						<div class="sale"> <i class="fas fa-grin-stars"></i> Sale! </div>
-						<div class="img">
-							<img src="/media/img/food-1.jpg">
-						</div>
-						<div class="name">Tortilla vege</div>
-						<div class="price"><span>109.15</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
-					<div class="product">
-						<div class="sale"> <i class="fas fa-grin-stars"></i> Sale! </div>
-						<div class="img">
-							<img src="/media/img/food-2.jpg">
-						</div>
-						<div class="name">Spaghetti mushrom</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
-
-					<div class="product">
-						<div class="img">
-							<img src="/media/img/food-3.jpg">
-						</div>
-						<div class="name">Quasadilla</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
-					<div class="product">
-						<div class="img">
-							<img src="/media/img/food-4.jpg">
-						</div>
-						<div class="name">Kuleczki panierowane</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>
-					<div class="product">
-						<div class="img">
-							<img src="/media/img/food-5.jpg">
-						</div>
-						<div class="name">Szaszłyki z kaczki</div>
-						<div class="price"><span>19.99</span> <curr>PLN</curr></div>
-						<div class="add-to-cart"> <span>BUY</span> <i class="fas fa-chevron-right"></i> </div>
-					</div>';
 
 				$h .= '</div>';
 
