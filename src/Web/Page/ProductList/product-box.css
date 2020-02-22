@@ -80,7 +80,7 @@
 	padding: 10px 20px; margin: 1%;
 	font-size: 1.1vw; font-weight: 900;
 	border: 2px solid #222; border-radius: 50px;
-	transition: all .6s
+	transition: all .6s; text-transform: uppercase;
 }
 .products .list .product .add-to-cart span{
 	float: left; text-align: left
@@ -116,6 +116,10 @@
 }
 .products .product-pagine #product-curr-page{
 	padding: 10px 30px; background: #000; color: #fff; border-radius: 25px;
+}
+notify{
+	float: left; width: 100%;
+	padding: 10px 20px; font-size: 17px; font-weight: 600; color: #21b973; border: 1px solid #21b973;
 }
 
 @media all and (max-width: 1024px)

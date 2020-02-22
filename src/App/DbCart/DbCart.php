@@ -377,7 +377,8 @@ class DbCart
 
 	function PlusAddon($hash, $aid = 0)
 	{
-		$max_addons = 100;
+		$max_addons = 10;
+
 		$addon = $this->GetProduct($aid);
 		if(!empty($addon['addon_quantity']))
 		{

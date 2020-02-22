@@ -4,11 +4,14 @@ namespace MyApp\Web\Page\ProductList;
 use Exception;
 use MyApp\Web\Page\Perpage;
 use PhpApix\Mysql\Db;
+use MyApp\App\Translate\Trans;
 
 class ProductBox
 {
 	static function Show()
 	{
+		$t = new Trans('/src/Web/Page/ProductList/Lang', 'pl');
+
 		// Url params
 		$p = self::GetParams();
 		// Category slug
@@ -46,12 +49,13 @@ class ProductBox
 
 		$h = '
 			<div class="products">
-				<!-- <div class="h1"> Products </div> -->
+				<!-- <div class="h1"> '.$t->Get('PRODUCTS').' </div> -->
 
 				<div class="list">';
 
-				if(empty($products)){
-					$h .= '<notify>No products available</notify>';
+				if(empty($products))
+				{
+					$h .= '<notify> '.$t->Get('PRODUCTS_EMPTY').' </notify>';
 				}
 
 				foreach ($products as $k => $v)
@@ -74,10 +78,10 @@ class ProductBox
 						}
 					}
 
-					$btn = '<div class="add-to-cart"> <span>WYPRZEDANE</span> </div>';
+					$btn = '<div class="add-to-cart"> <span> '.$t->Get('PRODUCTS_SOLDOUT').' </span> </div>';
 					if($v['stock_status'] == 'instock')
 					{
-						$btn = '<div class="add-to-cart" onclick="ShowAddToCart(\''.$v['id'].'\')"> <span>ZAMÓW</span> <i class="fas fa-chevron-right"></i> </div>';
+						$btn = '<div class="add-to-cart" onclick="ShowAddToCart(\''.$v['id'].'\')"> <span>'.$t->Get('PRODUCTS_ORDER').'</span> <i class="fas fa-chevron-right"></i> </div>';
 					}
 					$h .= '<div class="product">
 						<div class="sale '.$sale_off.'"> <i class="fas fa-grin-stars"></i> Sale! </div>
@@ -126,7 +130,7 @@ class ProductBox
 									</select>
 									-->
 								</div>
-								<div class="add-to-cart-now" id="pr-id" onclick="AddToCartProduct(this)" data-id="0"> <i class="fas fa-cart-plus"></i> <span>DO KOSZYKA</span> </div>
+								<div class="add-to-cart-now" id="pr-id" onclick="AddToCartProduct(this)" data-id="0"> <i class="fas fa-cart-plus"></i> <span> ' .$t->Get('ADDTOCART'). ' </span> </div>
 							</div>
 						</div>
 						<div class="size" id="pr-size">
@@ -135,9 +139,9 @@ class ProductBox
 								<div class="size-btn" onclick="SetProductSize(this)" data-price="0"> Size 25cm </div>
 							-->
 						</div>
-						<div class="addon-title" id="hide-addon-title">Dodatki</div>
+						<div class="addon-title" id="hide-addon-title">'.$t->Get('PRODUCTS_ADDONS').'</div>
 						<div class="addons" id="pr-addons">
-						<notify> Produkt bez dodatków. </notify>';
+						<notify> '.$t->Get('PRODUCTS_NOADDONS').' </notify>';
 
 						// foreach(['','','','','','','','',''] as $v)
 						// {
@@ -161,12 +165,12 @@ class ProductBox
 
 			<div id="shopping-cart" class="animated fadeIn">
 				<div id="cart-top">
-					<span> <i class="fas fa-shopping-cart"></i> Koszyk </span>
+					<span> <i class="fas fa-shopping-cart"></i> '.$t->Get('PRODUCTS_CART').' </span>
 					<div id="close-cart"> <i class="fas fa-times"></i> </div>
-					<a href="/checkout"> <div id="cart-checkout"> Zamów </div> </a>
+					<a href="/checkout"> <div id="cart-checkout"> '.$t->Get('PRODUCTS_ORDER').' </div> </a>
 				</div>
 				<div id="cart-hover">
-					<div class="empty-cart">Dodaj produkty do koszyka.</div>
+					<div class="empty-cart"> '.$t->Get('PRODUCTS_ADD').' </div>
 				</div>
 			</div>
 		';
