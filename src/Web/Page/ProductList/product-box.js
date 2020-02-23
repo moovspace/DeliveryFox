@@ -65,6 +65,7 @@ function SendToCart(id, qty, attr, addons)
 	promise.then((html) => {
 		console.log(html);
 		document.getElementById("cart-hover").innerHTML = html;
+		document.getElementById("cart-hover-checkout").innerHTML = html;
 	});
 }
 

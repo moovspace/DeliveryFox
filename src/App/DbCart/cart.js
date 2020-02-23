@@ -10,6 +10,12 @@ function CartUrl(url, divid)
 	promise.then((txt) => {
 		let el = document.getElementById(divid);
 		el.innerHTML = txt;
+
+		if(divid != 'cart-product-quantity')
+		{
+			let el1 = document.getElementById("cart-hover-checkout");
+			el1.innerHTML = txt;
+		}
 	});
 }
 

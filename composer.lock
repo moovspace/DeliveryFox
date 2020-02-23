@@ -4,29 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5443d45b8a4fa0191ecd6be4b16ec736",
+    "content-hash": "150e750512d55c5daf5bf2aab0a4b14d",
     "packages": [
         {
             "name": "moovspace/phpapix",
-            "version": "v4.0.0",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moovspace/PhpApix.git",
-                "reference": "ad5307297b19d388e9a4fa5d0a4512705f1efd97"
+                "reference": "419c11ac824eceea5b9a6fdf0b8d418183111f8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moovspace/PhpApix/zipball/ad5307297b19d388e9a4fa5d0a4512705f1efd97",
-                "reference": "ad5307297b19d388e9a4fa5d0a4512705f1efd97",
+                "url": "https://api.github.com/repos/moovspace/PhpApix/zipball/419c11ac824eceea5b9a6fdf0b8d418183111f8b",
+                "reference": "419c11ac824eceea5b9a6fdf0b8d418183111f8b",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-mbstring": "*",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "phpmailer/phpmailer": "^6.1"
             },
-            "type": "package",
+            "type": "library",
             "autoload": {
                 "psr-4": {
                     "PhpApix\\": "src/"
@@ -39,8 +39,14 @@
             "license": [
                 "MIT"
             ],
-            "description": "Php api server",
-            "time": "2020-01-23T12:33:17+00:00"
+            "authors": [
+                {
+                    "name": "Marcys",
+                    "email": "moovspace@github.com"
+                }
+            ],
+            "description": "Php api router with composer autoload. See how to build a server side api routing system in PHP.",
+            "time": "2020-02-09T18:40:10+00:00"
         },
         {
             "name": "phpmailer/phpmailer",

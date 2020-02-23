@@ -13,6 +13,8 @@ try
 	// Products category
 	$r->Set("/category", "MyApp/Web/Home/Homepage", "Index");
 	$r->Set("/category/{slug}", "MyApp/Web/Home/Homepage", "Index");
+	// Checkout
+	$r->Set("/checkout", "MyApp/Web/Checkout/Checkout", "Index");
 
 	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");
