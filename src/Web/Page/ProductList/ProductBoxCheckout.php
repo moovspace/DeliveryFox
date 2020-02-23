@@ -14,7 +14,8 @@ class ProductBoxCheckout
 
 		$h = '
 			<div class="checkout-box">
-				<div class="h1"> Checkout </div>
+
+				<h1> Checkout </h1>
 
 				<div id="shopping-cart" class="animated fadeIn">
 					<div id="cart-top">
@@ -27,12 +28,34 @@ class ProductBoxCheckout
 					</div>
 				</div>
 
+				<h3>Cart products</h3>
+
 				<div id="shopping-checkout" class="animated fadeIn">
 					<div id="cart-hover-checkout">
 						<div class="empty-cart"> '.$t->Get('PRODUCTS_ADD').' </div>
 					</div>
 				</div>
+
+				<h3>Paymeny method</h3>
+
+				<div class="pay-btn pay-btn-active" data-pay="1" onclick="PayMethod(this)"> <i class="fas fa-money-bill-wave"></i> Money payment on delivery. </div>
+				<div class="pay-btn"  data-pay="2" onclick="PayMethod(this)"> <i class="fas fa-credit-card"></i> Cart payment on delivery. </div>
+
+				<h3>Delivery address</h3>
+				<form method="post" id="order-form">
+					<label>Mobile</label>
+					<input type="text" name="mobile" placeholder="e.g. +48 700 100 100">
+					<label>City</label>
+					<input type="text" name="city" placeholder="e.g. Warsaw">
+					<label>Address</label>
+					<input type="text" name="address" placeholder="e.g. Złota 1/23">
+					<label>Order info</label>
+					<textarea name="info"></textarea>
+					<input type="hidden" name="pay" value="1" id="pay-method">
+					<input type="submit" name="order" value="Order Now">
+				</form>
 			</div>
+
 		';
 		return $h;
 	}

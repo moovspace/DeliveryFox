@@ -1,13 +1,26 @@
 #!/bin/bash
 
-# Database credentials
-user=""
-password=""
-host=""
-db_name=""
+# Allow execute file
+# chmod +x db-backup.sh
+# Run script
+# ./db-backup.sh
 
-# Other options
-backup_path="~/db-backup"
+# Cron stars:
+# Minutes Hours Days Month Day
+# Set cron josb (backup each day 23:01)
+# sudo crontab -e
+# 1 23 * * * /path/to/db-backup.sh
+
+# Database credentials
+user="app"
+password="toor"
+host="localhost"
+db_name="app"
+
+# Backup directory
+backup_path="backups"
+
+# Curr date
 date=$(date +"%d-%b-%Y")
 
 # create dit

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 22 Lut 2020, 16:37
+-- Czas generowania: 23 Lut 2020, 19:08
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -285,6 +285,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `coupon` varchar(50) NOT NULL DEFAULT '',
   `delivery_cost` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `mobile` varchar(50) NOT NULL,
+  `info` varchar(250) NOT NULL DEFAULT '',
+  `payment` int(11) NOT NULL DEFAULT 1,
+  `worker` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
@@ -297,10 +301,10 @@ TRUNCATE TABLE `orders`;
 -- Zrzut danych tabeli `orders`
 --
 
-INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`, `delivery_cost`) VALUES
-(24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '', '0.00'),
-(26, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:31:36', '', '0.00'),
-(27, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:38:23', '', '5.66');
+INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`, `delivery_cost`, `mobile`, `info`, `payment`, `worker`) VALUES
+(24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '', '0.00', '', '', 1, 0),
+(26, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:31:36', '', '0.00', '', '', 1, 0),
+(27, '171.68', 'pending', 'Kucza 177', '2020-02-18 11:38:23', '', '5.66', '', '', 1, 0);
 
 -- --------------------------------------------------------
 

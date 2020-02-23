@@ -351,3 +351,13 @@ function CountProductPrice()
 
 	SetProductPrice(parseFloat(cost).toFixed(2));
 }
+
+function PayMethod(it){
+	let btn = document.querySelectorAll(".pay-btn");
+	btn.forEach((i) => {
+		i.classList.remove("pay-btn-active");
+	});
+	// Set
+	it.classList.add("pay-btn-active");
+	document.getElementById("pay-method").value = it.dataset.pay;
+}
