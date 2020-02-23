@@ -441,6 +441,9 @@ notify{
 #order-form textarea{
 	min-height: 150px;
 }
+#order-form input[type=text]:focus, #order-form textarea:focus{
+	border-color: #21b973
+}
 #order-form input[type=submit]{
 	float: right; padding: 13px 25px; margin-top: 20px;
 	background: #21b973; color: #fff;
@@ -454,10 +457,11 @@ notify{
 .pay-btn{
 	float: left; width: 100%;
 	padding: 13px; margin-bottom: 25px;
-	border: 1px solid #444;
-	color: #444;
-	background: #eee;
-	cursor: pointer
+	border: 1px solid #aaa;
+	color: #aaa;
+	background: #f9f9f9;
+	cursor: pointer;
+	border-radius: 6px;
 }
 .pay-btn-active{
 	border: 1px solid #21b973;

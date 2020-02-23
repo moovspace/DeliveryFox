@@ -11,9 +11,9 @@ $curr = Currency::MAIN;
 // Create cart
 $c = new DbCart($curr);
 // Add delivery limits
-$c->DeliveryCost(5.66);
+$c->DeliveryCost(Currency::DELIVERY_COST);
 // Min order
-$c->DeliveryMinOrderCost(200);
+$c->DeliveryMinOrderCost(Currency::DELIVERY_MIN_ORDER);
 
 // ?clear=1
 if(!empty($_GET['clear']))
