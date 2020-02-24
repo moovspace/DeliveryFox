@@ -14,6 +14,8 @@ $c = new DbCart($curr);
 $c->DeliveryCost(Currency::DELIVERY_COST);
 // Min order
 $c->DeliveryMinOrderCost(Currency::DELIVERY_MIN_ORDER);
+// Add delivery time
+$c->DeliveryTime(Currency::DELIVERY_TIME);
 
 // ?clear=1
 if(!empty($_GET['clear']))

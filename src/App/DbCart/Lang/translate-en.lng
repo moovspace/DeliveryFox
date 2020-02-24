@@ -2,5 +2,6 @@
 "DELIVERY_COST": "Delivery cost",
 "COST": "Cart cost",
 "ADDONS": "Addons",
-"DELIVERY_MIN": "Free delivery from: "
+"DELIVERY_MIN": "Free delivery from: ",
+"DELIVERY_TIME": "Delivery time: "
 }

@@ -39,7 +39,7 @@ class DbCartSave
 	 * @param string $cupon Coupon code
 	 * @return string Order id
 	 */
-	function CreateOrder($price, $address, $delivery = 0, $cupon = '')
+	function CreateOrder($price, $address, $pick_up, $mobile, $info, $payment, $delivery = 0, $cupon = '')
 	{
 		$orderid = 0;
 
@@ -63,12 +63,11 @@ class DbCartSave
 			$delivery = 0;
 		}
 
-		$orderid = (int) $this->CreateOrderId($price, $address, $delivery, $cupon);
+		$orderid = (int) $this->CreateOrderId($price, $address, $pick_up , $mobile, $info, (int) $payment, $delivery, $cupon);
 
 		if($orderid > 0)
 		{
 			$this->AddProducts($orderid);
-			// $this->AddAddons($orderid);
 		}
 		else
 		{
@@ -79,13 +78,15 @@ class DbCartSave
 		return $orderid;
 	}
 
-	protected function CreateOrderId($price = 0, $address, $delivery = 0, $cupon = '')
+	protected function CreateOrderId($price = 0, $address, $pick_up = '', $mobile = '', $info = '', $payment = 3, $delivery = 0, $cupon = '')
 	{
 		try
 		{
+			$ip = $_SERVER['REMOTE_ADDR'];
+
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("INSERT INTO orders(price, address, coupon, delivery_cost) VALUES(:price, :address, :cupon, :delivery)");
-			$r->execute([':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery]);
+			$r = $db->Pdo->prepare("INSERT INTO orders(price, address, coupon, delivery_cost, pick_up_time, mobile, info, payment, ip) VALUES(:price, :address, :cupon, :delivery, :pick, :mobile, :info, :payment, :ip)");
+			$r->execute([':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery, ':pick' => $pick_up, ':mobile' => $mobile, ':info' => $info, ':payment' => $payment, ':ip' => $ip]);
 			return $db->Pdo->lastInsertId();
 		}
 		catch(Exception $e)
@@ -147,23 +148,25 @@ class DbCartSave
 			{
 				$db = Db::GetInstance();
 
-				foreach($this->Addons[$hash] as $v)
-				{
-					$pr = $this->GetProduct($v['id']);
-
-					if(!empty($pr))
+				if(!empty($this->Addons[$hash])){
+					foreach($this->Addons[$hash] as $v)
 					{
-						if($pr['on_sale'] > 0)
-						{
-							if($pr['price_sale'] < $pr['price'])
-							{
-								$pr['price'] = $pr['price_sale'];
-							}
-						}
+						$pr = $this->GetProduct($v['id']);
 
-						$r = $db->Pdo->prepare("INSERT INTO order_product_addon(rf_orders, rf_order_product, product, price, quantity, sale) VALUES(:rf1, :rf2, :product, :price, :quantity, :sale)");
-						$r->execute([':rf1' => $oid, ':rf2' => $pid, ':product' => $v['id'], ':price' => $pr['price'], ':quantity' => $v['quantity'], ':sale' => $pr['on_sale']]);
-						$this->AddonsIds[] = $db->Pdo->lastInsertId();
+						if(!empty($pr))
+						{
+							if($pr['on_sale'] > 0)
+							{
+								if($pr['price_sale'] < $pr['price'])
+								{
+									$pr['price'] = $pr['price_sale'];
+								}
+							}
+
+							$r = $db->Pdo->prepare("INSERT INTO order_product_addon(rf_orders, rf_order_product, product, price, quantity, sale) VALUES(:rf1, :rf2, :product, :price, :quantity, :sale)");
+							$r->execute([':rf1' => $oid, ':rf2' => $pid, ':product' => $v['id'], ':price' => $pr['price'], ':quantity' => $v['quantity'], ':sale' => $pr['on_sale']]);
+							$this->AddonsIds[] = $db->Pdo->lastInsertId();
+						}
 					}
 				}
 			}

@@ -357,7 +357,17 @@ function PayMethod(it){
 	btn.forEach((i) => {
 		i.classList.remove("pay-btn-active");
 	});
+	// Pay id
+	let pay = it.dataset.pay;
 	// Set
 	it.classList.add("pay-btn-active");
-	document.getElementById("pay-method").value = it.dataset.pay;
+	document.getElementById("pay-method").value = pay;
+
+	if(pay == 3){
+		document.getElementById("pick-up-hide").style.display = 'inherit';
+		document.getElementById("pick-up-show").style.display = 'none';
+	}else{
+		document.getElementById("pick-up-hide").value = '';
+		document.getElementById("pick-up-hide").style.display = 'none';
+	}
 }

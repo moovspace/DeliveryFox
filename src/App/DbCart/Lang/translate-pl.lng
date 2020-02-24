@@ -2,5 +2,6 @@
 "DELIVERY_COST": "Koszt dostawy",
 "COST": "Razem",
 "ADDONS": "Dodatki",
-"DELIVERY_MIN": "Bezpłatna dostawa od: "
+"DELIVERY_MIN": "Bezpłatna dostawa od: ",
+"DELIVERY_TIME": "Czas dostawy: "
 }

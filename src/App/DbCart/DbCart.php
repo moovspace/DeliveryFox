@@ -12,6 +12,7 @@ class DbCart
 	public $Coupon = '';
 	public $DeliveryMinOrderCost = 0;
 	public $DeliveryCost = 0;
+	public $DeliveryTime = 60;
 	public $Currency = 'PLN';
 
 	function __construct($currency = 'PLN')
@@ -259,6 +260,7 @@ class DbCart
 					<div class="delivery"> <span> '.$t->Get('COST').' </span> <span class="cost"> '.number_format((float)$this->Checkout(),2).' </span> <curr> '.$this->Currency.' </curr> </div>
 				</div>
 				<p class="delivery-min"> * '.$t->Get('DELIVERY_MIN').' '.$this->DeliveryMinOrderCost.' <curr> '.$this->Currency.' </curr> </p>
+				<p class="delivery-min"> * '.$t->Get('DELIVERY_TIME').' '.$this->DeliveryTime.' min </p>
 			</div>
 			'; // cart
 		}else{
@@ -313,6 +315,12 @@ class DbCart
 	{
 		if($value < 0){ $value = 0; }
 		$this->DeliveryCost = $value;
+	}
+
+	function DeliveryTime($value = 60)
+	{
+		if($value < 1){ $value = 1; }
+		$this->DeliveryTime = $value;
 	}
 
 	function Clear()

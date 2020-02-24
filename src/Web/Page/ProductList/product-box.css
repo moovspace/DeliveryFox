@@ -430,7 +430,7 @@ notify{
 	float: left; width: 100%;
 	padding: 13px 0px; margin-bottom: 10px;
 }
-#order-form input[type=text], #order-form textarea{
+#order-form input[type=text], #order-form textarea, #order-form select{
 	float: left; width: 100%;
 	min-width: 100%; max-width: 100%;
 	padding: 13px 20px; margin-bottom: 10px;
@@ -441,7 +441,7 @@ notify{
 #order-form textarea{
 	min-height: 150px;
 }
-#order-form input[type=text]:focus, #order-form textarea:focus{
+#order-form input[type=text]:focus, #order-form textarea:focus, #order-form select:focus{
 	border-color: #21b973
 }
 #order-form input[type=submit]{
@@ -467,4 +467,46 @@ notify{
 	border: 1px solid #21b973;
 	color: #21b973;
 	background: #21b9720a
+}
+#pick-up-hide{
+	display: none;
+}
+#order-error{
+	float: left; width: 100%;
+	border: 1px solid #f23;
+	background: #f23;
+	color: #fff;
+	font-weight: 900;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+	border-radius: 6px;
+}
+
+#order-ok{
+	float: left; width: 100%;
+	border: 1px solid #21b973;
+	background: #21b973;
+	color: #fff;
+	font-weight: 900;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+	border-radius: 6px;
+}
+
+#order-link{
+	float: left; width: 100%;
+	color: #222;
+	font-weight: 500;
+	padding: 15px 20px;
+	margin-bottom: 30px;
+	border-radius: 6px;
+	text-align: center
+}
+#order-link a{
+	font-weight: 300; padding: 10px 15px;
+	border: 1px solid #222; color: #222;
+	border-radius: 66px; font-weight: 900;
+}
+#order-link a:hover{
+	border: 1px solid #21b973; color: #21b973;
 }
