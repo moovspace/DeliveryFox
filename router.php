@@ -15,6 +15,7 @@ try
 	$r->Set("/category/{slug}", "MyApp/Web/Home/Homepage", "Index");
 	// Checkout
 	$r->Set("/checkout", "MyApp/Web/Checkout/Checkout", "Index");
+	$r->Set("/order", "MyApp/Web/Checkout/OrderStatus", "Index");
 
 	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");

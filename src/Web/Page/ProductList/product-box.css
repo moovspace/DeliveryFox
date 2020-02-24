@@ -510,3 +510,50 @@ notify{
 #order-link a:hover{
 	border: 1px solid #21b973; color: #21b973;
 }
+
+#status-box{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	position: relative;
+	margin: 100px auto;
+	width: 100%; max-width: 500px;
+	padding: 20px; border-radius: 6px;
+	box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+	border-top: 3px solid #21b973;
+}
+
+#status-box img{
+	width: 123px;
+	margin: 10px auto;
+}
+#status-box h3{
+	margin: 10px; font-weight: 400
+}
+#status-box h2{
+	margin: 10px; font-weight: 600
+}
+#status-box .status-btn{
+	padding: 15px 20px; font-size: 17px; font-weight: 400;
+	background: #f23; color: #fff;
+	border-radius: 50px; margin-top: 30px;
+	font-weight: 900
+}
+#status-box .status-btn-pending{
+	background: #ffe600; color: #222;
+}
+#status-box .status-btn-canceled{
+	background: #800080;
+}
+#status-box .status-btn-failed{
+	background: #f23;
+}
+#status-box .status-btn-processing{
+	background: #f70;
+}
+#status-box .status-btn-completed{
+	background: #77ff00; color: #222;
+}
+#status-box .status-btn-delivery{
+	background: #09f;
+}

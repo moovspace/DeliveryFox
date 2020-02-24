@@ -19,8 +19,6 @@ class ProductBoxCheckout
 		{
 			if((int) $_POST['pay'] >= 1 && !empty($_POST['mobile']) && !empty($_POST['pick_up']) && !empty($_POST['city']) && !empty($_POST['address']))
 			{
-				// print_r($_POST);
-
 				try
 				{
 					$orderid = 0;
@@ -47,6 +45,7 @@ class ProductBoxCheckout
 						$error .= '<div id="order-link"> Click the link to view the status of the order. </br></br></br> <a href="/order?id='.$orderid.'"> <i class="fas fa-link"></i> Order status </a> </div>';
 
 						$formOff = 1;
+						unset($_SESSION['cart']);
 					}
 					else
 					{
@@ -150,67 +149,4 @@ class ProductBoxCheckout
 		';
 	}
 
-	static function GetParams()
-	{
-		$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-		return explode('/', rtrim(ltrim($url, '/'), '/'));
-	}
-
-	static function GetProducts($slug = '', int $page = 1, int $perpage = 6, $q = '')
-	{
-		try
-		{
-			if($page < 1 ){ $page = 1; }
-			$offset = (int) (($page - 1) * $perpage);
-
-				// Get products
-			$db = Db::GetInstance();
-
-			if(!empty($q))
-			{
-				$q = str_replace(' ', '|', $q);
-				$sql = "SELECT * FROM product WHERE CONCAT_WS('',name,about) REGEXP :q AND parent = 0 ORDER BY id DESC LIMIT $offset, $perpage";
-				$r = $db->Pdo->prepare($sql);
-				$r->execute([':q' => $q]);
-			}
-			else
-			{
-				// Category id
-				$cid = (int) self::GetCategoryId($slug);
-				$sql = "SELECT * FROM product WHERE category = $cid AND parent = 0 AND visible = 1 ORDER BY id DESC LIMIT $offset, $perpage";
-				if($cid == 0)
-				{
-					$sql = "SELECT * FROM product WHERE category != $cid AND parent = 0 AND visible = 1 ORDER BY id DESC LIMIT $offset, $perpage";
-				}
-				$r = $db->Pdo->prepare($sql);
-				$r->execute();
-			}
-
-			return $r->fetchAll();
-		}
-		catch(Exception $e)
-		{
-			echo $e->getMessage();
-		}
-	}
-
-	static function GetCategoryId($slug = '')
-	{
-		try
-		{
-			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("SELECT id FROM category WHERE slug = :slug");
-			$r->execute([':slug' => $slug]);
-			$o = $r->fetchAll();
-			if(!empty($o)){
-				return $o[0]['id'];
-			}else{
-				return 0;
-			}
-		}
-		catch(Exception $e)
-		{
-
-		}
-	}
 }
