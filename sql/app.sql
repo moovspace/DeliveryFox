@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 25 Lut 2020, 21:00
+-- Czas generowania: 25 Lut 2020, 22:43
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -291,6 +291,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `info` varchar(250) NOT NULL DEFAULT '',
   `payment` int(11) NOT NULL DEFAULT 1,
   `worker` bigint(22) NOT NULL DEFAULT 0,
+  `rf_user` bigint(22) NOT NULL DEFAULT 0,
   `ip` varchar(100) NOT NULL DEFAULT '',
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
@@ -305,14 +306,14 @@ TRUNCATE TABLE `orders`;
 -- Zrzut danych tabeli `orders`
 --
 
-INSERT INTO `orders` (`id`, `price`, `status`, `name`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `ip`, `visible`) VALUES
-(30, '120.89', 'canceled', 'Kaśka Czałuśna', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1', 1),
-(31, '183.67', 'delivery', 'Beny Paluch', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, '127.0.0.1', 1),
-(32, '292.16', 'processing', 'Marek Garek', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, '127.0.0.1', 1),
-(33, '241.78', 'completed', 'Monka Mmonka', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, '127.0.0.1', 1),
-(34, '120.89', 'failed', 'Fiku Myku', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1', 1),
-(35, '75.74', 'delivery', 'Piku Maki', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, '127.0.0.1', 1),
-(36, '23.66', 'pending', 'Max kolanko', 'Poznań Kluczowa 88/13', '2020-02-25 18:45:07', '', '5.66', '1 hour', '+15 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1', 1);
+INSERT INTO `orders` (`id`, `price`, `status`, `name`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `rf_user`, `ip`, `visible`) VALUES
+(30, '120.89', 'canceled', 'Kaśka Czałuśna', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, 0, '127.0.0.1', 1),
+(31, '183.67', 'delivery', 'Beny Paluch', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, 0, '127.0.0.1', 1),
+(32, '292.16', 'processing', 'Marek Garek', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, 0, '127.0.0.1', 1),
+(33, '241.78', 'completed', 'Monka Mmonka', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, 0, '127.0.0.1', 1),
+(34, '120.89', 'failed', 'Fiku Myku', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, 0, '127.0.0.1', 1),
+(35, '75.74', 'delivery', 'Piku Maki', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, 0, '127.0.0.1', 0),
+(36, '23.66', 'pending', 'Max kolanko', 'Poznań Kluczowa 88/13', '2020-02-25 18:45:07', '', '5.66', '1 hour', '+15 123 123 123', 'Bez cebulki poproszę.', 1, 0, 0, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
