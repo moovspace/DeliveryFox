@@ -19,8 +19,9 @@ class Homepage
 	static function MenuLinks()
 	{
 		$arr = [];
-		$arr[0] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
-		$arr[1] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
+		$arr[0] = ['name' => 'home', 'title' => 'Home page', 'href' => '/'] ;
+		$arr[1] = ['name' => 'menu', 'title' => 'Menu page', 'href' => '/category'] ;
+		$arr[2] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
 		return $arr;
 	}
 }

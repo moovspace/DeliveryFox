@@ -1,0 +1,27 @@
+{
+    "name": "moovspace/phpapix",
+    "description": "Php api router with composer autoload. See how to build a server side api routing system in PHP.",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Marcys",
+            "email": "moovspace@github.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.1",
+        "php": ">=7.3",
+        "ext-mbstring": "*",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpApix\\": "src/"
+        },
+        "classmap": [
+            "src/"
+        ]
+    }
+}
