@@ -133,5 +133,6 @@
 "PP_DATE": "Data",
 "PP_IMIE": "Imię",
 "OR_ORDERS": "Zamówienia",
-"OR_TITLE": "Lista zamówień"
+"OR_TITLE": "Lista zamówień",
+"PP_SEARCH": "Wyszukaj"
 }

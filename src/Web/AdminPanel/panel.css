@@ -466,3 +466,24 @@ highlight{
 	color: #09f;
 	background: rgba(0, 153, 255, 0.089);
 }
+#search-txt{
+	float: right; min-width: 200px; width: 200px;
+}
+#search-btn{
+	float: right;
+}
+#btn-search{
+	float: right;
+	margin-right: 2%;
+	margin-bottom: 5px;
+	padding: 10px 25px;
+	border-radius: 50px;
+	color: #21b973;
+	border: 1px solid #21b973;
+	box-shadow: 0px 1px 5px #21b97275;
+	transition: all .5s;
+}
+#btn-search:hover{
+	color: #fff;
+	background: #21b973;
+}

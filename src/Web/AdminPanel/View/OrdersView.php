@@ -56,7 +56,7 @@ class OrdersView extends Component
 		if(!empty($_GET['q']))
 		{
 			$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
-			$sql = " AND CONCAT_WS(' ', name, status, address, mobile, price) REGEXP(".$q.")";
+			$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price, time) REGEXP('".$q."')";
 		}
 
 		try
@@ -82,11 +82,11 @@ class OrdersView extends Component
 			if(!empty($_GET['q']))
 			{
 				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
-				$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price) REGEXP(".$q.")";
+				$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price, time) REGEXP('".$q."')";
 			}
 
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE visible = 1".$sql);
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE visible = 1 ".$sql);
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -203,38 +203,14 @@ class OrdersView extends Component
 
 					<div id="box-fixed" class="animated fadeIn">
 						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
-						<form method="POST" action="/panel/categories">
-							<label>Name</label>
-							<input type="text" name="name" placeholder="e.g. Pizza">
-							<label>Slug</label>
-							<input type="text" name="slug" placeholder="e.g. pizza">
-							<label>Visible</label>
-							<select name="visible">
-								<option value="1">Yes</option>
-								<option value="0">No</option>
-							</select>
+						<form method="GET" action="">
+							<label>Search</label>
+							<input type="text" name="name" placeholder="e.g. Word">
 							<input type="submit" name="add" value="'.$arr['trans']->Get('C_ADD').'" class="btn float-right">
 						</form>
 					</div>
 
-					<div id="box-fixed-edit" class="animated fadeIn">
-						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT1').' <i class="fas fa-times close"></i> </h3>
-						<form method="POST" action="/panel/categories">
-							<label>Name</label>
-							<input type="text" name="name" placeholder="e.g. Pizza" id="edit-cat-name">
-							<label>Slug</label>
-							<input type="text" name="slug" placeholder="e.g. pizza" id="edit-cat-slug">
-							<label>Visible</label>
-							<select name="visible" id="edit-cat-visible">
-								<option value="1">Yes</option>
-								<option value="0">No</option>
-							</select>
-							<input type="hidden" name="catid" value="0" id="catid">
-							<input type="submit" name="update" value="'.$arr['trans']->Get('C_CHANGE').'" class="btn float-right">
-						</form>
-					</div>
-
-					<h3> '.$arr['trans']->Get('OR_TITLE').' </h3>
+					<h3> '.$arr['trans']->Get('OR_TITLE').' <a id="btn-search"> '.$arr['trans']->Get('PP_SEARCH').' <i class="fas fa-search"></i> </a> </h3>
 
 					'.$html['list'].'
 
