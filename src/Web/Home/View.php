@@ -6,6 +6,7 @@ use MyApp\Web\Page\Main\Content;
 use MyApp\Web\Page\TopMenu\TopMenuFixed;
 use MyApp\Web\Page\Menu\CategoryMenu;
 use MyApp\Web\Page\ProductList\ProductBox;
+use MyApp\Web\Home\Homepage;
 
 class View
 {
@@ -22,13 +23,9 @@ class View
 
     static function Show()
     {
-		$arr[0] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
-		$arr[1] = ['name' => 'menu', 'title' => 'Menu', 'href' => '/menu'] ;
-		$arr[2] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
-
 		// Html
 		$h = '';
-		$h .= TopMenuFixed::Show($arr);
+		$h .= TopMenuFixed::Show(Homepage::MenuLinks());
 		$h .= CategoryMenu::Show();
 		$h .= ProductBox::Show();
 

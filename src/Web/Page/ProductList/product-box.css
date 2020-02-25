@@ -3,14 +3,14 @@
 }
 .products .h1{
 	float: left; width: 98%;
-	padding: 10px 20px; margin: 1%;
+	padding: 10px 20px; margin: 20px 1% 0px 1%;
 	font-weight: 900; font-size: 19px;
 	background: #fff;
 }
 
 .products .list{
 	float: left; width: 98%;
-	padding: 10px; margin: 1%;
+	padding: 0px; margin: 1%;
 	font-weight: 400; font-size: 14px;
 	background: #fff
 }
@@ -160,7 +160,7 @@ notify{
 		font-size: 3vw;
 	}
 	.products .list .product .add-to-cart i{
-		padding: 0px
+		padding: 1px
 	}
 }
 

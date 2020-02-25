@@ -9,11 +9,19 @@ class Homepage
 {
 	function Index($r)
 	{
-		Html::Header('Green food delivery', 'Green food delivery', 'home page');
+		Html::Header('Order online', 'Order online', 'order online');
 
 		View::Show();
 
 		Html::Footer();
+	}
+
+	static function MenuLinks()
+	{
+		$arr = [];
+		$arr[0] = ['name' => 'homepage', 'title' => 'Main page', 'href' => '/'] ;
+		$arr[1] = ['name' => 'login', 'title' => 'Login page', 'href' => '/login'] ;
+		return $arr;
 	}
 }
 ?>

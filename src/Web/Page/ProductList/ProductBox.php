@@ -47,10 +47,12 @@ class ProductBox
 		}
 
 		$products = self::GetProducts($cat, $page, $perpage, $q);
+		$category_name = self::GetCategoryName($cat);
 
 		$h = '
 			<div class="products">
 				<!-- <div class="h1"> '.$t->Get('PRODUCTS').' </div> -->
+				<div class="h1"> '.$category_name.' </div>
 
 				<div class="list">';
 
@@ -235,13 +237,33 @@ class ProductBox
 		try
 		{
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("SELECT id FROM category WHERE slug = :slug");
+			$r = $db->Pdo->prepare("SELECT id,name FROM category WHERE slug = :slug");
 			$r->execute([':slug' => $slug]);
 			$o = $r->fetchAll();
 			if(!empty($o)){
 				return $o[0]['id'];
 			}else{
 				return 0;
+			}
+		}
+		catch(Exception $e)
+		{
+
+		}
+	}
+
+	static function GetCategoryName($slug = '')
+	{
+		try
+		{
+			$db = Db::GetInstance();
+			$r = $db->Pdo->prepare("SELECT id,name FROM category WHERE slug = :slug");
+			$r->execute([':slug' => $slug]);
+			$o = $r->fetchAll();
+			if(!empty($o)){
+				return $o[0]['name'];
+			}else{
+				return '';
 			}
 		}
 		catch(Exception $e)
