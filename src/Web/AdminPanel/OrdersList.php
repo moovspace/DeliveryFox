@@ -1,6 +1,7 @@
 <?php
 namespace MyApp\Web\AdminPanel;
 use MyApp\App\Translate\Trans;
+use MyApp\Web\Currency;
 
 class OrdersList
 {
@@ -34,47 +35,33 @@ class OrdersList
 			foreach ($d as $k => $v) {
 				$id = $v['id'];
 
-				$parent = '<span title="Product variant"> Id-'.$v['parent'].' </span>';
-				if($v['parent'] == 0)
-				{
-					$parent = '<span title="Main product"> <i class="fas fa-boxes"></i> </span>';
+				if($v['payment'] == 1){
+					$payment = '<div class="payment-btn" title="Płatność gotówką / Money paymeny"> <i class="fas fa-money-bill-wave"></i> Money</div>';
+				}
+				if($v['payment'] == 2){
+					$payment = '<div class="payment-btn" title="Karta płatnicza / Credit Card"> <i class="fas fa-credit-card"></i> Card</div>';
+				}
+				if($v['payment'] == 3){
+					$payment = '<div class="payment-btn" title="Odbiór o godzinie / I will pick up at "> <i class="fas fa-utensils"></i> '.$v['pick_up_time'].' </div>';
 				}
 
-				// Add variant
-				$add = '';
-				if($v['parent'] == 0)
+				if(!empty($v['status']))
 				{
-					// $add = '<a href="/panel/product/add?id='.$id.'" class="btn-small-li click-variant" data-id="'.$id.'" title="Add variant"> <i class="fas fa-plus-square"></i> </a>';
-				}
-
-				$status = '<span title="Visible" class="color-green"> <i class="fas fa-eye"></i> </span>';
-				if($v['visible'] == 0)
-				{
-					$status = '<span title="Hidden" class="color-red"> <i class="fas fa-eye-slash"></i> </span>';
-				}
-				$stock = '<span title="Instock" class="color-green"> <i class="fas fa-check-circle"></i> </span>';
-				if($v['stock_status'] == "outofstock")
-				{
-					$stock = '<span title="Out of stock" class="color-red"> <i class="fas fa-times-circle"></i> </span>';
+					$status = '<div class="payment-btn paymeny-'.$v['status'].'"> '.$v['status'].' </div>';
 				}
 
 				$t .= '<li>';
 				$t .= '<div> ' . $v['id'] . ' </div>';
-				$t .= '<div> ' . $parent . ' </div>';
 				$t .= '<div> ' . $v['name'] . ' </div>';
-				$t .= '<div> ' . $v['size'] . ' </div>';
-				if($v['on_sale'] == 0)
-				{
-					$t .= '<div> <highlight>' . $v['price'] . ' </highlight> / ' . $v['price_sale'] . ' </div>';
-				}else{
-					$t .= '<div> ' . $v['price'] . ' / <highlight>' . $v['price_sale'] . '</highlight> </div>';
-				}
-				$t .= '<div> ' . $status . $stock . ' </div>';
+				$t .= '<div> ' . $v['price'] . ' ' .Currency::MAIN . ' </div>';
+				$t .= '<div> ' . $v['time'] . ' </div>';
+				$t .= '<div> ' . $payment . ' </div>';
+				$t .= '<div> ' . $status . ' </div>';
+
 				$t .= '
 				<div>
-					'.$add.'
-					<a href="/panel/product/edit?id='.$id.'" class="btn-small-li click-edit" data-id="'.$id.'"> <i class="fas fa-edit"></i> </a>
-					<a href="?page='.$page.'&perpage='.$perpage.'&delete='.$id.'" class="btn-small-li click-del" data-id="'.$id.'"> <i class="fas fa-trash"></i> </a>
+					<a href="/panel/order?id='.$id.'" class="btn-small-li" data-id="'.$id.'" title="Podgląd zamówienia / Show order"> <i class="fas fa-eye"></i> </a>
+					<!-- <a href="?page='.$page.'&perpage='.$perpage.'&delete='.$id.'" class="btn-small-li click-del" data-id="'.$id.'" title="Usuń zamówienie / Delete order"> <i class="fas fa-trash"></i> </a> -->
 				</div>
 				</li>
 				';

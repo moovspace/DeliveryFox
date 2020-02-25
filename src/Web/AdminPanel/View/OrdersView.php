@@ -50,10 +50,19 @@ class OrdersView extends Component
 			$offset = 0;
 		}
 
+		// Search
+		$q = '';
+		$sql = '';
+		if(!empty($_GET['q']))
+		{
+			$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+			$sql = " AND CONCAT_WS(' ', name, status, address, mobile, price) REGEXP(".$q.")";
+		}
+
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM orders ORDER BY id DESC LIMIT :offset,:perpage");
+			$r = $db->Pdo->prepare("SELECT * FROM orders WHERE visible = 1 ".$sql." ORDER BY id DESC LIMIT :offset,:perpage");
 			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
 			return $r->fetchAll();
 		}
@@ -67,8 +76,17 @@ class OrdersView extends Component
 	{
 		try
 		{
+			// Search
+			$q = '';
+			$sql = '';
+			if(!empty($_GET['q']))
+			{
+				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+				$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price) REGEXP(".$q.")";
+			}
+
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE visible = 1".$sql);
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -89,7 +107,7 @@ class OrdersView extends Component
 				if($id > 0)
 				{
 					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("DELETE FROM orders WHERE id = $id");
+					$r = $db->Pdo->prepare("UPDATE orders SET visible = 0 WHERE id = $id");
 					$r->execute();
 					$ok = $r->rowCount();
 
@@ -115,11 +133,6 @@ class OrdersView extends Component
 			if($user->Role() != 'admin')
 			{
 				throw new Exception("Error user privileges", 666);
-			}
-
-			if(!empty($_GET['delete']))
-			{
-				$user->ErrorUpdate = self::Del();
 			}
 		}
 		catch(Exception $e)
@@ -148,25 +161,6 @@ class OrdersView extends Component
 		$arr['error'] = '';
 		$arr['trans'] = $t;
 
-		if(!empty($_POST) || !empty($_GET['delete']))
-		{
-			if($user->ErrorUpdate == 0){
-				$arr['error'] = '<span class="green"> '.$t->Get('A_ERR_NOTHING').' </span>';
-			}else if($user->ErrorUpdate == 1){
-				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
-			}else if($user->ErrorUpdate > 0){
-				$arr['error'] = '<span class="green"> '.$t->Get('C_UPDATED').' </span>';
-			}else if($user->ErrorUpdate == -4){
-				$arr['error'] = '<span class="red"> '.$t->Get('C_ERR_EMPTY').' </span>';
-			}else if($user->ErrorUpdate == -3){
-				$arr['error'] = '<span class="red"> '.$t->Get('C_ERR_DELETE').' </span>';
-			}else if($user->ErrorUpdate == -2){
-				$arr['error'] = '<span class="red"> '.$t->Get('A_ERR_DUPLICATE').' </span>';
-			}else if($user->ErrorUpdate < 0){
-				$arr['error'] = '<span class="red"> '.$t->Get('A_ERR_UPDATE').' </span>';
-			}
-		}
-
 		// Import component
 		$menu['top'] = TopMenu::Show($arr);
 		$menu['left'] = LeftMenu::Show();
@@ -174,15 +168,15 @@ class OrdersView extends Component
 
 		// Draw list
 		$aid = $t->Get('PP_ID');
-		$vid = $t->Get('PP_ID_VARIANT');
-		$a1 = $t->Get('PP_NAME');
-		$a2 = $t->Get('PP_PRICE');
-		$a3 = $t->Get('PP_PRICE_SALE');
-		$a4 = $t->Get('PP_SIZE');
+		$vid = $t->Get('PP_IMIE');
+		$a1 = $t->Get('PP_PRICE');
+		$a2 = $t->Get('PP_DATE');
+		$a3 = $t->Get('PP_PAY');
+		$a4 = $t->Get('PP_STATUS');
 		$a5 = $t->Get('PP_ACTION');
 		$status = $t->Get('PP_STATUS');
 
-		$title = [$aid, $vid, $a1, $a4, $a2.' / '.$a3, $status, $a5];
+		$title = [$aid, $vid, $a1, $a2, $a3, $status, $a5];
 
 		$rows =  self::GetProducts();
 		$maxrows =  self::GetMaxRows();
@@ -240,7 +234,7 @@ class OrdersView extends Component
 						</form>
 					</div>
 
-					<h3> '.$arr['trans']->Get('P_SUB_TITLE').'  <a href="/panel/product/add" id="btn-add-attribute"> '.$arr['trans']->Get('P_ADD_CAT').' <i class="fas fa-plus"></i> </a> </h3>
+					<h3> '.$arr['trans']->Get('P_SUB_TITLE').' </h3>
 
 					'.$html['list'].'
 

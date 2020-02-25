@@ -127,5 +127,9 @@
 "PR_UPDATED": "Product has been created.",
 "ERR_FIELD": "Enter all fields",
 "OR_ORDERS": "Orders",
-"OR_ORDER": "Order"
+"OR_ORDER": "Order",
+"PP_STATUS": "Status",
+"PP_PAY": "Paymeny",
+"PP_DATE": "Date",
+"PP_IMIE": "Name"
 }

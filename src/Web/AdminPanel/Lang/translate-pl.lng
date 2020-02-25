@@ -127,5 +127,9 @@
 "PR_UPDATED": "Produkt został utworzony.",
 "ERR_FIELD": "Uzupełnij wszystkie pola formularza.",
 "OR_ORDERS": "Zamówienia",
-"OR_ORDER": "Zamówienie"
+"OR_ORDER": "Zamówienie",
+"PP_STATUS": "Status",
+"PP_PAY": "Płatność",
+"PP_DATE": "Data",
+"PP_IMIE": "Imię"
 }

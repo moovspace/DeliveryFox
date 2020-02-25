@@ -6,7 +6,8 @@
 set_time_limit(0);
 
 // Timezone
-date_default_timezone_set('Etc/UTC');
+// date_default_timezone_set('Etc/UTC');
+date_default_timezone_set("Europe/Warsaw");
 
 // Errors
 ini_set('display_errors', 1);

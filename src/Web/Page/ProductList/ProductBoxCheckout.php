@@ -105,7 +105,10 @@ class ProductBoxCheckout
 						<select name="pick_up">
 							<option value="1 hour"> '.$t->Get('CH_PICK_HOUR').' </option>
 						';
-						for($i = 0; $i < 24; $i++)
+
+						// Current hour
+						$hour = ltrim(date('H', time()),'0') + 1;
+						for($i = $hour; $i < 24; $i++)
 						{
 							if(strlen($i) == 1){
 								$i = '0'.$i;
