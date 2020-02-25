@@ -39,7 +39,7 @@ class DbCartSave
 	 * @param string $cupon Coupon code
 	 * @return string Order id
 	 */
-	function CreateOrder($price, $address, $pick_up, $mobile, $info, $payment, $delivery = 0, $cupon = '')
+	function CreateOrder($price, $name, $address, $pick_up, $mobile, $info, $payment, $delivery = 0, $cupon = '')
 	{
 		$orderid = 0;
 
@@ -63,7 +63,7 @@ class DbCartSave
 			$delivery = 0;
 		}
 
-		$orderid = (int) $this->CreateOrderId($price, $address, $pick_up , $mobile, $info, (int) $payment, $delivery, $cupon);
+		$orderid = (int) $this->CreateOrderId($price, $name, $address, $pick_up , $mobile, $info, (int) $payment, $delivery, $cupon);
 
 		if($orderid > 0)
 		{
@@ -78,15 +78,15 @@ class DbCartSave
 		return $orderid;
 	}
 
-	protected function CreateOrderId($price = 0, $address, $pick_up = '', $mobile = '', $info = '', $payment = 3, $delivery = 0, $cupon = '')
+	protected function CreateOrderId($price = 0, $name = '', $address, $pick_up = '', $mobile = '', $info = '', $payment = 3, $delivery = 0, $cupon = '')
 	{
 		try
 		{
 			$ip = $_SERVER['REMOTE_ADDR'];
 
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("INSERT INTO orders(price, address, coupon, delivery_cost, pick_up_time, mobile, info, payment, ip) VALUES(:price, :address, :cupon, :delivery, :pick, :mobile, :info, :payment, :ip)");
-			$r->execute([':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery, ':pick' => $pick_up, ':mobile' => $mobile, ':info' => $info, ':payment' => $payment, ':ip' => $ip]);
+			$r = $db->Pdo->prepare("INSERT INTO orders(name, price, address, coupon, delivery_cost, pick_up_time, mobile, info, payment, ip) VALUES(:name, :price, :address, :cupon, :delivery, :pick, :mobile, :info, :payment, :ip)");
+			$r->execute([':name' => $name, ':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery, ':pick' => $pick_up, ':mobile' => $mobile, ':info' => $info, ':payment' => $payment, ':ip' => $ip]);
 			return $db->Pdo->lastInsertId();
 		}
 		catch(Exception $e)

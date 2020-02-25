@@ -18,7 +18,7 @@ class ProductBoxCheckout
 
 		if(!empty($_POST['add_order']))
 		{
-			if((int) $_POST['pay'] >= 1 && !empty($_POST['mobile']) && !empty($_POST['pick_up']) && !empty($_POST['city']) && !empty($_POST['address']))
+			if((int) $_POST['pay'] >= 1 && !empty($_POST['name']) && !empty($_POST['mobile']) && !empty($_POST['pick_up']) && !empty($_POST['city']) && !empty($_POST['address']))
 			{
 				try
 				{
@@ -37,7 +37,7 @@ class ProductBoxCheckout
 					{
 						// Save cart orders in database
 						$save = new DbCartSave();
-						$orderid = $save->CreateOrder($c->Checkout(), $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->DeliveryCost, $_POST['coupon']);
+						$orderid = $save->CreateOrder($c->Checkout(), $_POST['name'], $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->DeliveryCost, $_POST['coupon']);
 					}
 
 					if($orderid > 0)
@@ -117,6 +117,8 @@ class ProductBoxCheckout
 			$o .=		'</select>
 					</div>
 
+					<label> '.$t->Get('CH_NAME').' </label>
+					<input type="text" name="name" placeholder="'.$t->Get('CH_EG').' Imię Nazwisko">
 					<label> '.$t->Get('CH_MOBILE').' </label>
 					<input type="text" name="mobile" placeholder="'.$t->Get('CH_EG').' +48 700 100 100">
 					<label> '.$t->Get('CH_CITY').' </label>

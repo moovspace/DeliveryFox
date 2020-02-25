@@ -6,6 +6,7 @@ use MyApp\Web\AdminPanel\View\ProfilView;
 use MyApp\Web\AdminPanel\View\AttributesView;
 use MyApp\Web\AdminPanel\View\CategoriesView;
 use MyApp\Web\AdminPanel\View\ProductsView;
+use MyApp\Web\AdminPanel\View\OrdersView;
 
 class LeftMenu
 {
@@ -22,6 +23,7 @@ class LeftMenu
 			$menu .= AttributesView::Menu()->GetMenu();
 			$menu .= CategoriesView::Menu()->GetMenu();
 			$menu .= ProductsView::Menu()->GetMenu();
+			$menu .= OrdersView::Menu()->GetMenu();
 		}
 
 		if($user->Role() == 'worker')

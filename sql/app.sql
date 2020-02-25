@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 25 Lut 2020, 14:04
+-- Czas generowania: 25 Lut 2020, 19:49
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -281,6 +281,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `id` bigint(22) NOT NULL AUTO_INCREMENT,
   `price` decimal(15,2) NOT NULL DEFAULT 0.00,
   `status` enum('pending','failed','completed','refunded','canceled','onhold','processing','delivery') NOT NULL DEFAULT 'pending',
+  `name` varchar(250) NOT NULL,
   `address` varchar(250) NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `coupon` varchar(50) NOT NULL DEFAULT '',
@@ -292,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `worker` bigint(22) NOT NULL DEFAULT 0,
   `ip` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `orders`
@@ -303,18 +304,14 @@ TRUNCATE TABLE `orders`;
 -- Zrzut danych tabeli `orders`
 --
 
-INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `ip`) VALUES
-(24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '', '0.00', '', '', '', 1, 0, ''),
-(26, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:31:36', '', '0.00', '', '', '', 1, 0, ''),
-(27, '171.68', 'pending', 'Kucza 177', '2020-02-18 11:38:23', '', '5.66', '', '', '', 1, 0, ''),
-(28, '322.84', 'pending', 'Warszawa ZŁota 13', '2020-02-24 16:53:24', 'HOT-WINGS', '5.66', '1 hour', '+48 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1'),
-(29, '322.84', 'pending', 'Warszawa ZŁota 13', '2020-02-24 16:55:42', 'HOT-WINGS', '5.66', '1 hour', '+48 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1'),
-(30, '120.89', 'canceled', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
-(31, '183.67', 'delivery', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, '127.0.0.1'),
-(32, '292.16', 'processing', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, '127.0.0.1'),
-(33, '241.78', 'completed', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, '127.0.0.1'),
-(34, '120.89', 'failed', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
-(35, '75.74', 'delivery', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, '127.0.0.1');
+INSERT INTO `orders` (`id`, `price`, `status`, `name`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `ip`) VALUES
+(30, '120.89', 'canceled', 'Kaśka Czałuśna', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
+(31, '183.67', 'delivery', 'Beny Paluch', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, '127.0.0.1'),
+(32, '292.16', 'processing', 'Marek Garek', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, '127.0.0.1'),
+(33, '241.78', 'completed', 'Monka Mmonka', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, '127.0.0.1'),
+(34, '120.89', 'failed', 'Fiku Myku', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
+(35, '75.74', 'delivery', 'Piku Maki', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, '127.0.0.1'),
+(36, '23.66', 'pending', 'Max kolanko', 'Poznań Kluczowa 88/13', '2020-02-25 18:45:07', '', '5.66', '1 hour', '+15 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -332,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   `attr` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product`
@@ -362,7 +359,8 @@ INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, 
 (47, 31, 17, '18.00', 2, 1, 0),
 (48, 32, 26, '41.51', 2, 0, 17),
 (49, 33, 2, '16.32', 2, 0, 1),
-(50, 35, 2, '16.32', 2, 0, 1);
+(50, 35, 2, '16.32', 2, 0, 1),
+(51, 36, 17, '18.00', 1, 1, 0);
 
 -- --------------------------------------------------------
 

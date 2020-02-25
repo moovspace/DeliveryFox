@@ -125,5 +125,7 @@
 "EP_ABOUT_PL": "np. Pizza hawajska na grubym cieście.",
 "EP_UPDATED": "Zaktualizowano!",
 "PR_UPDATED": "Produkt został utworzony.",
-"ERR_FIELD": "Uzupełnij wszystkie pola formularza."
+"ERR_FIELD": "Uzupełnij wszystkie pola formularza.",
+"OR_ORDERS": "Zamówienia",
+"OR_ORDER": "Zamówienie"
 }
