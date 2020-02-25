@@ -2,7 +2,6 @@
 namespace MyApp\Web\Page\ProductList;
 
 use Exception;
-use PhpApix\Mysql\Db;
 use MyApp\App\Translate\Trans;
 use MyApp\Web\Currency;
 use MyApp\App\DbCart\DbCart;
@@ -12,6 +11,8 @@ class ProductBoxCheckout
 {
 	static function Show()
 	{
+		$t = new Trans('/src/Web/Page/ProductList/Lang', 'pl');
+
 		$error = '';
 		$formOff = 0;
 
@@ -41,15 +42,15 @@ class ProductBoxCheckout
 
 					if($orderid > 0)
 					{
-						$error = '<div id="order-ok"> <i class="far fa-check-circle"></i> Your order has been created! </div>';
-						$error .= '<div id="order-link"> Click the link to view the status of the order. </br></br></br> <a href="/order?id='.$orderid.'"> <i class="fas fa-link"></i> Order status </a> </div>';
+						$error = '<div id="order-ok"> <i class="far fa-check-circle"></i> '.$t->Get('CH_E1').' </div>';
+						$error .= '<div id="order-link"> '.$t->Get('CH_E2').' </br></br></br> <a href="/order?id='.$orderid.'"> <i class="fas fa-link"></i> Status </a> </div>';
 
 						$formOff = 1;
 						unset($_SESSION['cart']);
 					}
 					else
 					{
-						$error = '<div id="order-error"> <i class="fas fa-exclamation-circle"></i> Error! Can\'t create order. </div>';
+						$error = '<div id="order-error"> <i class="fas fa-exclamation-circle"></i> '.$t->Get('CH_E3').' </div>';
 					}
 				}
 				catch(Exception $e)
@@ -59,16 +60,15 @@ class ProductBoxCheckout
 			}
 			else
 			{
-				$error = '<div id="order-error"> <i class="fas fa-exclamation-circle"></i> Delivery form must be not empty! </div>';
+				$error = '<div id="order-error"> <i class="fas fa-exclamation-circle"></i> '.$t->Get('CH_E4').' </div>';
 			}
 		}
 
-		$t = new Trans('/src/Web/Page/ProductList/Lang', 'pl');
 
 		$h = '
 			<div class="checkout-box">
 
-				<h1> Checkout </h1>
+				<h1> '.$t->Get('CHECKOUT').' </h1>
 
 				<div id="shopping-cart" class="animated fadeIn">
 					<div id="cart-top">
@@ -84,7 +84,7 @@ class ProductBoxCheckout
 			$h .= $error;
 
 			$o = '
-				<h3>Cart products</h3>
+				<h3>'.$t->Get('CH_CART').' </h3>
 
 				<div id="shopping-checkout" class="animated fadeIn">
 					<div id="cart-hover-checkout">
@@ -92,18 +92,18 @@ class ProductBoxCheckout
 					</div>
 				</div>
 
-				<h3>Paymeny method</h3>
+				<h3> '.$t->Get('CH_PAY').' </h3>
 
-				<div class="pay-btn pay-btn-active" data-pay="1" onclick="PayMethod(this)"> <i class="fas fa-money-bill-wave"></i> Money payment on delivery. </div>
-				<div class="pay-btn"  data-pay="2" onclick="PayMethod(this)"> <i class="fas fa-credit-card"></i> Card payment on delivery. </div>
-				<div class="pay-btn"  data-pay="3" onclick="PayMethod(this)"> <i class="fas fa-utensils"></i> I will pick up in person at the restaurant. </div>
+				<div class="pay-btn pay-btn-active" data-pay="1" onclick="PayMethod(this)"> <i class="fas fa-money-bill-wave"></i> '.$t->Get('CH_PAY1').' Money payment on delivery. </div>
+				<div class="pay-btn"  data-pay="2" onclick="PayMethod(this)"> <i class="fas fa-credit-card"></i> '.$t->Get('CH_PAY2').' Card payment on delivery. </div>
+				<div class="pay-btn"  data-pay="3" onclick="PayMethod(this)"> <i class="fas fa-utensils"></i> '.$t->Get('CH_PAY3').' I will pick up in person at the restaurant. </div>
 
-				<h3>Delivery address</h3>
+				<h3> '.$t->Get('CH_ADDR').' </h3>
 				<form method="post" id="order-form">
 					<div id="pick-up-hide">
-						<label>Pick up time</label>
+						<label> '.$t->Get('CH_PICKUP').' </label>
 						<select name="pick_up">
-							<option value="1 hour">Pick up in an hour</option>
+							<option value="1 hour"> '.$t->Get('CH_PICK_HOUR').' </option>
 						';
 						for($i = 0; $i < 24; $i++)
 						{
@@ -117,18 +117,18 @@ class ProductBoxCheckout
 			$o .=		'</select>
 					</div>
 
-					<label>Mobile</label>
-					<input type="text" name="mobile" placeholder="e.g. +48 700 100 100">
-					<label>City</label>
-					<input type="text" name="city" placeholder="e.g. Warsaw">
-					<label>Address</label>
-					<input type="text" name="address" placeholder="e.g. Złota 1/23">
-					<label>Order info (optional)</label>
+					<label> '.$t->Get('CH_MOBILE').' </label>
+					<input type="text" name="mobile" placeholder="'.$t->Get('CH_EG').' +48 700 100 100">
+					<label> '.$t->Get('CH_CITY').' </label>
+					<input type="text" name="city" placeholder="'.$t->Get('CH_EG').' Warsaw">
+					<label> '.$t->Get('CH_ADDRESS').' </label>
+					<input type="text" name="address" placeholder="'.$t->Get('CH_EG').' Złota 1/23">
+					<label> '.$t->Get('CH_INFO').' </label>
 					<textarea name="info"></textarea>
-					<label>Coupon code (optional)</label>
-					<input type="text" name="coupon" placeholder="e.g. HOT-WINTER">
+					<label> '.$t->Get('CH_CODE').' </label>
+					<input type="text" name="coupon" placeholder="'.$t->Get('CH_EG').' HOT-WINTER">
 					<input type="hidden" name="pay" value="1" id="pay-method">
-					<input type="submit" name="add_order" value="Order Now">
+					<input type="submit" name="add_order" value=" '.$t->Get('CH_ORDER_NOW').'">
 				</form>
 			</div>';
 

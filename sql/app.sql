@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 24 Lut 2020, 16:15
+-- Czas generowania: 25 Lut 2020, 14:04
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `worker` bigint(22) NOT NULL DEFAULT 0,
   `ip` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `orders`
@@ -306,7 +306,15 @@ TRUNCATE TABLE `orders`;
 INSERT INTO `orders` (`id`, `price`, `status`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `ip`) VALUES
 (24, '60.66', 'pending', 'Złota 13/9', '2020-02-16 19:22:12', '', '0.00', '', '', '', 1, 0, ''),
 (26, '171.68', 'pending', 'Kucza 1', '2020-02-18 11:31:36', '', '0.00', '', '', '', 1, 0, ''),
-(27, '171.68', 'pending', 'Kucza 177', '2020-02-18 11:38:23', '', '5.66', '', '', '', 1, 0, '');
+(27, '171.68', 'pending', 'Kucza 177', '2020-02-18 11:38:23', '', '5.66', '', '', '', 1, 0, ''),
+(28, '322.84', 'pending', 'Warszawa ZŁota 13', '2020-02-24 16:53:24', 'HOT-WINGS', '5.66', '1 hour', '+48 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1'),
+(29, '322.84', 'pending', 'Warszawa ZŁota 13', '2020-02-24 16:55:42', 'HOT-WINGS', '5.66', '1 hour', '+48 123 123 123', 'Bez cebulki poproszę.', 1, 0, '127.0.0.1'),
+(30, '120.89', 'canceled', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
+(31, '183.67', 'delivery', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, '127.0.0.1'),
+(32, '292.16', 'processing', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, '127.0.0.1'),
+(33, '241.78', 'completed', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, '127.0.0.1'),
+(34, '120.89', 'failed', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, '127.0.0.1'),
+(35, '75.74', 'delivery', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -324,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   `attr` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product`
@@ -341,7 +349,20 @@ INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, 
 (34, 26, 17, '19.00', 1, 0, 0),
 (35, 26, 2, '16.00', 1, 0, 0),
 (36, 27, 17, '19.00', 1, 0, 0),
-(37, 27, 2, '16.00', 1, 0, 0);
+(37, 27, 2, '16.00', 1, 0, 0),
+(38, 28, 2, '16.32', 2, 0, 2),
+(39, 28, 26, '41.51', 1, 0, 17),
+(40, 28, 17, '18.00', 1, 1, 0),
+(41, 29, 2, '16.32', 2, 0, 2),
+(42, 29, 26, '41.51', 1, 0, 17),
+(43, 29, 17, '18.00', 1, 1, 0),
+(44, 30, 2, '16.32', 1, 0, 15),
+(45, 31, 26, '41.51', 2, 0, 16),
+(46, 31, 27, '21.55', 1, 1, 17),
+(47, 31, 17, '18.00', 2, 1, 0),
+(48, 32, 26, '41.51', 2, 0, 17),
+(49, 33, 2, '16.32', 2, 0, 1),
+(50, 35, 2, '16.32', 2, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -359,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `order_product_addon` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product_addon`
@@ -379,7 +400,21 @@ INSERT INTO `order_product_addon` (`id`, `rf_orders`, `rf_order_product`, `produ
 (28, 26, 35, 26, '40.01', 2, 1),
 (29, 27, 36, 2, '16.00', 2, 0),
 (30, 27, 36, 17, '19.00', 1, 0),
-(31, 27, 37, 26, '40.01', 2, 1);
+(31, 27, 37, 26, '40.01', 2, 1),
+(32, 28, 38, 26, '41.51', 2, 0),
+(33, 28, 38, 27, '21.55', 1, 1),
+(34, 28, 39, 27, '21.55', 1, 1),
+(35, 29, 41, 26, '41.51', 2, 0),
+(36, 29, 41, 27, '21.55', 1, 1),
+(37, 29, 42, 27, '21.55', 1, 1),
+(38, 30, 44, 26, '41.51', 2, 0),
+(39, 30, 44, 27, '21.55', 1, 1),
+(40, 31, 45, 27, '21.55', 1, 1),
+(41, 32, 48, 26, '41.51', 2, 0),
+(42, 32, 48, 27, '21.55', 1, 1),
+(43, 33, 49, 26, '41.51', 2, 0),
+(44, 33, 49, 27, '21.55', 1, 1),
+(45, 35, 50, 27, '21.55', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -434,7 +469,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `rating_average` decimal(3,2) NOT NULL DEFAULT 5.00,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pKey` (`parent`,`size`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `product`
@@ -449,7 +484,9 @@ INSERT INTO `product` (`id`, `parent`, `size`, `rf_attr`, `category`, `name`, `a
 (2, 0, 'Mała 20 cm', 1, 1, 'Pizza hawajska', 'Pizza hawajska z ananasem.', '16.32', '0.00', 0, 6, 5, '2020-02-13 19:01:16', 1, 'instock', 0, 0, '5.00'),
 (17, 0, 'Średnia 25cm', 0, 1, 'Pizza wiejska', 'Wspaniała pizza wiejska na cienkim cieście.', '19.15', '18.00', 1, 0, 5, '2020-02-15 21:25:54', 1, 'instock', 0, 0, '5.00'),
 (26, 2, 'Wielka 60cm', 2, 6, 'Pizza hawajska', 'Wielka pizza hawajska.', '41.51', '40.01', 0, 6, 4, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00'),
-(27, 2, 'Duża 50cm', 2, 6, 'Pizza hawajska', 'Duża pizza hawajska.', '32.66', '21.55', 1, 6, 2, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00');
+(27, 2, 'Duża 50cm', 2, 6, 'Pizza hawajska', 'Duża pizza hawajska.', '32.66', '21.55', 1, 6, 2, '2020-02-16 11:09:07', 1, 'instock', 0, 0, '5.00'),
+(28, 0, 'Olbrzymia 50cm', 2, 1, 'Quasadilla', 'Wspaniały opis produktu tutaj!', '20.50', '0.00', 0, 6, 5, '2020-02-25 12:44:57', 1, 'instock', 0, 0, '5.00'),
+(32, 0, 'Duże 40cm', 2, 5, 'Kuleczki', 'Wspaniały opis produktu tutaj!', '20.50', '19.00', 1, 6, 5, '2020-02-25 12:51:53', 1, 'instock', 0, 0, '5.00');
 
 -- --------------------------------------------------------
 

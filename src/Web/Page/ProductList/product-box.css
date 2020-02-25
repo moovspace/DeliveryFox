@@ -1,5 +1,5 @@
 .products{
-	float: left; width: 100%; background: #f9f9f9
+	float: left; width: 100%; background: #fff
 }
 .products .h1{
 	float: left; width: 98%;
@@ -22,7 +22,7 @@
 	background: #fff;
 	border: 2px solid #fff;
 	border-radius: 6px;
-	transition: all .6s
+	transition: border .6s
 }
 .products .list .product:hover{
 	border: 2px solid #ffe600;
@@ -80,7 +80,7 @@
 	padding: 10px 20px; margin: 1%;
 	font-size: 1.1vw; font-weight: 900;
 	border: 2px solid #222; border-radius: 50px;
-	transition: all .6s; text-transform: uppercase;
+	transition: border .6s; text-transform: uppercase;
 }
 .products .list .product .add-to-cart span{
 	float: left; text-align: left

@@ -113,6 +113,12 @@ class AddProductView extends Component
 		{
 			// Random image name, rename to product id
 			$img = self::ImageHash();
+
+			if(!file_exists('media/tmp'))
+			{
+				mkdir('media/tmp', 0777, true);
+			}
+
 			$img = 'media/tmp/' . $img. '.jpg';
 
 			if(!empty($_FILES['file']['tmp_name']))
@@ -215,7 +221,7 @@ class AddProductView extends Component
 			}else if($user->ErrorUpdate == -3){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_IMAGE').' </span>';
 			}else if($user->ErrorUpdate == -2){
-				$arr['error'] = '<span class="red"> '.$t->Get('ERR_USERNAME').' </span>';
+				$arr['error'] = '<span class="red"> '.$t->Get('ERR_PRODUCT').' </span>';
 			}else if($user->ErrorUpdate < 0){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_FIELD').' </span>';
 			}

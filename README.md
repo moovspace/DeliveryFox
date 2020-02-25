@@ -1,6 +1,22 @@
 # PhpApix applicatiopn
 namespace MyApp
 
+### After clone
+```bash
+# after clone repo and unzip refresh composer autoload
+cd /path/to/dir
+
+# update composer class
+composer update
+composer dump-autoload -o
+
+# change Config.php
+vendor/moovspace/phpapix/src/Settings/Config.php
+
+# Allow write to folders
+chmod -R 775 /path/to/dir
+```
+
 ### Directories
 - src/Api ***klasy z api (Json api)***
 - src/App ***klasy z dodatkami (Component, Menu, Email ...)***

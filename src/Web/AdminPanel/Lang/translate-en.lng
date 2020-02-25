@@ -3,6 +3,7 @@
 "ERR_NOTHING": "Nothing to update.",
 "ERR_IMAGE": "Error image file (Only .jpeg, .jpg files).",
 "ERR_USERNAME": "This username is aledy taken.",
+"ERR_PRODUCT": "Product with this name exists.",
 "ERR_UPDATE": "Can not update profil.",
 "PR_SETTINGS": "Profil settings",
 "PR_ACCOUNT": "Account",

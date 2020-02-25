@@ -11,24 +11,37 @@ class ProductBoxStatus
 	{
 		$t = new Trans('/src/Web/Page/ProductList/Lang', 'pl');
 
+		if(!empty($_GET['id'])){
+			$stat = self::GetStatus($_GET['id']);
+		}else{
+			$stat = 'pending';
+		}
+
+		if($stat == 'canceled'){
+			$status = '<div class="status-btn status-btn-canceled"> '.$t->Get('ST_CANCELED').' </div>';
+		}else if($stat == 'failed'){
+			$status = '<div class="status-btn status-btn-failed"> '.$t->Get('ST_FAILED').' </div>';
+		}else if($stat == 'processing'){
+			$status = '<div class="status-btn status-btn-processing"> '.$t->Get('ST_PROCESSING').' </div>';
+		}else if($stat == 'delivery'){
+			$status = '<div class="status-btn status-btn-delivery"> '.$t->Get('ST_DELIVERY').' </div>';
+		}else if($stat == 'completed'){
+			$status = '<div class="status-btn status-btn-completed"> '.$t->Get('ST_COMPLETED').' </div>';
+		}else{
+			$status = '<div class="status-btn status-btn-pending"> '.$t->Get('ST_PENDING').' </div> <p> '.$t->Get('ST_WAIT').' </p>';
+		}
 		$h = '
 		<div class="checkout-box">
 
-			<h1> Order status </h1>
+			<h1> '.$t->Get('ORDER_STATUS').' </br> <small style="font-size: 13px;"> '.$t->Get('ORDER_STATUS_INFO').'</small> </h1>
 
 			<div id="status-box">
 				<img src="/media/img/soup.png">
-				<h3>Order ID</h3>
+				<h3> '.$t->Get('ORDER_ID').' </h3>
 				<h2>'.$_GET['id'].'</h2>
-				<h3>Order Date</h3>
+				<h3> '.$t->Get('ORDER_DATE').' </h3>
 				<h2>2020-02-22 15:55:55</h2>
-				<div class="status-btn status-btn-pending"> Pending </div>
-				<div class="status-btn status-btn-canceled"> Canceled </div>
-				<div class="status-btn status-btn-failed"> Failed </div>
-				<div class="status-btn status-btn-processing"> Processing </div>
-				<div class="status-btn status-btn-delivery"> Delivery </div>
-				<div class="status-btn status-btn-completed"> Delivered </div>
-				<p>Order waiting for restaurant confirmation.</p>
+				'.$status.'
 			</div>
 
 			<div id="shopping-cart" class="animated fadeIn">
@@ -43,6 +56,10 @@ class ProductBoxStatus
 			</div>
 
 		</div>
+
+		<script>
+			setInterval(() => { location.reload(); }, 300000);
+		</script>
 		';
 
 		return $h;
@@ -55,4 +72,24 @@ class ProductBoxStatus
 		<script defer src="/src/Web/Page/ProductList/product-box.js"></script>
 		';
 	}
+
+	static function GetStatus($id){
+		try
+		{
+			$id = (int) $id;
+			$db = Db::getInstance();
+			$r = $db->Pdo->query("SELECT * FROM orders WHERE id = " . $id);
+			$row = $r->fetchAll();
+			if(!empty($row)){
+				return $row[0]['status'];
+			}else{
+				return 'pending';
+			}
+		}
+		catch(Exception $e)
+		{
+			return 'pending';
+		}
+	}
 }
+?>
