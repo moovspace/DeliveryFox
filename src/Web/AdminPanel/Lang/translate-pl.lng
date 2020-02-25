@@ -131,5 +131,7 @@
 "PP_STATUS": "Status",
 "PP_PAY": "Płatność",
 "PP_DATE": "Data",
-"PP_IMIE": "Imię"
+"PP_IMIE": "Imię",
+"OR_ORDERS": "Zamówienia",
+"OR_TITLE": "Lista zamówień"
 }

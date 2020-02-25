@@ -195,7 +195,7 @@ class OrdersView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('P_TITLE').'  </h1>
+				<h1> '.$arr['trans']->Get('OR_ORDERS').'  </h1>
 				<error id="error">
 					' . $arr['error'] . '
 				</error>
@@ -234,7 +234,7 @@ class OrdersView extends Component
 						</form>
 					</div>
 
-					<h3> '.$arr['trans']->Get('P_SUB_TITLE').' </h3>
+					<h3> '.$arr['trans']->Get('OR_TITLE').' </h3>
 
 					'.$html['list'].'
 

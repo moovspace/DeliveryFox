@@ -131,5 +131,7 @@
 "PP_STATUS": "Status",
 "PP_PAY": "Paymeny",
 "PP_DATE": "Date",
-"PP_IMIE": "Name"
+"PP_IMIE": "Name",
+"OR_ORDERS": "Orders",
+"OR_TITLE": "Orders list"
 }
