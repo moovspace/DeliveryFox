@@ -30,6 +30,10 @@ function OpenEditVariant(it){
 	let id = it.dataset.id;
 	let el = document.getElementById('box-fixed-edit-variant').style.display = 'inherit';
 }
+function OpenOrderSearch(it){
+	// let id = it.dataset.id;
+	let el = document.getElementById('box-fixed').style.display = 'inherit';
+}
 function OpenEditCategory(it){
 	let el = document.getElementById('box-fixed-edit').style.display = 'inherit';
 

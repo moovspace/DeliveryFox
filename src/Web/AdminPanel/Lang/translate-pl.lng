@@ -134,5 +134,6 @@
 "PP_IMIE": "Imię",
 "OR_ORDERS": "Zamówienia",
 "OR_TITLE": "Lista zamówień",
-"PP_SEARCH": "Wyszukaj"
+"PP_SEARCH": "Wyszukaj",
+"PP_KWOTA": "Kwota"
 }

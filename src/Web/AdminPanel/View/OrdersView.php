@@ -169,7 +169,7 @@ class OrdersView extends Component
 		// Draw list
 		$aid = $t->Get('PP_ID');
 		$vid = $t->Get('PP_IMIE');
-		$a1 = $t->Get('PP_PRICE');
+		$a1 = $t->Get('PP_KWOTA');
 		$a2 = $t->Get('PP_DATE');
 		$a3 = $t->Get('PP_PAY');
 		$a4 = $t->Get('PP_STATUS');
@@ -210,7 +210,7 @@ class OrdersView extends Component
 						</form>
 					</div>
 
-					<h3> '.$arr['trans']->Get('OR_TITLE').' <a id="btn-search"> '.$arr['trans']->Get('PP_SEARCH').' <i class="fas fa-search"></i> </a> </h3>
+					<h3> '.$arr['trans']->Get('OR_TITLE').' <a id="btn-search" onclick="OpenOrderSearch(this)"> '.$arr['trans']->Get('PP_SEARCH').' <i class="fas fa-search"></i> </a> </h3>
 
 					'.$html['list'].'
 

@@ -134,5 +134,6 @@
 "PP_IMIE": "Name",
 "OR_ORDERS": "Orders",
 "OR_TITLE": "Orders list",
-"PP_SEARCH": "Search"
+"PP_SEARCH": "Search",
+"PP_KWOTA": "Cost"
 }
