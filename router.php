@@ -9,17 +9,14 @@ try
 	// Namespace path
 	$r->Set("/", "MyApp/Web/Home/Homepage", "Index");
 	$r->Set("/logout", "MyApp/Web/Logout/Logout", "Index");
-
 	// Products category
-	$r->Set("/category", "MyApp/Web/Home/Homepage", "Index");
-	$r->Set("/category/{slug}", "MyApp/Web/Home/Homepage", "Index");
+	$r->Set("/category", "MyApp/Web/Category/Category", "Index");
+	$r->Set("/category/{slug}", "MyApp/Web/Category/Category", "Index");
 	// Checkout
 	$r->Set("/checkout", "MyApp/Web/Checkout/Checkout", "Index");
 	$r->Set("/order", "MyApp/Web/Checkout/OrderStatus", "Index");
-
 	// Include Auth Component route path
 	$r->Include("Web/Auth/routes");
-
 	// Admin Panel
 	$r->Include("Web/AdminPanel/routes");
 
