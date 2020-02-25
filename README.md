@@ -6,7 +6,7 @@ namespace MyApp
 # after clone repo and unzip refresh composer autoload
 cd /path/to/dir
 
-# update composer class
+# update composer class if vendor folder does not exists
 composer update
 composer dump-autoload -o
 

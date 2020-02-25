@@ -1,0 +1,59 @@
+### WOO.XX
+server {
+	listen 80;
+	listen [::]:80;
+
+	# Document dir
+	root /home/usero/Www/html/woo.xx;
+
+	# Run first
+	index index.php index.html;
+
+	# Domain, host
+	server_name woo.xx www.woo.xx;
+
+	location = /favicon.ico {
+		rewrite . /favicon/favicon.ico;
+	}
+
+	location / {
+		# Get file or folder or error
+		# try_files $uri $uri/ =404;
+
+		# Get file or folder or redirect uri to url param in index.php
+		try_files $uri $uri/ /index.php?url=$uri&$args;
+	}
+
+	location ~ \.php$ {
+		# Php-fpm
+		# include snippets/fastcgi-php.conf;
+		# fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
+
+	location ~ /(sql|vendor) {
+		deny all;
+		return 404;
+	}
+}
+
+# SSL
+server {
+    listen		443 ssl;
+    listen		[::]:443 ssl;
+
+    root /home/usero/Www/html/woo.xx;
+
+    index index.php index.html;
+
+    server_name         woo.xx www.woo.xx;
+
+    ssl_certificate     woo.xx.chain.crt;
+    ssl_certificate_key woo.xx.key;
+
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+}
+
+# Test, connection
+# openssl s_client -connect woo.xx:443
+# nginx -V
