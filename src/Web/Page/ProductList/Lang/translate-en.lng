@@ -37,6 +37,7 @@
 "CH_PAY3": "I will pick up in person at the restaurant.",
 "CH_E1": "Your order has been created!",
 "CH_E2": "Click the link to view the status of the order.",
-"CH_E3": "Error! Can\'t create order.",
-"CH_E4": "Delivery form must be not empty!"
+"CH_E3": "Error! Can not create order.",
+"CH_E4": "Delivery form must be not empty!",
+"OUR_PRODUCTS": "Products"
 }

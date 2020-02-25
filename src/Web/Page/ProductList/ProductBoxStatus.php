@@ -13,8 +13,6 @@ class ProductBoxStatus
 
 		if(!empty($_GET['id'])){
 			$stat = self::GetStatus($_GET['id']);
-		}else{
-			$stat = 'pending';
 		}
 
 		if($stat == 'canceled'){
@@ -27,9 +25,12 @@ class ProductBoxStatus
 			$status = '<div class="status-btn status-btn-delivery"> '.$t->Get('ST_DELIVERY').' </div>';
 		}else if($stat == 'completed'){
 			$status = '<div class="status-btn status-btn-completed"> '.$t->Get('ST_COMPLETED').' </div>';
-		}else{
+		}else if($stat == 'pending'){
 			$status = '<div class="status-btn status-btn-pending"> '.$t->Get('ST_PENDING').' </div> <p> '.$t->Get('ST_WAIT').' </p>';
+		}else{
+			$status = '<div class="status-btn status-btn-pending"> Error ID </div>';
 		}
+
 		$h = '
 		<div class="checkout-box">
 
@@ -78,12 +79,12 @@ class ProductBoxStatus
 		{
 			$id = (int) $id;
 			$db = Db::getInstance();
-			$r = $db->Pdo->query("SELECT * FROM orders WHERE id = " . $id);
+			$r = $db->Pdo->query("SELECT * FROM orders WHERE id = " . $id . " AND time > NOW() - INTERVAL 7 DAY");
 			$row = $r->fetchAll();
 			if(!empty($row)){
 				return $row[0]['status'];
 			}else{
-				return 'pending';
+				return 'error';
 			}
 		}
 		catch(Exception $e)

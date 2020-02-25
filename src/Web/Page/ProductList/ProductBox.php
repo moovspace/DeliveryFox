@@ -47,12 +47,13 @@ class ProductBox
 		}
 
 		$products = self::GetProducts($cat, $page, $perpage, $q);
-		$category_name = self::GetCategoryName($cat);
+		$title = $t->Get('OUR_PRODUCTS');
+		$category_name = self::GetCategoryName($cat, $title);
 
 		$h = '
 			<div class="products">
-				<!-- <div class="h1"> '.$t->Get('PRODUCTS').' </div> -->
 				<div class="h1"> '.$category_name.' </div>
+				<!-- <div class="h1"> '.$t->Get('PRODUCTS').' </div> -->
 
 				<div class="list">';
 
@@ -252,7 +253,7 @@ class ProductBox
 		}
 	}
 
-	static function GetCategoryName($slug = '')
+	static function GetCategoryName($slug = '', $title= 'Nasze dania')
 	{
 		try
 		{
@@ -263,7 +264,7 @@ class ProductBox
 			if(!empty($o)){
 				return $o[0]['name'];
 			}else{
-				return '';
+				return $title;
 			}
 		}
 		catch(Exception $e)
