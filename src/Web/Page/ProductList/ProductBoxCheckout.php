@@ -103,7 +103,7 @@ class ProductBoxCheckout
 
 				<h3> '.$t->Get('CH_PAY').' </h3>
 
-				<div class="pay-btn pay-btn-active" data-pay="1" onclick="PayMethod(this)"> <i class="fas fa-money-bill-wave"></i> '.$t->Get('CH_PAY1').' Money payment on delivery. </div>
+				<div class="pay-btn pay-btn-active" data-pay="1" onclick="PayMethod(this)"> <i class="fas fa-money-bill-wave"></i> '.$t->Get('CH_PAY1').' </div>
 				<div class="pay-btn"  data-pay="2" onclick="PayMethod(this)"> <i class="fas fa-credit-card"></i> '.$t->Get('CH_PAY2').' Card payment on delivery. </div>
 				<div class="pay-btn"  data-pay="3" onclick="PayMethod(this)"> <i class="fas fa-utensils"></i> '.$t->Get('CH_PAY3').' I will pick up in person at the restaurant. </div>
 

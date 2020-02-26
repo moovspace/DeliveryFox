@@ -41,5 +41,19 @@
 "CH_E4": "Uzupełnij pola formularza!",
 "CH_E5": "Błąd! Zamówienie już istnieje. (Następne za 10 minut).",
 "CH_NAME": "Imię i Nazwisko",
-"OUR_PRODUCTS": "Nasze dania"
+"OUR_PRODUCTS": "Nasze dania",
+"CH_COMMENT": "Dodtkowe informacje",
+"CH_ID": "Numer ID",
+"CH_COUPON": "Kupon:",
+"CH_DATE": "Data",
+"CH_IP": "IP Adres:",
+"CH_DELIVERY_ADDR": "Adres dostawy",
+"CH_IMIE": "Imię:",
+"CH_ADDRESS": "Adres:",
+"CH_MOBILE": "Numer telefonu:",
+"CH_ORDER_LIST": "Lista zamowień",
+"CH_NO_ADDONS": "Bez dodatków.",
+"CH_ADDONS": "Dodatki",
+"CH_CHOOSE_STATUS": "Wybierz status",
+"CH_UPDATE_STATUS": "Aktualizuj status"
 }

@@ -41,5 +41,19 @@
 "CH_E4": "Delivery form must be not empty!",
 "CH_E5": "Error! Only one order for 10 minutes.",
 "CH_NAME": "Firstname and Lastname",
-"OUR_PRODUCTS": "Products"
+"OUR_PRODUCTS": "Products",
+"CH_COMMENT": "Order comment",
+"CH_ID": "Order ID",
+"CH_COUPON": "Coupon:",
+"CH_DATE": "Data",
+"CH_IP": "IP Address:",
+"CH_DELIVERY_ADDR": "Delivery address",
+"CH_IMIE": "Name:",
+"CH_ADDRESS": "Address:",
+"CH_MOBILE": "Mobile:",
+"CH_ORDER_LIST": "Order list",
+"CH_NO_ADDONS": "No addons.",
+"CH_ADDONS": "Addons",
+"CH_CHOOSE_STATUS": "Choose status",
+"CH_UPDATE_STATUS": "Update status"
 }

@@ -34,6 +34,8 @@ class OrderView extends Component
 
 	static function GetOrderHtml()
 	{
+		$t = new Trans('/src/Web/Page/ProductList/Lang', 'pl');
+
 		if(!empty($_GET['id']))
 		{
 			$id = (int) $_GET['id'];
@@ -47,32 +49,32 @@ class OrderView extends Component
 			// print_r($order_addons);
 
 			if($order['payment'] == 1){
-				$payment = '<i class="fas fa-money-bill-wave"></i> Płatność gotówką przy dostawie.';
+				$payment = '<i class="fas fa-money-bill-wave"></i> '.$t->Get('CH_PAY1');
 			}
 			if($order['payment'] == 2){
-				$payment = '<i class="fas fa-credit-card"></i> Płatność kartą przy dostawie.';
+				$payment = '<i class="fas fa-credit-card"></i> '.$t->Get('CH_PAY2');
 			}
 			if($order['payment'] == 3){
-				$payment = '<i class="fas fa-utensils"></i> Odbiór osobist w lokalu. Godzina: ' . $order['pick_up_time'];
+				$payment = '<i class="fas fa-utensils"></i> '.$t->Get('CH_PAY3').'  ' . $order['pick_up_time'];
 			}
 
 			$comment = '';
 			if(!empty($order['info'])){
-				$comment = '<div class="thin"> <b>Komentarz do zamowienia:</b> </br>'.$order['info'].'</div>';
+				$comment = '<div class="thin"> <b> '.$t->Get('CH_COMMENT').'</b> </br>'.$order['info'].'</div>';
 			}
 
 			$h = '<div id="printarea">';
 			$h .= '
-				<h3> <span>Order ID:</span> <strong>'.$order['id'].'</strong> <span id="curr-status"> '.$order['status'].'</span> </h3>
+				<h3> <span>'.$t->Get('CH_ID').'</span> <strong>'.$order['id'].'</strong> <span id="curr-status"> '.$order['status'].'</span> </h3>
 				<div id="payment">'.$payment.'</div>
-				<div class="thin"> <b>Coupon:</b> '.$order['coupon'].' </br> <b>Date:</b> '.$order['time'].' </br> <b>IP address:</b> '.$order['ip'].'</div>
-				<h1>Delivery address</h1>
+				<div class="thin"> <b>'.$t->Get('CH_COUPON').'</b> '.$order['coupon'].' </br> <b> '.$t->Get('CH_DATE').'</b> '.$order['time'].' </br> <b> '.$t->Get('CH_IP').'</b> '.$order['ip'].'</div>
+				<h1> '.$t->Get('CH_DELIVERY_ADDR').'</h1>
 				<div id="delivery-address">
-					<div class="thin"> <b>Imię:</b> '.$order['name'].' </br> <b>Adres:</b> '.$order['address'].' </br> <b>Tel:</b> '.$order['mobile'].'</div>
+					<div class="thin"> <b>'.$t->Get('CH_IMIE').'</b> '.$order['name'].' </br> <b> '.$t->Get('CH_ADDRESS').'</b> '.$order['address'].' </br> <b>'.$t->Get('CH_MOBILE').'</b> '.$order['mobile'].'</div>
 					'.$comment.'
 				</div>
 
-				<h1>Order list</h1>
+				<h1> '.$t->Get('CH_ORDER_LIST').'</h1>
 			';
 
 			foreach($order_products as $pr)
@@ -87,7 +89,7 @@ class OrderView extends Component
 				}
 
 				if(empty($addons)){
-					$addons = '<div class="empty-addons"> Brak dodatków</div>';
+					$addons = '<div class="empty-addons"> '.$t->Get('CH_NO_ADDONS').' </div>';
 				}
 
 				$attr = self::GetOrderProductAttr($pr['attr']);
@@ -98,7 +100,7 @@ class OrderView extends Component
 							<div>'.$pr['pr_name'].' (ID-'.$pr['id'].')</div> <div>'.$pr['pr_size'].'</div> <div>'.$attr.'</div> <div><b>'.$pr['quantity'].'</b> szt.</div> <div>'.$pr['price'].' PLN</div>
 						</div>
 						<div class="ad">
-							<h4>Addons:</h4>
+							<h4> '.$t->Get('CH_ADDONS').'</h4>
 							'.$addons.'
 						</div>
 					</div>
@@ -113,7 +115,7 @@ class OrderView extends Component
 				<div id="actions">
 					<form method="POST" action="">
 						<select name="status" id="select-status">
-							<option value=""> Choose status </option>
+							<option value=""> '.$t->Get('CH_CHOOSE_STATUS').'</option>
 							<option value="processing"> Processing </option>
 							<option value="delivery"> Delivery </option>
 							<option value="completed"> Completed </option>
@@ -121,7 +123,7 @@ class OrderView extends Component
 							<option value="failed"> Failed </option>
 							<option value="pending"> Pending (default) </option>
 						</select>
-						<input type="submit" name="update" value="Update status" id="submit-status">
+						<input type="submit" name="update" value="'.$t->Get('CH_UPDATE_STATUS').'" id="submit-status">
 					</form>
 				</div>
 			';
@@ -129,7 +131,7 @@ class OrderView extends Component
 
 			return $h;
 		}else{
-			return '<h3>Error order id.</h3>';
+			return '<h3>'.$t->Get('CH_ERR_ID').'Error order id.</h3>';
 		}
 	}
 
