@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 25 Lut 2020, 22:43
+-- Czas generowania: 26 Lut 2020, 21:19
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `ip` varchar(100) NOT NULL DEFAULT '',
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `orders`
@@ -307,13 +307,19 @@ TRUNCATE TABLE `orders`;
 --
 
 INSERT INTO `orders` (`id`, `price`, `status`, `name`, `address`, `time`, `coupon`, `delivery_cost`, `pick_up_time`, `mobile`, `info`, `payment`, `worker`, `rf_user`, `ip`, `visible`) VALUES
-(30, '120.89', 'canceled', 'Kaśka Czałuśna', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, 0, '127.0.0.1', 1),
-(31, '183.67', 'delivery', 'Beny Paluch', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, 0, '127.0.0.1', 1),
-(32, '292.16', 'processing', 'Marek Garek', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, 0, '127.0.0.1', 1),
-(33, '241.78', 'completed', 'Monka Mmonka', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, 0, '127.0.0.1', 1),
+(30, '120.89', 'completed', 'Kaśka Czałuśna', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, 0, '127.0.0.1', 1),
+(31, '183.67', 'completed', 'Beny Paluch', 'New York Trumpowa 13', '2020-02-24 17:05:08', '', '5.66', '15:00', '+48 000 222 000', '', 3, 0, 0, '127.0.0.1', 1),
+(32, '292.16', 'completed', 'Marek Garek', 'Pszczynka Pikowa 4', '2020-02-24 17:07:10', 'BURGER-TIME', '5.66', '1 hour', '000 000 123', '', 2, 0, 0, '127.0.0.1', 1),
+(33, '241.78', 'canceled', 'Monka Mmonka', 'Psz Kulkowa 1', '2020-02-25 08:46:36', '', '5.66', '1 hour', '123123123', '', 2, 0, 0, '127.0.0.1', 1),
 (34, '120.89', 'failed', 'Fiku Myku', 'Przasnysz Dębowa 4', '2020-02-24 17:03:42', '', '5.66', '1 hour', '+48 111 222 333', '', 2, 0, 0, '127.0.0.1', 1),
 (35, '75.74', 'delivery', 'Piku Maki', 'sdffsd sdfsdf', '2020-02-25 12:25:32', '', '5.66', '1 hour', '23523523', 'sdfsd', 2, 0, 0, '127.0.0.1', 0),
-(36, '23.66', 'pending', 'Max kolanko', 'Poznań Kluczowa 88/13', '2020-02-25 18:45:07', '', '5.66', '1 hour', '+15 123 123 123', 'Bez cebulki poproszę.', 1, 0, 0, '127.0.0.1', 1);
+(36, '23.66', 'processing', 'Max kolanko', 'Poznań Kluczowa 88/13', '2020-02-25 18:45:07', '', '5.66', '1 hour', '+15 123 123 123', 'Bez cebulki poproszę.', 1, 0, 0, '127.0.0.1', 1),
+(37, '300.33', 'pending', 'Max', 'Warszawa Kacza 1', '2020-02-26 13:44:46', 'WINTER-DOM', '5.66', '1 hour', '123 123 123', 'komentarz do zamówienia', 1, 0, 58, '127.0.0.1', 1),
+(38, '651.04', 'delivery', 'Maxiu', 'Przasnysz klicza 9', '2020-02-26 14:10:08', 'HOT WINTER', '0.00', '1 hour', '123123123', 'Super comment', 2, 0, 58, '127.0.0.1', 1),
+(39, '24.66', 'canceled', 'Kasiu', 'Poznań Kószkowa 987', '2020-02-26 14:13:01', '', '5.66', '1 hour', '222333444', '', 2, 0, 58, '127.0.0.1', 1),
+(40, '23.66', 'pending', 'asdasd', 'sdfsdf sdfsdfsd', '2020-02-26 17:13:18', 'Boom', '5.66', '1 hour', '2342342', 'sdfsdfsd', 1, 0, 0, '127.0.0.1', 1),
+(41, '23.66', 'pending', 'sdfsdf', 'dfsdf sdfsdfs', '2020-02-26 17:47:47', '', '5.66', '1 hour', '435345s', '', 1, 0, 0, '127.0.0.1', 1),
+(42, '100.93', 'failed', 'sdfasdf', 'sdfsdf dsfsdf', '2020-02-26 17:53:32', '', '0.00', '1 hour', '345345', '', 1, 0, 0, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -331,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   `attr` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product`
@@ -362,7 +368,17 @@ INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, 
 (48, 32, 26, '41.51', 2, 0, 17),
 (49, 33, 2, '16.32', 2, 0, 1),
 (50, 35, 2, '16.32', 2, 0, 1),
-(51, 36, 17, '18.00', 1, 1, 0);
+(51, 36, 17, '18.00', 1, 1, 0),
+(52, 37, 17, '18.00', 1, 1, 0),
+(53, 37, 2, '16.32', 2, 0, 1),
+(54, 37, 32, '19.00', 1, 1, 16),
+(55, 38, 17, '18.00', 2, 1, 0),
+(56, 38, 2, '16.32', 2, 0, 1),
+(57, 38, 32, '19.00', 2, 1, 16),
+(58, 39, 32, '19.00', 1, 1, 18),
+(59, 40, 17, '18.00', 1, 1, 0),
+(60, 41, 17, '18.00', 1, 1, 0),
+(61, 42, 2, '16.32', 1, 0, 15);
 
 -- --------------------------------------------------------
 
@@ -380,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `order_product_addon` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product_addon`
@@ -414,7 +430,16 @@ INSERT INTO `order_product_addon` (`id`, `rf_orders`, `rf_order_product`, `produ
 (42, 32, 48, 27, '21.55', 1, 1),
 (43, 33, 49, 26, '41.51', 2, 0),
 (44, 33, 49, 27, '21.55', 1, 1),
-(45, 35, 50, 27, '21.55', 1, 1);
+(45, 35, 50, 27, '21.55', 1, 1),
+(46, 37, 53, 26, '41.51', 2, 0),
+(47, 37, 53, 27, '21.55', 1, 1),
+(48, 37, 54, 27, '21.55', 1, 1),
+(49, 38, 56, 26, '41.51', 2, 0),
+(50, 38, 56, 27, '21.55', 1, 1),
+(51, 38, 57, 26, '41.51', 3, 0),
+(52, 38, 57, 27, '21.55', 2, 1),
+(53, 42, 61, 26, '41.51', 1, 0),
+(54, 42, 61, 27, '21.55', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -594,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   `orders` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UserKey` (`rf_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `user_info`
@@ -606,7 +631,7 @@ TRUNCATE TABLE `user_info`;
 --
 
 INSERT INTO `user_info` (`id`, `rf_user`, `firstname`, `lastname`, `country`, `city`, `zip`, `address`, `mobile`, `mail`, `lat`, `lng`, `about`, `orders`) VALUES
-(1, 58, 'Max', 'Maxioski', 'Polska', 'Przasnysz', '06-300', 'Moczymordowska 199/23', '+48 111 222 333', 'emai@email.xx', '50.000000', '20.000000', 'To ja Maxiu!', 0);
+(1, 58, 'Max', 'Maxioski', 'Polska', 'Warszawa', '06-300', 'Moczymordowska 199/23', '+48 111 222 333', 'emai@email.xx', '50.000000', '20.000000', 'To ja Maxiu!', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
