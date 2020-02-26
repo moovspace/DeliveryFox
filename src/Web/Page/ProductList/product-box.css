@@ -381,7 +381,7 @@ notify{
 	color: #f23; cursor: pointer
 }
 #shopping-cart #cart-hover{
-	padding: 15px; min-height: 90%;
+	padding: 15px; min-height: 80vh;
 	overflow-y: auto
 }
 #cart-checkout{
@@ -560,4 +560,15 @@ notify{
 }
 #status-box .status-btn-delivery{
 	background: #09f;
+}
+
+#shopping-cart{
+	min-height: 100vh;
+	max-height: 100vh;
+	border: 2px solid #f23
+}
+#cart-hover{
+	min-height: 80vh;
+	max-height: 80vh;
+	overflow-y: scroll !important;
 }
