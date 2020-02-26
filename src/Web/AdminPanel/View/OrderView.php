@@ -108,10 +108,10 @@ class OrderView extends Component
 			}
 
 			$h .= '
-				<h3> Order delivery cost: <span style="float: right">'.$order['delivery_cost'].' PLN </span> </h3>
-				<h3> Order cost: <span style="float: right">'.$order['price'].' PLN</span> </h3>
+				<h3> '.$t->Get('CH_DELIVERY_COST').'  <span style="float: right">'.$order['delivery_cost'].' PLN </span> </h3>
+				<h3> '.$t->Get('CH_ORDER_COST').'  <span style="float: right">'.$order['price'].' PLN</span> </h3>
 
-				<h1> Change order status </h1>
+				<h1> '.$t->Get('CH_CHANGE').' </h1>
 				<div id="actions">
 					<form method="POST" action="">
 						<select name="status" id="select-status">

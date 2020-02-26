@@ -55,5 +55,8 @@
 "CH_NO_ADDONS": "Bez dodatków.",
 "CH_ADDONS": "Dodatki",
 "CH_CHOOSE_STATUS": "Wybierz status",
-"CH_UPDATE_STATUS": "Aktualizuj status"
+"CH_UPDATE_STATUS": "Aktualizuj status",
+"CH_CHANGE": "Zmień status",
+"CH_DELIVERY_COST": "Koszt dostawy:",
+"CH_ORDER_COST" : "Do zapłaty:"
 }

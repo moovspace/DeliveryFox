@@ -55,5 +55,8 @@
 "CH_NO_ADDONS": "No addons.",
 "CH_ADDONS": "Addons",
 "CH_CHOOSE_STATUS": "Choose status",
-"CH_UPDATE_STATUS": "Update status"
+"CH_UPDATE_STATUS": "Update status",
+"CH_CHANGE": "Change order status",
+"CH_DELIVERY_COST": "Order delivery cost:",
+"CH_ORDER_COST" : "Order cost:"
 }
