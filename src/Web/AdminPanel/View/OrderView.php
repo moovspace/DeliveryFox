@@ -82,7 +82,7 @@ class OrderView extends Component
 				{
 					if($ad['rf_order_product'] == $pr['id'])
 					{
-						$addons .= '<div class="flex"> <div>'.$ad['pr_name'].'</div> <div>'.$ad['pr_size'].'</div> <div> <b>'.$ad['quantity'].'</b> szt.</div> <div>'.$ad['price'].' PLN</div> </div>';
+						$addons .= '<div class="flex"> <div>'.$ad['pr_name'].' (ID-'.$ad['id'].')</div> <div>'.$ad['pr_size'].'</div> <div> <b>'.$ad['quantity'].'</b> szt.</div> <div>'.$ad['price'].' PLN</div> </div>';
 					}
 				}
 
@@ -95,7 +95,7 @@ class OrderView extends Component
 				$h .= '
 					<div class="pr">
 						<div class="flex">
-							<div>'.$pr['pr_name'].'</div> <div>'.$pr['pr_size'].'</div> <div>'.$attr.'</div> <div><b>'.$pr['quantity'].'</b> szt.</div> <div>'.$pr['price'].' PLN</div>
+							<div>'.$pr['pr_name'].' (ID-'.$pr['id'].')</div> <div>'.$pr['pr_size'].'</div> <div>'.$attr.'</div> <div><b>'.$pr['quantity'].'</b> szt.</div> <div>'.$pr['price'].' PLN</div>
 						</div>
 						<div class="ad">
 							<h4>Addons:</h4>
@@ -170,7 +170,7 @@ class OrderView extends Component
 				$row = $r->fetchAll();
 				if(!empty($row))
 				{
-					return $row[0]['name'];
+					return '<div class="attr">' . $row[0]['name'] . '</div>';
 				}
 			}
 			catch(Exception $e)
@@ -352,17 +352,21 @@ class OrderView extends Component
 
 	static function Title()
 	{
-		return 'Profil';
+		if(!empty($_GET['id'])){
+			return 'Order ID: '. (int) $_GET['id'];
+		}else{
+			return 'Error order id';
+		}
 	}
 
 	static function Description()
 	{
-		return 'Profil settings.';
+		return 'Order detail';
 	}
 
 	static function Keywords()
 	{
-		return 'profil, settings';
+		return 'single order';
 	}
 
 	static function Head()

@@ -528,6 +528,11 @@ strong{
 .pr .flex > div:last-child{
 	text-align: right
 }
+.pr .flex .attr{
+	padding: 2px 15px; border-radius: 50px;
+	float: left; width: auto; color: #21b973;
+	border: 1px solid #21b973;
+}
 .ad{
 	float: left; width: 100%;
 	border-radius: 6px; overflow: hidden;
