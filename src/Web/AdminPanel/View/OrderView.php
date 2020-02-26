@@ -32,10 +32,12 @@ class OrderView extends Component
 		return $menu;
 	}
 
-	static function GetOrderHtml($id = 0)
+	static function GetOrderHtml()
 	{
-		if(!empty($id))
+		if(!empty($_GET['id']))
 		{
+			$id = (int) $_GET['id'];
+
 			$order = self::GetOrder($id);
 			$order_products = self::GetOrderProducts($id);
 			$order_addons = self::GetOrderAddons($id);
@@ -54,6 +56,11 @@ class OrderView extends Component
 				$payment = '<i class="fas fa-utensils"></i> Odbiór osobist w lokalu. Godzina: ' . $order['pick_up_time'];
 			}
 
+			$comment = '';
+			if(!empty($order['info'])){
+				$comment = '<div class="thin"> <b>Komentarz do zamowienia:</b> </br>'.$order['info'].'</div>';
+			}
+
 			$h = '<div id="printarea">';
 			$h .= '
 				<h3> <span>Order ID:</span> <strong>'.$order['id'].'</strong> <span id="curr-status"> '.$order['status'].'</span> </h3>
@@ -62,7 +69,7 @@ class OrderView extends Component
 				<h1>Delivery address</h1>
 				<div id="delivery-address">
 					<div class="thin"> <b>Imię:</b> '.$order['name'].' </br> <b>Adres:</b> '.$order['address'].' </br> <b>Tel:</b> '.$order['mobile'].'</div>
-					<div class="thin"> <b>Komentarz do zamowienia:</b> </br>'.$order['info'].'</div>
+					'.$comment.'
 				</div>
 
 				<h1>Order list</h1>
@@ -99,8 +106,8 @@ class OrderView extends Component
 			}
 
 			$h .= '
-				<h2> Order delivery cost: <span style="float: right">'.$order['delivery_cost'].' PLN </span> </h2>
-				<h2> Order cost: <span style="float: right">'.$order['price'].' PLN</span> </h2>
+				<h3> Order delivery cost: <span style="float: right">'.$order['delivery_cost'].' PLN </span> </h3>
+				<h3> Order cost: <span style="float: right">'.$order['price'].' PLN</span> </h3>
 
 				<h1> Change order status </h1>
 				<div id="actions">
@@ -110,7 +117,7 @@ class OrderView extends Component
 							<option value="processing"> Processing </option>
 							<option value="delivery"> Delivery </option>
 							<option value="completed"> Completed </option>
-							<option value="canceld"> Canceled </option>
+							<option value="canceled"> Canceled </option>
 							<option value="failed"> Failed </option>
 							<option value="pending"> Pending (default) </option>
 						</select>
@@ -121,6 +128,8 @@ class OrderView extends Component
 			$h .= '</div>';
 
 			return $h;
+		}else{
+			return '<h3>Error order id.</h3>';
 		}
 	}
 
@@ -241,6 +250,34 @@ class OrderView extends Component
 		}
 	}
 
+	static function UpdateStatus()
+	{
+		if(!empty($_POST['status']))
+		{
+			try
+			{
+				$st = $_POST['status'];
+				$id = (int) $_GET['id'];
+
+				if($id > 0)
+				{
+					$db = Db::getInstance();
+					$r = $db->Pdo->prepare("UPDATE orders SET status = :st WHERE id = :id");
+					$r->execute([':st' => $st, ':id' => $id]);
+					$ok = $r->rowCount();
+
+					return $ok;
+				}else{
+					return -3;
+				}
+			}
+			catch(Exception $e)
+			{
+				return -1; // error
+			}
+		}
+	}
+
 	static function Data($arr = null)
 	{
 		try
@@ -270,6 +307,11 @@ class OrderView extends Component
 	{
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
 
+		if(!empty($_POST['update'])){
+			// Update status
+			self::UpdateStatus();
+		}
+
 		// Get data
 		$user = self::Data();
 
@@ -284,7 +326,7 @@ class OrderView extends Component
 		$menu['left'] = LeftMenu::Show();
 		$menu['footer'] = Footer::Show($arr);
 		// Html order
-		$menu['order'] = self::GetOrderHtml($_GET['id']);
+		$menu['order'] = self::GetOrderHtml();
 		// Retuen html
 		return self::Html($arr, $menu);
 	}
