@@ -56,7 +56,9 @@ class OrdersView extends Component
 		if(!empty($_GET['q']))
 		{
 			$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
-			$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price, time) REGEXP('".$q."')";
+			$q = str_replace(' ', '|', $q);
+			$q = trim($q);
+			$sql = "AND CONCAT_WS(' ', id, name, status, address, mobile, price, time) REGEXP('".$q."')";
 		}
 
 		try
@@ -82,7 +84,9 @@ class OrdersView extends Component
 			if(!empty($_GET['q']))
 			{
 				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
-				$sql = "AND CONCAT_WS(' ', name, status, address, mobile, price, time) REGEXP('".$q."')";
+				$q = str_replace(' ', '|', $q);
+				$q = trim($q);
+				$sql = "AND CONCAT_WS(' ', id, name, status, address, mobile, price, time) REGEXP('".$q."')";
 			}
 
 			$db = Db::getInstance();
@@ -202,11 +206,11 @@ class OrdersView extends Component
 				<div class="box-wrap">
 
 					<div id="box-fixed" class="animated fadeIn">
-						<h3 onclick="Close(this)"> '.$arr['trans']->Get('C_ADD_CAT').' <i class="fas fa-times close"></i> </h3>
+						<h3 onclick="Close(this)"> '.$arr['trans']->Get('OR_ORDERS').' <i class="fas fa-times close"></i> </h3>
 						<form method="GET" action="">
-							<label>Search</label>
-							<input type="text" name="name" placeholder="e.g. Word">
-							<input type="submit" name="add" value="'.$arr['trans']->Get('C_ADD').'" class="btn float-right">
+							<label>'.$arr['trans']->Get('PP_SEARCH_TEXT').'</label>
+							<input type="text" name="q" placeholder="'.$arr['trans']->Get('EG').' Word">
+							<input type="submit" name="add" value="'.$arr['trans']->Get('PP_SEARCH').'" class="btn float-right">
 						</form>
 					</div>
 
