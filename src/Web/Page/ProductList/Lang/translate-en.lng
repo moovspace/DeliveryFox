@@ -39,6 +39,7 @@
 "CH_E2": "Click the link to view the status of the order.",
 "CH_E3": "Error! Can not create order.",
 "CH_E4": "Delivery form must be not empty!",
+"CH_E5": "Error! Only one order for 10 minutes.",
 "CH_NAME": "Firstname and Lastname",
 "OUR_PRODUCTS": "Products"
 }

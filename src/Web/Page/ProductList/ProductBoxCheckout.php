@@ -35,18 +35,27 @@ class ProductBoxCheckout
 
 					if(!empty($c->Products))
 					{
-						// Save cart orders in database
 						$save = new DbCartSave();
-						$orderid = $save->CreateOrder($c->Checkout(), $_POST['name'], $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->CartDeliveryCost, $_POST['coupon']);
-					}
+						$exists = (int) $save->IsDuplicatedOrder($_POST['name'], $_SERVER['REMOTE_ADDR']);
 
-					if($orderid > 0)
-					{
-						$error = '<div id="order-ok"> <i class="far fa-check-circle"></i> '.$t->Get('CH_E1').' </div>';
-						$error .= '<div id="order-link"> '.$t->Get('CH_E2').' </br></br></br> <a href="/order?id='.$orderid.'"> <i class="fas fa-link"></i> Status </a> </div>';
+						if($exists > 0)
+						{
+							$error = '<div id="order-error"> <i class="fas fa-exclamation-circle"></i> '.$t->Get('CH_E5').' </div>';
+						}
+						else
+						{
+							// Save cart orders in database
+							$orderid = $save->CreateOrder($c->Checkout(), $_POST['name'], $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->CartDeliveryCost, $_POST['coupon']);
 
-						$formOff = 1;
-						unset($_SESSION['cart']);
+							if($orderid > 0)
+							{
+								$error = '<div id="order-ok"> <i class="far fa-check-circle"></i> '.$t->Get('CH_E1').' </div>';
+								$error .= '<div id="order-link"> '.$t->Get('CH_E2').' </br></br></br> <a href="/order?id='.$orderid.'"> <i class="fas fa-link"></i> Status </a> </div>';
+
+								$formOff = 1;
+								unset($_SESSION['cart']);
+							}
+						}
 					}
 					else
 					{

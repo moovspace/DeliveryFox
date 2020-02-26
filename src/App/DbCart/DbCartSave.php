@@ -185,6 +185,15 @@ class DbCartSave
 		}
 	}
 
+	static function IsDuplicatedOrder($name, $ip)
+	{
+
+		$db = Db::GetInstance();
+		$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE name = :name AND ip = :ip AND time > NOW() - INTERVAL 10 MINUTE");
+		$r->execute([':name' => $name, ':ip' => $ip]);
+		return $r->fetchAll()[0]['cnt'];
+	}
+
 	function GetProduct($id)
 	{
 		if($id > 0)

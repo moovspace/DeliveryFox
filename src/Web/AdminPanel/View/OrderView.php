@@ -65,7 +65,7 @@ class OrderView extends Component
 			$h .= '
 				<h3> <span>Order ID:</span> <strong>'.$order['id'].'</strong> <span id="curr-status"> '.$order['status'].'</span> </h3>
 				<div id="payment">'.$payment.'</div>
-				<div class="thin"> <b>Date:</b> '.$order['time'].' </br> <b>IP address:</b> '.$order['ip'].'</div>
+				<div class="thin"> <b>Coupon:</b> '.$order['coupon'].' </br> <b>Date:</b> '.$order['time'].' </br> <b>IP address:</b> '.$order['ip'].'</div>
 				<h1>Delivery address</h1>
 				<div id="delivery-address">
 					<div class="thin"> <b>Imię:</b> '.$order['name'].' </br> <b>Adres:</b> '.$order['address'].' </br> <b>Tel:</b> '.$order['mobile'].'</div>
