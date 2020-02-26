@@ -37,7 +37,7 @@ class ProductBoxCheckout
 					{
 						// Save cart orders in database
 						$save = new DbCartSave();
-						$orderid = $save->CreateOrder($c->Checkout(), $_POST['name'], $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->DeliveryCost, $_POST['coupon']);
+						$orderid = $save->CreateOrder($c->Checkout(), $_POST['name'], $_POST['city'].' '.$_POST['address'], $_POST['pick_up'], $_POST['mobile'], $_POST['info'], (int) $_POST['pay'], (float) $c->CartDeliveryCost, $_POST['coupon']);
 					}
 
 					if($orderid > 0)

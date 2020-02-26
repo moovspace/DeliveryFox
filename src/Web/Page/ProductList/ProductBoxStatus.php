@@ -13,6 +13,7 @@ class ProductBoxStatus
 
 		if(!empty($_GET['id'])){
 			$stat = self::GetStatus($_GET['id']);
+			$time = self::GetTime($_GET['id']);
 		}
 
 		if($stat == 'canceled'){
@@ -41,7 +42,7 @@ class ProductBoxStatus
 				<h3> '.$t->Get('ORDER_ID').' </h3>
 				<h2>'.$_GET['id'].'</h2>
 				<h3> '.$t->Get('ORDER_DATE').' </h3>
-				<h2>2020-02-22 15:55:55</h2>
+				<h2>'.$time.'</h2>
 				'.$status.'
 			</div>
 
@@ -90,6 +91,25 @@ class ProductBoxStatus
 		catch(Exception $e)
 		{
 			return 'pending';
+		}
+	}
+
+	static function GetTime($id){
+		try
+		{
+			$id = (int) $id;
+			$db = Db::getInstance();
+			$r = $db->Pdo->query("SELECT * FROM orders WHERE id = " . $id . " AND time > NOW() - INTERVAL 7 DAY");
+			$row = $r->fetchAll();
+			if(!empty($row)){
+				return $row[0]['time'];
+			}else{
+				return '0000-00-00';
+			}
+		}
+		catch(Exception $e)
+		{
+			return '0000-00-00';
 		}
 	}
 }

@@ -487,3 +487,134 @@ highlight{
 	color: #fff;
 	background: #21b973;
 }
+
+#select-status{
+	float: left; width: 200px; min-width: 200px; padding: 5px;
+	border-radius: 50px; padding: 5px 20px;
+}
+#submit-status{
+	float: left; width: 200px; min-width: 200px; padding: 5px;
+	background: #21b973; color: #fff;
+	border: 1px solid #21b973;
+	border-radius: 50px; padding: 5px 20px;
+}
+#curr-status{
+	float: rigth; width: 200px; min-width: 200px; padding: 5px;
+	background: #eee; color: #000;
+	border: 1px solid #000;
+	border-radius: 50px; margin-left: 20px;
+	padding: 5px 20px; font-size: 13px;
+}
+strong{
+	font-size: 25px; padding: 5px 15px; border: 1px solid #222;
+	border-radius: 50px; margin-left: 10px;
+}
+
+.pr{
+	float: left; width: 100%; padding: 10px;
+	border-radius: 6px; overflow: hidden;
+	border: 1px solid #eee; border-left: 2px solid #21b973;
+	margin-bottom: 10px; box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+	color: #273849;
+}
+.pr > .flex{
+	display: flex;
+	align-items: center;
+	justify-items: left; padding: 5px; font-weight: 600
+}
+.pr .flex > div{
+	float: left; width: 100%;
+}
+.pr .flex > div:last-child{
+	text-align: right
+}
+.ad{
+	float: left; width: 100%;
+	border-radius: 6px; overflow: hidden;
+	margin: 10px 0px;
+	padding: 5px; background: #e0e6e9
+}
+.ad > .flex{
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-items: left;
+	font-weight: 500
+}
+.ad .flex > div{
+	float: left; width: 100%;
+}
+.ad .flex > div:last-child{
+	text-align: right
+}
+.ad .empty-addons{
+	float: left; width: 100%; padding: 5px 0px;
+}
+.ad h4{
+	margin: 5px 10px;
+}
+.empty-addons{
+	margin-left: 10px;
+}
+#payment{
+	float: left; width: 100%; padding: 10px; color: #21b973
+}
+.thin{
+	float: left; width: 100%;  padding: 10px;
+}
+#printarea{
+	overflow: hidden;
+}
+#printarea h3 *{
+	float: left; width: auto;
+}
+#printarea h2{
+	float: left; width: 98%; margin: 0% 1%;
+}
+
+/* Declare print area div */
+@media print
+{
+	body *, #content * { display:none; }
+	#printarea *, body #box, body #box #box-right, body #box #box-right * { display: inherit; }
+	#printarea h3 *{
+		float: left; width: auto;
+	}
+	#printarea h2{
+		float: left; width: 98%; margin: 0% 1%;
+	}
+	.pr{
+		float: left; width: 100%; padding: 10px;
+		border-radius: 6px; overflow: hidden;
+		border: 1px solid #eee; border-left: 2px solid #21b973;
+		margin-bottom: 10px; box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+		color: #273849;
+	}
+	.pr > .flex{
+		display: flex !important;
+		align-items: center;
+		justify-items: left; padding: 5px; font-weight: 600
+	}
+	.pr .flex > div{
+		float: left; width: 100%;
+	}
+	.pr .flex > div:last-child{
+		text-align: right
+	}
+	.ad{
+		float: left; width: 100%;
+		border-radius: 6px; overflow: hidden;
+		margin: 10px 0px;
+		padding: 5px; background: #e0e6e9
+	}
+	.ad > .flex{
+		padding: 10px;
+		display: flex !important;
+		align-items: center;
+		justify-items: left;
+		font-weight: 500
+	}
+	.thin b{
+		float: left; width: auto; margin-right: 10px;
+	}
+ }

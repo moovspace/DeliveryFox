@@ -83,10 +83,14 @@ class DbCartSave
 		try
 		{
 			$ip = $_SERVER['REMOTE_ADDR'];
-
+			$uid = 0;
+			if(!empty($_SESSION['user']['id']))
+			{
+				$uid = (int) $_SESSION['user']['id'];
+			}
 			$db = Db::GetInstance();
-			$r = $db->Pdo->prepare("INSERT INTO orders(name, price, address, coupon, delivery_cost, pick_up_time, mobile, info, payment, ip) VALUES(:name, :price, :address, :cupon, :delivery, :pick, :mobile, :info, :payment, :ip)");
-			$r->execute([':name' => $name, ':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery, ':pick' => $pick_up, ':mobile' => $mobile, ':info' => $info, ':payment' => $payment, ':ip' => $ip]);
+			$r = $db->Pdo->prepare("INSERT INTO orders(name, price, address, coupon, delivery_cost, pick_up_time, mobile, info, payment, ip, rf_user) VALUES(:name, :price, :address, :cupon, :delivery, :pick, :mobile, :info, :payment, :ip, :userid)");
+			$r->execute([':name' => $name, ':price' => $price, ':address' => $address, ':cupon' => $cupon, ':delivery' => $delivery, ':pick' => $pick_up, ':mobile' => $mobile, ':info' => $info, ':payment' => $payment, ':ip' => $ip, ':userid' => $uid]);
 			return $db->Pdo->lastInsertId();
 		}
 		catch(Exception $e)

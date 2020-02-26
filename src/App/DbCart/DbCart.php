@@ -13,6 +13,7 @@ class DbCart
 	public $DeliveryMinOrderCost = 0;
 	public $DeliveryCost = 0;
 	public $DeliveryTime = 60;
+	public $CartDeliveryCost = 0;
 	public $Currency = 'PLN';
 
 	function __construct($currency = 'PLN')
@@ -109,6 +110,7 @@ class DbCart
 		if($cost < $this->DeliveryMinOrderCost && $cost > 0)
 		{
 			$cost += $this->DeliveryCost;
+			$this->CartDeliveryCost = $this->DeliveryCost;
 		}
 
 		return $cost;
