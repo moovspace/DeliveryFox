@@ -176,7 +176,7 @@ class AddProductView extends Component
 			$user = new User();
 
 			// If not admin
-			if($user->Role() != 'admin')
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'driver')
 			{
 				throw new Exception("Error user privileges", 666);
 			}

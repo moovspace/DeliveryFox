@@ -184,7 +184,7 @@ class CategoriesView extends Component
 			$user = new User(); // Is User logedd
 
 			// If not admin
-			if($user->Role() != 'admin')
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'driver')
 			{
 				throw new Exception("Error user privileges", 666);
 			}

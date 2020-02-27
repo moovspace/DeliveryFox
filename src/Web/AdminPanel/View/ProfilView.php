@@ -124,6 +124,12 @@ class ProfilView extends Component
 		{
 			$user = new User();
 
+			// If not admin
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'driver' && $user->Role() != 'user')
+			{
+				throw new Exception("Error user privileges", 666);
+			}
+
 			// Update database
 			$user->ErrorUpdate = self::UpdateAccount($user);
 		}

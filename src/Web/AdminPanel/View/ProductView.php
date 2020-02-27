@@ -74,6 +74,12 @@ class ProductView extends Component
 		{
 			$user = new User();
 
+			// If not admin
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'driver')
+			{
+				throw new Exception("Error user privileges", 666);
+			}
+
 			// Update database
 			$user->ErrorUpdate = self::UpdateAccount($user);
 		}
