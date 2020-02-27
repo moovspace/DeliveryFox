@@ -58,5 +58,6 @@
 "CH_UPDATE_STATUS": "Aktualizuj status",
 "CH_CHANGE": "Zmień status",
 "CH_DELIVERY_COST": "Koszt dostawy:",
-"CH_ORDER_COST" : "Do zapłaty:"
+"CH_ORDER_COST" : "Do zapłaty:",
+"CH_ERR_ID": "Podaj numer zamówienia"
 }

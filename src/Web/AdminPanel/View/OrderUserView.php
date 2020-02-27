@@ -12,7 +12,7 @@ use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
 use MyApp\Web\Currency;
 
-class OrderView extends Component
+class OrderUserView extends Component
 {
 	static public $ErrorUpdate = 0;
 
@@ -25,10 +25,10 @@ class OrderView extends Component
 		$t_edit = $t->Get('OR_ORDER');
 		$t_edit_title = $t->Get('OR_ORDER');
 
-		$menu = new Menu('/panel/orders', $t_name, $t_title, '<i class="fas fa-boxes"></i>', '<i class="fas fa-boxes"></i>');
-		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/order')
+		$menu = new Menu('/panel/delivery', $t_name, $t_title, '<i class="fas fa-truck"></i>', '<i class="fas fa-truck"></i>');
+		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/order-delivery')
 		{
-			$menu->AddLink('/panel/order', $t_edit, $t_edit_title, '<i class="fas fa-box"></i>', '<i class="fas fa-box"></i>');
+			$menu->AddLink('/panel/order-delivery', $t_edit, $t_edit_title, '<i class="fas fa-box"></i>', '<i class="fas fa-box"></i>');
 		}
 		return $menu;
 	}
@@ -111,29 +111,13 @@ class OrderView extends Component
 			$h .= '
 				<h3> '.$t->Get('CH_DELIVERY_COST').'  <span style="float: right">'.$order['delivery_cost'].' '.Currency::MAIN.' </span> </h3>
 				<h3> '.$t->Get('CH_ORDER_COST').'  <span style="float: right">'.$order['price'].' '.Currency::MAIN.'</span> </h3>
-
-				<h1> '.$t->Get('CH_CHANGE').' </h1>
-				<div id="actions">
-					<form method="POST" action="">
-						<select name="status" id="select-status">
-							<option value=""> '.$t->Get('CH_CHOOSE_STATUS').'</option>
-							<option value="processing"> Processing </option>
-							<option value="delivery"> Delivery </option>
-							<option value="completed"> Completed </option>
-							<option value="canceled"> Canceled </option>
-							<option value="failed"> Failed </option>
-							<option value="pending"> Pending (default) </option>
-						</select>
-						<input type="submit" name="update" value="'.$t->Get('CH_UPDATE_STATUS').'" id="submit-status">
-					</form>
-				</div>
 			';
 
 			$h .= '</div>';
 
 			return $h;
 		}else{
-			return '<h3>'.$t->Get('CH_ERR_ID').'Error order id.</h3>';
+			return '<h3>'.$t->Get('CH_ERR_ID').'</h3>';
 		}
 	}
 
@@ -227,34 +211,6 @@ class OrderView extends Component
 		return [];
 	}
 
-	static function UpdateStatus()
-	{
-		if(!empty($_POST['status']))
-		{
-			try
-			{
-				$st = $_POST['status'];
-				$id = (int) $_GET['id'];
-
-				if($id > 0)
-				{
-					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("UPDATE orders SET status = :st WHERE id = :id");
-					$r->execute([':st' => $st, ':id' => $id]);
-					$ok = $r->rowCount();
-
-					return $ok;
-				}else{
-					return -3;
-				}
-			}
-			catch(Exception $e)
-			{
-				return -1; // error
-			}
-		}
-	}
-
 	static function Data($arr = null)
 	{
 		try
@@ -262,7 +218,7 @@ class OrderView extends Component
 			$user = new User(); // Is User logedd
 
 			// If not admin
-			if($user->Role() != 'admin' && $user->Role() != 'worker')
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'user' && $user->Role() != 'driver')
 			{
 				throw new Exception("Error user privileges", 666);
 			}
@@ -286,11 +242,6 @@ class OrderView extends Component
 
 		// Get data
 		$user = self::Data();
-
-		if(!empty($_POST['update'])){
-			// Update status
-			self::UpdateStatus();
-		}
 
 		// Get user data
 		$arr['user'] = $user->GetUser();

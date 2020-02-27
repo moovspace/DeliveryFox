@@ -13,4 +13,7 @@ $r->Set("/panel/product/edit", "MyApp\Web\AdminPanel\EditProduct", "Index");
 // Orders
 $r->Set("/panel/orders", "MyApp\Web\AdminPanel\Orders", "Index");
 $r->Set("/panel/order", "MyApp\Web\AdminPanel\Order", "Index");
+// Delivery
+$r->Set("/panel/delivery", "MyApp\Web\AdminPanel\OrdersUser", "Index");
+$r->Set("/panel/order-delivery", "MyApp\Web\AdminPanel\OrderUser", "Index");
 ?>

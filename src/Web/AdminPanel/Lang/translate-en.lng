@@ -136,5 +136,7 @@
 "OR_TITLE": "Orders list",
 "PP_SEARCH": "Search",
 "PP_SEARCH_TEXT": "Search with",
-"PP_KWOTA": "Cost"
+"PP_KWOTA": "Cost",
+"OR_ORDERS1": "Delivery",
+"OR_ORDER1": "Your orders"
 }

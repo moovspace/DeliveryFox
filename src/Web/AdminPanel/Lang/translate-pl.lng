@@ -136,5 +136,7 @@
 "OR_TITLE": "Lista zamówień",
 "PP_SEARCH": "Wyszukaj",
 "PP_SEARCH_TEXT": "Wyszukaj zawierajace",
-"PP_KWOTA": "Kwota"
+"PP_KWOTA": "Kwota",
+"OR_ORDERS1": "Dostawa",
+"OR_ORDER1": "Twoje zamowienia"
 }

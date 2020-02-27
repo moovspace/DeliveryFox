@@ -10,9 +10,9 @@ use MyApp\Web\AdminPanel\LeftMenu;
 use MyApp\Web\AdminPanel\User;
 use MyApp\Web\AdminPanel\TopMenu;
 use MyApp\Web\AdminPanel\Footer;
-use MyApp\Web\AdminPanel\OrdersList;
+use MyApp\Web\AdminPanel\OrdersUserList;
 
-class OrdersView extends Component
+class OrdersUserView extends Component
 {
 	static public $ErrorUpdate = 0;
 
@@ -20,15 +20,15 @@ class OrdersView extends Component
 	{
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
 
-		$t_name = $t->Get('OR_ORDERS');
-		$t_title = $t->Get('OR_ORDERS');
+		$t_name = $t->Get('OR_ORDERS1');
+		$t_title = $t->Get('OR_ORDER1');
 		$t_edit = $t->Get('OR_ORDER');
 		$t_edit_title = $t->Get('OR_ORDER');
-		$menu = new Menu('/panel/orders', $t_name, $t_title, '<i class="fas fa-boxes"></i>', '<i class="fas fa-boxes"></i>');
+		$menu = new Menu('/panel/delivery', $t_name, $t_title, '<i class="fas fa-truck"></i>', '<i class="fas fa-truck"></i>');
 
-		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/order')
+		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/order-delivery')
 		{
-			$menu->AddLink('/panel/order', $t_edit, $t_edit_title, '<i class="fas fa-box"></i>', '<i class="fas fa-box"></i>');
+			$menu->AddLink('/panel/order-delivery', $t_edit, $t_edit_title, '<i class="fas fa-box"></i>', '<i class="fas fa-box"></i>');
 		}
 		return $menu;
 	}
@@ -50,6 +50,9 @@ class OrdersView extends Component
 			$offset = 0;
 		}
 
+		// Logged user id
+		$uid = (int)$_SESSION['user']['id'];
+
 		// Search
 		$q = '';
 		$sql = '';
@@ -64,8 +67,8 @@ class OrdersView extends Component
 		try
 		{
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM orders WHERE visible = 1 ".$sql." ORDER BY id DESC LIMIT :offset,:perpage");
-			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
+			$r = $db->Pdo->prepare("SELECT * FROM orders WHERE visible = 1 AND rf_user = :uid ".$sql." ORDER BY id DESC LIMIT :offset,:perpage");
+			$r->execute([':offset' => $offset, ':perpage' => $perpage, ':uid' => $uid]);
 			return $r->fetchAll();
 		}
 		catch(Exception $e)
@@ -78,6 +81,9 @@ class OrdersView extends Component
 	{
 		try
 		{
+			// Logged user id
+			$uid = (int)$_SESSION['user']['id'];
+
 			// Search
 			$q = '';
 			$sql = '';
@@ -90,40 +96,13 @@ class OrdersView extends Component
 			}
 
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE visible = 1 ".$sql);
-			$r->execute();
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE visible = 1 AND rf_user = :uid ".$sql);
+			$r->execute([':uid' => $uid]);
 			return $r->fetchAll()[0]['cnt'];
 		}
 		catch(Exception $e)
 		{
 			return 1;
-		}
-	}
-
-	static function Del()
-	{
-		if(!empty($_GET['delete']))
-		{
-			try
-			{
-				$id = (int) $_GET['delete'];
-
-				if($id > 0)
-				{
-					$db = Db::getInstance();
-					$r = $db->Pdo->prepare("UPDATE orders SET visible = 0 WHERE id = $id");
-					$r->execute();
-					$ok = $r->rowCount();
-
-					return $ok;
-				}else{
-					return -3;
-				}
-			}
-			catch(Exception $e)
-			{
-				return -1; // error
-			}
 		}
 	}
 
@@ -134,7 +113,7 @@ class OrdersView extends Component
 			$user = new User(); // Is User logedd
 
 			// If not admin
-			if($user->Role() != 'admin')
+			if($user->Role() != 'admin' && $user->Role() != 'worker' && $user->Role() != 'user' && $user->Role() != 'driver')
 			{
 				throw new Exception("Error user privileges", 666);
 			}
@@ -158,11 +137,6 @@ class OrdersView extends Component
 
 		// Get data
 		$user = self::Data();
-
-		if(!empty($_GET['delete']))
-		{
-			self::Del();
-		}
 
 		// Get user data
 		$arr['user'] = $user->GetUser();
@@ -191,7 +165,7 @@ class OrdersView extends Component
 		$maxrows =  self::GetMaxRows();
 		// print_r($maxrows);
 		// print_r($rows);
-		$menu['list'] = OrdersList::Get($title, $rows, (int) $_GET['page'], $maxrows);
+		$menu['list'] = OrdersUserList::Get($title, $rows, (int) $_GET['page'], $maxrows);
 
 		// Retuen html
 		return self::Html($arr, $menu);
@@ -204,7 +178,7 @@ class OrdersView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('OR_ORDERS').'  </h1>
+				<h1> '.$arr['trans']->Get('OR_ORDERS1').'  </h1>
 				<error id="error">
 					' . $arr['error'] . '
 				</error>
@@ -233,17 +207,17 @@ class OrdersView extends Component
 
 	static function Title()
 	{
-		return 'Profil';
+		return 'Delivery';
 	}
 
 	static function Description()
 	{
-		return 'Profil settings.';
+		return 'Delivery orders.';
 	}
 
 	static function Keywords()
 	{
-		return 'profil, settings';
+		return 'orders, zamówienia';
 	}
 
 	static function Head()
