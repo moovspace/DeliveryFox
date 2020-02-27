@@ -55,8 +55,19 @@ class ProductsView extends Component
 
 		try
 		{
+			// Search
+			$q = '';
+			$sql = '';
+			if(!empty($_GET['q']))
+			{
+				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+				$q = str_replace(' ', '|', $q);
+				$q = trim($q);
+				$sql = "AND CONCAT_WS(' ', size, name, about, stock_status) REGEXP('".$q."')";
+			}
+
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT * FROM product ORDER BY id DESC LIMIT :offset,:perpage");
+			$r = $db->Pdo->prepare("SELECT * FROM product WHERE id > 0 ".$sql." ORDER BY id DESC LIMIT :offset,:perpage");
 			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
 			return $r->fetchAll();
 		}
@@ -70,8 +81,19 @@ class ProductsView extends Component
 	{
 		try
 		{
+			// Search
+			$q = '';
+			$sql = '';
+			if(!empty($_GET['q']))
+			{
+				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+				$q = str_replace(' ', '|', $q);
+				$q = trim($q);
+				$sql = "AND CONCAT_WS(' ', size, name, about, stock_status) REGEXP('".$q."')";
+			}
+
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM product WHERE id > 0 ".$sql);
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -218,7 +240,16 @@ class ProductsView extends Component
 				</error>
 				<div class="box-wrap">
 
-					<h3> '.$arr['trans']->Get('P_SUB_TITLE').'  <a href="/panel/product/add" id="btn-add-attribute"> '.$arr['trans']->Get('P_ADD_CAT').' <i class="fas fa-plus"></i> </a> </h3>
+					<div id="box-fixed" class="animated fadeIn">
+						<h3 onclick="Close(this)"> '.$arr['trans']->Get('OR_PRODUCTS').' <i class="fas fa-times close"></i> </h3>
+						<form method="GET" action="">
+							<label>'.$arr['trans']->Get('PP_SEARCH_TEXT').'</label>
+							<input type="text" name="q" placeholder="'.$arr['trans']->Get('EG').' Word">
+							<input type="submit" name="add" value="'.$arr['trans']->Get('PP_SEARCH').'" class="btn float-right">
+						</form>
+					</div>
+
+					<h3> '.$arr['trans']->Get('P_SUB_TITLE').' <a id="btn-search" onclick="OpenOrderSearch(this)"> '.$arr['trans']->Get('PP_SEARCH').' <i class="fas fa-search"></i> </a> <a href="/panel/product/add" id="btn-add-attribute"> '.$arr['trans']->Get('P_ADD_CAT').' <i class="fas fa-plus"></i> </a> </h3>
 
 					'.$html['list'].'
 
