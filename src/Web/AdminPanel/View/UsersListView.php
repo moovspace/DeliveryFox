@@ -50,8 +50,19 @@ class UsersListView extends Component
 
 		try
 		{
+			// Search
+			$q = '';
+			$sql = '';
+			if(!empty($_GET['q']))
+			{
+				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+				$q = str_replace(' ', '|', $q);
+				$q = trim($q);
+				$sql = "AND CONCAT_WS(' ', username, email, mobile) REGEXP('".$q."')";
+			}
+
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT id, username, email, mobile, role, time, active FROM user ORDER BY id DESC LIMIT :offset,:perpage");
+			$r = $db->Pdo->prepare("SELECT id, username, email, mobile, role, time, active FROM user WHERE id > 0 ".$sql." ORDER BY id DESC LIMIT :offset,:perpage");
 			$r->execute([':offset' => $offset, ':perpage' => $perpage]);
 			return $r->fetchAll();
 		}
@@ -65,8 +76,19 @@ class UsersListView extends Component
 	{
 		try
 		{
+			// Search
+			$q = '';
+			$sql = '';
+			if(!empty($_GET['q']))
+			{
+				$q = htmlentities($_GET['q'], ENT_QUOTES, "UTF-8");
+				$q = str_replace(' ', '|', $q);
+				$q = trim($q);
+				$sql = "AND CONCAT_WS(' ', username, email, mobile) REGEXP('".$q."')";
+			}
+
 			$db = Db::getInstance();
-			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM attr");
+			$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM user WHERE id > 0 ".$sql);
 			$r->execute();
 			return $r->fetchAll()[0]['cnt'];
 		}
@@ -239,7 +261,16 @@ class UsersListView extends Component
 				</error>
 				<div class="box-wrap">
 
-					<h3> '.$arr['trans']->Get('A_LIST_USERS').'  </h3>
+					<div id="box-fixed" class="animated fadeIn">
+						<h3 onclick="Close(this)"> '.$arr['trans']->Get('OR_CLIENTS').' <i class="fas fa-times close"></i> </h3>
+						<form method="GET" action="">
+							<label>'.$arr['trans']->Get('PP_SEARCH_TEXT').'</label>
+							<input type="text" name="q" placeholder="'.$arr['trans']->Get('EG').' Word">
+							<input type="submit" name="add" value="'.$arr['trans']->Get('PP_SEARCH').'" class="btn float-right">
+						</form>
+					</div>
+
+					<h3> '.$arr['trans']->Get('A_LIST_USERS').' <a id="btn-search" onclick="OpenOrderSearch(this)"> '.$arr['trans']->Get('PP_SEARCH').' <i class="fas fa-search"></i> </a> </h3>
 
 					'.$html['list'].'
 

@@ -162,5 +162,6 @@
 "ERR_PASS": "Podaj aktualne i nowe hasło!",
 "LB_NEWS": "Wysyłaj newsletter",
 "LB_YES": "Tak",
-"LB_NO": "Nie"
+"LB_NO": "Nie",
+"OR_CLIENTS": "Użytkownicy"
 }

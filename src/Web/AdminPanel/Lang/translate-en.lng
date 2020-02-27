@@ -162,5 +162,6 @@
 "ERR_PASS": "Enter old and current password.",
 "LB_NEWS": "Send newsletter",
 "LB_YES": "Yes",
-"LB_NO": "No"
+"LB_NO": "No",
+"OR_CLIENTS": "Users"
 }
