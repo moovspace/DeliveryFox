@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 26 Lut 2020, 21:19
+-- Czas generowania: 27 Lut 2020, 13:36
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `ip` varchar(100) NOT NULL DEFAULT '',
   `visible` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `orders`
@@ -319,7 +319,8 @@ INSERT INTO `orders` (`id`, `price`, `status`, `name`, `address`, `time`, `coupo
 (39, '24.66', 'canceled', 'Kasiu', 'Poznań Kószkowa 987', '2020-02-26 14:13:01', '', '5.66', '1 hour', '222333444', '', 2, 0, 58, '127.0.0.1', 1),
 (40, '23.66', 'pending', 'asdasd', 'sdfsdf sdfsdfsd', '2020-02-26 17:13:18', 'Boom', '5.66', '1 hour', '2342342', 'sdfsdfsd', 1, 0, 0, '127.0.0.1', 1),
 (41, '23.66', 'pending', 'sdfsdf', 'dfsdf sdfsdfs', '2020-02-26 17:47:47', '', '5.66', '1 hour', '435345s', '', 1, 0, 0, '127.0.0.1', 1),
-(42, '100.93', 'failed', 'sdfasdf', 'sdfsdf dsfsdf', '2020-02-26 17:53:32', '', '0.00', '1 hour', '345345', '', 1, 0, 0, '127.0.0.1', 1);
+(42, '100.93', 'completed', 'sdfasdf', 'sdfsdf dsfsdf', '2020-02-26 17:53:32', '', '0.00', '1 hour', '345345', '', 1, 0, 0, '127.0.0.1', 1),
+(43, '120.89', 'failed', 'Maxymila', 'Kraków Smokowa 9/1', '2020-02-27 10:13:13', 'HOT_CUP', '0.00', '1 hour', '+48 123 123 123', 'Bez cebuli poproszę.', 1, 0, 63, '127.0.0.1', 1);
 
 -- --------------------------------------------------------
 
@@ -337,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `order_product` (
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   `attr` bigint(22) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product`
@@ -378,7 +379,8 @@ INSERT INTO `order_product` (`id`, `rf_orders`, `product`, `price`, `quantity`, 
 (58, 39, 32, '19.00', 1, 1, 18),
 (59, 40, 17, '18.00', 1, 1, 0),
 (60, 41, 17, '18.00', 1, 1, 0),
-(61, 42, 2, '16.32', 1, 0, 15);
+(61, 42, 2, '16.32', 1, 0, 15),
+(62, 43, 2, '16.32', 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -396,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `order_product_addon` (
   `quantity` int(11) NOT NULL DEFAULT 1,
   `sale` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `order_product_addon`
@@ -439,7 +441,9 @@ INSERT INTO `order_product_addon` (`id`, `rf_orders`, `rf_order_product`, `produ
 (51, 38, 57, 26, '41.51', 3, 0),
 (52, 38, 57, 27, '21.55', 2, 1),
 (53, 42, 61, 26, '41.51', 1, 0),
-(54, 42, 61, 27, '21.55', 2, 1);
+(54, 42, 61, 27, '21.55', 2, 1),
+(55, 43, 62, 26, '41.51', 2, 0),
+(56, 43, 62, 27, '21.55', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -593,7 +597,7 @@ TRUNCATE TABLE `user`;
 
 INSERT INTO `user` (`id`, `username`, `email`, `pass`, `mobile`, `role`, `time`, `ip`, `code`, `active`, `apikey`) VALUES
 (58, 'Marcys', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '+48 321 321 321', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1, 'f3c18f6f-53df-11ea-bc1b-0016d48a4846'),
-(63, 'Max', 'root@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1, '6d566eb3-53e0-11ea-bc1b-0016d48a4846');
+(63, 'Max', 'root@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'user', '2020-02-09 11:45:21', '127.0.0.1', '', 1, '6d566eb3-53e0-11ea-bc1b-0016d48a4846');
 
 -- --------------------------------------------------------
 
