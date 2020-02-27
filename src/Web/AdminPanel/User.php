@@ -209,7 +209,7 @@ class User
 	 *
 	 * @return array
 	 */
-	function GetUser()
+	function GetUser($id = 0)
 	{
 		$this->User = null;
 

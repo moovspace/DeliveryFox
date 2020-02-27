@@ -21,7 +21,13 @@ class UsersListView extends Component
 		$t = new Trans('/src/Web/AdminPanel/Lang', 'pl');
 		$t_attr = $t->Get('A_LIST_USERS');
 		$t_title = $t->Get('A_TITLE_USERS');
-		$menu = new Menu('/panel/users', $t_attr, $t_title, '<i class="fas fa-user"></i>', '<i class="fas fa-user"></i>');
+		$t_attr1 = $t->Get('A_CLIENT');
+		$t_title1 = $t->Get('A_CLIENT_TITLE');
+		$menu = new Menu('/panel/users', $t_attr, $t_title, '<i class="fas fa-users"></i>', '<i class="fas fa-users"></i>');
+		if(parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH) == '/panel/client')
+		{
+			$menu->AddLink('/panel/client', $t_attr1, $t_title1, '<i class="fas fa-user"></i>', '<i class="fas fa-user"></i>');
+		}
 		return $menu;
 	}
 

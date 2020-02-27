@@ -9,6 +9,7 @@ use MyApp\Web\AdminPanel\View\ProductsView;
 use MyApp\Web\AdminPanel\View\OrdersView;
 use MyApp\Web\AdminPanel\View\OrdersUserView;
 use MyApp\Web\AdminPanel\View\UsersListView;
+use MyApp\Web\AdminPanel\View\UserProfilView;
 
 class LeftMenu
 {

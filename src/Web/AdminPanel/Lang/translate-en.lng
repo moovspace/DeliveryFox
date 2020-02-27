@@ -152,5 +152,7 @@
 "USERNAME": "Username",
 "EMAIL": "Email",
 "PASS": "Password",
-"ROLE": "Role"
+"ROLE": "Role",
+"A_CLIENT": "User info",
+"A_CLIENT_TITLE": "User info"
 }

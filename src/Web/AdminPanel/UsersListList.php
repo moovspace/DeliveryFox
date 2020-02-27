@@ -32,7 +32,7 @@ class UsersListList
 				}
 				$t .= '
 				<div>
-					<a href="/client?id='.$id.'" class="btn-small-li user-show" data-id="'.$id.'"> <i class="fas fa-eye"></i> </a>
+					<a href="/panel/client?id='.$id.'" class="btn-small-li user-show" data-id="'.$id.'"> <i class="fas fa-eye"></i> </a>
 					<a href="?ban='.$id.'" class="btn-small-li" data-id="'.$id.'"> <i class="fas fa-ban"></i> </a>
 					<a href="?delete='.$id.'" class="btn-small-li" data-id="'.$id.'"> <i class="fas fa-trash"></i> </a>
 				</div>

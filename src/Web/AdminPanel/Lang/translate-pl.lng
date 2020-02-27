@@ -147,10 +147,12 @@
 "U_EMAIL": "Email",
 "A_TITLE_USERS": "Klienci",
 "A_LIST_USERS": "Lista klientów",
-"A_ADD_USER": "Dodaj klienta",
+"A_ADD_USER": "Dodaj użytkownika",
 "A_ADD": "Utwórz",
 "USERNAME": "Username",
 "EMAIL": "Email",
 "PASS": "Hasło",
-"ROLE": "Typ konta"
+"ROLE": "Typ konta",
+"A_CLIENT": "Użytkownik",
+"A_CLIENT_TITLE": "O uzytkowniku"
 }
