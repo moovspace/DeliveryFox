@@ -146,7 +146,7 @@ class ProfilView extends Component
 			}
 
 			// Update database
-			echo $user->ErrorUpdate = self::UpdateAccount($user);
+			$user->ErrorUpdate = self::UpdateAccount($user);
 		}
 		catch(Exception $e)
 		{
