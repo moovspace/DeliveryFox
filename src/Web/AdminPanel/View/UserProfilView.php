@@ -17,6 +17,21 @@ class UserProfilView extends Component
 {
 	static public $ErrorUpdate = 0;
 
+	static function GetUserOrdersQuantity($id = 0)
+	{
+		$db = Db::getInstance();
+		$r = $db->Pdo->prepare("SELECT COUNT(*) as cnt FROM orders WHERE rf_user = :id");
+		$r->execute([':id' => $id]);
+		$rows = $r->fetchAll();
+
+		if(!empty($rows))
+		{
+			// Update variable
+			return $rows[0]['cnt'];
+		}
+		return 0;
+	}
+
 	static function GetUser($id = 0)
 	{
 		$db = Db::getInstance();
@@ -83,12 +98,13 @@ class UserProfilView extends Component
 		if(!empty($_GET['id'])){
 			$uid = $_GET['id'];
 		}else{
-			$uid = 0;
+			header('Location: /panel/users');
 		}
 
 		// Get user data
 		$arr['user'] = self::GetUser($uid);
 		$arr['user_info'] = self::GetUserInfo($uid);
+		$arr['user_qty'] = self::GetUserOrdersQuantity($uid);
 		$arr['error'] = '';
 		$arr['trans'] = $t;
 
@@ -109,6 +125,7 @@ class UserProfilView extends Component
 			'.$html['left'].'
 			<div id="box-right">
 				<h1> '.$arr['trans']->Get('PR_SETTINGS').' </h1>
+				<h4>Orders/Zamówień: '.$arr['user_qty'].' </h4>
 				<error id="error">
 					' . $arr['error'] . '
 				</error>
@@ -116,7 +133,7 @@ class UserProfilView extends Component
 					<h3> '.$arr['trans']->Get('PR_ACCOUNT').' </h3>
 					<form method="post" enctype="multipart/form-data">
 						<div class="w-50">
-							<label> '.$arr['trans']->Get('LB_USER').' </label>
+							<label> '.$arr['trans']->Get('LB_USER').'</label>
 							<input disabled type="text" name="username" placeholder="'.$arr['trans']->Get('EG').' Username" value="' . $arr['user']['username'] . '">
 						</div>
 						<div class="w-50">
@@ -126,10 +143,6 @@ class UserProfilView extends Component
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_MOBILE').' </label>
 							<input disabled type="text" name="mobile" placeholder="'.$arr['trans']->Get('EG').' +48 000 000 000" value="' . $arr['user']['mobile'] . '">
-						</div>
-						<div class="w-50">
-							<label> '.$arr['trans']->Get('LB_AVATAR').' </label>
-							<input disabled type="file" name="file" accept="image/jpeg" placeholder="'.$arr['trans']->Get('EG').' Avatar">
 						</div>
 					</form>
 				</div>
