@@ -159,5 +159,8 @@
 "LB_PASS_OLD": "Aktualne hasło",
 "LB_PASS": "Nowe hasło",
 "LB_PASS_2": "Powtórz hasło",
-"ERR_PASS": "Podaj aktualne i nowe hasło!"
+"ERR_PASS": "Podaj aktualne i nowe hasło!",
+"LB_NEWS": "Wysyłaj newsletter",
+"LB_YES": "Tak",
+"LB_NO": "Nie"
 }

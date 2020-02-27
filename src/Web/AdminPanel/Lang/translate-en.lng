@@ -159,5 +159,8 @@
 "LB_PASS_OLD": "Current password",
 "LB_PASS": "New password",
 "LB_PASS_2": "Repeat password",
-"ERR_PASS": "Enter old and current password."
+"ERR_PASS": "Enter old and current password.",
+"LB_NEWS": "Send newsletter",
+"LB_YES": "Yes",
+"LB_NO": "No"
 }

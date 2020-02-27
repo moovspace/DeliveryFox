@@ -202,6 +202,9 @@ class ProfilView extends Component
 
 	static function Html($arr = null, $html = '')
 	{
+		$news = '';
+		if($arr["user"]["send_news"] == 1){ $news = "selected"; }
+
 		return '
 		'.$html['top'].'
 		<div id="box">
@@ -229,6 +232,13 @@ class ProfilView extends Component
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_AVATAR').' </label>
 							<input type="file" name="file" accept="image/jpeg" placeholder="'.$arr['trans']->Get('EG').' Avatar">
+						</div>
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('LB_NEWS').' </label>
+							<select name="send_news">
+								<option value="0"> '.$arr['trans']->Get('LB_NO').' </option>
+								<option value="1" '.$news.' > '.$arr['trans']->Get('LB_YES').' </option>
+							</select>
 						</div>
 						<line></line>
 						<input type="submit" name="account" value="'.$arr['trans']->Get('SAVE').'" class="btn float-right">
