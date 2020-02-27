@@ -30,11 +30,19 @@ class LeftMenu
 
 		if($user->Role() == 'worker')
 		{
+			$menu .= AttributesView::Menu()->GetMenu();
+			$menu .= CategoriesView::Menu()->GetMenu();
+			$menu .= ProductsView::Menu()->GetMenu();
+			$menu .= OrdersView::Menu()->GetMenu();
 			$menu .= OrdersUserView::Menu()->GetMenu();
 		}
 
 		if($user->Role() == 'driver')
 		{
+			$menu .= AttributesView::Menu()->GetMenu();
+			$menu .= CategoriesView::Menu()->GetMenu();
+			$menu .= ProductsView::Menu()->GetMenu();
+			$menu .= OrdersView::Menu()->GetMenu();
 			$menu .= OrdersUserView::Menu()->GetMenu();
 		}
 
