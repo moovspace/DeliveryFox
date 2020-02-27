@@ -124,7 +124,7 @@ class UserProfilView extends Component
 		<div id="box">
 			'.$html['left'].'
 			<div id="box-right">
-				<h1> '.$arr['trans']->Get('PR_SETTINGS').' </h1>
+				<h1> '.$arr['trans']->Get('PR_SETTINGS').' '.$arr['user']['username'].'</h1>
 				<h4>Orders/Zamówień: '.$arr['user_qty'].' </h4>
 				<error id="error">
 					' . $arr['error'] . '

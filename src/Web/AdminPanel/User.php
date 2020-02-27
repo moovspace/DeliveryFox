@@ -340,6 +340,26 @@ class User
 		$ok = $r->rowCount();
 		return $ok;
 	}
+
+	function UpdatePassword($id, $curr, $new1, $new2)
+	{
+		if($id > 0)
+		{
+			if($new1 == $new2)
+			{
+				$db = Db::getInstance();
+				$r = $db->Pdo->prepare("UPDATE user SET pass = MD5(:pass) WHERE id = :id AND pass = MD5(:curr)");
+				$r->execute([':id' => $id, ':pass' => $new1, ':curr' => $curr]);
+				$c = $r->rowCount();
+
+				if($c > 0)
+				{
+					return 1;
+				}
+			}
+		}
+		return -9;
+	}
 }
 
 /*

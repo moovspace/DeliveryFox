@@ -154,5 +154,10 @@
 "PASS": "Hasło",
 "ROLE": "Typ konta",
 "A_CLIENT": "Użytkownik",
-"A_CLIENT_TITLE": "O uzytkowniku"
+"A_CLIENT_TITLE": "O uzytkowniku",
+"LB_RECOVER": "Zmień hasło",
+"LB_PASS_OLD": "Aktualne hasło",
+"LB_PASS": "Nowe hasło",
+"LB_PASS_2": "Powtórz hasło",
+"ERR_PASS": "Podaj aktualne i nowe hasło!"
 }

@@ -154,5 +154,10 @@
 "PASS": "Password",
 "ROLE": "Role",
 "A_CLIENT": "User info",
-"A_CLIENT_TITLE": "User info"
+"A_CLIENT_TITLE": "User info",
+"LB_RECOVER": "Change password",
+"LB_PASS_OLD": "Current password",
+"LB_PASS": "New password",
+"LB_PASS_2": "Repeat password",
+"ERR_PASS": "Enter old and current password."
 }

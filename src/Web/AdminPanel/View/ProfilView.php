@@ -116,6 +116,21 @@ class ProfilView extends Component
 			}
 		}
 
+		if(!empty($_POST['reset']))
+		{
+			try
+			{
+				return $user->UpdatePassword($_SESSION['user']['id'], $_POST['curr'], $_POST['pass1'], $_POST['pass2']);
+			}
+			catch(Exception $e)
+			{
+				if ($e->errorInfo[1] == 1062) {
+					return -2; // username exist
+				}
+				return -1;
+			}
+		}
+
 	}
 
 	static function Data($arr = null)
@@ -131,7 +146,7 @@ class ProfilView extends Component
 			}
 
 			// Update database
-			$user->ErrorUpdate = self::UpdateAccount($user);
+			echo $user->ErrorUpdate = self::UpdateAccount($user);
 		}
 		catch(Exception $e)
 		{
@@ -169,6 +184,8 @@ class ProfilView extends Component
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_IMAGE').' </span>';
 			}else if($user->ErrorUpdate == -2){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_USERNAME').' </span>';
+			}else if($user->ErrorUpdate == -9){
+				$arr['error'] = '<span class="red"> '.$t->Get('ERR_PASS').' </span>';
 			}else if($user->ErrorUpdate < 0){
 				$arr['error'] = '<span class="red"> '.$t->Get('ERR_UPDATE').' </span>';
 			}
@@ -280,6 +297,26 @@ class ProfilView extends Component
 						</div>
 						<line></line>
 						<input type="submit" name="delivery" value="'.$arr['trans']->Get('SAVE').'" class="btn float-right">
+					</form>
+				</div>
+
+				<div class="box-wrap">
+					<h3> '.$arr['trans']->Get('LB_RECOVER').' </h3>
+					<form method="post">
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('LB_PASS_OLD').' </label>
+							<input type="text" name="curr">
+						</div>
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('LB_PASS').' </label>
+							<input type="text" name="pass1">
+						</div>
+						<div class="w-50">
+							<label> '.$arr['trans']->Get('LB_PASS_2').' </label>
+							<input type="text" name="pass2">
+						</div>
+						<line></line>
+						<input type="submit" name="reset" value="'.$arr['trans']->Get('SAVE').'" class="btn float-right">
 					</form>
 				</div>
 			</div>

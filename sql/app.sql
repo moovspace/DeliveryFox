@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 27 Lut 2020, 13:36
+-- Czas generowania: 27 Lut 2020, 19:58
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -584,7 +584,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `ukey` (`username`),
   UNIQUE KEY `apikey` (`apikey`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Tabela Truncate przed wstawieniem `user`
