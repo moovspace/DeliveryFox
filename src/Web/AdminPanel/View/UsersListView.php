@@ -248,19 +248,27 @@ class UsersListView extends Component
 				<h1> '.$arr['trans']->Get('A_ADD_USER').'  </h1>
 				<div class="box-wrap">
 					<form method="POST" action ="">
-						<label>'.$arr['trans']->Get('USERNAME').' </label>
-						<input type="text" name="username">
-						<label>'.$arr['trans']->Get('EMAIL').' </label>
-						<input type="text" name="email">
-						<label>'.$arr['trans']->Get('PASS').' </label>
-						<input type="text" name="pass">
-						<label>'.$arr['trans']->Get('ROLE').' </label>
-						<select name="role">
-							<option value="user"> User </option>
-							<option value="worker"> Worker </option>
-							<option value="driver"> Driver </option>
-							<option value="admin"> Admin </option>
-						</select>
+						<div class="w-50">
+							<label>'.$arr['trans']->Get('USERNAME').' </label>
+							<input type="text" name="username">
+						</div>
+						<div class="w-50">
+							<label>'.$arr['trans']->Get('EMAIL').' </label>
+							<input type="text" name="email">
+						</div>
+						<div class="w-50">
+							<label>'.$arr['trans']->Get('PASS').' </label>
+							<input type="text" name="pass">
+						</div>
+						<div class="w-50">
+							<label>'.$arr['trans']->Get('ROLE').' </label>
+							<select name="role">
+								<option value="user"> User </option>
+								<option value="worker"> Worker </option>
+								<option value="driver"> Driver </option>
+								<option value="admin"> Admin </option>
+							</select>
+						</div>
 						<input type="submit" name="add" class="btn float-right" value="'.$arr['trans']->Get('A_ADD').'">
 					</form>
 				</div>
