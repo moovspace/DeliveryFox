@@ -69,7 +69,7 @@ class SendNewsletterCron
 		}
 
 		$db = Db::getInstance();
-		$r = $db->Pdo->prepare("SELECT newsletter.id, newsletter.name, newsletter.email, newsletter_html.subject, newsletter_html.html FROM newsletter LEFT JOIN newsletter_html ON newsletter.rf_newsletter_html = newsletter_html.id WHERE error = '' LIMIT :limit");
+		$r = $db->Pdo->prepare("SELECT newsletter.id, newsletter.name, newsletter.email, newsletter_html.subject, newsletter_html.html FROM newsletter LEFT JOIN newsletter_html ON newsletter.rf_newsletter_html = newsletter_html.id WHERE error = '' ORDER BY RAND() LIMIT :limit");
 		$r->execute([':limit' => $limit]);
 		return $r->fetchAll();
 	}
