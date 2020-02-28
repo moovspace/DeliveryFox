@@ -17,7 +17,7 @@ class SendNewsletterCron
 		{
 			$sender = md5(uniqid());
 
-			echo "Sender id: " . $sender . " Wait ... </br>";
+			echo "Wait ... </br></br></br>";
 
 			$msgs = self::GetMessages($quantity = 100);
 
