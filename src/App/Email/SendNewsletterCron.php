@@ -23,7 +23,7 @@ class SendNewsletterCron
 
 			if(empty($msgs))
 			{
-				echo "All messages has been sent.";
+				echo "No more messages.";
 			}else{
 				echo "I'm sending ". $quantity . " messagess.";
 			}

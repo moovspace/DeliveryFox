@@ -634,6 +634,6 @@ strong{
  }
 
  #send-newsletter{
-	float: left; margin: 1.5%;
-	padding: 10px 20px; background: #21b973; color: #fff;
+	float: left; margin: 1% 1.5% 0% 0%;
+	padding: 10px 20px; background: #fff; color: #21b973; font-weight: 900
  }
