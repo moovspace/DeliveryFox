@@ -17,6 +17,14 @@ vendor/moovspace/phpapix/src/Settings/Config.php
 chmod -R 775 /path/to/dir
 ```
 
+### Cron files
+/src/Api/cron
+```bash
+crontab -e
+# At every 5th minute send 300 emails
+*/5 * * * * /path/to/document_root/src/Api/cron/send-newsletter.php
+```
+
 ### Directories
 - src/Api ***klasy z api (Json api)***
 - src/App ***klasy z dodatkami (Component, Menu, Email ...)***
