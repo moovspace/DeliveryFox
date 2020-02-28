@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 class SendEmail extends Config
 {
-	public $Error = 0;
+	public $Error = 1;
     public $ErrorMsg = "";
 
 	function Send($email, $subject, $html, $files = array()){

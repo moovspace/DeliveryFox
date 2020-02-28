@@ -134,15 +134,15 @@ class UserProfilView extends Component
 					<form method="post" enctype="multipart/form-data">
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_USER').'</label>
-							<input disabled type="text" name="username" placeholder="'.$arr['trans']->Get('EG').' Username" value="' . $arr['user']['username'] . '">
+							<input disabled type="text" name="username" value="' . $arr['user']['username'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_EMAIL').' <small>(disabled)</small> </label>
-							<input disabled type="text" name="email" placeholder="'.$arr['trans']->Get('EG').' your@email.address" disabled value="' . $arr['user']['email'] . '">
+							<input disabled type="text" name="email" disabled value="' . $arr['user']['email'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_MOBILE').' </label>
-							<input disabled type="text" name="mobile" placeholder="'.$arr['trans']->Get('EG').' +48 000 000 000" value="' . $arr['user']['mobile'] . '">
+							<input disabled type="text" name="mobile" value="' . $arr['user']['mobile'] . '">
 						</div>
 					</form>
 				</div>
@@ -152,31 +152,31 @@ class UserProfilView extends Component
 					<form method="post">
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_FIRST').' </label>
-							<input disabled type="text" name="firstname" placeholder="'.$arr['trans']->Get('EG').' Alicja" value="' . $arr['user_info']['firstname'] . '">
+							<input disabled type="text" name="firstname" value="' . $arr['user_info']['firstname'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_LAST').' </label>
-							<input disabled type="text" name="lastname" placeholder="'.$arr['trans']->Get('EG').' Piekna" value="' . $arr['user_info']['lastname'] . '">
+							<input disabled type="text" name="lastname" value="' . $arr['user_info']['lastname'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_EMAIL').' </label>
-							<input disabled type="text" name="mail" placeholder="'.$arr['trans']->Get('EG').' your@email.address" value="' . $arr['user_info']['mail'] . '">
+							<input disabled type="text" name="mail" value="' . $arr['user_info']['mail'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_MOBILE').' </label>
-							<input disabled type="text" name="mobile" placeholder="'.$arr['trans']->Get('EG').' +48 000 000 000" value="' . $arr['user_info']['mobile'] . '">
+							<input disabled type="text" name="mobile" value="' . $arr['user_info']['mobile'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_LNG').' </label>
-							<input disabled type="text" name="lng" placeholder="'.$arr['trans']->Get('EG').' 21.000000" value="' . $arr['user_info']['lng'] . '">
+							<input disabled type="text" name="lng" value="' . $arr['user_info']['lng'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_LAT').' </label>
-							<input disabled type="text" name="lat" placeholder="'.$arr['trans']->Get('EG').' 52.000000" value="' . $arr['user_info']['lat'] . '">
+							<input disabled type="text" name="lat" value="' . $arr['user_info']['lat'] . '">
 						</div>
 						<div class="w-50">
 							<label>'.$arr['trans']->Get('LB_ABOUT').' </label>
-							<textarea disabled name="about" placeholder="'.$arr['trans']->Get('EG').' Wspaniały opis.">' . $arr['user_info']['about'] . '</textarea>
+							<textarea disabled name="about">' . $arr['user_info']['about'] . '</textarea>
 						</div>
 					</form>
 				</div>
@@ -186,19 +186,19 @@ class UserProfilView extends Component
 					<form method="post">
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_CITY').' </label>
-							<input disabled type="text" name="city" placeholder="'.$arr['trans']->Get('EG').' Warsaw" value="' . $arr['user_info']['city'] . '">
+							<input disabled type="text" name="city" value="' . $arr['user_info']['city'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_ZIP').' </label>
-							<input disabled type="text" name="zip" placeholder="'.$arr['trans']->Get('EG').' 00-000" value="' . $arr['user_info']['zip'] . '">
+							<input disabled type="text" name="zip" value="' . $arr['user_info']['zip'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_ADDR').' </label>
-							<input disabled type="text" name="address" placeholder="'.$arr['trans']->Get('EG').' Złota 13/9" value="' . $arr['user_info']['address'] . '">
+							<input disabled type="text" name="address" value="' . $arr['user_info']['address'] . '">
 						</div>
 						<div class="w-50">
 							<label> '.$arr['trans']->Get('LB_COUNTRY').' </label>
-							<input disabled type="text" name="country" placeholder="'.$arr['trans']->Get('EG').' Polska" value="' . $arr['user_info']['country'] . '">
+							<input disabled type="text" name="country" value="' . $arr['user_info']['country'] . '">
 							<!--
 							<select>
 								<option value="Polska">Polska</option>

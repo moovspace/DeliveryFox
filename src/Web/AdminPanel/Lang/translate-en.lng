@@ -164,5 +164,11 @@
 "LB_YES": "Yes",
 "LB_NO": "No",
 "OR_CLIENTS": "Users",
-"OR_PRODUCTS": "Products"
+"OR_PRODUCTS": "Products",
+"LB_NEWS": "Send newsletter to clients",
+"LB_TITLE": "Message title with {NAME}",
+"LB_HTML": "Newsletter html file with {NAME} and {EMAIL}",
+"SEND": "Send",
+"SEND_ERR": "Enter all fields.",
+"SEND_OK": "Messages are waiting for delivery."
 }
