@@ -19,7 +19,7 @@ class SendNewsletterCron
 
 			$msgs = self::GetMessages($quantity = 100);
 
-			if(empty($msg))
+			if(empty($msgs))
 			{
 				echo "All messages has been sent.";
 			}
