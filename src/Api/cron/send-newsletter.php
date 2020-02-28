@@ -6,5 +6,5 @@ require("../../../vendor/autoload.php");
 use MyApp\App\Email\SendNewsletterCron;
 
 // Send 100 per instance or run
-SendNewsletterCron::Send(100);
+SendNewsletterCron::Send(300);
 ?>
