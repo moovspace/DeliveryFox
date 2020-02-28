@@ -17,11 +17,15 @@ class SendNewsletterCron
 		{
 			$sender = md5(uniqid());
 
+			echo "Sender id: " . $sender . " Wait ... </br>";
+
 			$msgs = self::GetMessages($quantity = 100);
 
 			if(empty($msgs))
 			{
 				echo "All messages has been sent.";
+			}else{
+				echo "I'm sending ". $quantity . " messagess.";
 			}
 
 			foreach($msgs as $m)
