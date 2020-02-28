@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 28 Lut 2020, 13:41
+-- Czas generowania: 28 Lut 2020, 14:10
 -- Wersja serwera: 10.3.22-MariaDB-0+deb10u1
 -- Wersja PHP: 7.3.14-1~deb10u1
 
@@ -264,22 +264,13 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `error` varchar(250) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `newsletter`
 --
 
 TRUNCATE TABLE `newsletter`;
---
--- Zrzut danych tabeli `newsletter`
---
-
-INSERT INTO `newsletter` (`id`, `email`, `name`, `rf_newsletter_html`, `sender`, `time`, `error`) VALUES
-(1, 'usero@drive.xx', 'Marcys', '3', '53d59e8d5c74a96e8b149e7ba776aa2e', '2020-02-28 11:50:59', '1'),
-(2, 'root@drive.xx', 'Max', '3', '53d59e8d5c74a96e8b149e7ba776aa2e', '2020-02-28 11:50:59', '1'),
-(3, 'root@drive.xx', 'Max', '4', '53d59e8d5c74a96e8b149e7ba776aa2e', '2020-02-28 11:51:45', '1');
-
 -- --------------------------------------------------------
 
 --
@@ -292,23 +283,13 @@ CREATE TABLE IF NOT EXISTS `newsletter_html` (
   `subject` varchar(250) NOT NULL,
   `html` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Tabela Truncate przed wstawieniem `newsletter_html`
 --
 
 TRUNCATE TABLE `newsletter_html`;
---
--- Zrzut danych tabeli `newsletter_html`
---
-
-INSERT INTO `newsletter_html` (`id`, `subject`, `html`) VALUES
-(1, 'Wiadomość testowa {NAME}', '<h1>Hello {NAME}</h1>\n<p>Html content goes here...</p>\n<a href=\"/unsubscribe?email={EMAIL}\"> wypisz się z newslettera </a>\n'),
-(2, 'Wiadomość testowa {NAME}', '<h1>Hello {NAME}</h1>\n<p>Html content goes here...</p>\n<a href=\"/unsubscribe?email={EMAIL}\"> wypisz się z newslettera </a>\n'),
-(3, 'Wiadomość testowa {NAME}', '<h1>Hello {NAME}</h1>\n<p>Html content goes here...</p>\n<a href=\"/unsubscribe?email={EMAIL}\"> wypisz się z newslettera </a>\n'),
-(4, 'Wiadomość testowa {NAME}', '<h1>Hello {NAME}</h1>\n<p>Html content goes here...</p>\n<a href=\"/unsubscribe?email={EMAIL}\"> wypisz się z newslettera </a>\n');
-
 -- --------------------------------------------------------
 
 --
@@ -636,7 +617,7 @@ TRUNCATE TABLE `user`;
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `pass`, `mobile`, `role`, `time`, `ip`, `code`, `active`, `apikey`, `send_news`) VALUES
-(58, 'Marcys', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '+48 321 321 321', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1, 'f3c18f6f-53df-11ea-bc1b-0016d48a4846', 0),
+(58, 'Marcys', 'usero@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '+48 321 321 321', 'admin', '2020-02-09 11:45:21', '127.0.0.1', '', 1, 'f3c18f6f-53df-11ea-bc1b-0016d48a4846', 1),
 (63, 'Max', 'root@drive.xx', '5f4dcc3b5aa765d61d8327deb882cf99', '', 'user', '2020-02-09 11:45:21', '127.0.0.1', '', 1, '6d566eb3-53e0-11ea-bc1b-0016d48a4846', 1);
 
 -- --------------------------------------------------------

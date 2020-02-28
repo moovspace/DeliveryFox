@@ -125,7 +125,7 @@ class NewsletterView extends Component
 						<line></line>
 						<input type="submit" name="news" value="'.$arr['trans']->Get('SEND').'" class="btn float-right">
 					</form>
-					<a href="/src/Api/cron/send-newsletter.php" target="_blank" id="send-newsletter"> Test cron file </a>
+					<a href="/src/Api/cron/send-newsletter.php" target="_blank" id="send-newsletter"> Run cron send </a>
 				</div>
 			</div>
 		</div>
