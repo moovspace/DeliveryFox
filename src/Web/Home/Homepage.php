@@ -9,7 +9,7 @@ class Homepage
 {
 	function Index($r)
 	{
-		Html::Header('Order online', 'Order online', 'order online');
+		Html::Header('Homepage', 'homepage', 'order online');
 
 		View::Show();
 

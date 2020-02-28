@@ -51,6 +51,7 @@ class SendNewsletterCron
 
 				// Update error status
 				self::UpdateError($m['id'], $err);
+
 			}
 
 			sleep(1);

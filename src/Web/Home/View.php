@@ -1,42 +1,31 @@
 <?php
 namespace MyApp\Web\Home;
 
-use PhpApix\Mysql\Db;
 use MyApp\Web\Page\Main\Content;
 use MyApp\Web\Page\TopMenu\TopMenuFixed;
-use MyApp\Web\Page\Menu\CategoryMenu;
-use MyApp\Web\Page\ProductList\ProductBox;
 use MyApp\Web\Home\Homepage;
+// Main page
+use MyApp\App\MainPage\TopSlider;
 
 class View
 {
-    static function Data($arr = null){
-        try
-		{
-			$db = Db::GetInstance();
-		}
-		catch(Exception $e)
-		{
-			echo $e->getMessage();
-        }
-    }
-
     static function Show()
     {
 		// Html
 		$h = '';
 		$h .= TopMenuFixed::Show(Homepage::MenuLinks());
-		$h .= CategoryMenu::Show();
-		$h .= ProductBox::Show();
 
-		// Content div
-		echo Content::Show([$h]);
+		// Top slider
+		$h .= TopSlider::Html(['img1' => '/media/home/top-slider.jpg','txt1' => 'We make and delivers burgers!', 'txt2' => 'Taste some today', 'href1' => '/category', 'title1' => 'Nasze dania', 'href2' => '/gallery', 'title2' => 'Nasza galeria']);
+
+		// Show components
+		echo $h;
 
 		// Style, js
 		echo Content::Head();
 		echo TopMenuFixed::Head();
-		echo CategoryMenu::Head();
-		echo ProductBox::Head();
+
+		echo TopSlider::Style();
 	}
 }
 ?>
