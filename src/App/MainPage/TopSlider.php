@@ -38,6 +38,7 @@ class TopSlider
 			background-size: cover;
 			text-align: center;
 			padding-bottom: 50px;
+			background-attachment: fixed;
 		}
 		.top-slider-center h1{
 			margin-top: 200px; font-size: 55px; color: #fff; font-weight: 400; text-transform: uppercase;
