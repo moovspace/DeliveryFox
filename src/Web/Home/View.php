@@ -28,7 +28,7 @@ class View
 		// About
 		$h .= About::Html(['img' => '/media/home/lokal.jpg', 'h1' => 'Welcome', 'h2' => 'About Restaurant', 'p' => 'Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome.']);
 		// Footer
-		$h .= Footer::Html(['bg' => '/media/home/lokal.jpg','img' => '/media/home/logo.png', 'name' => 'Borgeros', 'city' => '00-100 Warsaw', 'address' => 'ul. Platynowa 36', 'days' => 'Open: Pn - Nd','hours' => '12:00 - 23:00', 'contact' => 'Contact', 'mobile' => '+48 100 100 100', 'email' => 'email@email.email', 'social' => 'Social', 'tw' => 'twitter.com/@burgeros', 'fb' => 'fb.com/@burgeros', 'in' => 'instagram.com/@burgeros']);
+		$h .= Footer::Html(['bg' => '/media/home/lokal.jpg','img' => '/media/home/logo.png', 'name' => 'Borgeros', 'city' => '00-100 Warsaw', 'address' => 'ul. Platynowa 36', 'days' => 'Open: Pn - Nd','hours' => '12:00 - 23:00', 'contact' => 'Contact', 'mobile' => '+48 100 100 100', 'email' => 'email@email.email', 'social' => 'Social', 'tw' => 'https://twitter.com/@burgeros', 'fb' => 'https://fb.com/@burgeros', 'in' => 'https://instagram.com/@burgeros']);
 
 		// Show components
 		echo $h;
