@@ -35,7 +35,7 @@ class Footer
 				</div>
 
 				<div class="bottom">
-					All rights reserved 2020.
+					All rights reserved 2020r.
 				</div>
 
 			</div>
@@ -109,7 +109,7 @@ class Footer
 			padding: 30px 0px;
 			text-align:center;
 			background: #88534299; color: #e0cda9;
-			border-top: 1px solid #e0cda9;
+			box-shadow: 0px 1px 3px rgba(0,0,0,0.2) inset;
 			z-index: 2;
 		}
 
