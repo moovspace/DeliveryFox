@@ -40,12 +40,13 @@ class TopSlider
 
 		<style>
 		.top-slider{
-			float: left; width: 100%; overflow: hidden; border: 1px solid #222;
+			float: left; width: 100%; overflow: hidden;
 			position: relative
 		}
 		.top-slider-center{
 			float: left; width: 100%; min-height: 600px; overflow: hidden;
 			background-position: center;
+			background-size: cover;
 			text-align: center;
 			padding-bottom: 50px;
 		}
@@ -56,25 +57,25 @@ class TopSlider
 		}
 		.top-slider-center .a-orange{
 			color: #fff; background: #ffad16;
-			padding: 10px 25px;
+			padding: 10px 35px;
 			border-radius: 50px;
 			border: 2px solid #ffad16;
 			font-weight: 900;
 			transition: all .5s;
 		}
 		.top-slider-center .a-orange:hover{
-			background: #ffad1655; color: #fff;
+			background: #ffad1699; color: #fff;
 		}
 		.top-slider-center .a-white{
 			color: #fff;
-			padding: 10px 25px;
+			padding: 10px 35px;
 			border-radius: 50px;
 			border: 2px solid #fff;
 			font-weight: 900;
 			transition: all .5s;
 		}
 		.top-slider-center .a-white:hover{
-			background: #ffad1655; color: #fff;
+			background: #ffad1699; color: #fff;
 		}
 		.fixed-menu{
 			background: rgba(255,255,255,.01) !important
@@ -84,6 +85,18 @@ class TopSlider
 		}
 		#cart-btn-show{
 			display: none;
+		}
+
+		@media all and (max-width: 1024px){
+			.top-slider-center h1{
+				margin-top: 180px; font-size: 45px;
+			}
+		}
+
+		@media all and (max-width: 480px){
+			.top-slider-center h1{
+				margin-top: 180px; font-size: 35px;
+			}
 		}
 		</style>
 		';
