@@ -10,8 +10,8 @@ a{
 }
 .logo{
 	float: left;
-	height: 45px;
-	margin: 10px 20px;
+	height: 70px;
+	margin: 10px 30px;
 }
 #box{
 	display: flex;

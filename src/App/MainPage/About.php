@@ -67,6 +67,12 @@ class About
 		}
 
 		@media all and (max-width: 480px){
+			.box-about img{
+				float: left; width: 90%;
+			}
+			.box-about .right{
+				width: 90%;
+			}
 		}
 		</style>
 		';

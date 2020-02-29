@@ -1,7 +1,7 @@
 .fixed-menu{background: rgba(255,255,255,.95); position: fixed; top: 0px; left: 0px; z-index: 9; float: left; width: 100%; padding: 10px; color: #222; display: flex; align-items: center;}
 .fixed-menu .left{float: left; flex-grow: 1}
 .fixed-menu .left a{float: left; width: 100%; overflow: hidden;}
-.fixed-menu .left img{float: left; height: 40px;}
+.fixed-menu .left img{float: left; height: 70px;}
 .fixed-menu .middle{float: left; flex-grow: 10; display: flex; align-items: center; justify-content: flex-end; text-align: right}
 .fixed-menu .middle a{float: right; width: auto; padding: 5px; color: #222; font-weight: 900 !important}
 .fixed-menu .middle a:hover{color: #21b973}

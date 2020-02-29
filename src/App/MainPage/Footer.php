@@ -24,7 +24,7 @@ class Footer
 				<div class="right">
 					<h1>'.$arr['contact'].'</h1>
 					<h2> <i class="fas fa-envelope"></i> '.$arr['email'].'</h2>
-					<p> <i class="fas fa-mobile"></i> '.$arr['mobile'].'</p>
+					<h2> <i class="fas fa-mobile"></i> '.$arr['mobile'].'</h2>
 				</div>
 
 				<div class="right">
@@ -66,7 +66,7 @@ class Footer
 		}
 		.box-footer .right img{
 			float: left;
-			height: 80px;
+			height: 125px;
 			margin-left: 20px;
 			z-index: 2;
 		}
@@ -89,6 +89,9 @@ class Footer
 		}
 		.box-footer .right h2 a{
 			color: #fff;
+		}
+		.box-footer .right h2 i{
+			min-width: 20px;
 		}
 		.box-footer .right h2 a:hover{
 			color: #ffad16;
@@ -114,12 +117,18 @@ class Footer
 			.box-footer .right{
 				float: left; width: 50%;
 			}
-			.box-footer .right:nth-child(3){
+			.box-footer .right:nth-child(4){
 				padding-left: 30px;
 			}
 		}
 
 		@media all and (max-width: 480px){
+			.box-footer .right{
+				float: left; width: 50%;
+			}
+			.box-footer .right:nth-child(4){
+				padding-left: 30px;
+			}
 		}
 		</style>
 		';
