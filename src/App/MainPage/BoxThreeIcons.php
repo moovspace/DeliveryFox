@@ -46,7 +46,7 @@ class BoxThreeIcons
 		.box3{
 			float: left; width: 100%; height: auto; overflow: hidden;
 			text-align: center;
-			background: #e0cda9
+			background: #fff /* e0cda9 */
 		}
 		.box3 p{
 			float: left; width: 80%; margin-left: 10%;

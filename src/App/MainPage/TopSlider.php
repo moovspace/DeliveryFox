@@ -5,25 +5,14 @@ class TopSlider
 {
 	static function Html($arr)
 	{
-		$img1 = $arr['img1'];
-
-		$txt1 = $arr['txt1'];
-		$txt2 = $arr['txt2'];
-
-		$href1 = $arr['href1'];
-		$title1 = $arr['title1'];
-
-		$href2 = $arr['href2'];
-		$title2 = $arr['title2'];
-
 		$h = '<div class="top-slider">';
 
 		$h .= '
-			<div class="top-slider-center" style="background-image: url('.$img1.');">
-				<h1> '.$txt1.' </br> '.$txt2.' </h1>
+			<div class="top-slider-center" style="background-image: url('.$arr['img1'].');">
+				<h1> '.$arr['txt1'].' </br> '.$arr['txt2'].' </h1>
 				<p>
-					<a href="'.$href1.'" class="a-orange">'.$title1.'</a>
-					<a href="'.$href2.'" class="a-white">'.$title2.'</a>
+					<a href="'.$arr['href1'].'" class="a-orange">'.$arr['title1'].'</a>
+					<a href="'.$arr['href2'].'" class="a-white">'.$arr['title2'].'</a>
 				</p>
 			</div>
 		';

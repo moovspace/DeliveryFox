@@ -27,8 +27,8 @@ class About
 		<style>
 		.box-about{
 			float: left; width: 100%; overflow: hidden;
-			padding: 50px 0px;
-			background: #e0cda9;
+			padding: 50px 0px 90px 0px;
+			background: #fff;
 		}
 
 		.box-about img{

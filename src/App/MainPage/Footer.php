@@ -62,7 +62,7 @@ class Footer
 			width: 110%; height: 110%;
 			z-index: 1;
 			object-fit: cover;
-			filter: blur(3px) brightness(50%);
+			filter: blur(2px) brightness(80%);
 		}
 		.box-footer .right img{
 			float: left;
@@ -105,10 +105,10 @@ class Footer
 		.box-footer .bottom{
 			position: relative;
 			float: left; width: 100%;
-			margin-top: 30px;
+			margin-top: 50px;
 			padding: 30px 0px;
 			text-align:center;
-			background: #885342; color: #e0cda9;
+			background: #88534299; color: #e0cda9;
 			border-top: 1px solid #e0cda9;
 			z-index: 2;
 		}
