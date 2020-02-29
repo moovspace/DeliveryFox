@@ -9,6 +9,7 @@ use MyApp\App\MainPage\TopSlider;
 use MyApp\App\MainPage\BoxFourLinks;
 use MyApp\App\MainPage\BoxThreeIcons;
 use MyApp\App\MainPage\About;
+use MyApp\App\MainPage\BannerLeftText;
 use MyApp\App\MainPage\Footer;
 
 class View
@@ -27,6 +28,8 @@ class View
 		$h .= BoxThreeIcons::Html(['title' => 'How Do I Order?', 'txt' => 'Some text or long description. Some text or long description. Some text or long description.','img1' => '/media/home/pizza-icon.png','txt1' => 'Take Step One', 'desc1' => 'Choose dishes', 'img2' => '/media/home/address-icon.png','txt2' => 'Take Step Two', 'desc2' => 'Enter your Address', 'img3' => '/media/home/plate-icon.png','txt3' => 'And Step Three', 'desc3' => 'Enjoy Your Order', 'href3' => '/category', 'title3' => 'Nasze dania', 'img4' => '/media/home/drinks.jpg']);
 		// About
 		$h .= About::Html(['img' => '/media/home/lokal.jpg', 'h1' => 'Welcome', 'h2' => 'About Restaurant', 'p' => 'Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome. Some text incrediblr awesome.']);
+		// Banner left
+		$h .= BannerLeftText::Html(['img' => '/media/home/banner.jpg', 'h1' => 'Always fresh products </br> Never frozen!', 'h2' => 'Order three dishes </br> Get one for free!', 'href' => '/', 'link' => 'Order now']);
 		// Footer
 		$h .= Footer::Html(['bg' => '/media/home/footer.jpg','img' => '/media/home/logo.png', 'name' => 'Borgeros', 'city' => '00-100 Warsaw', 'address' => 'ul. Platynowa 36', 'days' => 'Open: Pn - Nd','hours' => '12:00 - 23:00', 'contact' => 'Contact', 'mobile' => '+48 100 100 100', 'email' => 'email@email.email', 'social' => 'Social', 'tw' => 'https://twitter.com/@burgeros', 'fb' => 'https://fb.com/@burgeros', 'in' => 'https://instagram.com/@burgeros']);
 
@@ -41,6 +44,7 @@ class View
 		echo BoxFourLinks::Style();
 		echo BoxThreeIcons::Style();
 		echo About::Style();
+		echo BannerLeftText::Style();
 		echo Footer::Style();
 	}
 }
