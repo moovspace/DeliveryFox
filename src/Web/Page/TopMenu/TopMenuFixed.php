@@ -12,7 +12,7 @@ class TopMenuFixed
 	static function Show(array $arr)
 	{
 		$o = '
-		<div class="fixed-menu">
+		<div class="fixed-menu" id="fixed-menu">
 			<div class="left">
 				<a href="/" title="Homepage">
 					<img src="/media/img/logo.png">

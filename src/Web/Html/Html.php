@@ -56,7 +56,7 @@ class Html
 
 				</style>
 			</head>
-			<body>
+			<body id="body">
 		<?php
 	}
 

@@ -67,7 +67,7 @@ class TopSlider
 			background: #ffad1699; color: #fff;
 		}
 		.fixed-menu{
-			background: rgba(255,255,255,.01) !important
+			background: rgba(255,255,255,.01)
 		}
 		.fixed-menu .middle .fixed-link{
 			color: #fff;
@@ -88,6 +88,24 @@ class TopSlider
 			}
 		}
 		</style>
+
+		<script>
+			var scrollTop = window.scrollY;
+
+			window.addEventListener("scroll", () => {
+
+				var scrollTop = window.scrollY;
+				console.log(scrollTop);
+
+				let el = document.getElementById("fixed-menu");
+
+				if(scrollTop > 100){
+					el.style.backgroundColor = "rgba(0,0,0,.3)";
+				}else{
+					el.style.backgroundColor = "rgba(255,255,255,.01)";
+				}
+			});
+		</script>
 		';
 
 		return $style;
