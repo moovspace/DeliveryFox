@@ -31,7 +31,7 @@ class View
 		// Banner left
 		$h .= BannerLeftText::Html(['img' => '/media/home/banner.jpg', 'h1' => 'Always fresh products </br> Never frozen!', 'h2' => 'Order three dishes </br> Get one for free!', 'href' => '/', 'link' => 'Order now']);
 		// Footer
-		$h .= Footer::Html(['bg' => '/media/home/footer.jpg','img' => '/media/home/logo.png', 'name' => 'Borgeros', 'city' => '00-100 Warsaw', 'address' => 'ul. Platynowa 36', 'days' => 'Open: Pn - Nd','hours' => '12:00 - 23:00', 'contact' => 'Contact', 'mobile' => '+48 100 100 100', 'email' => 'email@email.email', 'social' => 'Social', 'tw' => 'https://twitter.com/@burgeros', 'fb' => 'https://fb.com/@burgeros', 'in' => 'https://instagram.com/@burgeros']);
+		$h .= Footer::Html(['bg' => '/media/home/footer.jpg','img' => '/media/home/logo.png', 'name' => 'Burgeros', 'city' => '00-000 Warsaw', 'address' => 'ul. Niewidoczna 13', 'days' => 'Open: Pn - Nd','hours' => '12:00 - 23:00', 'contact' => 'Contact', 'mobile' => '+48 000 000 000', 'email' => 'email@email.email', 'social' => 'Social', 'tw' => 'https://twitter.com/@burgeros', 'fb' => 'https://fb.com/@burgeros', 'in' => 'https://instagram.com/@burgeros']);
 
 		// Show components
 		echo $h;
