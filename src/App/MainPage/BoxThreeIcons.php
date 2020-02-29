@@ -90,16 +90,6 @@ class BoxThreeIcons
 			z-index: 2;
 		}
 
-		.fixed-menu{
-			background: rgba(255,255,255,.01) !important
-		}
-		.fixed-menu .middle .fixed-link{
-			color: #fff;
-		}
-		#cart-btn-show{
-			display: none;
-		}
-
 		@media all and (max-width: 1024px){
 			.box3{
 				display: block;

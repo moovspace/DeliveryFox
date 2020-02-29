@@ -95,15 +95,6 @@ class BoxFourLinks
 		.box4 .box-img a:hover{
 			background: #ffad1699; color: #fff;
 		}
-		.fixed-menu{
-			background: rgba(255,255,255,.01) !important
-		}
-		.fixed-menu .middle .fixed-link{
-			color: #fff;
-		}
-		#cart-btn-show{
-			display: none;
-		}
 
 		@media all and (max-width: 1024px){
 			.box4{
