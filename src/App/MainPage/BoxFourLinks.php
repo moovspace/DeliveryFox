@@ -55,12 +55,17 @@ class BoxFourLinks
 			float: left; width: 25%; height: 300px;
 			text-align: center;
 			position: relative;
+			overflow: hidden;
 		}
 		.box4 .box-img img{
 			float: left; width: 100%; height: 100%;
 			position: absolute; top: 0px; left: 0px;
 			z-index: 1; object-fit: cover;
 			filter: brightness(80%);
+			transition: all 1s;
+		}
+		.box4 .box-img img:hover{
+			transform: scale(1.5) rotate(16deg);
 		}
 		.box4 .box-img h2{
 			font-size: 26px; color: #fff; font-weight: 400;

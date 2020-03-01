@@ -108,7 +108,7 @@ class Footer
 			margin-top: 50px;
 			padding: 30px 0px;
 			text-align:center;
-			background: #88534299; color: #e0cda9;
+			background: rgba(0,0,0,.3); color: #e0cda9;
 			box-shadow: 0px 1px 3px rgba(0,0,0,0.2) inset;
 			z-index: 2;
 		}

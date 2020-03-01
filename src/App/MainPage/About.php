@@ -57,8 +57,8 @@ class About
 		}
 		.box-about .right p{
 			color: #fff; font-size: 15px; font-weight: 500;
-			text-align:justify;
-    		text-justify:auto;
+			text-align: justify;
+    		text-justify: auto;
 		}
 
 
