@@ -8,6 +8,7 @@ try
 
 	// Namespace path
 	$r->Set("/", "MyApp/Web/Home/Homepage", "Index");
+	$r->Set("/gallery", "MyApp/Web/Home/Gallery/Gallery", "Index");
 	$r->Set("/logout", "MyApp/Web/Logout/Logout", "Index");
 	// Products category
 	$r->Set("/category", "MyApp/Web/Category/Category", "Index");

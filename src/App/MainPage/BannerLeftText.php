@@ -6,15 +6,12 @@ class BannerLeftText
 	static function Html($arr)
 	{
 		$h = '
-			<div class="box-banner-left">
-				<img src="'.$arr['img'].'">
-
+			<div class="box-banner-left" style="background-image: url('.$arr['img'].')">
 				<div class="left">
 					<h1> '.$arr['h1'].' </h1>
 					<h2> '.$arr['h2'].' </h2>
 					<a href="'.$arr['href'].'"> '.$arr['link'].' </a>
 				</div>
-
 			</div>
 		';
 		return $h;
@@ -33,12 +30,8 @@ class BannerLeftText
 			background: #fff;
 			min-height: 450px;
 			overflow: hidden;
-		}
-
-		.box-banner-left img{
-			position: absolute; top: 0px; left: 0px;
-			width: 100%; height: 100%;
-			object-fit: cover;
+			background-position: center; background-size: cover;
+			/* background-attachment: fixed; */
 		}
 
 		.box-banner-left .left{

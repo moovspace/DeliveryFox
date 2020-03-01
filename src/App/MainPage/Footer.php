@@ -6,8 +6,7 @@ class Footer
 	static function Html($arr)
 	{
 		$h = '
-			<div class="box-footer">
-				<img src="'.$arr['bg'].'" class="bg">
+			<div class="box-footer" style="background-image: url('.$arr['bg'].');">
 
 				<div class="right">
 					<img src="'.$arr['img'].'">
@@ -55,14 +54,8 @@ class Footer
 			float: left; width: 100%; overflow: hidden;
 			padding: 30px 0px 0px 0px;
 			background: #885342;
-		}
-		.box-footer .bg{
-			position: absolute;
-			top: -10px; left: -10px;
-			width: 110%; height: 110%;
-			z-index: 1;
-			object-fit: cover;
-			filter: blur(2px) brightness(80%);
+			background-position: center; background-size: cover;
+			background-attachment: fixed;
 		}
 		.box-footer .right img{
 			float: left;
