@@ -598,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ip` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `active` tinyint(1) NOT NULL DEFAULT 0,
-  `apikey` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `apikey` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `send_news` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ukey1` (`email`),
