@@ -30,8 +30,8 @@ class Html
 				<!-- font awesome 5 -->
 				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
 
-				<!-- jQuery -->
-				<script defer src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+				<!-- jQuery defer -->
+				<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 				<!-- Style -->
 				<link rel="stylesheet" href="/src/Web/Html/style.css">

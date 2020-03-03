@@ -28,9 +28,13 @@ class TopSlider
 		<link href="https://fonts.googleapis.com/css?family=Anton&display=swap&subset=latin-ext" rel="stylesheet">
 
 		<style>
+		body{
+			background-image: url(media/img/bg.png);
+		}
 		.top-slider{
 			float: left; width: 100%; overflow: hidden;
-			position: relative
+			position: relative;
+
 		}
 		.top-slider-center{
 			float: left; width: 100%; min-height: 600px; overflow: hidden;
