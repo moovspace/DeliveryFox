@@ -23,6 +23,9 @@ vendor/moovspace/phpapix/src/Settings/Config.php
 
 # Allow write to folders
 chmod -R 775 /path/to/dir
+
+# You may need delete one php class from :D
+vendor/moovspace/phpapix
 ```
 
 ### Cron files
