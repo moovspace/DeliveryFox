@@ -19,7 +19,7 @@ class SendNewsletterCron
 
 			echo "Wait ... </br></br></br>";
 
-			$msgs = self::GetMessages($quantity = 100);
+			$msgs = self::GetMessages($quantity);
 
 			if(empty($msgs))
 			{
